@@ -23,3 +23,8 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 - [x] S2 MCP server (backend/kaagaz/mcp_server.py, same 7 tools, tests/test_mcp.py passes in-process)
 - [x] S3 Second rule pack: starting a company in Karnataka (in-ka-company), same sourcing and audit, pack switcher on Start, exact working/calendar day conversion, e2e + integration tests.
 - [x] S4 i18n structure ready for the app shell (frontend/src/i18n.ts), English only: no Hindi strings, because they could not be checked carefully.
+
+## Demo video (18 Oct 2026)
+- [x] Capture of the real app and FalkorDB Browser (video/capture), numbers from the API (video/plan/shots.json)
+- [x] Motion layer, edit, captions, music, mix, renderer (video/motion, video/render)
+- [x] Final render video/out/kaagaz.mp4: 2:18.6, 1920x1080, 30 fps, -14.9 LUFS, peak -1.5 dBFS (not in git, 30 MB)
