@@ -11,3 +11,4 @@ e2e/playwright-report/
 data/sources/.fetch.lock
 data/sources/.rate.json
 # source files over 5 MB (hash kept in data/sources/index.json)
+data/sources/raw/sakala-compendium-en.pdf

@@ -182,6 +182,20 @@
     "text_chars": 14006
   },
   {
+    "id": "ka-holidays-2024",
+    "url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
+    "final_url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
+    "title": "Government of Karnataka - List of Holidays 2024 (HOLIDAYSLIST2024.pdf)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "2fc499503bfc727439b311ac2bbdac238b11c82b626c6fe9fbea5e7910e6534b",
+    "file": "raw/ka-holidays-2024.pdf",
+    "text_file": "text/ka-holidays-2024.txt",
+    "content_type": "application/pdf",
+    "size": 7633227,
+    "large_not_in_git": true,
+    "text_chars": 26864
+  },
+  {
     "id": "nsp-aicte-pragati-degree-faq",
     "url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_F.pdf",
     "final_url": "https://scholarships.gov.in/public/schemeGuidelines/AICTE/AICTE_2010_F.pdf",
