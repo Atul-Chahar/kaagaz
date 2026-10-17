@@ -120,7 +120,7 @@ documents:
     office: food-civil-supplies-ka
     office_cite: {source_id: sakala-compendium-en, excerpt: "1 Ration Card: Concerned 7 Working Tahsildars in 35 Deputy 35 Issue of Transfer of Food Days", confidence: official}
     days: 7
-    days_cite: {source_id: sakala-compendium-en, excerpt: "Inclusion of names of Rationing members, Surrender, Areas, New Ration Card as Bangalore. per letter.", confidence: official}
+    days_cite: {source_id: sakala-compendium-en, excerpt: "1 Ration Card: Concerned 7 Working Tahsildars in 35 Deputy 35 Issue of Transfer of Food Days", confidence: official}
     notes: >-
       Sakala 3.1 row 1 (designated officer: concerned Food Inspector, 7 working days) covers ration-card services including
       "New Ration Card as per letter". CAVEAT: the department's home page says it is only disposing new ration card
@@ -153,7 +153,7 @@ documents:
       POI, POA, POR, PDB. PAN card is also a valid POI (row 2) but omitted here to avoid a cycle (pan-card requires aadhaar).
     requires:
       - any_of: {id: aadhaar-poi, label: "One Proof of Identity (age 5+)"}
-        cite: {source_id: uidai-supporting-docs-goa, excerpt: "Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)", confidence: official}
+        cite: {source_id: uidai-supporting-docs-goa, excerpt: "List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth for Enrolment", confidence: official}
         options:
           - doc: passport
             cite: {source_id: uidai-supporting-docs-goa, excerpt: "1. Valid Indian Passport ✔ ✔ ✔ ✔", confidence: official}
@@ -168,7 +168,7 @@ documents:
           - doc: sslc-marks-card
             cite: {source_id: uidai-supporting-docs-goa, excerpt: "12. Mark-sheet/Certificate issued by ✔ X ✔ ✔ recognised Board of Education", confidence: official}
       - any_of: {id: aadhaar-poa, label: "One Proof of Address (age 5+)"}
-        cite: {source_id: uidai-supporting-docs-goa, excerpt: "Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)", confidence: official}
+        cite: {source_id: uidai-supporting-docs-goa, excerpt: "List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth for Enrolment", confidence: official}
         options:
           - doc: passport
             cite: {source_id: uidai-supporting-docs-goa, excerpt: "1. Valid Indian Passport ✔ ✔ ✔ ✔", confidence: official}

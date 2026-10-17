@@ -93,7 +93,8 @@ schemes:
       certificates are needed; mapped here to caste-income-certificate-ka. Start date of the window is not published.
     requires: &common_sc_st_obc
       - doc: ssp-student-account
-        cite: {source_id: ssp-ka-home, excerpt: "Create New Account (Pre & Postmatric)", confidence: official}
+        note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
+        cite: {source_id: ssp-ka-home, excerpt: "Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application is common for all schemes)", confidence: official}
       - doc: sslc-marks-card
         cite: {source_id: ssp-ka-home, excerpt: "Enter Class 10 (SSLC / CBSE / ICSE / KOS) Registration Number of the student", confidence: official}
       - doc: caste-income-certificate-ka
@@ -176,7 +177,8 @@ schemes:
       stated in any fetched source. RD-number caveat as above.
     requires: &common_minority
       - doc: ssp-student-account
-        cite: {source_id: ssp-ka-home, excerpt: "Create New Account (Pre & Postmatric)", confidence: official}
+        note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
+        cite: {source_id: ssp-ka-home, excerpt: "Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application is common for all schemes)", confidence: official}
       - doc: sslc-marks-card
         cite: {source_id: ssp-ka-home, excerpt: "Enter Class 10 (SSLC / CBSE / ICSE / KOS) Registration Number of the student", confidence: official}
       - doc: caste-income-certificate-ka

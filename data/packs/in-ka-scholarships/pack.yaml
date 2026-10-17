@@ -333,7 +333,7 @@ documents:
     source_url: https://sakala.kar.nic.in/Service%20Compendium/05-05-2026%20sakala_service_compendium_English%20(Final).pdf
     source_title: Sakala Service Compendium (English), 05-05-2026
     retrieved_at: '2026-10-17'
-    excerpt: Inclusion of names of Rationing members, Surrender, Areas, New Ration Card as Bangalore. per letter.
+    excerpt: '1 Ration Card: Concerned 7 Working Tahsildars in 35 Deputy 35 Issue of Transfer of Food Days'
     confidence: official
 - id: residence-certificate-ka
   name: Residence certificate (Karnataka)
@@ -648,7 +648,8 @@ rules:
     source_url: https://www.dpse.goa.gov.in/list-of-Supporting-Document-for-Aadhaar-Enrolment-and-Update.pdf
     source_title: List of Supporting Documents for Aadhaar Enrolment and Update (UIDAI), hosted by DPSE Goa
     retrieved_at: '2026-10-17'
-    excerpt: Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)
+    excerpt: List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth
+      for Enrolment
     confidence: official
 - from: aadhaar
   to: aadhaar-poi
@@ -658,7 +659,8 @@ rules:
     source_url: https://www.dpse.goa.gov.in/list-of-Supporting-Document-for-Aadhaar-Enrolment-and-Update.pdf
     source_title: List of Supporting Documents for Aadhaar Enrolment and Update (UIDAI), hosted by DPSE Goa
     retrieved_at: '2026-10-17'
-    excerpt: Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)
+    excerpt: List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth
+      for Enrolment
     confidence: official
 - from: aadhaar-face-authentication
   to: aadhaar
@@ -1071,8 +1073,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-fee-concession-bcwd
   to: university-registration-number
   kind: REQUIRES
@@ -1132,8 +1136,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-fee-reimbursement-minority
   to: university-registration-number
   kind: REQUIRES
@@ -1203,8 +1209,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-pms-obc
   to: university-registration-number
   kind: REQUIRES
@@ -1274,8 +1282,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-pms-sc
   to: university-registration-number
   kind: REQUIRES
@@ -1345,8 +1355,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-pms-st
   to: university-registration-number
   kind: REQUIRES
@@ -1416,8 +1428,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-vidyasiri-bcwd
   to: university-registration-number
   kind: REQUIRES
@@ -1477,8 +1491,10 @@ rules:
     source_url: https://ssp.karnataka.gov.in/
     source_title: State Scholarship Portal Karnataka
     retrieved_at: '2026-10-17'
-    excerpt: Create New Account (Pre & Postmatric)
+    excerpt: Enter the e-mail address of the student (not mandatory) Understand the process of Application Submission (Application
+      is common for all schemes)
     confidence: official
+  note: The SSP home page lists account creation (with the Aadhaar number) as the step before application submission.
 - from: ka-ssp-vidyasiri-minority
   to: university-registration-number
   kind: REQUIRES

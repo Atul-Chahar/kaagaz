@@ -129,6 +129,8 @@ def main() -> None:
                     conflicts.append(f"{d['id']}.{k}: kept {cur[k]!r}, {fname} says {v!r}")
                 elif k == "note" and v not in cur[k]:
                     cur[k] = f"{cur[k]} {v}"
+            if d.get("note_assumption"):
+                cur["note"] = (f"{cur.get('note') or ''} {d['note_assumption']}").strip()
             for k in ("office_cite", "days_cite", "validity_cite", "service_days_cite"):
                 if d.get(k) and not cur.get(k) and (k != "days_cite" or cur.get("days") == d.get("days")):
                     cur[k] = expand(d[k], f"{fname}/doc/{d['id']}/{k}")

@@ -151,12 +151,12 @@ documents:
 
   - id: co-gstin
     name: GST registration (GSTIN), Karnataka
+    note_assumption: "7 working days assumes the applicant completes Aadhaar authentication; under CGST Rule 9 registration can take up to thirty days when it is not done and physical verification is ordered."
     office: gst-proper-officer
     office_cite: {source_id: cgst-rule-9, excerpt: "The application shall be forwarded to the proper officer who shall examine the application and the accompanying documents", confidence: official}
     days: 7
     days_cite: {source_id: cgst-rule-9, excerpt: "approve the grant of registration to the applicant within a period of 1 [seven] working days from the date of submission of the application", confidence: official}
     days_unit: working_days
-    note: working days
     # Rule 9(1) proviso: 30 days (unit "days", not "working days") when Aadhaar authentication is not done or physical
     # verification is ordered: "the registration shall be granted within thirty days of submission of application,
     # after physical verification of the place of business". Rule 9(2): REG-03 clarification notice within 7 working
@@ -180,7 +180,6 @@ documents:
     days: 7
     days_cite: {source_id: sakala-compendium-en, excerpt: "1 Registration under Labour/Senior 07 working Labour 35 Assistant 35 the Karnataka Labour Days Officer Working Labour Working Shops and Inspector", confidence: official}
     days_unit: working_days
-    note: working days
     # Sakala 10.1 row 1; renewal is 10 working days (row 2). Not available through SPICe+ in Karnataka (FAQ 41: Delhi only).
     requires:
       - any_of: {id: co-establishment-address-proof-ka, label: "Address proof for the establishment (rental agreement / GST / BBMP Khata)"}
@@ -211,7 +210,6 @@ documents:
     days: 30
     days_cite: {source_id: prs-ka-pt-act-1976, excerpt: "the assessing authority shall, after such inquiry as it may deem fit within thirty days of the receipt of the application", confidence: secondary}
     days_unit: calendar_days
-    note: calendar days
     # Secondary: PRS copy of Act 35 of 1976, s.5(3); official copies (indiacode.nic.in 403, pt.kar.nic.in unreachable)
     # could not be saved, and later amendments to s.5 were not verified. For new companies the application goes through
     # SPICe+ AGILE-PRO-S (mandatory in Karnataka, FAQ 38); the PT portal's own document list was not captured.

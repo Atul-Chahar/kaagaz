@@ -125,7 +125,8 @@ documents:
   office: gst-proper-officer
   days: 7
   days_unit: working_days
-  note: working days
+  note: 7 working days assumes the applicant completes Aadhaar authentication; under CGST Rule 9 registration can take up
+    to thirty days when it is not done and physical verification is ordered.
   office_cite:
     source_id: cgst-rule-9
     source_url: https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule9_v1.00.html
@@ -158,7 +159,6 @@ documents:
   office: pt-assessing-authority-ka
   days: 30
   days_unit: calendar_days
-  note: calendar days
   office_cite:
     source_id: prs-ka-pt-act-1976
     source_url: https://prsindia.org/files/bills_acts/acts_states/karnataka/1976/1976KR35.pdf
@@ -190,7 +190,6 @@ documents:
   office: labour-inspector-ka
   days: 7
   days_unit: working_days
-  note: working days
   office_cite:
     source_id: ka-shops-act-1961-wb
     source_url: https://web.archive.org/web/20200131014450id_/http://labour.kar.nic.in:80/labour/karshopscommercial-1961.htm
