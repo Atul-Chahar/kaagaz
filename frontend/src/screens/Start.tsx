@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { api, ApiError, type Scheme } from '../api'
+import { api, ApiError, getPack, setPack, type PackInfo, type Scheme } from '../api'
 import { Loading, StateBox } from '../components/common'
 import { fmtDays } from '../format'
 import { go, type Session } from '../nav'
@@ -18,12 +18,26 @@ export default function Start({ session, setSession }: { session: Session | null
   const tree = treeState && treeState.scheme === picked ? treeState.ids : null
   const [held, setHeld] = useState<Set<string>>(new Set())
   const [busy, setBusy] = useState(false)
+  const [packs, setPacks] = useState<PackInfo[]>([])
+  const [pack, setPackState] = useState<string | null>(getPack())
+  const ui = packs.find(p => p.id === (pack ?? packs[0]?.id))?.ui ?? {}
+  const target = ui.target ?? 'scholarship'
+
+  useEffect(() => { api.packs().then(setPacks).catch(() => setPacks([])) }, [])
 
   useEffect(() => {
     Promise.all([api.schemes(), api.documents()])
       .then(([s, d]) => { setSchemes(s.schemes); setDocs(d.documents); setGroups(d.groups) })
       .catch((e: ApiError) => setError(e.message))
-  }, [])
+  }, [pack])
+
+  function switchPack(id: string) {
+    setPack(id)
+    setPackState(id)
+    setPicked(null)
+    setHeld(new Set())
+    setSchemes(null)
+  }
 
   useEffect(() => {
     if (!session || session.example) return
@@ -52,7 +66,7 @@ export default function Start({ session, setSession }: { session: Session | null
     setBusy(true)
     try {
       const ex = await api.example()
-      setSession({ id: ex.student_id, scheme_id: ex.scheme_id, example: true })
+      setSession({ id: ex.student_id, scheme_id: ex.scheme_id, example: true, pack: getPack() ?? undefined })
       go('/chain')
     } catch (e) {
       setError((e as ApiError).message)
@@ -63,7 +77,7 @@ export default function Start({ session, setSession }: { session: Session | null
     if (!picked) return
     setBusy(true)
     try {
-      let id = session && !session.example ? session.id : null
+      let id = session && !session.example && (session.pack ?? null) === getPack() ? session.id : null
       if (!id) id = (await api.newStudent()).id
       await api.setTarget(id, picked)
       const before = new Set<string>()
@@ -73,7 +87,7 @@ export default function Start({ session, setSession }: { session: Session | null
       } catch { /* none */ }
       for (const d of held) if (!before.has(d)) await api.addHolding(id, d)
       for (const d of before) if (!held.has(d)) await api.removeHolding(id, d)
-      setSession({ id, scheme_id: picked })
+      setSession({ id, scheme_id: picked, pack: getPack() ?? undefined })
       go('/chain')
     } catch (e) {
       setError((e as ApiError).message)
@@ -92,21 +106,34 @@ export default function Start({ session, setSession }: { session: Session | null
         </div>
         <div className="example-card">
           <h2 style={{ fontSize: '1.15rem' }}>See it with the Example student</h2>
-          <p>A made-up student profile (not a real person) applying for a Karnataka scholarship. It shows the hidden certificate chain and the verdict in one click.</p>
+          <p>{ui.example ?? 'A made-up student profile (not a real person) applying for a Karnataka scholarship. It shows the hidden certificate chain and the verdict in one click.'}</p>
           <button className="btn" type="button" onClick={loadExample} disabled={busy} data-testid="load-example">Load the Example student</button>
         </div>
       </section>
 
       {error && <div style={{ marginTop: 24 }}><StateBox title="Something went wrong" error>{error.includes('docker') ? <p>{error}</p> : <p>{error}</p>}</StateBox></div>}
 
+      {packs.length > 1 && (
+        <div className="depth" role="group" aria-label="Rule pack" style={{ marginTop: 24 }}>
+          <span className="label">Rule pack</span>
+          <div className="depth-steps">
+            {packs.map(p => (
+              <button key={p.id} type="button" style={{ padding: '0 14px', fontFamily: 'var(--font-body)' }}
+                aria-pressed={(pack ?? packs[0].id) === p.id} onClick={() => switchPack(p.id)} data-testid={`pack-${p.id}`}>{p.name}</button>
+            ))}
+          </div>
+          <span className="hint">The engine is the same; only the rules change.</span>
+        </div>
+      )}
+
       <div className="steps">
         <section className="step" aria-labelledby="step1">
           <span className="step-n">Step 1 of 3</span>
-          <h2 id="step1">Pick a scholarship</h2>
-          <label htmlFor="scheme-search" className="sr-only">Search scholarships</label>
-          <input id="scheme-search" type="search" placeholder="Search by name, department or portal" value={q} onChange={e => setQ(e.target.value)} />
-          {!schemes && !error && <Loading label="Reading scholarships from the graph" />}
-          {schemes && shown.length === 0 && <p className="note" style={{ marginTop: 12 }}>No scholarship in this rule pack matches "{q}".</p>}
+          <h2 id="step1">Pick a {target}</h2>
+          <label htmlFor="scheme-search" className="sr-only">Search {target}s</label>
+          <input id="scheme-search" type="search" placeholder={`Search ${target}s by name`} value={q} onChange={e => setQ(e.target.value)} />
+          {!schemes && !error && <Loading label={`Reading ${target}s from the graph`} />}
+          {schemes && shown.length === 0 && <p className="note" style={{ marginTop: 12 }}>No {target} in this rule pack matches "{q}".</p>}
           <ul className="scheme-list" aria-label="Scholarships in this rule pack">
             {shown.map(s => {
               const w = windowLine(s)
@@ -132,7 +159,7 @@ export default function Start({ session, setSession }: { session: Session | null
         <section className="step" aria-labelledby="step2">
           <span className="step-n">Step 2 of 3</span>
           <h2 id="step2">Tick what you already hold</h2>
-          {!picked && <p className="note">Pick a scholarship first. Then you will see every document it needs, including the documents you need to get those documents.</p>}
+          {!picked && <p className="note">Pick a {target} first. Then you will see every document it needs, including the documents you need to get those documents.</p>}
           {picked && !tree && <Loading label="Walking the requirement graph" />}
           {picked && tree && (
             <div>
@@ -164,7 +191,7 @@ export default function Start({ session, setSession }: { session: Session | null
         <aside className="go-box" aria-labelledby="step3">
           <span className="step-n">Step 3 of 3</span>
           <h2 id="step3" style={{ fontSize: '1.3rem' }}>Go</h2>
-          <p>{picked ? `${held.size} document${held.size === 1 ? '' : 's'} ticked. Kaagaz remembers this for your next visit.` : 'Pick a scholarship to continue.'}</p>
+          <p>{picked ? `${held.size} document${held.size === 1 ? '' : 's'} ticked. Kaagaz remembers this for your next visit.` : `Pick a ${target} to continue.`}</p>
           <button className="btn" type="button" disabled={!picked || busy} onClick={goPlan} data-testid="go">Show my chain</button>
         </aside>
       </div>

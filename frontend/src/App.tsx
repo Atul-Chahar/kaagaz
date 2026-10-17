@@ -9,6 +9,7 @@ import Sources from './screens/Sources'
 import About from './screens/About'
 import type { Session } from './nav'
 import { t, type MessageKey } from './i18n'
+import { setPack } from './api'
 
 const ROUTES: { path: string; key: MessageKey }[] = [
   { path: '/', key: 'nav.start' },
@@ -26,7 +27,7 @@ function currentPath(): string {
 
 export default function App() {
   const [path, setPath] = useState(currentPath())
-  const [session, setSessionState] = useState<Session | null>(() => getStudent())
+  const [session, setSessionState] = useState<Session | null>(() => { const s = getStudent(); setPack(s?.pack ?? null); return s })
   const [theme, setThemeState] = useState<'light' | 'dark' | null>(() => getTheme())
 
   useEffect(() => {

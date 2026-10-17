@@ -114,7 +114,18 @@ export class ApiError extends Error {
   }
 }
 
-async function req<T>(path: string, init?: RequestInit): Promise<T> {
+// The rule pack every call reads. Set by the Start screen's pack switcher (shown only when more than one pack exists).
+let currentPack: string | null = null
+export function setPack(id: string | null) { currentPack = id }
+export function getPack(): string | null { return currentPack }
+
+function withPack(path: string): string {
+  if (!currentPack || path.startsWith('/api/health') || path === '/api/packs') return path
+  return `${path}${path.includes('?') ? '&' : '?'}pack=${encodeURIComponent(currentPack)}`
+}
+
+async function req<T>(rawPath: string, init?: RequestInit): Promise<T> {
+  const path = withPack(rawPath)
   let r: Response
   try {
     r = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...init })
@@ -130,7 +141,10 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
   return r.json() as Promise<T>
 }
 
+export interface PackInfo { id: string; name: string; jurisdiction: string; version: string; ui?: Record<string, string> }
+
 export const api = {
+  packs: () => req<PackInfo[]>('/api/packs'),
   health: () => req<{ ok: boolean; falkordb: boolean; message?: string; llm: boolean; llm_model: string | null; browser_url: string; packs?: Record<string, boolean> }>('/api/health'),
   schemes: () => req<{ today: string; schemes: Scheme[] }>('/api/schemes'),
   documents: () => req<{ documents: { id: string; name: string; days: number | null; office_name: string | null; group: string }[]; groups: string[] }>('/api/documents'),

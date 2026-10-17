@@ -227,7 +227,7 @@ def load_example(pack: str | None = None) -> dict:
     ex = graph.load_pack(pid).get("example_student")
     if not ex:
         raise HTTPException(404, "this pack has no example student")
-    sid = memory.EXAMPLE_ID
+    sid = memory.EXAMPLE_ID if pid == DEFAULT_PACK else f"{memory.EXAMPLE_ID}-{pid}"[:64]
     memory.reset(sid)
     memory.ensure_student(sid, memory.EXAMPLE_LABEL)
     for h in ex.get("holdings", []):

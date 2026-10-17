@@ -53,16 +53,18 @@ def expand_calendar(cal: dict, where: str) -> dict:
     return out
 
 
-def fragments() -> list[tuple[str, dict]]:
-    files = sorted(RESEARCH.glob("*.yaml"), key=lambda p: (PRIORITY.index(p.name) if p.name in PRIORITY else 99, p.name))
+def fragments(research: Path = RESEARCH) -> list[tuple[str, dict]]:
+    files = sorted(research.glob("*.yaml"), key=lambda p: (PRIORITY.index(p.name) if p.name in PRIORITY else 99, p.name))
     return [(p.name, yaml.safe_load(p.read_text()) or {}) for p in files]
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pack", default="in-ka-scholarships")
+    ap.add_argument("--research", default=None, help="fragment folder (default data/research)")
     args = ap.parse_args()
     pack_dir = ROOT / "data" / "packs" / args.pack
+    research = Path(args.research) if args.research else RESEARCH
     meta = yaml.safe_load((pack_dir / "meta.yaml").read_text())
     exclude_conditions = {c["condition"] for c in meta.get("exclude_conditions", [])}
 
@@ -105,7 +107,7 @@ def main() -> None:
             else:
                 sys.exit(f"build_pack: {where}/{owner}: requirement without doc or any_of: {r}")
 
-    for fname, frag in fragments():
+    for fname, frag in fragments(research):
         for o in frag.get("offices", []) or []:
             if o["id"] not in offices:
                 offices[o["id"]] = {"id": o["id"], "name": o["name"], "level": o.get("level"),
@@ -144,7 +146,7 @@ def main() -> None:
             add_requires(s["id"], s.get("requires"), fname)
 
     calendar = None
-    for fname, frag in fragments():
+    for fname, frag in fragments(research):
         if frag.get("calendar"):
             calendar = expand_calendar(frag["calendar"], fname)
 

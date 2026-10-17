@@ -2,7 +2,7 @@
 
 const KEY = 'kaagaz.student'
 
-export function getStudent(): { id: string; scheme_id?: string } | null {
+export function getStudent(): { id: string; scheme_id?: string; example?: boolean; pack?: string } | null {
   try {
     const raw = localStorage.getItem(KEY)
     return raw ? JSON.parse(raw) : null
@@ -11,7 +11,7 @@ export function getStudent(): { id: string; scheme_id?: string } | null {
   }
 }
 
-export function setStudent(v: { id: string; scheme_id?: string } | null): void {
+export function setStudent(v: { id: string; scheme_id?: string; example?: boolean; pack?: string } | null): void {
   try {
     if (v) localStorage.setItem(KEY, JSON.stringify(v))
     else localStorage.removeItem(KEY)
