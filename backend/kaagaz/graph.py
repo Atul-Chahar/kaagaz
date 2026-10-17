@@ -128,7 +128,7 @@ def seed_pack(pack_id: str) -> dict:
         row = {"id": s["id"], "name": s["name"], "authority": s.get("authority"), "portal": s.get("portal"),
                "note": s.get("note"), "window_start": _iso(win.get("start")), "window_end": _iso(win.get("end")),
                "window_year": win.get("year"), "window_is_last_published": bool(win.get("is_last_published")),
-               "window_note": win.get("note")}
+               "window_note": win.get("note"), "window_renewals_only": bool(win.get("renewals_only"))}
         row.update(_cite(win.get("cite"), "window_"))
         schemes.append(row)
     w("seed_schemes", {"rows": schemes})

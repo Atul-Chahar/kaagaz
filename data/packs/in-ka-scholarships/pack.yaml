@@ -309,9 +309,12 @@ documents:
 - id: passport
   name: Indian passport
 - id: proof-of-identity
-  name: Proof of identity
+  name: Identity proof (the source does not list which documents count)
+  note: The certificate rule asks for an ID proof without listing the accepted documents, so Kaagaz cannot show their times.
 - id: proof-of-residence
-  name: Proof of residence
+  name: Address proof (the source does not list which documents count)
+  note: The certificate rule asks for an address proof without listing the accepted documents, so Kaagaz cannot show their
+    times.
 - id: property-tax-receipt
   name: House tax / property tax receipt
 - id: ration-card-ka
@@ -587,6 +590,8 @@ schemes:
     end: 2026-10-31
     year: 2026-27
     is_last_published: false
+    renewals_only: true
+    note: Renewal applications only
     cite:
       source_id: nsp-all-scholarships
       source_url: https://scholarships.gov.in/All-Scholarships
@@ -2108,7 +2113,7 @@ example_student:
   about: A made-up second-year degree student in Karnataka who lives in a college hostel and applies for Fee Reimbursement
     for Minorities on the State Scholarship Portal. They already hold their Aadhaar, an Aadhaar-seeded bank account, college
     papers, an SSP account and e-attested documents, and an identity proof. They do not yet hold a caste and income certificate
-    or a proof of residence.
+    or an address proof.
   holdings:
   - aadhaar
   - bank-account

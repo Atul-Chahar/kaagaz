@@ -33,6 +33,7 @@ export interface Scheme {
   window_year?: string
   window_is_last_published?: boolean
   window_note?: string
+  window_renewals_only?: boolean
   window_source_url?: string
   window_source_title?: string
   window_retrieved_at?: string
@@ -77,7 +78,7 @@ export interface Plan {
   depth: number
   max_depth: number
   today: string
-  deadline: { date: string | null; source: string }
+  deadline: { date: string | null; source: string; renewal_window_end?: string }
   days_left: number | null
   day_unit: string
   calendar_complete: boolean
@@ -95,6 +96,7 @@ export interface Plan {
   items: PlanItem[]
   start_today: { id: string; name: string; days: number | null; days_unit?: string; span?: number; office_name: string | null; reduction: number; on_critical: boolean; path: string[] }[]
   chain_check: { chain_days_cypher: number; planner_all_of: number; agree: boolean }
+  option_checks: { anyof_id: string; cypher_choice: string | null; cypher_days: number | null; planner_choice: string | null; planner_days: number; comparable: boolean; agree: boolean | null }[]
   saved_at?: string
 }
 

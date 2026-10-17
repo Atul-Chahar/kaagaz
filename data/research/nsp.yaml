@@ -69,7 +69,8 @@ schemes:
     name: PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS)
     authority: Department of Higher Education, Ministry of Education, Government of India
     portal: NSP
-    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false,
+    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false, renewals_only: true,
+             note: "Renewal applications only",
              cite: {source_id: nsp-all-scholarships, excerpt: "College And University Students (CSSS) (Merit Based Scheme) Scheme Open from (for Renewal): 01-06-2026 Student Application Open till (for Renewal): 31-10-2026", confidence: official}}
     note: >-
       For AY 2026-27 NSP lists this window for RENEWAL applications only; no fresh-application window is published

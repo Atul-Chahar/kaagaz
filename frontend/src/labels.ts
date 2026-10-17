@@ -19,6 +19,7 @@ export function windowLine(s: Scheme): { text: string; cls: string } {
   if (!s.window_end) return { text: 'No deadline published', cls: 'muted' }
   const left = s.days_left ?? 0
   if (left < 0) return { text: `Closed ${fmtDate(s.window_end)}`, cls: 'muted' }
+  if (s.window_renewals_only) return { text: `Renewals only, closes ${fmtDate(s.window_end)}`, cls: 'muted' }
   const prefix = s.window_is_last_published ? 'Last published window ended' : 'Closes'
   // closing within a month is marked in stamp blue (red is kept for the critical path and "late" only)
   return { text: `${prefix} ${fmtDate(s.window_end)}`, cls: left <= 30 ? 'soon' : '' }

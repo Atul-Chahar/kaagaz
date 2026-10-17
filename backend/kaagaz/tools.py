@@ -235,6 +235,9 @@ class Tools:
         tgt = next((t for t in memory.targets(student_id, trace) if t["scheme_id"] == scheme["id"]), None)
         if tgt and tgt.get("deadline"):
             return {"date": tgt["deadline"], "source": tgt.get("deadline_source") or "student"}
+        if scheme.get("window_end") and scheme.get("window_renewals_only"):
+            # the published window is for renewals only; the rules modelled are a fresh application's
+            return {"date": None, "source": "renewals_only", "renewal_window_end": scheme["window_end"]}
         if scheme.get("window_end"):
             src = "last_published_window" if scheme.get("window_is_last_published") else "published_window"
             return {"date": scheme["window_end"], "source": src}
@@ -303,6 +306,29 @@ class Tools:
         planner_allof = Planner(allof, held_ids, applies=applies).finish(scheme_id).lb
         max_depth_rows = self._q("prerequisites", {"scheme_id": scheme_id, "depth": MAX_DEPTH}, trace)
         max_depth = max((r["depth"] for r in max_depth_rows), default=0)
+        # fastest_option.cypher cross-checks the planner's choice inside every open "any one of" group (full depth
+        # only, so both see the same graph; comparable when no other group sits under the options)
+        option_checks = []
+        if depth >= max_depth:
+            raw = Planner(g, held_ids, applies=applies)
+            anyofs = {k for k, v in g.nodes.items() if v.label == "AnyOf"}
+            for aid in sorted(anyofs):
+                if p.satisfied(aid) or p._choice.get(aid) is None or aid not in {i["id"] for i in items}:
+                    continue
+                rows_o = self._q("fastest_option", {"anyof_id": aid, "held": sorted(held_ids),
+                                                    "applies": sorted(applies)}, trace)
+                below, stack = set(), [e.dst for e in g.edges if e.src == aid]
+                while stack:
+                    n = stack.pop()
+                    if n not in below:
+                        below.add(n)
+                        stack += [e.dst for e in g.edges if e.src == n]
+                comparable = not (below & anyofs)
+                cy = rows_o[0]["total_days"] if rows_o else None
+                pl = raw.finish(aid).lb
+                option_checks.append({"anyof_id": aid, "cypher_choice": rows_o[0]["doc_id"] if rows_o else None,
+                                      "cypher_days": cy, "planner_choice": p._choice.get(aid), "planner_days": pl,
+                                      "comparable": comparable, "agree": (cy == pl) if comparable else None})
         unknown = p.unknown_needed()
         result = {
             "scheme": scheme,
@@ -332,6 +358,7 @@ class Tools:
                             for e in g.edges if e.type == "REQUIRES" and e.props.get("condition")],
             "items": items,
             "start_today": start_today,
+            "option_checks": option_checks,
             "chain_check": {"chain_days_cypher": chain_max, "planner_all_of": planner_allof,
                             "agree": chain_max == planner_allof, "longest_chains": chain_rows},
         }

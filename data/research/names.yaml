@@ -11,8 +11,8 @@ documents:
   - {id: fee-receipt, name: College fee receipt}
   - {id: hostel-certificate, name: Hostel admission certificate}
   - {id: voter-id, name: Voter ID card}
-  - {id: proof-of-residence, name: Proof of residence}
-  - {id: proof-of-identity, name: Proof of identity}
+  - {id: proof-of-residence, name: Address proof (the source does not list which documents count), note: "The certificate rule asks for an address proof without listing the accepted documents, so Kaagaz cannot show their times."}
+  - {id: proof-of-identity, name: Identity proof (the source does not list which documents count), note: "The certificate rule asks for an ID proof without listing the accepted documents, so Kaagaz cannot show their times."}
   - {id: income-proof, name: Proof of income (salary slip or bank statement)}
   - {id: driving-licence, name: Driving licence}
   - {id: passport, name: Indian passport}

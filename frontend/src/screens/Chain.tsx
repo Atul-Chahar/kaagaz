@@ -12,6 +12,7 @@ type Cache = Record<number, ToolResponse<Plan>>
 
 function deadlineLabel(p: Plan): string {
   const s = p.scheme
+  if (p.deadline.source === 'renewals_only') return `no fresh-application window is published; the window closing ${fmtDate(p.deadline.renewal_window_end)} is for renewals only`
   if (p.deadline.source === 'student') return 'your own date'
   if (p.deadline.source === 'example_own_date') return "the example's own made-up date"
   if (p.deadline.source === 'last_published_window') return `last published window (${s.window_year ?? ''})`
@@ -224,7 +225,7 @@ export default function Chain({ session, setSession }: { session: Session | null
         <section aria-labelledby="today-h">
           <div className="section-head">
             <h2 id="today-h">Start today</h2>
-            <p>Things you can apply for now, in order. The first ones shorten your critical path the most.</p>
+            <p>Things you can apply for or gather now, in order. The first ones shorten your critical path the most.</p>
           </div>
           {plan.start_today.length === 0 && <p className="note">Nothing can be started at this depth. Every document left needs another one first, or you hold everything.</p>}
           <ol className="todo" data-testid="start-today">
@@ -285,7 +286,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                     <div>
                       <div className="name">{o.name}</div>
                       <div className="sub">
-                        {o.deadline.date ? `Deadline ${fmtDate(o.deadline.date)}` : 'No deadline published'}
+                        {o.deadline.date ? `Deadline ${fmtDate(o.deadline.date)}` : o.deadline.source === 'renewals_only' ? `Renewals only (closes ${fmtDate(o.deadline.renewal_window_end)})` : 'No deadline published'}
                         {o.shared_count > 0 ? ` · reuses ${plural(o.shared_count, 'document', 'documents')} you still need` : ''}
                       </div>
                     </div>
@@ -304,6 +305,12 @@ export default function Chain({ session, setSession }: { session: Session | null
         <div style={{ marginTop: 16, display: 'grid', gap: 16 }}>
           {memoryNote && <p className="note" data-testid="memory-note">{memoryNote}</p>}
           <p className="note">Graph check: <code>chain_days.cypher</code> found a longest all-of chain of {plan.chain_check.chain_days_cypher} days and the planner found {plan.chain_check.planner_all_of}. {plan.chain_check.agree ? 'They agree.' : 'They disagree, which is a bug.'}</p>
+          {plan.option_checks.length > 0 && (
+            <p className="note">Graph check for each "any one of" group: <code>fastest_option.cypher</code>{' '}
+              {plan.option_checks.map(c => c.comparable
+                ? `${itemsById[c.anyof_id]?.name ?? c.anyof_id}: ${c.cypher_days} days, ${c.agree ? 'same as the planner' : 'differs from the planner'}`
+                : `${itemsById[c.anyof_id]?.name ?? c.anyof_id}: has another group inside, checked by the planner only`).join('; ')}.</p>
+          )}
           <TraceTable rows={cache[depth]?.trace ?? []} />
         </div>
       </details>

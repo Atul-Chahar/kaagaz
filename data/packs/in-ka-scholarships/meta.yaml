@@ -34,7 +34,7 @@ example_student:
     A made-up second-year degree student in Karnataka who lives in a college hostel and applies for Fee Reimbursement
     for Minorities on the State Scholarship Portal. They already hold their Aadhaar, an Aadhaar-seeded bank account,
     college papers, an SSP account and e-attested documents, and an identity proof. They do not yet hold a caste and
-    income certificate or a proof of residence.
+    income certificate or an address proof.
   holdings: [aadhaar, bank-account, bank-account-aadhaar-seeded, sslc-marks-card, marks-card-previous, study-certificate,
              fee-receipt, hostel-certificate, university-registration-number, ssp-student-account, ssp-e-attested-documents,
              proof-of-identity]

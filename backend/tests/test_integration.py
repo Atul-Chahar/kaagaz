@@ -81,7 +81,7 @@ PARAMS = {
     "shared_documents": {"scheme_id": None, "needed": ["caste-income-certificate-ka", "aadhaar"]},
     "load_bearing": {"scheme_ids": None, "held": [], "limit": 5},
     "load_bearing_pagerank": {"limit": 5},
-    "fastest_option": {"anyof_id": None, "held": []},
+    "fastest_option": {"anyof_id": None, "held": [], "applies": []},
     "resolve_name": {"q": None},
     "search_names": {"words": ["income"], "limit": 5},
     "explain": {"scheme_id": None, "doc_id": "aadhaar"},
@@ -172,7 +172,7 @@ def test_fastest_option_matches_planner_choice_when_options_have_no_nested_group
         opts = kids.get(a["id"], [])
         if any(has_nested(o) for o in opts):
             continue
-        rows = graph.run(RULES, "fastest_option", {"anyof_id": a["id"], "held": []}).rows
+        rows = graph.run(RULES, "fastest_option", {"anyof_id": a["id"], "held": [], "applies": []}).rows
         # planner on a graph rooted at this AnyOf
         for sid in scheme_ids():
             g, _r, _s = t.build_rule_graph(sid, MAX_DEPTH, Trace())
@@ -340,3 +340,15 @@ def test_conditional_requirement_counts_only_when_it_applies(student):
     after = t.call("plan", {"student_id": student, "scheme_id": sid, "remember": False}).data
     assert "disability-certificate" in after["needed"]
     assert after["chain_check"]["agree"]
+
+
+
+def test_plan_runs_fastest_option_cross_check_and_it_agrees(student):
+    t = Tools(PACK)
+    checks = []
+    for sid in scheme_ids():
+        d = t.call("plan", {"student_id": student, "scheme_id": sid, "remember": False}).data
+        checks += d["option_checks"]
+    comparable = [c for c in checks if c["comparable"]]
+    assert comparable, "at least one any-of group should be cross-checked"
+    assert all(c["agree"] for c in comparable), [c for c in comparable if not c["agree"]]
