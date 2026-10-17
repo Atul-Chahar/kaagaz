@@ -8,14 +8,15 @@ import Benchmark from './screens/Benchmark'
 import Sources from './screens/Sources'
 import About from './screens/About'
 import type { Session } from './nav'
+import { t, type MessageKey } from './i18n'
 
-const ROUTES = [
-  { path: '/', label: 'Start' },
-  { path: '/chain', label: 'Your chain' },
-  { path: '/ask', label: 'Ask' },
-  { path: '/benchmark', label: 'Benchmark' },
-  { path: '/sources', label: 'Sources' },
-  { path: '/graph', label: 'About the graph' },
+const ROUTES: { path: string; key: MessageKey }[] = [
+  { path: '/', key: 'nav.start' },
+  { path: '/chain', key: 'nav.chain' },
+  { path: '/ask', key: 'nav.ask' },
+  { path: '/benchmark', key: 'nav.benchmark' },
+  { path: '/sources', key: 'nav.sources' },
+  { path: '/graph', key: 'nav.graph' },
 ]
 
 function currentPath(): string {
@@ -35,7 +36,8 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const label = ROUTES.find(r => r.path === path)?.label ?? 'Kaagaz'
+    const route = ROUTES.find(r => r.path === path)
+    const label = route ? t(route.key) : 'Kaagaz'
     document.title = path === '/' ? 'Kaagaz' : `${label} · Kaagaz`
     document.getElementById('main')?.focus({ preventScroll: true })
   }, [path])
@@ -63,25 +65,25 @@ export default function App() {
   return (
     <>
       <InkFilter />
-      <a className="skip" href="#main" onClick={e => { e.preventDefault(); document.getElementById('main')?.focus() }}>Skip to content</a>
+      <a className="skip" href="#main" onClick={e => { e.preventDefault(); document.getElementById('main')?.focus() }}>{t('skip')}</a>
       <header className="topbar">
         <div className="topbar-in">
           <a className="wordmark" href="#/" aria-label="Kaagaz, start page"><Mark /> Kaagaz</a>
-          <nav className="nav" aria-label="Main">
+          <nav className="nav" aria-label={t('nav.label')}>
             {ROUTES.map(r => (
-              <a key={r.path} href={`#${r.path}`} aria-current={path === r.path ? 'page' : undefined}>{r.label}</a>
+              <a key={r.path} href={`#${r.path}`} aria-current={path === r.path ? 'page' : undefined}>{t(r.key)}</a>
             ))}
           </nav>
           <button className="theme-btn" type="button" onClick={toggleTheme} title={`Switch to ${effective === 'dark' ? 'light' : 'dark'} colours`}>
-            {effective === 'dark' ? 'Day office' : 'Night office'}
+            {effective === 'dark' ? t('theme.toLight') : t('theme.toDark')}
           </button>
         </div>
       </header>
       <main id="main" tabIndex={-1} style={{ outline: 'none' }}>{screen}</main>
       <footer className="foot">
-        <span>Kaagaz. Rules come from saved official sources; every line links to its source.</span>
-        <span>Not legal advice. Check the official portal before you apply.</span>
-        <span>Built with Claude Code.</span>
+        <span>{t('foot.sources')}</span>
+        <span>{t('foot.advice')}</span>
+        <span>{t('foot.ai')}</span>
       </footer>
     </>
   )

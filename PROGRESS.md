@@ -19,7 +19,7 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 15. [ ] `FINAL_REPORT.md` written and printed.
 
 ## Stretch (only after 1 to 11 green)
-- [ ] S1 Live deployment (or docs/DEPLOY.md)
-- [ ] S2 MCP server
+- [x] S1 Live deployment: BLOCKED for a live URL (no FalkorDB Cloud credentials or deploy token in the environment; no accounts created). docs/DEPLOY.md written with exact steps; docker compose stack tested locally.
+- [x] S2 MCP server (backend/kaagaz/mcp_server.py, same 7 tools, tests/test_mcp.py passes in-process)
 - [ ] S3 Second rule pack
-- [ ] S4 Hindi UI strings (or i18n structure ready, English only)
+- [x] S4 i18n structure ready for the app shell (frontend/src/i18n.ts), English only: no Hindi strings, because they could not be checked carefully.
