@@ -1,0 +1,5 @@
+// Seed: documents. days may be null (no official time found); null properties are simply not stored.
+UNWIND $rows AS r
+CREATE (:Document {id: r.id, name: r.name, days: r.days, validity: r.validity, office: r.office, note: r.note,
+  days_source_url: r.days_source_url, days_source_title: r.days_source_title,
+  days_retrieved_at: r.days_retrieved_at, days_excerpt: r.days_excerpt, days_confidence: r.days_confidence})

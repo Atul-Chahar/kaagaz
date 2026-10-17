@@ -1,0 +1,159 @@
+NOTICE TO THE USERS OF FOOD DEPT. APPLICATIONS.
+
+1.	Buy only those authentication devices which are specified by the dept.
+
+2.	Old devices even if it is procured from the same manufacturer would not work unless it is approved by UIADI for RD services. 
+
+3.	If you continue to use the old devices, it will not support the authentication process and you may not be able to use them in food dept. applications.
+
+4. Each manufacturer has obtained the necessary permission from UIDAI for their RD services. All the devices needs to be first registered with respective vendors before it can be further used in food dept. application.
+
+5.	Follow the instructions carefully for registering these devices, details for which is provided in their respective websites.
+
+6. In addition to registering the devices for RD Services, additional APIs (application program interface) needs to be installed for its successful use. Visit their website for the essential information.
+
+7.	Details of devices currently supported for dept. use is listed here
+
+a. Biometric devices – Mantra MFS110 - for Driver Installation
+
+ click here 
+for  RD service Installation 
+ Click here 
+
+                            for Mantra Optical Fingerprint Scanner MFS110 Manual
+ Click here 
+ and for more information 
+ (64 bit) 
+ ******
+
+b. Iris devices – Mantra MIS100V2 - for Driver Installation
+
+ click here 
+for  RD service Installation 
+ Click here 
+
+                            for Mantra IRIS Scanner MIS100V2 Manual
+ Click here 
+ and for more information 
+ click here 
+ ******
+
+c. Iris devices – Biomatiques EPI-1000 - for Driver and RD Service Installation
+
+ click here 
+  for Biomatiques IRIS Scanner EPI-1000 Manual
+ Click here 
+ and for more information 
+ click here 
+ ******
+
+d. Biometric devices – Access FM220U L1 - for Driver and RD Service Installation
+
+ click here 
+  for Access FM220U L1 Manual 
+ Click here 
+
+        for Access FM220U L1 FINGER CAPTURING GUIDE 
+ Click here 
+
+        and for more information 
+ click here 
+ ******
+
+e. Iris devices – iriShield-USB MK2120UL - for Driver and RD Service Installation
+
+ click here 
+  for iriShield-USB MK2120UL Manual 
+ Click here 
+
+        and for more information 
+ click here 
+ ******
+
+ Click here 
+ to understand how to resolve the error messages while authenticating.
+
+ Click here 
+ for NOTICE on L0 devices. 
+
+ ** This device integration is pending with the food dept.
+
+ *** If you have already used RD services earlier it is required to uninstall that and install the new version provieded here to work correctly.
+
+ಆಹಾರ ಇಲಾಖೆಯ ಅಪ್ಲಿಕೇಶನ್  ಬಳಕೆದಾರರಿಗೆ ಮಹತ್ವದ ಸೂಚನೆಗಳು
+
+1. ಹೊಸ ಬಯೋಮೆಟ್ರಿಕ್/ ಐರಿಸ್  ಸಾಧನಗಳನ್ನು ಖರೀದಿಸುವಾಗ ಕೇವಲ UIDAI ನಲ್ಲಿ ನೋಂದಣಿಯಾದ ಸಾಧನಗಳನ್ನು ಮಾತ್ರ ಬಳಸಿ.
+
+2. ಹಳೆಯ ಬಯೋಮೆಟ್ರಿಕ್/ ಐರಿಸ್  ಸಾಧನಗಳನ್ನು (ಈ ಮೋದಲೇ ಆಹಾರ ಇಲಾಖೆಯು ತಿಳಿಸಿದ ತಯಾರಕರಿಂದ ಖರೀದಿಸಿದ್ದರೂ) ಬಳಸಿದಲ್ಲಿ ಆಹಾರ  ಇಲಾಖೆಯ  ಅಪ್ಲಿಕೇಶನ್ ಗಳಲ್ಲಿ ಬಳಸಲು ದಿ. 31/08/2017 ರ ನಂತರ ಸಾಧ್ಯವಿರುವುದಿಲ್ಲ.
+
+3. ಹೊಸ ನೋಂದಾಯಿತ  ಬಯೋಮೆಟ್ರಿಕ್/ ಐರಿಸ್  ಸಾಧನಗಳನ್ನು ಬಳಸುವ ಮೊದಲು ಈ ಸಾಧನಗಳ ತಯಾರಕರೊಂದಿಗೆ ತಮ್ಮ ಬಯೋಮೆಟ್ರಿಕ್/ ಐರಿಸ್  ಸಾಧನಗಳನ್ನು  ನೋಂದಾವಣೆ ಮಾಡುವುದು  ಖಡ್ಡಾಯವಾಗಿದ್ದು ಮತ್ತು ನೋಂದಾಯಿಸುವ ವಿಧಾನ ಆಯಾ ತಯಾರಕರ website ನಲ್ಲಿ ಈಗಾಗಲೇ ನೀಡಲಾಗಿದೆ.
+
+4. ಈ ನೋಂದಣಿಯ ಜೊತೆಗೆ, ತಯಾರಕರು ನೀಡಲಾಗುವ ಹೊಸ web API ಯನ್ನು ತಮ್ಮ ಕಂಪ್ಯೂಟರ್ ನಲ್ಲಿ ಅಳವಡಿಸಿಕೊಳ್ಳುವುದು ಖಡ್ಡಾಯವಾಗಿರುತ್ತದೆ.
+
+5. ಆಹಾರ ಇಲಾಖೆಯ ಅಪ್ಲಿಕೇಶನ್ ಸದ್ಯ ಈ ಕೆಳಗೆ ನಮೂದಿಸಲಾದ ತಯಾರಕರ ಸಾಧನಗಳನ್ನು ಬಳಸಲು ಬದಲಾಯಿಸಲಾಗುವುದು/ಬದಲಾಯಿಸಲಾಗಿದೆ. 
+
+a. Biometric devices – Mantra MFS110 - for Driver Installation
+
+ click here 
+for  RD service Installation 
+ Click here 
+
+                            for Mantra Optical Fingerprint Scanner MFS110 Manual
+ Click here 
+ and for more information 
+ (64 bit) 
+ ******
+
+b. Iris devices – Mantra MIS100V2 - for Driver Installation
+
+ click here 
+for  RD service Installation 
+ Click here 
+
+                            for Mantra IRIS Scanner MIS100V2 Manual
+ Click here 
+ and for more information 
+ click here 
+ ******
+
+c. Iris devices – Biomatiques EPI-1000 - for Driver and RD Service Installation
+
+ click here 
+  for Biomatiques IRIS Scanner EPI-1000 Manual
+ Click here 
+ and for more information 
+ click here 
+ ******
+
+d. Biometric devices – Access FM220U L1 - for Driver and RD Service Installation
+
+ click here 
+  for Access FM220U L1 Manual 
+ Click here 
+
+    for Access FM220U L1 FINGER CAPTURING GUIDE 
+ Click here 
+
+    and for more information 
+ click here 
+ ******
+
+e. Iris devices – iriShield-USB MK2120UL - for Driver and RD Service Installation
+
+ click here 
+  for iriShield-USB MK2120UL Manual 
+ Click here 
+
+     and for more information 
+ click here 
+ ******
+
+                            ದೃಢೀಕರಿಸುವಾಗ ದೋಷ ಸಂದೇಶಗಳನ್ನು ಹೇಗೆ ಪರಿಹರಿಸುವುದು ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು 
+ ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ 
+
+                            L0 ಸಾಧನಗಳ ಸೂಚನೆಗೆ 
+ ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ 
+
+ ** This device integration is pending with the food dept.
+
+ *** If you have already used RD services earlier it is required to uninstall that and install the new version provieded here to work correctly.

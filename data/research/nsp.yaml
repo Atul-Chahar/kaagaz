@@ -1,0 +1,180 @@
+# National Scholarship Portal (NSP) - central schemes for a college student.
+# All sources snapshotted 2026-10-17 via scripts/fetch_source.py; every excerpt checked with scripts/check_excerpt.py.
+# Not found in any official source: a legal/stated processing time for OTR generation (days: null).
+offices:
+  - id: nsp-portal
+    name: National Scholarship Portal (scholarships.gov.in), MeitY, Government of India
+    level: national
+    office_cite: {source_id: nsp-home, excerpt: "One Time Registration (OTR) is a unique 14-digit number issued based on the Aadhaar/Aadhaar Enrolment ID (EID)", confidence: official}
+  - id: college-institution
+    name: Institute Nodal Officer at the student's college (Level 1 verification on NSP)
+    level: institution
+    office_cite: {source_id: nsp-sop, excerpt: "The Institute Nodal officer must verify the correctness of details in the application form and uploaded documents submitted by the student/ applicant", confidence: official}
+    note: >-
+      Second-level verification is by District/State/Ministry Nodal Officers (NSP SOP); for CSSS the second level is the
+      State Higher Education Department or the State Nodal Agency (CSSS guidelines section 6.v).
+
+documents:
+  - id: nsp-otr
+    name: NSP One Time Registration (OTR) number
+    office: nsp-portal
+    office_cite: {source_id: nsp-home, excerpt: "One Time Registration (OTR) is a unique 14-digit number issued based on the Aadhaar/Aadhaar Enrolment ID (EID)", confidence: official}
+    days: null    # no official source states a processing time; OTR is generated after e-KYC + face authentication
+    validity: Valid for the student's entire academic career; free of charge on NSP (Rs 30 total if done at a CSC).
+    validity_cite: {source_id: nsp-otr-faq, excerpt: "The OTR number is generated once and remains valid throughout the student's academic career.", confidence: official}
+    note: >-
+      OTR FAQ lists "NPCI Seeding status (desired)" as a fourth item, i.e. desired, not mandatory, for OTR itself.
+      Students without Aadhaar may use the Aadhaar Enrolment ID (EID) or, if minor, a parent's/guardian's Aadhaar,
+      but must submit their own Aadhaar within one month (EID case) or on turning 18. Face authentication uses the
+      NSP OTR app plus UIDAI AadhaarFaceRD app, or biometric authentication at a CSC.
+    requires:
+      - doc: aadhaar
+        cite: {source_id: nsp-otr-faq, excerpt: "To create your OTR, student shall have: Required Documents/Information: I. Active mobile number II. Aadhaar number III. Mobile number linked with Aadhaar", confidence: official}
+      - doc: aadhaar-face-authentication
+        cite: {source_id: nsp-otr-faq, excerpt: "Face-authentication is mandatory for generation of OTR.", confidence: official}
+  - id: aadhaar-face-authentication
+    name: Aadhaar face authentication (e-KYC) via NSP OTR app, or biometric authentication at a CSC
+    office: nsp-portal
+    office_cite: {source_id: nsp-otr-faq, excerpt: "Complete the face-authentication using option “eKYC with FaceAuth” on NSP OTR Mobile App.", confidence: official}
+    days: null
+    note: Fails if the Aadhaar holder has locked biometrics; must be "Unlocked" in mAadhaar / myAadhaar first (NSP home announcement).
+    requires:
+      - doc: aadhaar
+        cite: {source_id: nsp-home, excerpt: "kindly ensure that the Biometric Lock / Unlock status should be as “Unlocked” for authentication in Aadhaar.", confidence: official}
+  - id: income-certificate
+    name: Family income certificate (issuing authority not specified by the scheme source)
+    office: null
+    days: null
+    note: >-
+      Used where the scheme source does not name the issuing authority (CSSS, PM YASASVI Top Class College). For a
+      Karnataka student this would in practice be income-certificate-ka, but the cited sources do not say so.
+  - id: caste-certificate
+    name: Caste / category certificate (issuing authority not specified by the scheme source)
+    office: null
+    days: null
+    note: >-
+      Used where the scheme source does not name the issuing authority. For a Karnataka student this would in practice
+      be caste-certificate-ka, but the cited sources do not say so.
+  - id: parent-declaration-pragati
+    name: Parent Declaration (Appendix-III of AICTE Pragati FAQ)
+    office: null
+    days: null
+  - id: sibling-affidavit
+    name: Affidavit that benefits are restricted to two siblings (Top Class Education for SC)
+    office: null
+    days: null
+
+schemes:
+  - id: nsp-csss
+    name: PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS)
+    authority: Department of Higher Education, Ministry of Education, Government of India
+    portal: NSP
+    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: nsp-all-scholarships, excerpt: "College And University Students (CSSS) (Merit Based Scheme) Scheme Open from (for Renewal): 01-06-2026 Student Application Open till (for Renewal): 31-10-2026", confidence: official}}
+    note: >-
+      For AY 2026-27 NSP lists this window for RENEWAL applications only; no fresh-application window is published
+      on NSP as of 2026-10-17. Institute verification closes 15-11-2026, L2 verification 30-11-2026. Income limit
+      Rs 4.5 lakh; income certificate needed only for fresh applicants.
+    requires:
+      - doc: nsp-otr
+        cite: {source_id: nsp-home, excerpt: "OTR is required to apply for scholarship on National Scholarship Portal.", confidence: official}
+      - doc: marks-card-previous
+        note: Fresh - 12th mark sheet; Renewal - previous year mark sheet.
+        cite: {source_id: nsp-csss-faq, excerpt: "FRESH: 12th Mark Sheet, Family Income Certificate, Category/ caste Certification for reserved category students, Disability Certificate (if applicable) b. RENEWAL: Previous Year Mark Sheet", confidence: official}
+      - doc: income-certificate
+        note: Fresh applicants only.
+        cite: {source_id: nsp-csss-guidelines, excerpt: "Income certificate will be required only for the fresh applicants;", confidence: official}
+      - doc: caste-certificate
+        note: Only for reserved category students (fresh).
+        cite: {source_id: nsp-csss-faq, excerpt: "FRESH: 12th Mark Sheet, Family Income Certificate, Category/ caste Certification for reserved category students, Disability Certificate (if applicable)", confidence: official}
+      - doc: disability-certificate
+        note: If applicable (fresh).
+        cite: {source_id: nsp-csss-faq, excerpt: "FRESH: 12th Mark Sheet, Family Income Certificate, Category/ caste Certification for reserved category students, Disability Certificate (if applicable)", confidence: official}
+      - doc: bank-account-aadhaar-seeded
+        cite: {source_id: nsp-csss-faq, excerpt: "The scholarship amount will be disbursed in the Aadhaar Seeded Bank Account.", confidence: official}
+
+  - id: nsp-pm-yasasvi-top-class-college
+    name: PM YASASVI Central Sector Scheme of Top Class Education in College for OBC, EBC and DNT Students
+    authority: Department of Social Justice & Empowerment (Backward Classes), Government of India
+    portal: NSP
+    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: nsp-all-scholarships, excerpt: "In College For OBC, EBC And DNT Students (Merit Based Scheme) Scheme Open from : 01-06-2026 Student Application Open till : 31-10-2026", confidence: official}}
+    note: >-
+      Only for notified institutions, within slots; family income up to Rs 2.50 lakh. Institute verification on NSP
+      closes 15-11-2026 per NSP listing.
+    requires:
+      - doc: nsp-otr
+        cite: {source_id: nsp-home, excerpt: "OTR is required to apply for scholarship on National Scholarship Portal.", confidence: official}
+      - doc: income-certificate
+        cite: {source_id: nsp-yasasvi-topclass-college-guidelines, excerpt: "upload their income certificate and caste certificate on the Portal along with details of their bank account, Admission Rank and Fee details", confidence: official}
+      - doc: caste-certificate
+        cite: {source_id: nsp-yasasvi-topclass-college-guidelines, excerpt: "upload their income certificate and caste certificate on the Portal along with details of their bank account, Admission Rank and Fee details", confidence: official}
+      - doc: bank-account
+        cite: {source_id: nsp-yasasvi-topclass-college-guidelines, excerpt: "upload their income certificate and caste certificate on the Portal along with details of their bank account, Admission Rank and Fee details", confidence: official}
+
+  - id: nsp-top-class-sc
+    name: Central Sector Scholarship of Top Class Education for SC Students
+    authority: Department of Social Justice & Empowerment, Government of India
+    portal: NSP
+    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: nsp-all-scholarships, excerpt: "Top Class Education For SC Students (Merit Based Scheme) Scheme Open from : 01-06-2026 Student Application Open till : 31-10-2026", confidence: official}}
+    note: >-
+      Fresh only for first-year students in notified institutions; family income up to Rs 8 lakh. Income certificate for
+      self-employed parents must come from a Revenue Officer not below Tehsildar (maps to income-certificate-ka for a
+      Karnataka student); salaried parents need an employer certificate plus Revenue Officer certificate for other income.
+    requires:
+      - doc: nsp-otr
+        cite: {source_id: nsp-home, excerpt: "OTR is required to apply for scholarship on National Scholarship Portal.", confidence: official}
+      - doc: caste-certificate
+        note: Valid SC certificate; issuing authority not stated in source.
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "Valid SC Certificate, Income Certificate, Aadhaar, Aadhaar-seeded bank account details, admission details, admission rank and fee details as prescribed on NSP.", confidence: official}
+      - doc: income-certificate-ka
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "Self-employed parents: certificate by Revenue Officer not below Tehsildar.", confidence: official}
+      - doc: aadhaar
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "Valid SC Certificate, Income Certificate, Aadhaar, Aadhaar-seeded bank account details", confidence: official}
+      - doc: bank-account-aadhaar-seeded
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "Yes. Aadhaar-seeded bank account is mandatory for DBT.", confidence: official}
+      - doc: admission-proof
+        note: Source says "admission details, admission rank and fee details".
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "admission details, admission rank and fee details as prescribed on NSP.", confidence: official}
+      - doc: sibling-affidavit
+        cite: {source_id: nsp-topclass-sc-faq, excerpt: "No. Benefits are restricted to two siblings. An affidavit is required.", confidence: official}
+
+  - id: nsp-aicte-pragati-degree
+    name: AICTE Pragati Scholarship Scheme for Girl Students (Technical Degree)
+    authority: All India Council for Technical Education (AICTE)
+    portal: NSP
+    window: {start: 2026-06-01, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: nsp-all-scholarships, excerpt: "Pragati Scholarship Scheme For Girl Students ( Technical Degree) (Merit Based Scheme) Scheme Open from : 01-06-2026 Student Application Open till : 31-10-2026", confidence: official}}
+    note: >-
+      Girl students in AICTE-approved institutions, max two per family, family income up to Rs 8 lakh. Income
+      certificate must be issued by State/UT Government (Tehsildar/District Magistrate/Deputy Commissioner per the
+      Appendix-II format), so for a Karnataka student it maps to income-certificate-ka. Renewal needs a promotion
+      certificate from the head of institution.
+    requires:
+      - doc: nsp-otr
+        cite: {source_id: nsp-home, excerpt: "OTR is required to apply for scholarship on National Scholarship Portal.", confidence: official}
+      - doc: sslc-marks-card
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Copy of SSC/10th certificate & mark sheet.", confidence: official}
+      - doc: marks-card-previous
+        note: 12th certificate and mark sheet (degree level); diploma certificate for lateral entry.
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Copy of HSC/12th certificate (In case of Degree level)& mark sheet.", confidence: official}
+      - doc: study-certificate
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Study/ Bonafide Certificate (Appendix-I).", confidence: official}
+      - doc: income-certificate-ka
+        cite: {source_id: nsp-aicte-pragati-degree-guidelines, excerpt: "A valid income certificate issued by State/ UT Government need to be enclosed.", confidence: official}
+      - doc: parent-declaration-pragati
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Parent Declaration (Appendix-III).", confidence: official}
+      - doc: aadhaar
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Aadhaar card and Aadhaar seeded bank account in the name of candidate is mandatory for submitting online application under PRAGATI scheme.", confidence: official}
+      - doc: bank-account-aadhaar-seeded
+        cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "Aadhaar card and Aadhaar seeded bank account in the name of candidate is mandatory for submitting online application under PRAGATI scheme.", confidence: official}
+
+# Extra document-level facts (office citations for documents issued by the college)
+document_offices:
+  - doc: study-certificate
+    office: college-institution
+    office_cite: {source_id: nsp-aicte-pragati-degree-faq, excerpt: "STUDY/ BONAFIDECERTIFICATE Photo of Student (To be issued by Director / Principal / Head of the Institution)", confidence: official}
+  - doc: bank-account-aadhaar-seeded
+    note: NSP SOP - disbursement priority goes to Aadhaar-seeded accounts (applies across NSP schemes).
+    cite: {source_id: nsp-sop, excerpt: "priority for Scholarship Disbursement will be given to the Aadhaar seeded bank accounts.", confidence: official}

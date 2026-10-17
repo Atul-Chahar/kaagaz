@@ -1,0 +1,540 @@
+Frequently Asked Questions
+
+E-attestation Process
+
+  1. What is e-attestation?
+
+     E-Attestation is the attestation of document using digital technologies. The
+     attesting authority uses electronic signature to attest document. The benefit of
+     E-Attesting documents is the once E-Attested the documents can be used
+     multiple time for verification. This reduces the need to visit a government
+     office each time attested documents are required.
+
+  2. Why is e-attestation required?
+
+     An E-Attested document proves that the information contained in the
+     document is verified to be authentic by the attesting authority. In case of post
+     matric scholarship, an E-Attested document conclusively proves the eligibility
+     of the student to avail scholarships as applicable under various schemes.
+
+  3. How should I login to e-attestation?
+
+     You can login to E-Attestation portal through the link provided in post matric
+     scholarship portal (https://ssp.postmatric.karnataka.gov.in). You can log in to
+     the E-Attestation portal by providing your Aadhar Number and Name (as in
+     Aadhar). You don’t need any other credentials.
+
+
+  4. Can I use my parents Aadhar number for getting my document
+     attested electronically?
+
+     No. You must use only your Aadhar.
+
+  5. Will there be any charges for getting my documents attested
+     electronically?
+
+     No. There will be no charges for electronic attestation of documents.
+
+
+  6. Can I change the language of e-attestation portal to Kannada ?
+
+     Yes. You can change the language to Kannada by choosing Kannada in the
+     “Change Language” button in the top right of the portal.
+
+
+  7. What is the process for e-attestation?
+
+     Student must upload and submit the documents requiring E-Attestation in the
+     E-Attestation page in post matric portal
+     https://ssp.postmatric.karnataka.gov.in.
+   After successful submission, student must produce the original of the
+   submitted document to E-Attestation officer. You must also download the
+   Aadhar consent form from the E-attestation page, sign the form and submit it
+   to the E-Attestation officer.
+
+   The E-Attestation officer will verify the documents and electronically sign the
+   document. The electronically signed document will be available to the student
+   in E-Attestation page in post matric portal.
+
+   The E-Attestation process for a document is deemed to be completed only
+   when the document appears in the Approved documents tab of the E-
+   Attestation page in post matric portal.
+
+8. Where can I download the Aadhar Consent form?
+
+   You can download the Aadhar Consent form from the E-attestation page in
+   the post matric portal.
+
+9. Do I have to submit the Aadhar Consent form in the E-Attestation
+   page in post matric portal?
+
+   No, you must not upload the Aadhar Consent form. You must only upload the
+   documents that require E-Attestation.
+
+10. Who does e-attestation and how do I ensure his eligibility?
+
+   The list of E-Attestation officers is available in post matric scholarship portal.
+
+11. Do I need to meet the E-Attestation officer who has received my
+    request for e-attestation? What are the documents I need to carry
+    with me?
+
+   Yes. You must meet the person who has received your request for e-attestation
+   for one-time verification of the document. You need to carry the original
+   document of the document submitted for E-Attestation.
+
+12. Is submitting documents for E-Attestation the final step in
+    attestation of documents?
+
+   No. It is not the final step in attestation. You must meet the E-attestation
+   officer with the original document and Aadhar Declaration form. The E-
+   attestation will verify the original and electronically sign the submitted
+   document.
+
+   The E-Attestation process for a document is deemed to be completed only
+   when the document appears in the Approved documents tab of the E-
+   Attestation page in post matric portal.
+
+13. Where should I go for physical verification of the submitted
+    documents? Who does the physical verification of documents?
+   Currently, after successful submission of documents by you on the portal, you
+   must visit your E-Attestation officer for verification of original documents.
+   College E-Attestation officers will perform physical verification of documents
+   and electronically attest the submitted document.
+
+14. Do I have to meet the E-Attestation officer after submitting every
+    document or Can I submit all documents and meet the E-
+    Attestation?
+
+   You can submit all documents in the E-attestation page in the post matric
+   portal and can meet the E-attestation officer with the originals of all
+   submitted documents for physical verification. You must also carry the signed
+   Aadhar consent form downloaded from the E-Attestation page of the student.
+   However, if you don’t have all the documents, you can get documents attested
+   as and when they are ready.
+
+15. How can I know the names of e-attestation officers of my institute?
+
+   You can obtain the information in post matric scholarship portal.
+
+
+16. What is the legal sanctity of a e-attested document?
+
+   The E-Attested document is as valid as a manually attested document as per
+   IT Act, 2000.
+
+17. How are e-attested documents made accessible to me?
+
+   The documents submitted for E-attestation is electronically attested by the E-
+   Attestation officer after verification of the original documents. The E-attested
+   documents can be accessed by the student in the E-attestation page in Post
+   Matric portal under the tab Approved Documents.
+
+18.How safe is my e-attested documents?
+
+   The documents are attested using E-Sign facility of Government of India
+   which ensures non-repudiation with only authorised person eligible to attest
+   and only students and persons authorised by the student can access the E-
+   Attested documents.
+
+   Also new age technology of Blockchain has been used to secure the E-attested
+   document.
+
+19. Can anyone else access my e-attested documents?
+
+   No. The E-attestation page in the post matric portal can be accessed only
+   through your Aadhar Number. Only people who you authorise can access your
+   E-Attested documents.
+
+20. Where can I apply for E-attestation for post-matric scholarship?
+   You can apply for E-attestation in the E-Attestation page of Post Matric
+   Scholarship portal.
+   Students who do not have computers/internet connectivity can approach the
+   nearest KarnatakaOne and BangaloreOne centres.
+
+   Facilities for applying for E-attestation for post matric scholarship will also be
+   available in all college libraries.
+
+21. What all documents are required to be E-Attested for applying for
+    post matric scholarship?
+
+   Currently, the students studying in institutions in Karnataka need to apply for
+   E-Attestation for post-matric scholarship the following:
+
+    Type of Student                         Type of Document
+    Students pursuing regular degree        1. Bonafide Certificate
+    courses*                                2. Marksheet/Promotion Certificate
+                                            3. Fee Receipt
+                                            4. Hostel Admission Certificate (only
+                                               for students residing in private
+                                               and college run hostels)
+    Students pursuing                       1. Hostel Admission Certificate (only
+    ITI/Diploma/PU/ B. Pharma                  for students residing in private
+    /Paramedical/Nursing                       and college run hostels)
+    Kin of Defence Personnel pursuing       1. Defence Personnel Service
+    Engineering/Diploma Courses                Certificate
+    Students who are not kin of defence     1. Salary Certificate
+    personnel and belong to SC/ST
+    category and are pursuing
+    Engineering/Diploma Courses
+    * Degree courses includes all post matric courses except ITI/Diploma/PU/
+    B. Pharma/ Paramedical/Nursing
+
+
+22. I am pursuing Distance Education/Correspondence course. What
+    are the documents I can get E-Attested?
+
+   Currently, you cannot get any of the documents E-Attested. You must get it
+   physically attested.
+
+23. I am a kin of defence personnel pursuing full time
+    Engineering/Diploma course. Can I get my defence personnel
+    service certificate attested?
+
+   Yes. You can get defence personnel service certificate E-Attested.
+
+24. I belong to SC/ST category and I am pursuing full time
+    Engineering/Diploma course. Can I get my salary attested?
+      Yes. You can get salary certificate E-Attested.
+
+25. I am pursuing a degree course and I am staying in Government
+    hostel. What are the documents I must get E-Attested?
+
+      You must get the following documents E-Attested:
+
+         •   Bonafide Certificate
+         •   Mark Sheet/Promotion Certificate
+         •   Fee Receipt
+
+      You do not have to submit your Government hostel admission certificate for
+      E-Attestation.
+
+26.   I am pursuing a degree course in a Government/Government
+      Aided college and I am staying in my college hostel. What are the
+      documents I can get E-Attested?
+
+      You must get the following documents E-Attested:
+
+         •   Bonafide Certificate
+         •   Mark Sheet/Promotion Certificate
+         •   Fee Receipt
+         •   Hostel Admission Certificate
+
+27. I am pursuing a degree course in a private college and I am staying
+    in college hostel. What are the documents I can get E-Attested?
+
+      You must get the following documents E-Attested:
+
+         •   Bonafide Certificate
+         •   Mark Sheet/Promotion Certificate
+         •   Fee Receipt
+         •   Hostel Admission Certificate
+
+ 28. I am pursuing a degree course in a Government/Government
+     aided/Private college and I am staying in private hostel that is not
+     managed by my college. What are the documents I can get E-
+     Attested?
+
+      You must get the following documents E-Attested:
+
+         •   Bonafide Certificate
+         •   Mark Sheet/Promotion Certificate
+         •   Fee Receipt
+         •   Hostel Admission Certificate
+
+29. I am resident of Karnataka but presently studying in other state.
+    What are the documents I can get E-attested?
+   Currently, you cannot get any of the documents E-Attested. You must get it
+   physically attested as per laws of that state.
+
+30. What type of file can I upload for E-attestation?
+
+   You can upload only PDF files for E-Attestation.
+
+31. What is the maximum file size for every document?
+    2 MB.
+
+32. Can I upload multiple pages separately for a document I need to
+    get E-Attested?
+
+   No. You cannot upload multiple pages separately. In case you have multiple
+   pages for a document for which you need E-Attestation, merge all the pages
+   into one document and upload the merged document.
+
+33. How are e-attested documents used for giving me post-matric
+    scholarship?
+
+   E-Attested documents conclusively prove your credentials and eligibility for
+   availing post matric scholarship under various schemes.
+
+34. Will I be able to re-use my e-attested documents in future?
+
+   Yes. The E-Attested document is tamper-proof and valid for eternity. It can be
+   used multiple times.
+
+
+35. What are the benefits of e-attestation?
+
+   Only one-time verification of documents, validity for eternity, tamper proof
+   storage and secure sharing of E-Attested documents.
+
+
+36. Is there any user manual/video tutorial that can explain step-by-
+    step process of uploading documents?
+
+   Yes. They can be found in the E-Attestation page in the post matric portal.
+
+37. What should I do if I require assistance for applying for E-
+    attestation?
+
+   Call the helpline number: ____________
+
+38. How can I share my e-attested document with my friend over
+    gmail or whatsapp?
+   Attestation documents carry personal and sensitive personal data. You should
+   not share it with everyone. However, in case of need, you can download the E-
+   attested document in PDF format and share it with your friends.
+
+39. If my document is rejected by an e-attestation officer, how can I
+    know the reason for rejection?
+
+   The reason for rejection is provided in the Rejected Documents tab.
+
+40. If my document gets rejected by an e-attestation officer, will I be
+    able to apply again?
+
+   Yes. You can apply again with correct document.
+
+41. When will E-Attestation officer reject my documents from E-
+    Attesting it?
+
+   The E-Attestation officer will reject your document when:
+
+     • Index Data is not the same as data in the original document
+     • Submitted document is not relevant
+     • Submitted / Original Document is not clear
+     • Submitted Document is not matching with Original
+     • Document is not within the validity period
+     • Document is tampered
+     • Document is fake
+     • Incomplete index information is given
+     • Fake index information is given
+     • Applicant doesn’t belong to Institute
+     • Any other reason provided by E-Attestation officer
+
+
+42. What is index data for attestation of documents?
+
+   When you upload document for E-Attestation, you fill some details of the
+   document in a form. That form is called index data. For example, for Bonafide
+   Certificate, the index data in Name of Student (as in Certificate), College,
+   Course, Mode of Study, Course Combination/Discipline/Trade, Year in which
+   you are studying, Academic Year and Date of Issue of Certificate.
+
+
+43. Why is index data to be filled by me for getting documents E-
+    Attested?
+
+   The data is the correct content of the document. The values of these index
+   fields should be as per document. If you fill wrong values E-Attestation officer
+   would reject the document for attestation.
+44. What happens if I do not fill the index data or What happens if I fill
+   it wrongly?
+
+   You cannot upload the document without filling index data. If you fill wrong
+   index data, the document will be rejected.
+
+
+45. Will I get any SMS/email alert after approval/rejection of my
+   documents in e- attestation?
+
+   Currently this feature is not available. You have to check the E-attestation
+   page in post matric page to find out the status of your document.
+
+46. Will I be able to submit my document for e-attestation using my
+    mobile and low speed internet?
+
+   Currently, E-attestation is not available in the form of a mobile application.
+   You can access the E-Attestation page in the post matric portal through any
+   browser in a mobile phone.
+
+47. What would I do with the E-Attested document?
+
+    The post matric scholarship would open in first week of November 2019. The
+    portal requires you to provide the id of the E-Attested document. Please note
+    that each E-Attested document of yours has an E-Attested id given by E-
+    Attestation system. Please know that you would not be required to upload the
+    E-Attested document.
+
+48. What is a bonafide certificate/study certificate? What are the
+    index data I should give to upload bonafide certificate?
+
+    Bonafide Certificate is a document which is issued as a proof that you are
+    studying in your college. It is a certificate of proof that you belong to class
+    and course in the institution during the academic year.
+
+    After you select the document bonafide in E-Attestation portal, you must
+    enter your name as in the bonafide certificate issued by your college. You
+    should also enter the date of issue of the certificate. The rest of the
+    information will appear on your screen.
+
+    You must check the details in your screen and make necessary changes to
+    ensure the details in the screen are the same as details given in the certificate.
+    Always remember, if you enter wrong details, the document will be rejected.
+
+49. My course follows an annual examination system? What are the
+    details I should give as index data for Marksheet/Promotion
+    Certificate?
+   When you select marksheet/promotion the following details will appear as
+   pre-populated fields namely, your college, course and course
+   combination/discipline/trade. You must enter the following details:
+
+      •   You must enter your name as in marksheet.
+
+      •   You must enter the marks obtained in either percentage or Grade
+          Point Average (GPA), whichever is applicable to you, against the box:
+          Obtained Marks in percentage/CGPA.
+
+      •   You must enter maximum marks of the exam in either percentage or
+          Grade Point Average (GPA), whichever is applicable to you.
+
+      •   You must select Yes against the field Promoted, if you were promoted
+          to the current year of studying from previous year. You must select No
+          against the field Promoted, if you were promoted not promoted.
+
+      •   You must select Yes/No against the field, “Pass in all subjects”. You
+          should select Yes if you have passed in all subjects in the previous year.
+          You should select No if you have not passed in all subjects. You should
+          select No if you have not passed even in one subject in the previous
+          year.
+
+      •   You must enter the date of issue of Marksheet/Promotion Certificate
+
+
+
+50. My course follows semester examination system? What are the
+    details I should give as index data in Marksheet/Promotion
+    Certificate?
+
+   When you select marksheet/promotion the following details will appear as
+   pre-populated fields namely, your college, course and course
+   combination/discipline/trade. You must enter the following details:
+
+      •   You must enter your name as in marksheet
+
+      •   You must enter the marks obtained in either percentage or Grade
+          Point Average (GPA), whichever is applicable to you, in the first
+          semester of previous year against the box: Obtained Marks in
+          percentage/CGPA in Semester 1
+
+      •   You must enter maximum marks of the exam in either percentage or
+          Grade Point Average (GPA), whichever is applicable to you, in
+          Semester 1 against the box: Maximum marks in percentage/CGPA in
+          Semester 1
+
+      •   You must enter the marks obtained in either percentage or Grade
+          Point Average (GPA), whichever is applicable to you, in the second
+          semester of previous year against the box: Obtained Marks in
+          percentage/CGPA in Semester 2
+
+      •   You must enter maximum marks of the exam in either percentage or
+          Grade Point Average (GPA), whichever is applicable to you, in
+          Semester 2 against the box: Maximum marks in percentage/CGPA in
+          Semester 2
+
+      •   You must select Yes against the field Promoted, if you were promoted
+          to the current year of studying from previous year. You must select No
+          against the field Promoted, if you were promoted not promoted
+
+      •   You must select Yes/No against the field, “Pass in all subjects in
+          Semester 1”. You should select Yes if you have passed in all subjects in
+          the first semester of previous year. You should select No if you have
+          not passed in all subjects. You should select No if you have not passed
+          even in one subject in the first semester of previous year
+
+      •   You must select Yes/No against the field, “Pass in all subjects in
+          Semester 2”. You should select Yes if you have passed in all subjects in
+          the second semester of previous year. You should select No if you have
+          not passed in all subjects. You should select No if you have not passed
+          even in one subject in the second semester of previous year
+
+      •   You must enter the date of issue of Marksheet/Promotion Certificate
+
+
+51. I have multiple marksheets for every subject/semester? Should I
+    upload all of them?
+
+  Yes. You should upload all of them. You merge all the marksheets into one
+  document and upload it.
+
+
+52. I am in first year. What marksheet/promotion certificate should I
+   upload?
+
+  First year students in any course should upload their marksheet/promotion
+  certificate of the final year in their previous course.
+
+  Undergraduate first year students should upload their PU final year
+  marksheet and Post Graduate first year students should upload the final year
+  marksheet of their Undergraduate course.
+
+
+53. What is a Fee Receipt? What are the index data required for a Fee
+    Receipt?
+   A fee receipt is a proof of payment of fees. Your college will issue it to you
+   after you have paid your fees. Once you select the fee receipt document, your
+   college, course and course combination will appear in the screen.
+
+   After entering your name, you must enter the Fee you have paid against every
+   type of fee. You must not enter anything in the type of fee that is not
+   applicable for you. After entering all the fee, you must enter the date of issue
+   of fee receipt.
+
+   You must check the details in your screen and make necessary changes to
+   ensure the details in the screen are the same as details given in the certificate.
+   Always remember, if you enter wrong details, the document will be rejected.
+
+54. What are the index data for hostel admission certificate? Who is it
+    applicable?
+
+   Hostel admission certificate is required only for students residing in
+   Private/College Run hostels. Students staying in Government hostels need
+   not apply for E-Attestation for hostel certificate.
+
+   Your college, course, course name, year of studying and academic year will
+   appear on your screen after you choose the document. You must enter your
+   name (as in certificate), name of hostel, address of hostel and date of issue of
+   certificate.
+
+55. What are the index data for Defence Service Certificate? Who is it
+    applicable?
+
+    Only students who are pursuing Engineering/Diploma and are kin of
+    defence personnel and do not belong to SC/ST category must get defence
+    service certificate attested.
+
+    Your college, course and course combination will be auto populated. You
+    must enter the following details:
+       • Name of Student (as in certificate)
+       • Name of Parent (as in certificate)
+       • Service Number
+       • Rank
+       • Working Unit
+       • Commission Details: Commissioned/Non-Commissioned/Other
+
+56. Who should get Salary Certificate attested? What is the index data
+    for the certificate?
+
+    Only students who are pursuing Engineering/Diploma and are not kin of
+    defence personnel and belong to SC/ST category must get defence service
+    certificate attested. The annual income of the parent of the student must be
+    between 2.5 lakhs to 10 lakhs.
+
+    The student must enter the following index data:
+•   Name of Parent (as in certificate)
+•   Designation of Parent
+•   Office Address of Parent
+•   Net Salary (as in Salary Certificate)
+•   Gross Salary (as in Salary Certificate)
+•   Date of Issue of Certificate
+

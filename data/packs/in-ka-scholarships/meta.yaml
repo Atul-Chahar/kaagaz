@@ -1,0 +1,13 @@
+pack:
+  id: in-ka-scholarships
+  name: Scholarships for students in Karnataka, India
+  jurisdiction: Karnataka, India (state schemes) and Government of India (central schemes on NSP)
+  language: en
+  currency: INR
+  timezone: Asia/Kolkata
+  version: "2026.10.17"
+# Who this pack models: a college student in Karnataka applying for a post-matric scholarship.
+models: A college student in Karnataka (regular degree course) applying for a post-matric scholarship.
+exclude_conditions:
+  - condition: Only for persons born on or after 1.10.2023
+    reason: A college student was born long before 1 Oct 2023, so this Aadhaar rule does not apply to them.

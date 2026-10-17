@@ -1,0 +1,202 @@
+# Karnataka State Scholarship Portal (SSP) post-matric schemes, FY 2026-27.
+# Researched 2026-10-17. Primary sources: ssp.karnataka.gov.in home page (English, ssp-ka-home) and
+# its Kannada version (ssp-ka-archives, which states "ಮೆಟ್ರಿಕ್ ನಂತರದ" = post-matric explicitly for each last date),
+# plus per-scheme eligibility JSON served by the portal (ssp-elig-*).
+# Not obtained: the SSP Downloads PDFs ("List of Documents required to Apply for PostMatric Scholarship",
+# "User Manual for SSP Post Matric Student Application 2026-27", e-attestation authority list). They are served only
+# through an ASP.NET postback + session (ViewDocument.ashx returns "Document not found or access denied" to a plain GET),
+# so they could not be snapshotted with fetch_source.py. The e-attestation document list below therefore comes from an
+# older (c. 2019) SSP FAQ hosted by Mangalore University and is marked secondary.
+
+offices:
+  - id: ssp-portal-ka
+    name: State Scholarship Portal (SSP), Centre for e-Governance, Government of Karnataka
+    level: state
+    office_cite: {source_id: ssp-ka-home, excerpt: "SSP provides a platform for receipt of online applications and disbursal of scholarship by sponsoring departments through DBT", confidence: official}
+  - id: college-institution
+    name: College / educational institution (College e-Attestation officer)
+    level: institution
+    office_cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "College E-Attestation officers will perform physical verification of documents and electronically attest the submitted document.", confidence: secondary}
+  - id: swd-ka
+    name: Social Welfare Department, Government of Karnataka
+    level: state
+  - id: twd-ka
+    name: Scheduled Tribes Welfare Department, Government of Karnataka
+    level: state
+  - id: bcwd-ka
+    name: Backward Classes Welfare Department, Government of Karnataka
+    level: state
+    office_cite: {source_id: ssp-ka-home, excerpt: "mandatory for Universities/ Educational Boards to publish results details in National Academic Depository (NAD) to display applications of OBC and Minority students for approval", confidence: official}
+  - id: dom-ka
+    name: Directorate of Minorities (Minority Welfare Department), Government of Karnataka
+    level: state
+    office_cite: {source_id: ssp-ka-home, excerpt: "mandatory for Universities/ Educational Boards to publish results details in National Academic Depository (NAD) to display applications of OBC and Minority students for approval", confidence: official}
+
+documents:
+  - id: ssp-student-account
+    name: SSP student account (Create New Account, Pre & Postmatric)
+    office: ssp-portal-ka
+    office_cite: {source_id: ssp-ka-home, excerpt: "Create New Account (Pre & Postmatric)", confidence: official}
+    days: null
+    note: Account creation asks for the student's Aadhaar number, name and gender as in Aadhaar, and a student/parent mobile number (email optional).
+    requires:
+      - doc: aadhaar
+        cite: {source_id: ssp-ka-home, excerpt: "Enter the Aadhaar number of student", confidence: official}
+  - id: university-registration-number
+    name: University / Educational Board registration number for the current course
+    office: null
+    days: null
+    note: Entered in the SSP application; the source does not say who issues it, so no office is asserted.
+  - id: ssp-e-attested-documents
+    name: Documents e-attested on SSP (post-matric e-attestation)
+    office: college-institution
+    office_cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "College E-Attestation officers will perform physical verification of documents and electronically attest the submitted document.", confidence: secondary}
+    days: null
+    note: >-
+      Current SSP page says documents are uploaded for e-attestation "from concerned department officer (if applicable)".
+      The list of documents below is from an older SSP FAQ (c. 2019, hosted by Mangalore University); the current
+      2026-27 approving-authority PDF on SSP could not be fetched. Per that FAQ, ITI/Diploma/PU/B.Pharma/Paramedical/Nursing
+      students need only the hostel admission certificate (if in a private or college-run hostel), and students in
+      Government hostels do not need the hostel certificate e-attested. The student logs in with own Aadhaar.
+    requires:
+      - doc: aadhaar
+        cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "You can log in to the E-Attestation portal by providing your Aadhar Number and Name (as in Aadhar).", confidence: secondary}
+      - doc: study-certificate
+        condition: regular degree courses (Bonafide Certificate)
+        cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt", confidence: secondary}
+      - doc: marks-card-previous
+        condition: regular degree courses (Marksheet / Promotion Certificate)
+        cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt", confidence: secondary}
+      - doc: fee-receipt
+        condition: regular degree courses
+        cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt", confidence: secondary}
+      - doc: hostel-certificate
+        condition: only if residing in a private or college-run hostel
+        cite: {source_id: ssp-e-attestation-faq-v3, excerpt: "Hostel Admission Certificate (only for students residing in private and college run hostels)", confidence: secondary}
+
+# Requirements common to every SSP post-matric application (the SSP says "Application is common for all schemes").
+# Repeated per scheme below so each scheme is self-contained.
+schemes:
+  - id: ka-ssp-pms-sc
+    name: SC Post Matric Scholarship (GoI)
+    authority: Social Welfare Department, Government of Karnataka
+    authority_office: swd-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "SC Post Matric Scholarship(GoI)", confidence: official}
+    window: {start: null, end: 2027-01-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: ssp-ka-archives, excerpt: "ಸಮಾಜ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ: 31/01/2027", confidence: official}}
+    window_open_cite: {source_id: ssp-ka-home, excerpt: "Scholarship application is open to submit applications for FY 2026-27.", confidence: official}
+    note: &rdnote >-
+      SSP asks for the RD number of the Caste, Income (or EWS) certificate issued by the Revenue Department,
+      "whichever is applicable"; the SSP links "Check your RD number Details" to the Atalji Janasnehi Kendra (ajsk.karnataka.gov.in)
+      verification page. The page does not say whether one combined caste-and-income certificate or two separate
+      certificates are needed; mapped here to caste-income-certificate-ka. Start date of the window is not published.
+    requires: &common_sc_st_obc
+      - doc: ssp-student-account
+        cite: {source_id: ssp-ka-home, excerpt: "Create New Account (Pre & Postmatric)", confidence: official}
+      - doc: sslc-marks-card
+        cite: {source_id: ssp-ka-home, excerpt: "Enter Class 10 (SSLC / CBSE / ICSE / KOS) Registration Number of the student", confidence: official}
+      - doc: caste-income-certificate-ka
+        cite: {source_id: ssp-ka-home, excerpt: "Enter the RD number of Caste, Income, EWS certificate issued by Revenue Department (whichever is applicable)", confidence: official}
+      - doc: university-registration-number
+        cite: {source_id: ssp-ka-home, excerpt: "Enter University/ Educational Board Registration number of the student for the current course", confidence: official}
+      - doc: nsp-otr
+        cite: {source_id: ssp-ka-home, excerpt: "Enter One Time Registration (OTR) number issued by National Scholarship Portal (only for SC, ST and OBC students)", confidence: official}
+      - doc: bank-account-aadhaar-seeded
+        cite: {source_id: ssp-ka-home, excerpt: "Aadhaar seeding to bank account is mandatory for submission of application and to avail scholarship.", confidence: official}
+      - doc: ssp-e-attested-documents
+        condition: if applicable
+        cite: {source_id: ssp-ka-home, excerpt: "Student must upload documents for e-attestation from concerned department officer (if applicable)", confidence: official}
+    eligibility_cite: {source_id: ssp-elig-sc-pms, excerpt: '"Entry of OTR Number","EligibilityDescription":"Mandatory"', confidence: official}
+
+  - id: ka-ssp-pms-st
+    name: Postmatric Scholarship for ST Students
+    authority: Scheduled Tribes Welfare Department, Government of Karnataka
+    authority_office: twd-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "Postmatric Scholarship for ST Students", confidence: official}
+    window: {start: null, end: 2026-12-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: ssp-ka-archives, excerpt: "ಪರಿಶಿಷ್ಟ ಪಂಗಡಗಳ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ: 31/12/2026", confidence: official}}
+    note: *rdnote
+    requires: *common_sc_st_obc
+    eligibility_cite: {source_id: ssp-elig-st-pms, excerpt: '"Entry of OTR Number","EligibilityDescription":"Mandatory"', confidence: official}
+
+  - id: ka-ssp-pms-obc
+    name: PostMatric for OBC Students Central / PM YASASVI
+    authority: Backward Classes Welfare Department, Government of Karnataka
+    authority_office: bcwd-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "PostMatric for OBC Students Central/PM Yasasvi", confidence: official}
+    window: {start: null, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: ssp-ka-archives, excerpt: "ಹಿಂದುಳಿದ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ: 31/10/2026", confidence: official}}
+    window_dept_cite: {source_id: bcwd-ka-postmatric-2026-27, excerpt: "Last date to apply: 31.10.2026", confidence: official}
+    note: *rdnote
+    requires: *common_sc_st_obc
+    eligibility_cite: {source_id: ssp-elig-obc-pms, excerpt: '"Entry of OTR Number","EligibilityDescription":"Mandatory"', confidence: official}
+
+  - id: ka-ssp-vidyasiri-bcwd
+    name: Vidyasiri Food and Accommodation Scheme (BCWD)
+    authority: Backward Classes Welfare Department, Government of Karnataka
+    authority_office: bcwd-ka
+    portal: SSP
+    name_cite: {source_id: bcwd-ka-postmatric-2026-27, excerpt: "Post-Matric Scholarship, Nomadic/Semi-Nomadic Post-Matric Eligibility Scholarship, Fee Concession, and Vidyasiri-Food Accommodation & Assistance Scheme for the year 2026-27.", confidence: official}
+    window: {start: null, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: bcwd-ka-postmatric-2026-27, excerpt: "Last date to apply: 31.10.2026", confidence: official}}
+    note: >-
+      For day scholars not allotted a seat in SC/ST/OBC/Minority hostels (eligibility_cite_hostel). BCWD page states one
+      last date (31.10.2026) for all four BCWD post-matric schemes. RD-number caveat as for the other SSP schemes.
+    eligibility_cite_hostel: {source_id: ssp-elig-vidyasiri-bcwd, excerpt: '"Dayscholar / Hosteller","EligibilityDescription":"Not allotted hostel seat in SC/ ST/ OBC/ Minority hostels"', confidence: official}
+    requires: *common_sc_st_obc
+    eligibility_cite: {source_id: ssp-elig-vidyasiri-bcwd, excerpt: '"Entry of OTR Number","EligibilityDescription":"Mandatory"', confidence: official}
+
+  - id: ka-ssp-fee-concession-bcwd
+    name: BCWD Fee Reimbursement (Fee Concession)
+    authority: Backward Classes Welfare Department, Government of Karnataka
+    authority_office: bcwd-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "BCWD Fee Reimbursement", confidence: official}
+    window: {start: null, end: 2026-10-31, year: "2026-27", is_last_published: false,
+             cite: {source_id: bcwd-ka-postmatric-2026-27, excerpt: "Last date to apply: 31.10.2026", confidence: official}}
+    note: BCWD notice names this "Fee Concession"; SSP lists it as "BCWD Fee Reimbursement". RD-number caveat as above.
+    requires: *common_sc_st_obc
+    eligibility_cite: {source_id: ssp-elig-bcwd-fee, excerpt: '"Entry of OTR Number","EligibilityDescription":"Mandatory"', confidence: official}
+
+  - id: ka-ssp-fee-reimbursement-minority
+    name: Fee Reimbursement scheme for Minorities (Post-Matric)
+    authority: Directorate of Minorities, Government of Karnataka
+    authority_office: dom-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "Fee Reimbursement scheme for Minorities", confidence: official}
+    window: {start: null, end: 2026-11-30, year: "2026-27", is_last_published: false,
+             cite: {source_id: ssp-ka-archives, excerpt: "ಅಲ್ಪಸಂಖ್ಯಾತರ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ: 30/11/2026", confidence: official}}
+    note: >-
+      The Directorate of Minorities home page also lists an earlier 2026-27 last date of 30-09-2026 for this scheme; the
+      current SSP date is 30/11/2026. NSP-OTR is required by SSP only for SC, ST and OBC students, so it is not listed here.
+      The SSP eligibility for this scheme does not list OTR. Whether a separate minority declaration is needed is not
+      stated in any fetched source. RD-number caveat as above.
+    requires: &common_minority
+      - doc: ssp-student-account
+        cite: {source_id: ssp-ka-home, excerpt: "Create New Account (Pre & Postmatric)", confidence: official}
+      - doc: sslc-marks-card
+        cite: {source_id: ssp-ka-home, excerpt: "Enter Class 10 (SSLC / CBSE / ICSE / KOS) Registration Number of the student", confidence: official}
+      - doc: caste-income-certificate-ka
+        cite: {source_id: ssp-ka-home, excerpt: "Enter the RD number of Caste, Income, EWS certificate issued by Revenue Department (whichever is applicable)", confidence: official}
+      - doc: university-registration-number
+        cite: {source_id: ssp-ka-home, excerpt: "Enter University/ Educational Board Registration number of the student for the current course", confidence: official}
+      - doc: bank-account-aadhaar-seeded
+        cite: {source_id: ssp-ka-home, excerpt: "Aadhaar seeding to bank account is mandatory for submission of application and to avail scholarship.", confidence: official}
+      - doc: ssp-e-attested-documents
+        condition: if applicable
+        cite: {source_id: ssp-ka-home, excerpt: "Student must upload documents for e-attestation from concerned department officer (if applicable)", confidence: official}
+
+  - id: ka-ssp-vidyasiri-minority
+    name: Vidyasiri scheme for minorities
+    authority: Directorate of Minorities, Government of Karnataka
+    authority_office: dom-ka
+    portal: SSP
+    name_cite: {source_id: ssp-ka-home, excerpt: "Vidyasiri scheme for minorities", confidence: official}
+    window: {start: null, end: 2026-11-30, year: "2026-27", is_last_published: false,
+             cite: {source_id: ssp-ka-archives, excerpt: "ಅಲ್ಪಸಂಖ್ಯಾತರ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ: 30/11/2026", confidence: official}}
+    note: For students who applied for a minority hostel seat but were not allotted one. RD-number caveat as above.
+    eligibility_cite_hostel: {source_id: ssp-elig-vidyasiri-minority, excerpt: '"EligibilityDescription":"Applied for hostel seat in minority hostel but not allotted a hostel seat"', confidence: official}
+    requires: *common_minority

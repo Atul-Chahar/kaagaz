@@ -1,0 +1,255 @@
+# Research area: the documents themselves (issuing office, legal max processing time, prerequisites).
+# All Sakala times are WORKING days (Karnataka Sakala Services Act 2011 compendium, 05-05-2026).
+offices:
+  - id: taluk-office-ka
+    name: Taluk office / Nadakacheri (Atalji Janasnehi Kendra), Revenue Department, Karnataka
+    level: taluk
+  - id: food-civil-supplies-ka
+    name: Food, Civil Supplies and Consumer Affairs Department, Karnataka (Food Inspector)
+    level: taluk
+  - id: municipal-registrar
+    name: Urban local body registrar of births and deaths (Health Inspector / Health Officer), Karnataka
+    level: taluk
+  - id: uidai-enrolment-centre
+    name: Aadhaar enrolment centre (UIDAI; also at Atalji Janasnehi Kendras in Karnataka)
+    level: national
+  - id: bank-branch
+    name: Bank branch (regulated entity under RBI KYC Master Direction)
+    level: bank
+  - id: income-tax-dept
+    name: Income Tax Department, Government of India (e-Filing portal, Instant e-PAN)
+    level: national
+
+documents:
+  - id: caste-certificate-ka
+    name: Caste certificate (Karnataka; Category-A, SC/ST, OBC-Central)
+    office: taluk-office-ka
+    office_cite: {source_id: tumkur-caste-cert, excerpt: "Taluk level functionary is authorized for issuing Caste Certificates in Karnataka.", confidence: official}
+    days: 21
+    days_cite: {source_id: sakala-compendium-en, excerpt: "31 Caste Tahsildar 21 Assistant 35 Additional 35 Working Certificate Working Commissioner Working Deputy Days (Cat-A)", confidence: official}
+    notes: >-
+      21 working days, Tahsildar is designated officer. Same 21 days for Caste Certificate (SC/ST) (Sakala 4.1 row 32)
+      and OBC Certificate (Central) (row 33). Not issued to general-category applicants (AJSK FAQ).
+    validity: null
+    requires:
+      - any_of: {id: id-or-ration-proof-caste-ka, label: "One of: ration card, voter card, or name in voter list"}
+        cite: {source_id: tumkur-caste-cert, excerpt: "Copy of Ration Card / Copy of Voter Card / Name in the Voter List (one of them)", confidence: official}
+        options:
+          - doc: ration-card-ka
+            cite: {source_id: tumkur-caste-cert, excerpt: "Copy of Ration Card / Copy of Voter Card / Name in the Voter List (one of them)", confidence: official}
+          - doc: voter-id
+            cite: {source_id: tumkur-caste-cert, excerpt: "Copy of Ration Card / Copy of Voter Card / Name in the Voter List (one of them)", confidence: official}
+      - doc: proof-of-residence
+        cite: {source_id: tumkur-caste-cert, excerpt: "Income report Residence Proof Caste / religion report", confidence: official}
+      - doc: proof-of-identity
+        cite: {source_id: ajsk-faqs, excerpt: "ID proof and Address Proof documents are mandatory for all certificates.", confidence: official}
+
+  - id: income-certificate-ka
+    name: Income certificate (Karnataka)
+    office: taluk-office-ka
+    office_cite: {source_id: tumkur-income-cert, excerpt: "few services like income & residential certificates are signed by DT 7 caste related certificates signed by tahsildar", confidence: official}
+    days: 21
+    days_cite: {source_id: sakala-compendium-en, excerpt: "10 Income Deputy 21 Assistant 35 Additional 35 Working Certificate Tahsildar Working Commissioner Working Deputy Days", confidence: official}
+    notes: 21 working days; designated officer is the Deputy Tahsildar (Sakala 4.1 row 10).
+    validity: "Valid up to a period of 12 months from date of issue (Tumakuru district page)."
+    validity_cite: {source_id: tumkur-income-cert, excerpt: "Valid up to a period of 12 months from date of issue.", confidence: official}
+    requires:
+      - doc: income-proof
+        cite: {source_id: tumkur-income-cert, excerpt: "Required Documents Income proof / salary slip / bank statement etc.", confidence: official}
+      - any_of: {id: id-proof-ka, label: "One ID proof"}
+        cite: {source_id: tumkur-income-cert, excerpt: "ID proof / voter id card / driving license / aadhar card", confidence: official}
+        options:
+          - doc: voter-id
+            cite: {source_id: tumkur-income-cert, excerpt: "ID proof / voter id card / driving license / aadhar card", confidence: official}
+          - doc: driving-licence
+            cite: {source_id: tumkur-income-cert, excerpt: "ID proof / voter id card / driving license / aadhar card", confidence: official}
+          - doc: aadhaar
+            cite: {source_id: tumkur-income-cert, excerpt: "ID proof / voter id card / driving license / aadhar card", confidence: official}
+      - any_of: {id: proof-of-address-ka, label: "One address proof"}
+        cite: {source_id: tumkur-income-cert, excerpt: "Address proof / ration card / bank passbook / passport", confidence: official}
+        options:
+          - doc: ration-card-ka
+            cite: {source_id: tumkur-income-cert, excerpt: "Address proof / ration card / bank passbook / passport", confidence: official}
+          - doc: bank-account
+            cite: {source_id: tumkur-income-cert, excerpt: "Address proof / ration card / bank passbook / passport", confidence: official}
+          - doc: passport
+            cite: {source_id: tumkur-income-cert, excerpt: "Address proof / ration card / bank passbook / passport", confidence: official}
+      - any_of: {id: age-proof-ka, label: "One age proof"}
+        cite: {source_id: tumkur-income-cert, excerpt: "Age proof / school leaving certificate / birth certificate", confidence: official}
+        options:
+          - doc: school-leaving-certificate
+            cite: {source_id: tumkur-income-cert, excerpt: "Age proof / school leaving certificate / birth certificate", confidence: official}
+          - doc: birth-certificate
+            cite: {source_id: tumkur-income-cert, excerpt: "Age proof / school leaving certificate / birth certificate", confidence: official}
+      - doc: aadhaar
+        cite: {source_id: tumkur-income-cert, excerpt: "If belongs to the minority community then caste certificate Aadhaar Card", confidence: official}
+
+  - id: caste-income-certificate-ka
+    name: Caste and income certificate (Karnataka; Form F, backward classes other than Category-1)
+    office: taluk-office-ka
+    office_cite: {source_id: sakala-compendium-en, excerpt: "30 Caste and Tahsildar 21 Assistant 35 Additional 35 Working Income Working Commissioner Working Deputy Days Certificate", confidence: official}
+    days: 21
+    days_cite: {source_id: sakala-compendium-en, excerpt: "30 Caste and Tahsildar 21 Assistant 35 Additional 35 Working Income Working Commissioner Working Deputy Days Certificate", confidence: official}
+    notes: >-
+      21 working days, Tahsildar (Sakala 4.1 row 30). Form F is titled "Income and caste certificate to be issued to candidates
+      belonging to backward classes other than Category-1" (cite in form_cite).
+    form_cite: {source_id: tumkur-income-cert, excerpt: "FORM F – INCOME AND CASTE CERTIFICATE TO BE ISSUED TO CANDIDATES BELONGING TO BACKWARD CLASSES OTHER THAN CATEGORY-1", confidence: official}
+    validity: null
+    requires:
+      - doc: proof-of-identity
+        cite: {source_id: ajsk-faqs, excerpt: "ID proof and Address Proof documents are mandatory for all certificates.", confidence: official}
+      - doc: proof-of-residence
+        cite: {source_id: ajsk-faqs, excerpt: "ID proof and Address Proof documents are mandatory for all certificates.", confidence: official}
+
+  - id: residence-certificate-ka
+    name: Residence certificate (Karnataka)
+    office: taluk-office-ka
+    office_cite: {source_id: sakala-compendium-en, excerpt: "26 Residence Tahsildar 14 Assistant 35 Additional 35 Working certificate Working Commissioner Working Deputy Days", confidence: official}
+    days: 14
+    days_cite: {source_id: sakala-compendium-en, excerpt: "26 Residence Tahsildar 14 Assistant 35 Additional 35 Working certificate Working Commissioner Working Deputy Days", confidence: official}
+    notes: 14 working days, Tahsildar (Sakala 4.1 row 26).
+    validity: null
+    requires:
+      - doc: proof-of-identity
+        cite: {source_id: ajsk-faqs, excerpt: "ID proof and Address Proof documents are mandatory for all certificates.", confidence: official}
+      - doc: proof-of-residence
+        cite: {source_id: ajsk-faqs, excerpt: "ID proof and Address Proof documents are mandatory for all certificates.", confidence: official}
+
+  - id: ration-card-ka
+    name: Ration card (Karnataka; new / BPL)
+    office: food-civil-supplies-ka
+    office_cite: {source_id: sakala-compendium-en, excerpt: "1 Ration Card: Concerned 7 Working Tahsildars in 35 Deputy 35 Issue of Transfer of Food Days", confidence: official}
+    days: 7
+    days_cite: {source_id: sakala-compendium-en, excerpt: "Inclusion of names of Rationing members, Surrender, Areas, New Ration Card as Bangalore. per letter.", confidence: official}
+    notes: >-
+      Sakala 3.1 row 1 (designated officer: concerned Food Inspector, 7 working days) covers ration-card services including
+      "New Ration Card as per letter". CAVEAT: the department's home page says it is only disposing new ration card
+      applications received before March 2023 (status_cite), so a fresh application may not be possible now.
+    status_cite: {source_id: ahara-home, excerpt: "The Food Department is disposing the already received new ration card applications only, which were received before March-2023", confidence: official}
+    validity: null
+    requires: []
+
+  - id: birth-certificate
+    name: Birth certificate (Karnataka, urban local body registrar; event already registered)
+    office: municipal-registrar
+    office_cite: {source_id: sakala-compendium-en, excerpt: "1 Issue of Birth, Death Health 3 Working Municipal 35 Deputy 35 & Still Birth Inspector Days for commissioner Working Commissioner Working", confidence: official}
+    days: 7
+    days_cite: {source_id: sakala-compendium-en, excerpt: "7 Working Municipal 35 Deputy 35 Days for commissioner Working Commissioner Working event data Days of District Days", confidence: official}
+    notes: >-
+      City Municipal Council row (Sakala 36.1 B): 3 working days if event data is in electronic media, 7 working days otherwise.
+      Other bodies: municipal corporations similar 3/7; rural Village Accountant 7 working days (<1 year) / 14 (>1 year)
+      (Sakala 4.1 row 4); govt hospitals 15 working days (Sakala 7.1 rows 5-6).
+    validity: null
+    requires: []
+
+  - id: aadhaar
+    name: Aadhaar number (UIDAI)
+    office: uidai-enrolment-centre
+    office_cite: {source_id: ajsk-faqs, excerpt: "YES Aadhar Enrolment at AJSK is free of Cost.", confidence: official}
+    days: null
+    notes: >-
+      UIDAI's own FAQ (generation time) could not be snapshotted: uidai.gov.in returned HTTP 500 to the research fetcher.
+      Document list is the UIDAI Schedule II (2025) as hosted on dpse.goa.gov.in. Column order in the 5+ table is
+      POI, POA, POR, PDB. PAN card is also a valid POI (row 2) but omitted here to avoid a cycle (pan-card requires aadhaar).
+    requires:
+      - any_of: {id: aadhaar-poi, label: "One Proof of Identity (age 5+)"}
+        cite: {source_id: uidai-supporting-docs-goa, excerpt: "Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)", confidence: official}
+        options:
+          - doc: passport
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "1. Valid Indian Passport ✔ ✔ ✔ ✔", confidence: official}
+          - doc: ration-card-ka
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "3. Ration /PDS Photograph Card/e- ✔ ✔ ✔ X Ration Card", confidence: official}
+          - doc: voter-id
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "4. Voter Identity Card /e-Voter Identity ✔ ✔ X X Card", confidence: official}
+          - doc: driving-licence
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "5. Driving licence ✔ X X X", confidence: official}
+          - doc: caste-certificate-ka
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "11. Scheduled Tribe(ST)/ Scheduled ✔ ✔ ✔ X", confidence: official}
+          - doc: sslc-marks-card
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "12. Mark-sheet/Certificate issued by ✔ X ✔ ✔ recognised Board of Education", confidence: official}
+      - any_of: {id: aadhaar-poa, label: "One Proof of Address (age 5+)"}
+        cite: {source_id: uidai-supporting-docs-goa, excerpt: "Identity Proof of Address Proof of Relationship Birth List of documents (POI) (POA)", confidence: official}
+        options:
+          - doc: passport
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "1. Valid Indian Passport ✔ ✔ ✔ ✔", confidence: official}
+          - doc: ration-card-ka
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "3. Ration /PDS Photograph Card/e- ✔ ✔ ✔ X Ration Card", confidence: official}
+          - doc: voter-id
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "4. Voter Identity Card /e-Voter Identity ✔ ✔ X X Card", confidence: official}
+          - doc: caste-certificate-ka
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "11. Scheduled Tribe(ST)/ Scheduled ✔ ✔ ✔ X", confidence: official}
+          - doc: electricity-bill
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "16. Electricity bill (pre-paid/post-paid X ✔ X X", confidence: official}
+          - doc: institution-certificate-uidai-format
+            cite: {source_id: uidai-supporting-docs-goa, excerpt: "(vi) Recognisededucational X ✔ X X institution (signed by the Head of Institute,only for the institute students concerned).", confidence: official}
+      - doc: birth-certificate
+        condition: "Only for persons born on or after 1.10.2023"
+        cite: {source_id: uidai-supporting-docs-goa, excerpt: "For resident Indian and non-resident Indian (NRI) born on and after 1.10.2023, birth certificate is mandatory.", confidence: official}
+
+  - id: bank-account
+    name: Bank savings account
+    office: bank-branch
+    office_cite: {source_id: rbi-kyc-md, excerpt: "REs shall obtain the following from an individual while establishing an account-based relationship", confidence: official}
+    days: null
+    notes: No official maximum time for opening an account was found in the RBI KYC Master Direction.
+    requires:
+      - any_of: {id: kyc-identity-address, label: "Aadhaar or one Officially Valid Document (identity + address)"}
+        cite: {source_id: rbi-kyc-md, excerpt: "(ab) the proof of possession of Aadhaar number where offline verification cannot be carried out or any OVD", confidence: official}
+        options:
+          - doc: aadhaar
+            cite: {source_id: rbi-kyc-md, excerpt: "proof of possession of Aadhaar number, the Voter's Identity Card issued by the Election Commission of India", confidence: official}
+          - doc: passport
+            cite: {source_id: rbi-kyc-md, excerpt: "(OVD) means the passport, the driving licence,", confidence: official}
+          - doc: driving-licence
+            cite: {source_id: rbi-kyc-md, excerpt: "(OVD) means the passport, the driving licence,", confidence: official}
+          - doc: voter-id
+            cite: {source_id: rbi-kyc-md, excerpt: "proof of possession of Aadhaar number, the Voter's Identity Card issued by the Election Commission of India", confidence: official}
+          - doc: nrega-job-card
+            cite: {source_id: rbi-kyc-md, excerpt: "job card issued by NREGA duly signed by an officer of the State Government", confidence: official}
+          - doc: npr-letter
+            cite: {source_id: rbi-kyc-md, excerpt: "letter issued by the National Population Register containing details of name and address", confidence: official}
+      - any_of: {id: pan-or-form60, label: "PAN or Form No. 60"}
+        cite: {source_id: rbi-kyc-md, excerpt: "the Permanent Account Number or the equivalent e-document thereof or Form No. 60 as defined in Income-tax Rules, 1962", confidence: official}
+        options:
+          - doc: pan-card
+            cite: {source_id: rbi-kyc-md, excerpt: "the Permanent Account Number or the equivalent e-document thereof or Form No. 60 as defined in Income-tax Rules, 1962", confidence: official}
+          - doc: form-60
+            cite: {source_id: rbi-kyc-md, excerpt: "the Permanent Account Number or the equivalent e-document thereof or Form No. 60 as defined in Income-tax Rules, 1962", confidence: official}
+
+  - id: bank-account-aadhaar-seeded
+    name: Bank account seeded with Aadhaar in NPCI mapper (DBT-enabled)
+    office: bank-branch
+    office_cite: {source_id: aicte-aadhaar-seeding-steps, excerpt: "The branch will then link the Aadhaar number to the customer's account and also in NPCI mapper.", confidence: official}
+    days: null
+    notes: >-
+      No official time limit found. NPCI pages (npci.org.in) returned HTTP 403 to the fetcher; process taken from an AICTE
+      (PMSSS scholarship) notice. Seeding is needed to receive DBT.
+    requires:
+      - doc: bank-account
+        cite: {source_id: aicte-aadhaar-seeding-steps, excerpt: "Customer to visit the bank branch where he / she is holding an account and submit the duly filled consent form", confidence: official}
+      - doc: aadhaar
+        cite: {source_id: aicte-aadhaar-seeding-steps, excerpt: "The branch will then link the Aadhaar number to the customer's account and also in NPCI mapper.", confidence: official}
+      - doc: aadhaar-seeding-consent-form
+        cite: {source_id: aicte-aadhaar-seeding-steps, excerpt: "Customer to visit the bank branch where he / she is holding an account and submit the duly filled consent form", confidence: official}
+
+  - id: pan-card
+    name: PAN (Instant e-PAN via Aadhaar)
+    office: income-tax-dept
+    office_cite: {source_id: itd-instant-epan-help, excerpt: "Instant e-PAN is a free, pre-login service on the e-Filing portal", confidence: official}
+    days: null
+    notes: >-
+      No processing time stated on the official page. Instant e-PAN is not available to a minor on the date of request
+      (minor_cite), so students under 18 cannot use this route.
+    minor_cite: {source_id: itd-instant-epan-help, excerpt: "A minor as on the date of the request.", confidence: official}
+    requires:
+      - doc: aadhaar
+        cite: {source_id: itd-instant-epan-help, excerpt: "A valid Aadhaar number. A mobile number linked to that Aadhaar (for OTP verification). Access to DigiLocker.", confidence: official}
+      - any_of: {id: pan-dob-proof, label: "One date-of-birth proof in DigiLocker"}
+        cite: {source_id: itd-instant-epan-help, excerpt: "You may select the any one of the documents(s) to be shared with the Income Tax Department as proof of date of birth.", confidence: official}
+        options:
+          - doc: driving-licence
+            cite: {source_id: itd-instant-epan-help, excerpt: "Driving License Birth Certificate Class X marksheet", confidence: official}
+          - doc: birth-certificate
+            cite: {source_id: itd-instant-epan-help, excerpt: "Driving License Birth Certificate Class X marksheet", confidence: official}
+          - doc: sslc-marks-card
+            cite: {source_id: itd-instant-epan-help, excerpt: "Driving License Birth Certificate Class X marksheet", confidence: official}

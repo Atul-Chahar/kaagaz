@@ -1,0 +1,1390 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>document.documentElement.className += " js";</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        /* apply saved text size / contrast before first paint */
+        (function () { try {
+            var f = parseInt(localStorage.getItem('a11y-fs'), 10), c = localStorage.getItem('a11y-contrast'), h = document.documentElement;
+            if (!isNaN(f) && f !== 1 && f >= 0 && f <= 4) h.classList.add('a11y-fs-' + f);
+            if (c === 'yellow' || c === 'pink') h.classList.add('a11y-c-' + c);
+        } catch (e) { } })();
+    </script>
+
+    
+    <title>Home | Department of Food, Civil Supplies and Consumer Affairs | Government of Karnataka</title>
+    <meta name="description" content="Official website of the Department of Food, Civil Supplies and Consumer Affairs, Government of Karnataka: ration cards, Anna Bhagya, NFSA, e-services, acts, orders and notifications.">
+    <meta name="keywords" content="Food and Civil Supplies, Karnataka, ration card, Anna Bhagya, NFSA, public distribution system, consumer affairs">
+    <meta name="author" content="Department of Food, Civil Supplies and Consumer Affairs, Government of Karnataka">
+    <meta property="og:title" content="Home | Department of Food, Civil Supplies and Consumer Affairs | Government of Karnataka">
+    <meta property="og:site_name" content="Department of Food, Civil Supplies and Consumer Affairs, Government of Karnataka">
+
+    
+    <!--<link href="~/assets/img/favicon.png" rel="icon">-->
+
+    <!-- Vendor CSS -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template CSS, then the DBIM theme so DBIM colours/typography win (DBIM 2, 4) -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!--<link href="~/assets/css/dbim-theme.css" rel="stylesheet">
+    <link href="~/assets/css/print.css" rel="stylesheet" media="print">-->
+    <link href="/assets/css/shell.css" rel="stylesheet">
+    <link href="/assets/css/a11y-controls.css" rel="stylesheet">
+    
+    <link href="/assets/css/home.css" rel="stylesheet">
+
+
+    
+    <style>
+        .dbim-user-controls .wrap, .dbim-brand .wrap, .gigw-footer .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .dbim-user-controls {
+            background: var(--dbim-key, #162F6A);
+        }
+
+            .dbim-user-controls .wrap {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px 16px;
+                justify-content: flex-end;
+                align-items: center;
+                min-height: 32px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+            }
+
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+            .lang-switch button {
+                background: none;
+                border: 1px solid rgba(255,255,255,.6);
+                color: #fff;
+                border-radius: 4px;
+                padding: 1px 9px;
+                line-height: 1.6;
+                cursor: pointer;
+                font: inherit;
+                font-size: 13px;
+            }
+
+                .lang-switch button[aria-pressed="true"] {
+                    background: #fff;
+                    color: var(--dbim-key, #162F6A);
+                    font-weight: 600;
+                }
+
+        .dbim-brand {
+            background: #fff;
+            border-bottom: 1px solid var(--dbim-linen, #EBEAEA);
+        }
+
+            .dbim-brand .wrap {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px 20px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+
+        .dbim-lockup {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dbim-text, #150202);
+            text-decoration: none;
+        }
+
+            .dbim-lockup img {
+                height: 56px;
+                width: auto;
+            }
+
+            .dbim-lockup .gov {
+                display: block;
+                font-size: 13px;
+                line-height: 1.3;
+            }
+
+            .dbim-lockup .org {
+                display: block;
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 1.25;
+                color: var(--dbim-key, #162F6A);
+            }
+
+        .dbim-cobrand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-left: auto;
+        }
+
+            .dbim-cobrand img {
+                height: 56px;
+                width: auto;
+                max-width: 100%;
+            }
+
+ /* Minister banner: same height as the CM banner so both read at the same text size */
+        .dbim-minister {
+            display: block;
+            height: 56px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        /* Desktop: keep the whole brand bar on ONE row. The department name (left) gives up space and wraps
+           first; logos, search and banners keep their size. Below 1200px the bar wraps/stacks as before. */
+        @media (min-width: 1200px) {
+            .dbim-brand .wrap {
+                flex-wrap: nowrap;
+                gap: 10px 16px;
+            }
+
+            .dbim-lockup {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+
+                .dbim-lockup .org {
+                    font-size: clamp(15px, 1.5vw, 18px);
+                }
+
+            .dbim-cobrand, .dbim-minister {
+                flex: 0 0 auto;
+                margin-left: 0;
+            }
+
+            .dbim-brand .wrap .itms-menu-search {
+                flex: 0 1 220px;
+                width: auto;
+                min-width: 150px;
+            }
+        }
+
+        .itms-menu-search {
+            position: relative;
+            width: 300px;
+            max-width: 100%;
+        }
+
+            .itms-menu-search label {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+            }
+
+        .itms-menu-search-input {
+            width: 100%;
+            min-height: 44px;
+            border: 2px solid var(--dbim-key, #162F6A);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font: inherit;
+        }
+
+        .itms-menu-search-results {
+            position: absolute;
+            top: 48px;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 5px 18px rgba(0,0,0,.2);
+            z-index: 9999;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .itms-menu-search-results[hidden] {
+                display: none;
+            }
+
+            .itms-menu-search-results a {
+                display: block;
+                padding: 10px 12px;
+                color: var(--dbim-text, #150202);
+                text-decoration: none;
+                border-bottom: 1px solid #eee;
+            }
+
+                .itms-menu-search-results a:hover, .itms-menu-search-results a:focus {
+                    background: var(--dbim-4, #D2DFFF);
+                    text-decoration: underline;
+                }
+
+        .itms-menu-search-no-result {
+            padding: 12px;
+            text-align: center;
+            color: var(--dbim-grey-3, #606060);
+        }
+        /* DBIM 5.4 / GIGW 5.2.21: dropdowns open on keyboard focus too, not only on mouse hover */
+        .nav-menu .drop-down:focus-within > ul {
+            opacity: 1;
+            visibility: visible;
+            top: 100%;
+        }
+
+        .nav-menu .drop-down .drop-down:focus-within > ul {
+            top: 0;
+            left: 100%;
+        }
+
+        /* ---- Compact, official-looking main menu bar (same colours, no wasted height) ---- */
+        #header {
+            background: var(--dbim-key, #162F6A);
+        }
+
+            #header .container {
+                max-width: 1200px;
+                padding: 0 16px;
+                display: flex;
+                align-items: center;
+                min-height: 48px;
+            }
+
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: 0;
+            color: #fff;
+            font: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 4px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            width: 100%;
+        }
+
+            .nav-menu > ul {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: stretch;
+                gap: 0;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+                .nav-menu > ul > li {
+                    display: flex;
+                }
+
+                    .nav-menu > ul > li > a {
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        padding: 13px 16px;
+                        color: #fff;
+                        font-size: 14.5px;
+                        font-weight: 500;
+                        line-height: 1.2;
+                        text-decoration: none;
+                        white-space: nowrap;
+                        transition: background .15s ease;
+                    }
+
+                        .nav-menu > ul > li > a:hover, .nav-menu > ul > li > a:focus {
+                            background: rgba(255,255,255,.14);
+                        }
+
+            .nav-menu .drop-down > a[aria-haspopup]::after {
+                content: "";
+                width: 7px;
+                height: 7px;
+                margin-left: 2px;
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
+                transform: translateY(-2px) rotate(45deg);
+            }
+
+            .nav-menu .drop-down {
+                position: relative;
+            }
+
+                .nav-menu .drop-down > ul {
+                    position: absolute;
+                    top: calc(100% + 0px);
+                    left: 0;
+                    min-width: 230px;
+                    margin: 0;
+                    padding: 6px 0;
+                    list-style: none;
+                    background: #fff;
+                    border-radius: 0 0 8px 8px;
+                    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity .15s ease;
+                    z-index: 60;
+                }
+
+                    .nav-menu .drop-down > ul li a {
+                        display: block;
+                        padding: 9px 18px;
+                        color: var(--dbim-text, #150202);
+                        font-size: 14px;
+                        line-height: 1.3;
+                        text-decoration: none;
+                    }
+
+                        .nav-menu .drop-down > ul li a:hover, .nav-menu .drop-down > ul li a:focus {
+                            background: var(--dbim-4, #D2DFFF);
+                        }
+
+                .nav-menu .drop-down .drop-down > a[aria-haspopup]::after {
+                    transform: translateY(-2px) rotate(-45deg);
+                    margin-left: auto;
+                }
+
+                .nav-menu .drop-down .drop-down > a[aria-haspopup] {
+                    justify-content: space-between;
+                }
+
+                .nav-menu .drop-down .drop-down > ul {
+                    top: -6px;
+                    left: 100%;
+                    border-radius: 8px;
+                }
+
+        #divPartial:empty {
+            display: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            #header .container {
+                min-height: 0;
+                padding: 0 16px;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .nav-menu {
+                display: none;
+                padding-bottom: 8px;
+            }
+
+                .nav-menu.nav-open {
+                    display: block;
+                }
+
+                .nav-menu > ul {
+                    flex-direction: column;
+                }
+
+                    .nav-menu > ul > li > a {
+                        padding: 11px 4px;
+                    }
+
+                .nav-menu .drop-down > ul {
+                    position: static;
+                    opacity: 1;
+                    visibility: visible;
+                    box-shadow: none;
+                    border-radius: 0;
+                    background: rgba(255,255,255,.06);
+                    display: none;
+                }
+
+                .nav-menu .drop-down.drop-down-open > ul, .nav-menu .drop-down .drop-down.drop-down-open > ul {
+                    display: block;
+                }
+
+                .nav-menu .drop-down > ul li a {
+                    color: #fff;
+                }
+
+                    .nav-menu .drop-down > ul li a:hover, .nav-menu .drop-down > ul li a:focus {
+                        background: rgba(255,255,255,.14);
+                    }
+
+                .nav-menu .drop-down .drop-down > ul {
+                    left: 0;
+                    top: 0;
+                }
+        }
+
+        .gigw-footer .cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .gigw-footer h2 {
+            font-size: 16px;
+            color: #fff;
+            margin: 0 0 8px;
+        }
+
+        .gigw-footer ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            line-height: 2;
+        }
+
+        .gigw-footer .social {
+            display: flex;
+            gap: 14px;
+        }
+
+        .gigw-footer .meta {
+            border-top: 1px solid rgba(255,255,255,.3);
+            margin-top: 24px;
+            padding-top: 16px;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px 24px;
+        }
+
+        .gigw-footer .text-link, .gigw-footer .lineage a {
+            text-decoration: underline;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .back-to-top:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 991.98px) {
+            .itms-menu-search {
+                width: 100%;
+            }
+
+            .itms-menu-search-results {
+                position: relative;
+                top: 3px;
+            }
+
+            .dbim-cobrand {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <style>
+        /* Footer main */
+        .gigw-footer {
+            padding: 30px 0;
+            font-size: 14px;
+        }
+
+            /* 3-column proper layout */
+            .gigw-footer .cols {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 40px;
+            }
+
+                /* Each column equal width */
+                .gigw-footer .cols > * {
+                    flex: 1;
+                }
+
+        /* Right column fix */
+        .footer-right {
+            text-align: right;
+            min-width: 200px;
+        }
+
+        /* Remove bullets */
+        .gigw-footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            /* Horizontal alignment for links */
+            .gigw-footer ul li {
+                display: inline-block;
+                margin: 6px 12px 6px 0;
+            }
+
+        /* Clean links */
+        .gigw-footer a {
+            text-decoration: none;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+            .gigw-footer a:hover {
+                text-decoration: underline;
+            }
+
+        /* Section headings */
+        .gigw-footer h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Remove ALL lines */
+        .gigw-footer hr,
+        .gigw-footer .meta,
+        .gigw-footer .cols nav ul::after {
+            border: none !important;
+        }
+
+        /* Disclaimer */
+        .gigw-footer .disclaimer {
+            margin-bottom: 20px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* Bottom section alignment */
+        .gigw-footer .meta {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 13px;
+            text-align: left;
+        }
+    </style>
+
+    <script>var ROOT = '/';</script>
+    
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
+    <!--<script src="~/assets/js/gigw-a11y.js" defer></script>
+    <script src="~/assets/js/external-links.js" defer></script>
+    <script src="~/assets/js/cookie-consent.js" defer></script>-->
+    <script src="/assets/js/download_Annotator.js" defer></script>
+    <script src="/assets/js/Last_updated.js" defer></script>
+    <script src="/assets/js/site-nav.js" defer></script>
+    <script src="/assets/js/a11y-controls.js" defer></script>
+</head>
+<body>
+    
+    <a class="gigw-skip-link" href="#main-content">Skip to main content</a>
+
+    <header role="banner">
+        
+        <div class="dbim-user-controls">
+            <div class="wrap">
+                <a href="/Home/ScreenReaderAccess">Screen Reader Access</a>
+                
+                <ul class="lang-switch" aria-label="Language">
+                    <li><button type="button" lang="kn" aria-pressed="false" onclick="ConvertToKA()">ಕನ್ನಡ</button></li>
+                    <li><button type="button" lang="en" aria-pressed="true" onclick="ConvertToEN()">English</button></li>
+                </ul>
+                
+                <div id="a11y-controls" class="a11y-controls" role="group" aria-label="Accessibility controls">
+                    <div class="a11y-group" role="group" aria-label="Text size">
+                        <button type="button" data-a11y-size="down" aria-label="Decrease text size" title="Decrease text size">A-</button>
+                        <button type="button" data-a11y-size="reset" aria-label="Reset text size" title="Reset text size">A</button>
+                        <button type="button" data-a11y-size="up" aria-label="Increase text size" title="Increase text size">A+</button>
+                    </div>
+                    <div class="a11y-group" role="group" aria-label="Contrast">
+                        <button type="button" data-a11y-contrast="normal" aria-pressed="true" title="Normal"><span class="a11y-swatch normal" aria-hidden="true"></span>Normal</button>
+                        <button type="button" data-a11y-contrast="yellow" aria-pressed="false" title="Yellow on black"><span class="a11y-swatch yellow" aria-hidden="true"></span>Yellow on black</button>
+                        <button type="button" data-a11y-contrast="pink" aria-pressed="false" title="Pink on black"><span class="a11y-swatch pink" aria-hidden="true"></span>Pink on black</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        
+        <div class="dbim-brand">
+            <div class="wrap">
+                <a class="dbim-lockup" href="/Home/Home" title="Home">
+                    <img src="/assets/image/logo.png" alt="Government of Karnataka emblem" width="64" height="64">
+                    <span>
+                        <span class="gov">Government of Karnataka</span>
+                        <span class="org">Department of Food, Civil Supplies and Consumer Affairs</span>
+                    </span>
+                </a>
+
+                
+                <div class="dbim-cobrand">
+                    <img src="/assets/image/chief_minister_of_karnataka_en.png" alt="Hon&#39;ble Chief Minister of Karnataka" height="64">
+                    <img src="/assets/image/emblemblack.png" alt="State Emblem of India" width="40" height="64">
+                </div>
+
+                
+                <form class="itms-menu-search" role="search" autocomplete="off" onsubmit="return itmsMenuSearchSubmit();">
+                    <label for="menuSearch">Search menu</label>
+                    <input type="search" id="menuSearch" class="itms-menu-search-input" placeholder="Search menu"
+                           aria-controls="menuSearchResults" aria-describedby="menuSearchStatus">
+                    <ul id="menuSearchResults" class="itms-menu-search-results" hidden></ul>
+                    <span id="menuSearchStatus" class="visually-hidden" role="status" aria-live="polite"></span>
+                </form>
+
+		
+                <img class="dbim-minister" src="/assets/image/rizwan_arshad_minister_en_2line.png" alt="Shri. Rizwan Arshad, Hon&#39;ble Minister for Food, Civil Supplies and Consumer Affairs, Government of Karnataka">
+            </div>
+        </div>
+
+        
+        <div id="header" class="header-inner-pages">
+            <div class="container d-flex align-items-center">
+                
+                <button type="button" class="nav-toggle" id="navToggle" aria-controls="mainNav" aria-expanded="false">
+                    <i class="bx bx-menu" aria-hidden="true"></i><span>Menu</span>
+                </button>
+                <nav class="nav-menu" id="mainNav" aria-label="Main">
+                    <ul>
+                        <li><a href="/Home/Home">Home</a></li>
+                        
+                        <li class="drop-down">
+                            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
+                            <ul>
+                                
+                                <li><a href="/Home/Function">About Us</a></li>
+                                <li class="drop-down">
+                                    <a href="#" role="button" aria-haspopup="true" aria-expanded="false">Citizen Chartes</a>
+                                    <ul>
+                                        
+                                        <li><a href="/Aharadept/Doc/citizen_charter_kannnada.pdf" target="_blank" rel="noopener noreferrer" hreflang="kn">Kannada (PDF)<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                                        <li><a href="/Aharadept/Doc/citizen_charter_english.pdf" target="_blank" rel="noopener noreferrer" hreflang="en">English (PDF)<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/Home/JobChart">Job Chart</a></li>
+                                <li><a href="/Home/Function">Functions</a></li>
+                                <li><a href="/Home/Sections">Sections</a></li>
+                                <li><a href="/Home/Offices">Offices</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down">
+                            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">Offerings</a>
+                            <ul>
+                                <li><a href="/Home/AnnaBhagyaYojana">AnnaBhagya Yojana</a></li>
+                                <li><a href="/Home/NFSA">NFSA</a></li>
+                                <li><a href="/Home/EServices">e - Services</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down">
+                            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">Documents</a>
+                            <ul>
+                                <li><a href="/Home/Acts">Acts</a></li>
+                                <li><a href="/Home/Order">Orders</a></li>
+                                <li><a href="/Home/Notifications">Notifications</a></li>
+                                <li><a href="/Home/Circulars">Circulars</a></li>
+                                <li><a href="/Home/CourtCases">Court case</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down">
+                            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">Media</a>
+                            <ul>
+                                <li><a href="/Home/News">News</a></li>
+                                <li><a href="/Home/Advertisement">Advertisement</a></li>
+                                <li><a href="/Home/Announcement">Announcements</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down">
+                            <a href="#" role="button" aria-haspopup="true" aria-expanded="false">Connect</a>
+                            <ul>
+                                <li><a href="/Home/ContactUs">Contact Us</a></li>
+                                <li><a href="/Home/RTI">RTI</a></li>
+                                <li><a href="/Home/Feedback">Feedback</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+               
+            </div>
+            </div>
+        
+    </header>
+    <div id="divPartial"></div>
+
+    
+    <main id="main-content">
+        <div id="content">
+            <div id="page-content" class="wrapper">
+                <div class="content-wrapper">
+                    
+                    
+
+
+
+
+
+
+<div class="home-page">
+
+    
+    <h1 class="visually-hidden">Department of Food, Civil Supplies and Consumer Affairs</h1>
+
+    
+    <section class="hero" aria-label="Highlights">
+        <div class="hero__inner">
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="7000"
+                 aria-roledescription="carousel" aria-label="Highlights">
+
+                <div class="carousel-inner" id="heroSlides" aria-live="off">
+                    <div class="carousel-item active" role="group" aria-roledescription="slide" aria-label="1 / 8">
+                        <div class="slide slide--notice">
+                            <div class="slide__text">
+                                <p></p>
+                                <p>Identification of ineligible first; issue of new ration card next</p>
+                                <p>Utilize &quot;ONE NATION ONE RATION CARD&quot; Scheme</p>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="2 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/newscroll_1.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Ration Card System</p>
+                                    <p>It has come to the notice of the Department that fake news and rumors are circulating in the media that new ration cards are being issued. This is fake news!... The Food Department is disposing the already received new ration card applications only, which were received before March-2023</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="3 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_2 new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Aadhaar Authenticated Ration Distribution</p>
+                                    <p>Ration can be disributed to the card holder through any fair price shop  against Aadhaar based OTP or fingerprint authentication.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="4 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_3new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">SMS Alerts</p>
+                                    <p>Free SMS to citizens about food graind allotted to his/her card.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="5 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_4 new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Portability-Any where Ration</p>
+                                    <p>The card holder can draw the ration from any shop in the state.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="6 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_5new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Reward Scheme</p>
+                                    <p>Citizen can inform online to the department about black marketing of food grain in his/her area and earn cash award.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="7 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_6new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Public Grivance</p>
+                                    <p>Citizen can raise the grievance online on the food grains distribution and ration card issuals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="8 / 8">
+                            <div class="slide">
+                                
+                                <div class="slide__media">
+                                    <img src="/Aharadept/images/scroll_7new.png" alt="" loading="lazy" decoding="async">
+                                </div>
+                                <div class="slide__text">
+                                    <p class="slide__title">Transparent System</p>
+                                    <p>Anyone can see online the details of ration cards, allotments, food grains distribution, etc.</p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="hero__controls">
+                    <button type="button" class="hero-btn" data-target="#heroCarousel" data-slide="prev" aria-label="Previous slide">
+                        <i class="bx bx-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    
+                    <button type="button" class="hero-btn hero-btn--toggle" id="heroToggle" aria-pressed="false"
+                            data-label-pause="Pause slides" data-label-play="Play slides">
+                        <i class="bx bx-pause" aria-hidden="true"></i><span class="hero-btn__text">Pause slides</span>
+                    </button>
+                    <button type="button" class="hero-btn" data-target="#heroCarousel" data-slide="next" aria-label="Next slide">
+                        <i class="bx bx-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="block" aria-labelledby="h-services">
+        <div class="block__inner">
+            <h2 id="h-services" class="block__title">e - Services</h2>
+
+            <div class="panels">
+                <section class="panel" aria-labelledby="h-office">
+                    <h3 id="h-office" class="panel__title">Office use</h3>
+                    <ul class="svc-list">
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/b.png" alt="" width="30" height="20">
+                <span>Bangalore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/off3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCSOFFICE_BSERVER/login.aspx">FCSOFFICE</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/m.png" alt="" width="30" height="20">
+                <span>Mysore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/off3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCSOFFICE_MSERVER/login.aspx">FCSOFFICE</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/k.png" alt="" width="30" height="20">
+                <span>Kalaburagi Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/off3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCSOFFICE_KSERVER/login.aspx">FCSOFFICE</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/stats7.png" alt="" width="30" height="20">
+                <a href="https://ahara.karnataka.gov.in/fcs_office_statistics">Statistics</a>
+        </h4>
+    </li>
+                    </ul>
+                </section>
+
+                <section class="panel" aria-labelledby="h-public">
+                    <h3 id="h-public" class="panel__title">Public use</h3>
+                    <ul class="svc-list">
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/b.png" alt="" width="30" height="20">
+                <span>Bangalore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/nrc1.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/nrc/">Apply for new ration card</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/amend3.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/rcamend_bserver/">Apply for ration card corrections</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCS_VERIFY_BSER">Ration Card Status</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pgrs.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/pgrs_fcs/home.aspx">Register Grievance</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/m.png" alt="" width="30" height="20">
+                <span>Mysore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/nrc1.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/nrc/">Apply for new ration card</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/amend3.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/rcamend_mserver/">Apply for ration card corrections</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCS_VERIFY_MSER">Ration Card Status</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pgrs.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/pgrs_fcs/home.aspx">Register Grievance</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/k.png" alt="" width="30" height="20">
+                <span>Kalaburagi Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/nrc1.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/nrc/">Apply for new ration card</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/amend3.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/rcamend_kserver/">Apply for ration card corrections</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc3.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FCS_VERIFY_KSER">Ration Card Status</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pgrs.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/pgrs_fcs/home.aspx">Register Grievance</a>
+                    </li>
+            </ul>
+    </li>
+                    </ul>
+                </section>
+
+                <section class="panel" aria-labelledby="h-agency">
+                    <h3 id="h-agency" class="panel__title">Agency use</h3>
+                    <ul class="svc-list">
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/b.png" alt="" width="30" height="20">
+                <span>Bangalore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_BSERVER/">SHOPOWNER-EKYC(Bangalore, Bangalore East(IRA)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_BSERVER2/">SHOPOWNER-EKYC(Bangalore Rural, Bangalore East(IRA)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_BSERVER3/">SHOPOWNER-EKYC(Bangalore West(IRA), Bangalore South(IRA))</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/SHOPOWNER_BSERVER/">SHOPOWNER</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc5.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/PBC_BSERVER/login.aspx">PHOTO BIO CENTER</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/m.png" alt="" width="30" height="20">
+                <span>Mysore Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_MSERVER/">SHOPOWNER-EKYC(Bagalkote, Belagavi, Vijayapura, Chamarajanagar, Chikamagalur)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_MSERVER2/">SHOPOWNER-EKYC(Dakshina Kannada, Dharwad, Gadag, Haveri, Hassan)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_MSERVER3/">SHOPOWNER-EKYC(Kodagu, Mandya, Mysuru, Udupi, Uttara Kannada))</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/SHOPOWNER_MSERVER/">SHOPOWNER</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc5.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/PBC_MSERVER/login.aspx">PHOTO BIO CENTER</a>
+                    </li>
+            </ul>
+    </li>
+    <li class="svc">
+        <h4 class="svc__title">
+            
+            <img class="svc__flag" src="/Aharadept/images/k.png" alt="" width="30" height="20">
+                <span>Kalaburagi Region</span>
+        </h4>
+            <ul class="svc__links">
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_KSERVER/">SHOPOWNER-EKYC(Ballari, Bidar, Chitradurga, Davanagere)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_KSERVER2/">SHOPOWNER-EKYC(Kalaburgi, Kolar, Koppal, Raichur, Shimoga)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/FPS_EKYC_KSERVER3/">SHOPOWNER-EKYC(Tumkur, Chikkaballapura, Ramanagar, Yadgir, Vijayanagara)</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/shop2.jpg" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/SHOPOWNER_KSERVER/">SHOPOWNER</a>
+                    </li>
+                    <li>
+                            <img class="svc__icon" src="/Aharadept/images/pc5.png" alt="" width="20" height="20" loading="lazy">
+                        <a href="https://ahara.karnataka.gov.in/PBC_KSERVER/login.aspx">PHOTO BIO CENTER</a>
+                    </li>
+            </ul>
+    </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="block block--tint" aria-labelledby="h-portals">
+        <div class="block__inner">
+            <h2 id="h-portals" class="block__title">Related websites</h2>
+            <nav aria-labelledby="h-portals">
+                <ul class="portals">
+                        <li><a href="https://nfsa.gov.in" target="_blank" rel="noopener noreferrer">PDS Portal of India<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="https://impds.nic.in" target="_blank" rel="noopener noreferrer">Annavitran<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="#" target="_blank" rel="noopener noreferrer">Department of Legal Metrology<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="https://fist.karnataka.gov.in/" target="_blank" rel="noopener noreferrer">Karnataka PDS Data Centre<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="https://kscdrc.kar.nic.in/" target="_blank" rel="noopener noreferrer">State Commission and District Fora<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="https://kfcsc.karnataka.gov.in" target="_blank" rel="noopener noreferrer">Karnataka Food &amp; Civil Supplies Corporation Ltd.<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                        <li><a href="https://india.gov.in/" target="_blank" rel="noopener noreferrer">National Portal of India<span class="visually-hidden"> (opens in a new window)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="gigw-footer" role="contentinfo">
+        <div class="wrap">
+
+            <p class="disclaimer">Disclaimer : This website is designed to disseminate information/activities related to Food Civil Supplies and Consumer Affairs department, Government of Karnataka</p>
+
+            <div class="cols">
+
+                <!-- Column 1 -->
+                <nav aria-label="Website policies and help">
+                    <h2>Policies & Help</h2>
+                    <ul>
+                        <li><a href="/Home/WebsitePolicies">Website Policies</a></li>
+                        <li><a href="/Home/WebsitePolicies#terms">Terms &amp; Conditions</a></li>
+                        <li><a href="/Home/WebsitePolicies#privacy">Privacy Policy</a></li>
+                        <li><a href="/Home/WebsitePolicies#copyright">Copyright Policy</a></li>
+                        <li><a href="/Home/WebsitePolicies#hyperlinking">Hyperlinking Policy</a></li>
+                        <li><a href="/Home/ScreenReaderAccess">Screen Reader Access</a></li>
+                        <li><a href="/Home/Help">Help</a></li>
+                        <li><a href="/Home/Feedback">Feedback</a></li>
+                        <li><a href="/Home/ContactUs">Contact Us</a></li>
+                        <li><a href="/Home/Sitemap">Sitemap</a></li>
+                        <li><a href="/Home/Archives">Archives</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Column 2 -->
+                <div class="wrap">
+                    <nav aria-label="Related Links">
+                        <h2>Related Links</h2>
+                        <ul>
+                            <li><a href="https://www.india.gov.in" target="_blank" rel="noopener">National Portal of India</a></li>
+                            <li><a href="https://www.karnataka.gov.in" target="_blank" rel="noopener">Karnataka State Portal</a></li>
+                            <li><a href="https://www.mygov.in" target="_blank" rel="noopener">MyGov</a></li>
+                            <li><a href="https://www.myscheme.gov.in" target="_blank" rel="noopener">myScheme</a></li>
+                            <li><a href="https://pgportal.gov.in" target="_blank" rel="noopener">CPGRAMS & Grievance</a></li>
+                        </ul>
+                    </nav>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="wrap">
+
+                        <nav aria-label="Social media">
+                            <h2 style="font-size:var(--fs-p1);color:#fff">Follow us</h2>
+                            <ul>
+                                <li><a href="https://x.com/" target="_blank" rel="noopener">X (Twitter)<span class="visually-hidden"> </span></a></li>
+                                <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook<span class="visually-hidden"> </span></a></li>
+                                <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> </span></a></li>
+                                <li><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube<span class="visually-hidden"> </span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+
+        </div>
+
+        <table border="0" width="100%">
+            <tr>
+                <td>
+                    <div>
+                        <p class="lineage">
+                            This website belongs to the Department of Food, Civil Supplies and Consumer Affairs, Government of Karnataka.
+                            <br>
+                            Content owned and managed by Food, Civil Supplies &amp; Consumer Affairs Department, Government of Karnataka · Website Designed &amp; developed by
+                            <a href="https://karnataka.nic.in/" target="_blank">National Informatics Centre(NIC), Bengaluru.Karnataka</a>
+                        </p>
+                        <p class="lineage">
+                            Last reviewed and updated on: 
+                            <time data-last-updated>12 OCT, 2026</time>
+                            <br>
+                            This website is designed for compatibility with all modern browsers, ensuring seamless performance across Chrome, Edge, Firefox, and Safari. For the best experience, we recommend using the latest version of your preferred browser. 
+                        </p>
+                        <p class="lineage"><strong>Toll Free No.: 1967 Visitors:</strong> 10169151</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </footer>
+
+    <a href="#main-content" class="back-to-top" aria-label="Back to top"><i class="ri-arrow-up-line" aria-hidden="true"></i></a>
+    <div id="preloader" aria-hidden="true"></div>
+
+    <!-- Vendor JS -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/assets/vendor/venobox/venobox.min.js"></script>
+    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/modernizr.custom.js"></script>
+    <script src="/assets/js/ytmenu.js"></script>
+    <script src="/assets/ForMenu/js/popper.js"></script>
+    <script src="/assets/ForMenu/js/main_menu.js"></script>
+    <script src="/assets/js/typed.js"></script>
+
+    
+    <script>
+        /* Language switch (unchanged behaviour) */
+        function ConvertToKA() {
+            $.get(ROOT + "Home/ConvertToKA?convertType=KA", function () { location.reload(true); });
+        }
+        function ConvertToEN() {
+            $.get(ROOT + "Home/ConvertToEN?convertType=EN", function () { location.reload(true); });
+        }
+
+        /* Mobile menu toggle: shows/hides #mainNav, keeps aria-expanded in sync (DBIM 5.4 / GIGW 5.2.20) */
+        $(document).on("click", "#navToggle", function () {
+            var open = $(this).attr("aria-expanded") !== "true";
+            $(this).attr("aria-expanded", open ? "true" : "false");
+            $("#mainNav").toggleClass("nav-open", open);
+        });
+
+        /* GIGW 5.2.21 / 5.2.20: dropdown menus operable by keyboard, closed with Escape */
+        $(document).on("click keydown", ".nav-menu .drop-down > a[aria-haspopup]", function (e) {
+            if (e.type === "keydown" && e.key !== "Enter" && e.key !== " " && e.key !== "ArrowDown") return;
+            e.preventDefault();
+            var li = $(this).parent(), open = $(this).attr("aria-expanded") !== "true";
+            li.siblings(".drop-down").removeClass("drop-down-open").children("a[aria-haspopup]").attr("aria-expanded", "false");
+            li.toggleClass("drop-down-open", open);
+            $(this).attr("aria-expanded", open ? "true" : "false");
+            if (open) li.find("> ul a").first().trigger("focus");
+        });
+        $(document).on("keydown", ".nav-menu .drop-down", function (e) {
+            if (e.key !== "Escape") return;
+            var trigger = $(this).children("a[aria-haspopup]");
+            trigger.attr("aria-expanded", "false");
+            $(this).removeClass("drop-down-open");
+            trigger.trigger("focus");
+            e.stopPropagation();
+        });
+    </script>
+    <style>
+        .nav-menu .drop-down.drop-down-open > ul {
+            opacity: 1;
+            visibility: visible;
+            top: 100%;
+        }
+
+        .nav-menu .drop-down .drop-down.drop-down-open > ul {
+            top: 0;
+            left: 100%;
+        }
+    </style>
+
+    <script>
+        /* DBIM 9: menu search – labelled input, results as a list of links, result count announced (GIGW 5.2.50) */
+        var itmsMenuItems = [
+            { name: "Home", keywords: "home homepage main", url: '/Home/Home' },
+            { name: "Job Chart", keywords: "job chart jobchart", url: '/Home/JobChart' },
+            { name: "Functions", keywords: "about us function functions", url: '/Home/Function' },
+            { name: "Acts", keywords: "act acts law laws order orders", url: '/Home/Acts' },
+            { name: "Notifications", keywords: "notification notifications", url: '/Home/Notifications' },
+            { name: "Court case", keywords: "court cases courtcases", url: '/Home/CourtCases' },
+            { name: "Offices", keywords: "office offices", url: '/Home/Offices' },
+            { name: "Contact Us", keywords: "contact us contactus", url: '/Home/ContactUs' },
+            { name: "Website Policies", keywords: "terms conditions disclaimer policy policies privacy", url: '/Home/WebsitePolicies' },
+            { name: "RTI", keywords: "rti right to information", url: '/Home/RTI' },
+            { name: "AnnaBhagya Yojana", keywords: "anna bhagya annabhagya", url: '/Home/AnnaBhagyaYojana' },
+            { name: "NFSA", keywords: "nfsa food security", url: '/Home/NFSA' },
+            { name: "e - Services", keywords: "service services e-services", url: '/Home/EServices' },
+            { name: "Advertisement", keywords: "advertisement advertisements", url: '/Home/Advertisement' }
+        ];
+        var noResultText = "No matching page found";
+        var resultsText = "results";
+
+        function itmsEscape(s) { return $("<div>").text(s).html(); }
+
+        function itmsMenuSearch(text) {
+            var q = $.trim(text).toLowerCase(), box = $("#menuSearchResults"), status = $("#menuSearchStatus");
+            box.empty();
+            if (!q) { box.attr("hidden", true); status.text(""); return []; }
+            var hits = itmsMenuItems.filter(function (i) {
+                return i.name.toLowerCase().indexOf(q) !== -1 || i.keywords.indexOf(q) !== -1;
+            });
+            if (!hits.length) {
+                box.html('<li class="itms-menu-search-no-result">' + itmsEscape(noResultText) + "</li>");
+            } else {
+                hits.forEach(function (i) {
+                    box.append('<li><a href="' + itmsEscape(i.url) + '">' + itmsEscape(i.name) + "</a></li>");
+                });
+            }
+            box.removeAttr("hidden");
+            status.text(hits.length ? hits.length + " " + resultsText : noResultText);
+            return hits;
+        }
+
+        function itmsMenuSearchSubmit() {
+            var hits = itmsMenuSearch($("#menuSearch").val());
+            if (hits.length) { window.location.href = hits[0].url; }
+            return false;
+        }
+
+        $(document).on("input", "#menuSearch", function () { itmsMenuSearch(this.value); });
+        $(document).on("keydown", "#menuSearch", function (e) {
+            if (e.key === "Escape") { this.value = ""; itmsMenuSearch(""); }
+            if (e.key === "ArrowDown") { e.preventDefault(); $("#menuSearchResults a").first().trigger("focus"); }
+        });
+        $(document).on("keydown", "#menuSearchResults a", function (e) {
+            var links = $("#menuSearchResults a"), i = links.index(this);
+            if (e.key === "ArrowDown") { e.preventDefault(); links.eq(Math.min(i + 1, links.length - 1)).trigger("focus"); }
+            if (e.key === "ArrowUp") { e.preventDefault(); i > 0 ? links.eq(i - 1).trigger("focus") : $("#menuSearch").trigger("focus"); }
+            if (e.key === "Escape") { $("#menuSearch").val("").trigger("focus"); itmsMenuSearch(""); }
+        });
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(".itms-menu-search").length) { $("#menuSearchResults").attr("hidden", true); }
+        });
+    </script>
+    
+    <script>
+        /* Hero carousel: pause/play (GIGW 5.2.25), stops for visitors who prefer reduced motion, pauses while focused */
+        (function () {
+            var $c = $("#heroCarousel"), btn = document.getElementById("heroToggle");
+            if (!$c.length || !btn) return;
+
+            var playing = true, slides = document.getElementById("heroSlides");
+            var textEl = btn.querySelector(".hero-btn__text"), icon = btn.querySelector("i");
+
+            function setPlaying(p) {
+                playing = p;
+                $c.carousel(p ? "cycle" : "pause");
+                btn.setAttribute("aria-pressed", p ? "false" : "true");
+                textEl.textContent = btn.getAttribute(p ? "data-label-pause" : "data-label-play");
+                icon.className = p ? "bx bx-pause" : "bx bx-play";
+                slides.setAttribute("aria-live", p ? "off" : "polite");
+            }
+
+            btn.addEventListener("click", function () { setPlaying(!playing); });
+            $c.on("focusin", function () { $c.carousel("pause"); });
+            $c.on("focusout", function () { if (playing) $c.carousel("cycle"); });
+
+            if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPlaying(false);
+
+            /* Scrolled out of view: stop rotating (saves battery/CPU); resumes on return unless the visitor paused it */
+            if ("IntersectionObserver" in window) {
+                new IntersectionObserver(function (entries) {
+                    if (!playing) return;
+                    $c.carousel(entries[0].isIntersecting ? "cycle" : "pause");
+                }, { threshold: 0.2 }).observe($c[0]);
+            }
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+                          ALL INDIA COUNCIL FOR TECHNICAL EDUCATION
+                          Nelson Mandela Marg, Vasant Kunj, New Delhi-110070
+                        PRIME MINISTER’S SPECIAL SCHOLARSHIP SCHEME
+
+
+
+                STEPS TO ACTIVATE THE INACTIVE AADHAAR BY THE BENEFICIARY
+                              STUDENTS OF PMSSS
+
+
+
+       Dear Student,
+       Here's a 7 step instructions to check the status of your Aadhaar:
+
+       1) Visit the official website of Unique Identification Authority of India, which is
+          uidai.gov.in
+       2) Student can check Aadhaar linking status using below link:
+          https://resident.uidai.gov.in/bank-mapper
+       3) Provide your 12-digit Aadhaar number in the relevant box to verify whether your
+          aadhaar number is valid or not.
+       4) In the next step, enter a security code displayed as an image.
+       5) Enter the OTP, which you got on your registered mobile number.
+       6) If your number is valid, the page will be shown, which will display a message
+          confirming the status of the Aadhaar number entered.
+
+
+
+
+       7) However, in case of deactivated Aadhaar number, the page will not display the
+          message.
+
+Note: Aadhaar seeding is necessitated for receiving Direct Benefit Transfers (DBT) provided by various
+Government schemes. Incase candidate’s Aadhaar status is inactive the transaction may fail and candidate will
+not receive the PMSSS scholarship.
+
+
+
+                                                                                                Page 1 of 4
+                                        Aadhaar Seeding Process
+
+Aadhaar seeding is necessitated for receiving Direct Benefit Transfers (DBT) provided by
+various Government schemes. The following is the process flow of Aadhaar seeding
+
+   1. Customer to visit the bank branch where he / she is holding an account and submit the duly filled
+      consent form – Annexure I
+   2. The bank officials after verifying the details and documents provided (as may be required) and
+      authenticity of the customer based on the signature will accept Aadhaar seeding consent form and
+      provide an acknowledgement to the customer.
+   3. The branch will then link the Aadhaar number to the customer’s account and also in NPCI mapper.
+   4. Once this activity is completed and Aadhaar number will reflect in NPCI mapper.
+
+Role of the customer:
+
+   1. Submit the consent form with complete details either in physical or electronic form as per the facility
+      provided by his / her bank.
+   2. In case of moving Aadhaar number from one bank to another bank, the customer should provide the
+      name of the bank from which the Aadhaar is being moved.
+   3. In case of physical form, the consent form should be duly signed as per the bank records.
+   4. After seeding is completed the customer may approach their Gas service provider (Oil Marketing
+      Company) for the pending subsidy amount.
+   5. For non-receipt of subsidies customer to approach respective OMC’s through their toll free number:
+      1800 2333 555
+Role of the Bank / Branch:
+
+   1. Verifying the completeness of the consent form, checking the documentation and authenticating the
+      customer’s signature.
+   2. After the officials are satisfied with the documentation they should carry out the following activities
+          a. Linking the Aadhaar number to the bank account (in CBS)
+          b. Updating NPCI mapper
+
+       Note: By linking the Aadhaar number to the account the branch is not updating the mapper. The
+       mapper update process has to be followed by their central team or IT division as the case may be.
+
+   3. After the mapper files are uploaded the response files received from NPCI have to be verified.
+   4. In case of failure in updating any Aadhaar number/s then necessary corrective action has to be
+      taken and CBS also should be updated accordingly.
+   5. Customer query / complaint handling
+      1. Branches should understand that if Aadhaar number is not updated in NPCI mapper the action
+          is purely lies with the bank only. The customer should not be told that NPCI has not updated the
+          Aadhaar number.
+      2. Aadhaar number being active in bank’s CBS does not mean that mapper file is updated, the
+          branch should not show CBS screen or provide screen shot to the customer confirming seeding.
+      3. If the customer complaints, the branch should approach their internal team handling Aadhaar
+          mapping and ascertain the reason for non-updating the Aadhaar in NPCI mapper.
+      4. After ascertaining the root cause bank should take corrective action and redress the grievance
+          of the customer.
+
+Responsibility of NPCI:
+
+   1. Mapper is a platform provided by NPCI for the banks to update or remove Aadhaar numbers as per
+      their customer’s request.
+   2. The activity of updating or removing an Aadhaar number from mapper can be performed only by the
+      banks.
+   3. NPCI on its own does not update the mapper records.
+   4. In case customer approaches NPCI for grievance redressal, NPCI will have to reach out to the
+      teams concerned in banks for necessary action.
+                                                                                              Page 2 of 4
+   5. NPCI will ensure that mapper platform is available, files submitted by banks are processed and
+      response is provided.
+
+Customer grievance:
+
+   1. If the Aadhaar number is not reflecting in NPCI mapper after submitting all the relevant documents
+      to the bank the action rests with the bank only.
+   2. The customer should approach the bank’s customer service cell for grievance redressal and follow
+      escalation matrix if the issue is not resolved.
+   3. If customer wants to write to NPCI then the copy of the consent form duly acknowledged by the
+      bank should be provided for taking up with the bank concerned.
+   4. For any escalations customer may write to npci.dbtl@npci.org.in with Aadhaar consent
+      acknowledgment copy provided by the bank.
+
+
+Additional information:
+
+   Customer can link only one account with Aadhaar at any point of time.
+       If customer gives consent to multiple banks, then subsidy will be credited to the last seeded Bank
+       with which the status is active in NPCI mapper.
+   If Aadhaar status is inactive, customer to visit respective bank branch in person and submit the duly
+       filled customer consent form.
+   OMC’s to be approached for reinitiating the failed transactions to last seeded bank account.
+
+
+
+
+                                                                                                 Page 3 of 4
+                    APPLICATION FOR LINKING/ SEEDING AADHAR NUMBER
+               AND RECEIVING DBT BENEFITS INTO BANK ACCOUNT- (NPCI MAPPING) *
+
+The Branch Manager,                                                                Date:
+………………………. Branch
+……………………… Bank
+Dear Sir,
+Account No.                         in A/c Name
+
+Linking / Seeding of Aadhaar in NPCI-Mapping for Receiving Direct Benefits
+
+I am maintaining a Bank Account No.                      with your Branch.
+
+2. I submit my Aadhaar number and voluntarily give my consent
+     to: o Use my Aadhaar Details to authenticate me from UIDAI.
+     o Use my Mobile Number mentioned below for sending SMS Alerts to me.
+     o Link the Aadhaar Number to all my existing/new/future accounts and customer profile (CIF) with your Bank.
+
+
+                                                                           (Signature/Thumb Impression of customer)
+
+ OPTION FOR RECEIVING DBT BENEFITS (TICK ONE)
+
+    o I wish to seed my account No.                      with NPCI mapper to enable me to receive Direct Benefit
+      Transfer (DBT) including LPG Subsidy from Govt. of India (GOI) in my above account. I understand that if
+      more than one Benefit transfer is due to me, I will receive all the benefit transfers in the same account. (for
+      customer who have not so far seeded account with NPCI Mapper)
+    o I already have an account with                       (name of Bank) having IIN Number**                  , and
+      seeded with NPCI Mapper for receiving DBT from GOI. I request you to change my NPCI mapping (DBT
+      Benefit Account) to my account with your Bank.
+    o I already have an account with another bank                                   (name of Bank) having IIN
+      Number**               , and seeded with NPCI Mapper for receiving DBT from GOI. I do not want to change
+      my NPCI mapping (DBT Benefit Account) from the existing Bank.
+    o I do not wish to seed my accounts from your Bank with NPCI Mapper (I will not be getting DBT).
+
+3. I have been explained about the nature of information that may be shared upon authentication. I have been given to
+understand that my information submitted to the bank herewith shall not be used for any purpose other thanmentioned
+above, or as per requirements of law.
+
+4. I hereby declare that all the above information voluntarily furnished by me is true, correct and complete.
+
+Yours faithfully
+                                                                [if consent sent through BC/BDO/VO]
+
+(Signature/Thumb Impression of customer)                       o I hereby authorize the Banking Correspondent
+                                                               ……………………………………...
+                                                               o I hereby authorize the Sarpanch, / V.O./B.D.O./
+Name:                                                          .……………………………………….…
+                                                               to submit the above consent letter to the bank.
+Mobile No.:
+
+Email:
+
+Encl: Copy of Aadhaar
+
+                                                              (Signature/Thumb Impression of Customer)
+*NPCI Mapping: Mapping is a process of associating a Bank with Aadhaar number which is facilitated by NPCI
+for Direct Benefit Transfer to the respective Bank who have linked the Aadhaar Number to a specific Bank account
+for receiving Direct Benefits to which customer has given the consent.
+** IIN number will be provided by Bank receiving the consent Application
+                                                                                                         Page 4 of 4
+

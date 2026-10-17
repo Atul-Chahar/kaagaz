@@ -1,0 +1,844 @@
+                                                               SCHEDULE II
+                                                       [see regulations 10(2) and 19(4)]
+
+                                        List of Acceptable Documents for Enrolment and Update
+
+          List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth for Enrolment
+                                         for Aadhaar Number of Individual up to Five Years of Age
+                                                 ✔means allowed and Xmeans not allowed.
+●         Enrolment Type I: Head of the Family (HoF) based enrolment
+
+                                                                                    Proof of Relationship             Proof of Date of Birth
+ Sl.                               List of documents                             (POR)document,containing               (PDB)document,
+ No.                    (see note below this tabular statement)                   name of child and name of         containing name and Date
+                                                                                    Head of Family (HoF)                     of Birth
+1.           Birth certificate issued by Authorised Authority (in the                         ✔                                 ✔
+             respective States) under the Registration of Births and Deaths
+             Act, 1969, read with the rules made thereunder
+2.           Valid Indian Passport (only applicable for NRIs)                                 ✔                                 ✔
+3.           Document to prove legal guardianship                                             ✔                                  X
+●         Enrolment Type II: Document based Enrolment
+
+
+                                                                                   Proof of Identity (POI)           Proof of Address (POA)
+ Sl.                               List of documents
+                                                                                 document, containing name            document,containing
+ No.                    (see note below this tabular statement)
+                                                                                      and photograph                name and address in India
+
+     4.      Certificate issued on UIDAI Standard Certificate format by                       ✔                                 ✔
+             Superintendent/ Warden/ Matron/ Head of Institution of
+             recognised        shelter        homes       or      orphanages
+             (only for children of the shelter home or orphanage concerned)
+●       Documents applicable for holders of Overseas Citizen of India (OCI) card holder,nationals of Nepal and Bhutan and other
+        foreign nationals seeking enrolment
+     5.     Valid OCI card, along with valid foreign passport, for                              ✔                                 X*
+            individual who have stayed in India for 182 days or more in the
+            immediately preceding 12 months
+     6.     Valid Long Term Visa (LTV) document, along with foreign                             ✔                                 X*
+            passport (valid or expired), of the country of origin, issued to
+            minorities communities of Afghanistan, Bangladesh and
+            Pakistan (Hindus, Sikhs, Buddhists, Jains, Parsis and Christians)
+     7.     Valid visa, along with valid foreign passport issued, to other                      ✔                                 X*
+            foreign nationals who have stayed in India for 182 days or more
+            in the immediately preceding 12 months
+     8.     Passport of Nepal/Bhutan for nationals of Nepal/Bhutan. In case                     ✔                                 X*
+            passport is not available, both of the following documents to be
+            submitted:
+             (a) Valid Nepalese/ Bhutanese Citizenship Certificate
+             (b) Limited validity Photo Identity Certificate issued by
+                  Nepalese Mission / Royal Bhutanese Mission in India for
+                  stay of more than 182 days
+       * Proof of Address documents as in the list of acceptable supporting documents for Aadhaar enrolment (above fiveyears) will be applicable.
+       Note: Any document listed in the above tabular statement shall be acceptable only if it meets the following conditions, namely:—
+               (a) It is currently valid (unless otherwise expressly provided for above);
+               (b) The person in respect of whom such document is issued is entitled for the same;
+               (c) If the information contained in the document is publicly displayed or otherwise accessible to UIDAI online or is verifiable
+                    offline through digital means made available by the authority issuing the same, such information is verified if such means are
+                    used; and
+               (d) The authority issuing the document presented to evidence proof of identity, address, date of birth or relationship has not made
+                    any declaration in respect of such category of document that such document is not proof of the same.
+
+      Important Note:
+           (a) For resident Indian and non-resident Indian (NRI) born on and after 1.10.2023, birth certificate is mandatory.
+          (b) Head of Family (HoF) based enrolment is mandatory (except for children residing in shelter homes or orphanages and foreign
+              national seeking enrolment) for children below five years of age. Any one of the parents or legal guardian can become HoF.
+          (c) HoF must have a valid Aadhaar before performing HoF based enrolment.
+          (d) Aadhaar number of both the parents is required for HoF based enrolment and biometric authentication by one of the parents is
+              mandatory.
+          (e) Name of the child and HoF must be mentioned in the PoR document.
+          (f) Name of the individual as mentioned in the supporting document, will be replicated as such in the individual‟s Aadhaar. No
+              additional information like parent/guardian first name, middle name and last name will be considered.
+          (g) The address mentioned in the HoF Aadhaar will be used in the child‟s Aadhaar.
+          (h) For foreign national seeking enrolment, the Aadhaar issued will be valid only till validity of the visa. However, in case of
+              Nepal/Bhutan nationals, the Aadhaar issued will be valid for a period of ten years.
+          (i) For OCI card holders, the Aadhaar issued will be valid only for a period of ten years.
+          (j) For LTV document holders, the Aadhaar issued will be valid only till the validity of LTV document.
+          (k) HoF is encouraged to provide any of the following Proof of Identity (PoI) documents issued in the name of the child:
+               (i)    Indian passport
+               (ii)   Photo Identity Card/Certificate with photograph issued by Central Government /State Government, such as Domicile
+                      Certificate, Resident Certificate etc.
+               (iii) ST/ SC/ OBC Certificate issued by Central Government /State Government
+               (iv) Disability Identity Card/Certificate of Disability issued under the Rights of Persons with Disabilities Rules, 2017
+
+     List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth for Enrolment for
+                                     Aadhaar Number of Individual Five Years and above of Age
+                                                    ✔means allowed and Xmeans not allowed
+
+                                                   Proof of
+                                                                                                                         Proof of Date of
+                                                   Identity      Proof of Address
+                                                                                           Proof of Relationship              Birth
+                 List of documents                  (POI)             (POA)
+Sl.                                                                                     (POR)document,containing        (PDB)document,
+            (see note below this tabular         document,     document,containing
+No.                                                                                      name of child and name of      containing name
+                     statement)                  containing    name and address in
+                                                                                           Head of Family (HoF)            and Date of
+                                                  name and             India
+                                                                                                                              Birth
+                                                 photograph
+
+1.      Valid Indian Passport                        ✔                  ✔                            ✔                          ✔
+2.      PAN Card/e-PAN Card                          ✔                   X                            X                         X
+3.      Ration /PDS Photograph Card/e-               ✔                  ✔                            ✔                          X
+        Ration Card
+4.      Voter Identity Card /e-Voter Identity        ✔                  ✔                             X                         X
+        Card
+5.      Driving licence                              ✔                   X                            X                         X
+6.      Service Photo Identity Card issued           ✔                   X                            X                         ✔
+        by Central Government/ State
+        Government/ PSU/ regulatory body /
+        statutory body
+7.      Pensioner Photo Identity Card /              ✔                   X                           ✔                          ✔
+        Freedom Fighter Photo Identity Card
+        / Pension Payment Order issued by
+        Central       Government/        State
+        Government/ PSU / regulatory body /
+        statutory body
+8.      CGHS/ ECHS/ ESIC/ Medi-Claim                 ✔                   X                            X                         X
+        Card issued by Central Government/
+        State Government/ PSU
+9.      Disability Identity Card / Certificate       ✔                  ✔                             X                         X
+        of Disability issued under Rights of
+        Persons with Disabilities Rules, 2017
+10.     Photograph      Identity    Card     /       ✔                  ✔                            ✔                          X
+        Certificate with photograph issued by
+        Central       Government/        State
+        Government,       such    as    under
+        Bhamashah        scheme,     Domicile
+        Certificate, MGNREGA/NREGS Job
+        Card, Labour Card, etc.
+11.   Scheduled Tribe(ST)/ Scheduled             ✔   ✔   ✔   X
+      Cast(SC)/Other      Backward       Cast
+      (OBC) Certificate issued by Central
+      Government/ State Government
+12.   Mark-sheet/Certificate issued by           ✔   X   ✔   ✔
+      recognised Board of Education or
+      university or deemed university or
+      higher      educational     institution
+      established by a Central or State Act
+13.   Passbook with photograph issued by         ✔   ✔   X   X
+      a Public Sector Bank (as categorised
+      by RBI), duly stamped and signed,
+      along with a supporting certificate
+      from the branch manager in charge
+      certifying that KYC in respect of the
+      accountholder is complete and the
+      proof of address for the address
+      shown in the passbook is available in
+      the bank‟s record
+14.   Third gender / Transgender Identity        ✔   ✔   ✔   ✔
+      Card / Certificate issued under the
+      Transgender Persons (Protection of
+      Rights) Act, 2019
+15.   Certificate    issued    on    UIDAI
+      Standard Certificate format by:
+       (i) MP/ MLA/ MLC/ Municipal               X   ✔   X   X
+               Councillor
+        (ii) Gazetted Officer Group „A‟          X   ✔   X   X
+               /Employees           Provident
+               FundOorganisation (EPFO)
+               Officer
+        (iii) Tehsildar/ Gazetted Officer        X   ✔   X   X
+               Group „B‟
+        (iv) Gazetted Officer at National        ✔   ✔   X   X
+               AIDS Control Organisation
+               (NACO) / State Health
+               Department / Project Director
+               of the State AIDS Control
+               Society or his nominee (in
+               pursuance       of     Hon‟ble
+               Supreme Court Judgment in
+               Criminal      Appeal     No(s).
+               135/2010 dated 19.5.2022)
+        (v) Superintendent/ Warden/              ✔   ✔   X   X
+               Matron/ Head of Institution
+               of recognised shelter homes
+               or orphanages (only for
+               children of shelter home or
+               orphanage concerned)
+        (vi) Recognisededucational               X   ✔   X   X
+               institution (signed by the
+               Head of Institute,only for the
+               institute students concerned).
+        (vii) Village Panchayat Head/            X   ✔   X   X
+               President or Mukhiya/ Gaon
+               Bura/ equivalent authority
+               (for rural areas)/ Village
+               Panchayat Secretary/ Village
+               Revenue         Officer      or
+               equivalent (for rural areas)
+16.   Electricity bill (pre-paid/post-paid       X   ✔   X   X
+      bill, not older than 3 months)
+17.   Water bill (not older than 3 months)       X   ✔   X   X
+18.   Telephone landline bill/ post-paid        X                  ✔                          X                        X
+      mobile bill/ broadband bill (not older
+      than 3 months)
+19.   Valid sale agreement/ gift deed           X                  ✔                          X                        X
+      registered with the Registrar Office,
+      or registered or unregistered rent,
+      lease agreement or leave and licence
+      agreement
+20.   Gas connection bill (not older than 3     X                  ✔                          X                        X
+      months)
+21.   Allotment letter of accommodation         X                  ✔                          X                        X
+      issued by Central Government/ State
+      Government/ PSU / regulatory body /
+      statutory body (not older than 1 year)
+22.   Life or medical insurance Policy          X                  ✔                          X                        X
+      (valid up to 1 year from the date of
+      issue of the Policy)
+23.   Birth certificate issued by Authorised    X                  X                          ✔                        ✔
+      Authorityunder the Registration of
+      Births and Deaths Act, 1969, read
+      with the rules made thereunder
+24.   Family entitlement document issued        X                  X                          ✔                        X
+      by Central Government/ State
+      Government
+25.   Prisoner Induction Document (PID)        ✔                   ✔                          X                        X
+      issued by Prison Officer, with
+      signature and seal
+26.   Document         to     prove    legal    X                  X                          ✔                        X
+      guardianship
+Documents applicable for holders of Overseas Citizen of India (OCI) card holder,or Long Term Visa (LTV),nationals of Nepal and
+Bhutan and other foreign nationals seeking enrolment
+
+27.   Valid OCI card, along with valid         ✔                   X                          X                        X
+      foreign passport, for individual who
+      have stayed in India for 182 days or
+      more in the immediately preceding
+      12 months
+28.   Valid Long Term Visa (LTV)               ✔                   ✔                          X                        X
+      document, along with foreign
+      passport (valid or expired), of the
+      country of origin, issued to
+      minorities       communities       of
+      Afghanistan,      Bangladesh      and
+      Pakistan (Hindus, Sikhs, Buddhists,
+      Jains, Parsis and Christians)
+29.   Valid Passport of Nepal/Bhutan for       ✔                   X                          X                        X
+      nationals of Nepal/Bhutan. In case
+      passport is not available, any two of
+      the following documents having the
+      same address may be submitted:
+      (क) Valid Nepalese/ Bhutanese
+           Citizenship Certificate
+      (ख) Valid Voter Identity Card issued
+           by the Election Commission of
+           Nepal/ Bhutan
+      (ग) Limited validity Photo Identity
+           Certificate issued by Nepalese
+           Mission/     Royal     Bhutanese
+           Mission in India
+30.   Valid visa, along with valid foreign     ✔                   X                          X                        X
+      passport issued, to other foreign
+      nationals who have stayed in
+      India for 182 days or more in the
+      immediately preceding 12 months
+31.  Valid Registration Certificate or               X                    ✔                             X                           X
+     Residential permit issued by
+     FRRO/FRO to the foreign national
+     (except OCI Card holders, LTV
+     document holders and Nepal/Bhutan
+     nationals)
+ Note: Any document listed in the above tabular statement shall be acceptable only if it meets the following conditions, namely:—
+          (a) It is currently valid (unless otherwise expressly provided for above);
+          (b) The person in respect of whom such document is issued is entitled for the same;
+          (c) If the information contained in the document is publicly displayed or otherwise accessible to UIDAI online or is verifiable
+               offline through digital means made available by the authority issuing the same, such information is verified if such means are
+               used; and
+          (d) The authority issuing the document presented to evidence proof of identity, address, date of birth or relationship has not
+               made any declaration in respect of such category of document that the same is not proof of the same.
+
+        Important Note:
+           (a) For resident Indian and Non Resident Indian (NRI) born on and after 01.10.2023, birth certificate is mandatory.
+           (b) A document is accepted as Proof of Identity (PoI) document only if it contains Name and Photograph of the individual.
+           (c) A document is accepted as Proof of Address (PoA) document only if it contains Name and Address of the individual.
+           (d) A document is accepted as both Proof of Identity (PoI) and Proof of Address (PoA) document only if it contains Name,
+               Photograph and Address of the individual.
+           (e) Name of the individual as mentioned in the supporting document, will be replicated as such in the individual‟s Aadhaar. No
+               additional information like parent/guardian first name, middle name and last name will be considered.
+           (f) All the PoI, PoA, DoB documents shall be issued on the name of the individual. Documents in the name of the family
+               member/members cannot be considered for enrolment of the other family members.
+           (g) Head of Family (HoF) based enrolment shall be used in case individual does not have PoI and PoA documents.
+           (h) HoF must have a valid Aadhaar before performing HoF based enrolment. HoF must accompany the individual during
+               enrolment for his / her Aadhaar Authentication.
+           (i) The address mentioned in the HoF Aadhaar will be used in the family member‟s Aadhaar.
+           (j) For foreign national seeking enrolment, the Aadhaar issued will be valid only till validity of the visa. However, in case of
+               Nepal/Bhutan nationals, the Aadhaar issued will be valid for a period of ten years.
+           (k) For OCI card holders, the Aadhaar issued will be valid only for a period of ten years.
+           (l) For LTV document holders, the Aadhaar issued will be valid only till the validity of LTV document.
+           (m) All the documents should be latest and valid (except otherwise specified)
+
+
+
+
+      List of Documents that may be presented to evidence Proof of Identity, Address, Relationship or Date of Birth for Update of
+                                   Information in respect of Aadhaar Number Holder of any Age
+                                                 ✔means allowed and Xmeans not allowed
+
+                                                                                                      Proof of         Proof of Date of
+                                                                                Proof of           Relationship             Birth
+                                                      Proof of Identity
+                    List of documents                                       Address (POA)       (POR)document,co       (PDB)document
+  Sl.                                                 (POI) document,
+               (see note below this tabular                                 document,conta       ntaining name of              ,
+  No.                                               containing name and
+                        statement)                                          ining name and       child and name of        containing
+                                                        photograph
+                                                                            address in India      Head of Family        name and Date
+                                                                                                       (HoF)               of Birth
+ 1.        Valid Indian Passport                            ✔                      ✔                     ✔                   ✔*
+ 2.        PAN Card/e-PAN Card                              ✔                      X                     X                     X
+
+ 3.        Ration / PDS Photograph Card / e-                ✔                      ✔                     ✔                     X
+           Ration Card
+ 4.        Voter Identity Card /e-Voter Identity            ✔                      ✔                     X                     X
+           Card, whose details are displayed
+           online on the website of the Election
+           Commission of India or the Chief
+           Electoral Officer concerned
+ 5.        Driving licence                                  ✔                      X                     X                     X
+ 6.        Service Photo Identity Card issued by            ✔                      X                     X                    ✔*
+           Central      Government/         State
+           Government/ PSU/ regulatory body /
+           statutory body
+7.    Pensioner Photo Identity Card /             ✔   X   ✔   ✔*
+      Freedom Fighter Photo Identity Card
+      / Pension Payment Order issued by
+      Central      Government/       State
+      Government/ PSU / regulatorybody /
+      statutory body
+8.    Kisan Photo Passbook                        ✔   ✔   X   X
+
+9.    CGHS/ ECHS/ ESIC/ Medi-Claim                ✔   X   X   X
+      Card issued by Central Government/
+      State Government/ PSU
+10.   Disability Identity Card / Certificate      ✔   ✔   X   X
+      of Disability issued under Rights of
+      Persons with Disabilities Rules, 2017
+11.   Photograph Identity Card / Certificate      ✔   ✔   ✔   X
+      with photograph issued by Central
+      Government/ State Government, such
+      as      underBhamashah           scheme,
+      Domicile                     Certificate,
+      MGNREGA/NREGS              Job      Card,
+      Labour Card, etc.
+12.   Marriage Certificate with or without        ✔   ✔   ✔   X
+      photograph issued by Central
+      Government/       State     Government
+      (supporting PoI document of old
+      name and photograph is required if
+      the Marriage Certificate is without
+      photograph)
+13.   ST / SC / OBC Certificate issued by         ✔   ✔   ✔   X
+      Central     Government         /    State
+      Government
+14.   School Leaving Certificate (SLC)/           ✔   X   X   X
+      School Transfer Certificate (TC)
+15.   Mark-sheet/Certificate issued by            ✔   X   ✔   ✔*
+      recognised Board of Education
+      oruniversity or deemed university or
+      higher      educational       institution
+      established by a Central or State Act
+16.   Passbook with photograph issued by a        ✔   ✔   X   X
+      Public Sector Bank (as categorised by
+      RBI), duly stamped and signed, along
+      with a supporting certificate from the
+      branch manager in charge certifying
+      that KYC in respect of the
+      accountholder is complete and the
+      proof of address for the address
+      shown in the passbook is available in
+      the bank‟s record
+17.   Scheduled       Commercial        Bank‟s    X   ✔   X   X
+      (notified by RBI) Passbook having
+      Name and Photograph (cross stamped
+      with Bank seal) and signed by bank
+      official/ Post Office Savings Account
+      Passbook (with stamp and signature
+      of issuing official of post office)
+18.   Bank Account Statement/ Credit Card         X   ✔   X   X
+      Statement (with Bank stamp &
+      signature of issuing bank official)/
+      Post Office Savings              Account
+      Statement (with stamp and signature
+      of issuing official of post office) (not
+      older than 3 months)
+19.   Third gender / Transgender Identity         ✔   ✔   ✔   ✔*
+      Card / Certificate issued under the
+      Transgender Persons (Protection of
+      Rights) Act, 2019
+20.   Certificate issued on UIDAI Standard
+      Certificate format by:
+           (i) MP / MLA / MLC /                   X   ✔   X   X
+                 Municipal Councillor
+          (ii) Gazetted Officer Group 'A'/        X   ✔   X   X
+                Employees Provident Fund
+                Organisation (EPFO) Officer
+          (iii) Tehsildar/ Gazetted Officer       X   ✔   X   X
+                Group 'B'
+          (iv) Gazetted Officer at National       ✔   ✔   X   X
+                AIDS Control Organisation
+                (NACO)/State             Health
+                Department / Project Director
+                of the State AIDS Control
+                Society or his nominee (in
+                pursuance       of     Hon‟ble
+                Supreme Court Judgment in
+                Criminal      Appeal     No(s).
+                135/2010 dated 19.5.2022)
+          (v) Superintendent/          Warden/    ✔   ✔   X   X
+                Matron/ Head of Institution
+                of recognised shelter homes
+                or orphanages (only for
+                children of shelter home or
+                orphanage concerned)
+          (vi) Recognisededucational              X   ✔   X   X
+                institution (signed by the
+                Head of Institute,only for the
+                institute students concerned)
+          (vii) Village Panchayat Head/           X   ✔   X   X
+                President or Mukhiya/ Gaon
+                Bura/ equivalent authority
+                (for rural areas)/ Village
+                Panchayat Secretary/ Village
+                Revenue         Officer      or
+                equivalent (for rural areas)
+21.   Electricity bill (pre-paid/post-paid        X   ✔   X   X
+      bill, not older than 3 months)
+22.   Water bill (not older than 3 months)        X   ✔   X   X
+
+23.   Telephone landline bill/ post-paid          X   ✔   X   X
+      mobile bill/ broadband bill (not older
+      than 3 months)
+24.   Property Tax Receipt (not older than        X   ✔   X   X
+      1 year)
+25.   Valid sale agreement/ gift deed             X   ✔   X   X
+      registered with the Registrar Office,
+      or registered or unregistered rent,
+      lease agreement or leave and licence
+      agreement
+26.   Gas connection bill (not older than 3       X   ✔   X   X
+      months)
+27.   Allotment letter of accommodation           X   ✔   X   X
+      issued by Central Government/ State
+      Government/ PSU / regulatory body /
+      statutory body (not older than 1 year)
+28.   Life or medical insurance Policy            X   ✔   X   X
+      (valid up to 1 year from the date of
+      issue of the Policy)
+29.   Birth certificate issued by Authorised      X   X   ✔   ✔
+      Authorityunder the Registration of
+      Births and Deaths Act, 1969, read
+      with the rules made thereunder
+30.    Family entitlement document issued             X                     X                  ✔                   X
+       by Central Government/ State
+       Government
+31.    Prisoner Induction Document (PID)              ✔                     ✔                  X                   X
+       issued by Prison Officer, with
+       signature and seal
+32.    Self-declaration from the Head of              X                     X                  ✔                   X
+       Family     (HoF)     certifying     the
+       relationship with the individual
+       residing at the same address as HoF,
+       valid only for borrowing address of
+       HoF. (to be used only for address
+       update     of     immediate     family
+       member/members of HoF)
+33.    Document        to    prove       legal        X                     X                  ✔                   X
+       guardianship
+Documents applicable for holders of Overseas Citizen of India (OCI) card holder,or Long Term Visa (LTV),nationals of Nepal
+and Bhutan and other foreign nationals seeking enrolment
+
+34.  Valid OCI card, along with valid                 ✔                      X                 X                   X
+     foreign passport
+35.  Valid Long Term Visa (LTV)                       ✔                      ✔                 X                   X
+     document, along with foreign
+     passport (valid or expired), of the
+     country of origin, issued to minorities
+     communities       of      Afghanistan,
+     Bangladesh and Pakistan (Hindus,
+     Sikhs, Buddhists, Jains, Parsis and
+     Christians)
+36.  Passport of Nepal/Bhutan for                     ✔                      X                 X                   X
+     nationals of Nepal/Bhutan. In case
+     passport is not available, any two of
+     the following documents having the
+     same address may be submitted:
+      (a) Nepalese/               Bhutanese
+           Citizenship Certificate
+      (b) Valid Voter Identity Card
+           issued     by    the     Election
+           Commission of Nepal/ Bhutan
+      (c) Limited validity Photo Identity
+           Certificate issued by Nepalese
+           Mission/ Royal Bhutanese
+           Mission in India
+37.  Valid visa, along with valid foreign             ✔                      X                 X                   X
+     passport issued, to other foreign
+     nationals
+38.  Valid Registration Certificate or                X                      ✔                      X              X
+     Residential    permit     issued     by
+     Foreigners Regional Registration
+     Office       (FRRO)         /Foreigners
+     Registration Office (FRO) to the
+     foreign national
+     (except OCI Card holders, LTV
+     document holders and Nepal/ Bhutan
+     nationals)
+Documents applicable for exception cases of name, gender and date of birth (DoB):
+
+39.    For exception cases of name change:            ✔                     X                  X                   X
+       Gazette Notification of new name
+       alongwith any supporting POI
+       document of old name with
+       Photograph (for first/full name
+       change)/Divorce Decree/ Adoption
+       Certificate/ Marriage Certificate
+40.    For Exception cases of Gender                        ✔                       X                     X                     X
+       Change: Medical Certificate from
+       surgeon, in case individual changed
+       gender surgically
+41.    For exception cases of DoB Change:                    X                      X                     X                    ✔
+       Self Declaration as per notified
+       format along with Birth certificate
+       issued by Authorised Authorityunder
+       the Registration of Births and Deaths
+       Act, 1969, read with the rules made
+       thereunder
+Note: Any document listed in the above tabular statement shall be acceptable only if it meets the following conditions, namely:—
+         (a) It is currently valid (unless otherwise expressly provided for above);
+         (b) The person in respect of whom such document is issued is entitled for the same;
+         (c) If the information contained in the document is publicly displayed or otherwise accessible to UIDAI online or is verifiable
+             offline through digital means made available by the authority issuing the same, such information is verified if such means are
+             used; and
+         (d) The authority issuing the document presented to evidence proof of identity, address, date of birth or relationship has not made
+             any declaration in respect of such category of document that such document is not proof of the same.
+
+      Important Note:
+         (a) For resident Indian and Non Resident Indian (NRI) born on and after 01.10.2023, birth certificate is mandatory.
+         (b) *DoB update of all individual between the age group of 0-18 years mandatorily requires Birth Certificate issued by
+             Authorized Authority of the respective States
+         (c) A document is accepted as Proof of Identity (PoI) document only if it contains Name and Photograph of the individual.
+         (d) A document is accepted as Proof of Address (PoA) document only if it contains Name and Address of the individual.
+         (e) A document is accepted as both Proof of Identity (PoI) and Proof of Address (PoA) document only if it contains Name,
+             Photograph and Address of the individual.
+         (f) Name of the individual as mentioned in the supporting document, will be replicated as such in the individual‟s Aadhaar. No
+             additional information like parent/guardian first name, middle name and last name will be considered.
+         (g) PoI, PoA andPDB documents shall be issued on the name of the individual. Documents in the name of the family
+             member/members cannot be considered for enrolment of the other family members.
+         (h) Head of Family (HoF) based enrolment shall be used in case individual does not have PoI and PoA documents.
+         (i) HoF must have a valid Aadhaar before performing HoF based enrolment.HoF must accompany the individual during
+             enrolment for his / her Aadhaar Authentication.
+         (j) The address mentioned in the HoF Aadhaar will be used in the family member‟s Aadhaar.
+         (k) In case of child (0-5 years) having name as “Baby of ….” in Aadhaar, the first update request for full name change shall be
+             allowed by submission of Birth certificate issued by Authorised Authorityunder the Registration of Births and Deaths Act,
+             1969, read with the rules made thereunder.
+         (l) Aadhaar update for foreigner national will be conducted at Aadhaar adult enrolment centres only.
+         (m) For foreign national seeking enrolment, the Aadhaar issued will be valid only till validity of the visa. However, in case of
+             Nepal/Bhutan nationals, the Aadhaar issued will be valid for a period of ten years.
+         (n) For OCI card holders, the Aadhaar issued will be valid only for a period of ten years.
+         (o) For LTV document holders, the Aadhaar issued will be valid only till the validity of LTV document.
+         (p) Please refer Self Declaration for DoB Change — [#]
+         (q) Please refer Exception Handling Mechanism — [##]
+         (r) Exception handling process is carried out under jurisdiction of UIDAI Regional Offices and considered only after due
+             diligence of the case by the Regional Office concerned.
+         (s) All the documents should be latest and valid (except otherwise specified).”; and
+
+      #- https://uidai.gov.in/images/SOP_for_DOB_update.pdf
+      ##- https://uidai.gov.in/images/Biometric_exception_guidelines_01-08-2014.pdf
+SELF-DECLARATION FROM THE HEAD OF FAMILY (HOF) FOR SHARING ADDRESS
+    WITH IMMEDIATE FAMILY MEMBER RESIDING AT THE SAME ADDRESS
+
+
+I, _________________________________________________ (Name as in Aadhaar), resident
+
+of   _________________________________________________________________________
+
+____________________________________________________________________                       (Address
+
+as provided in Aadhaar) holding Aadhaar Number___________________________________, do
+
+hereby solemnly affirm and declare as under:-
+
+
+
+		    i.	That resident Mr./Ms._____________________________ holding Aadhaar number
+
+             _______________________ is related to me as my __________________________
+
+             ___________________________ (Please specify the relation with applicant) and is
+
+             residing with me at the above mentioned address.
+
+
+
+		    ii.	That I agree to share my address in my Aadhaar with Mr./Ms. __________________
+
+             _____________________ for updating his/her address in Aadhaar in my capacity of
+
+             Head of the Family (HoF).
+
+
+
+		    iii.	That the undersigned undertakes that, the above mentioned information is correct
+
+             to the best of my knowledge and belief and at any point of time if any of the said
+
+             information is found to be incorrect/fraudulent/false, the Aadhaar of Mr./Ms.
+
+             ___________________________ and mine can be deactivated and legal action
+
+             may be initiated against me, as per the provisions of the Aadhaar (Targeted Delivery
+
+             of Financial and Other Subsidies, Benefits and Services) Act, 2016 (18 of 2016) and,
+
+             Regulations framed there under and other applicable Acts and Rules, etc.
+
+
+
+
+Date DD/MM/YYYY	                                   Name & Signature of Head of the Family (HoF)
+
+
+Note:
+1. This document is valid for Head of Family (HoF) based Aadhaar address update purpose only.
+2. This document is valid for 3 months from date of issue
+       CERTIFICATE FOR AADHAAR ENROLMENT/ UPDATE (TO BE USED ONLY AS PROOF OF ADDRESS*)
+Instructions: All details to be filled in Block Letters                                                                         (To be valid for 3 months from date of issue)
+
+To be printed on plain A4 paper size;           Not required to be printed on letter head;			                              D D           M M            Y      Y      Y        Y
+                                                                        Resident’s Details
+                                          Resident                    Non-Resident Indian (NRI)                           New Enrolment                     Update Request
+
+Aadhaar Number:
+(For update only)
+
+Full Name:
+
+
+
+
+C/o:
+
+House No./ Bldg./ Apt:
+
+Street/ Road/ Lane:
+
+Landmark:
+
+Area/ Locality/ Sector:
+
+Village/ Town/ City:
+
+Post Office:
+
+District:
+                                                                                                                                                      Resident’s Recent
+State:                                                                                                                                                Colour Photograph
+                                                                                                                                                      3.5cm x 4.5 cm
+
+                                                                                                                                                      Cross Signed and
+                                                                                                                                                       Cross Stamped
+                                                                                                                                                       by the Certifier.
+
+PIN Code:                                                                                                                                               NB: DO NOT
+                                                                                                                                                       OVERLAP WITH
+                                                                                                                                                        TEXT BOXES
+                                                                                                         Signature of the Resident/
+Date of Birth:                                                                                           Thumb/ Finger Impression
+
+
+                                                Certіfіer’s Details (To be fіlled by the certіfіer Only)
+Name of the Certifier:
+
+Designation:
+
+Office Address:
+
+
+
+
+Contact Number:
+
+I hereby certify above mentioned details of the resident                                                     Checklist for Certifier
+and I am a.... (Tick appropriate box below)                                 No overwriting         Issue date is filled       Resident’s signature       Certifier’s details
+       Gazetted Officer - Group A                                           Resident’s Photo is cross signed and cross stamped (paper to photo or photo to paper)
+
+       Village Panchayat Head or Mukhiya
+       Gazetted Officer - Group B
+       MP/ MLA/ MLC/ Municipal Councillor
+       Tehsildar
+       Head of Recognized Educational Institution
+       Superintendent/ Warden/ Matron/ Head of Institution
+       of Recognized shelter homes/ Orphanages
+                                                                                                          Signature & Stamp of the Certifier
+       EPFO Officer
+
+*To be used as Proof of Identify (PoI) only in specific cases as mentioned in the list of applicable supporting documents.
+                 INSTRUCTIONS FOR FILLING UP Certificate for AADHAAR ENROLMENT/ UPDATE
+                                  (To be used only as proof of address*)
+
+A.    GENERAL INSTRUCTIONS ––– Please read these instructions carefully before filling the application form
+The Application Form consists of two forms, i.e., Resident details and Certifier details.
+Sample filled form is available at the end of these instructions. Residents are advised to view the sample filled form after reading these
+instructions.
+Incomplete or inappropriately-filled application form will not be accepted. Please follow the instructions given below while filling the form.
+• Certificate has to be printed on Plain paper.
+• Use CAPITAL LETTERS only, as shown in the image below –
+            r   a m e         s     h                          R A M E S H
+
+                    Incorrect                                          Correct
+•    Use standard fonts and avoid stylized writing.
+•    Use black or blue ball point pen only. Do NOT fill the application form with ink-pen or pencil.
+•    Put a tick marks ( ), in the boxes where you have to select options as your answer and leave the other option(s) blank.
+•    Write clearly within the boxes without touching the boundaries. Try and write in the centre of the box, as shown in the image below–
+
+
+               Incorrect                   Correct
+• Leave one box blank after each complete word, while filling up the boxes.
+        R A M E S H G U P T                A               R A M E S H             G U P T       A
+
+                    Incorrect                                                Correct
+• Do NOT write “NA” or “N/A” or “NOT APPLICABLE” in any boxes in the form to convey that the column is not relevant for your case. Leave
+     that column blank.
+
+B.    FIELD -WISE GUIDELINES FOR FILLING UP “CERTIFICATE FOR AADHAAR ENROLMENT/ UPDATE”- Resident section
+
+ensure all the fields are filled properly, as per below instructions.
+
+       S No       Filed Name                     General Instructions
+       1          Date of Issue                      • Specify the date in DD-MM-YYYY format.
+                                                     • Ensure Certificate is submitted within 3 months of date of issue.
+                                                     • Enrollment or Update Request will be rejected if Date of Issue is blank or Certificate
+                                                       has expired.
+       2          Resident Category                  • Specify the resident is native Resident of India or belongs to Non Resident Indian
+                                                       (NRI) Category
+       3          Enrolment type                     •   Specify the current request is either for obtaining a Aadhaar card which is known as
+                                                         “New Enrolment” or for updating an existing Aadhaar details which is known as
+                                                         “Update Request”.
+
+       4          Aadhaar Number                     •   Mention your Aadhaar Number.
+                                                     •   In case of Enrolment, Kindly leave it blank.
+                                                     •   In case of Update, it is mandatory to specify the Aadhaar number.
+
+       5          Full Name                          •   Mention the name of Resident.
+                                                     •   Name shall be mentioned in the format as to be recorded in the Aadhaar.
+
+       6          C/o                                •   Mention the Care of (C/o) if required in the address field.
+                                                     •   This field can be left blank as well.
+
+       7          House No/ Bldg./ Apt:              •   Mention the House Number, Building Name or Apartment Name as per the address.
+
+
+       8          Street/Road/ Lane                  •   Mention Street Name, Road & Lane of the address.
+
+
+       9          Landmark                           •   Mention the Landmark near your address.
+                                                     •   This field can be left blank as well, if not required.
+       10         Area/ Locality/ Sector             •   Mention Area/ Locality/ Sector of your address.
+
+
+       11         Village/ Town/ City                •   Mention Village/ Town/ City of your address.
+
+
+       12         Post Office                        •   Mention the nearest post office of your address.
+                                                     •   This filed can be left blank.
+
+       13         District                           •   Mention the District of your address.
+       14         State                              •   Mention the State of your address.
+           15            Pin Code                                  •    Mention the pincode of your address.
+           16            Date of Birth                             •    Mention the Date of Birth.
+
+           17            Signature                                 •    Resident shall do the Signature in the box specified for signature.
+                                                                   •    Illiterate Resident can provide Thumb or Finger impression.
+
+           18            Resident Photo                            •    Resident shall paste latest color photograph of size 3.5 cm X 4.5 cm.
+                                                                   •    Ensure photo is pasted in the space provided. It shall not overlap in text boxes.
+                                                                   •    Photo needs to be cross sign by the certifier.
+                                                                   •    Photo needs to be cross stamped by the certifier.
+
+
+
+    C.    FIELD -WISE GUIDELINES FOR FILLING UP “CERTIFICATE FOR AADHAAR ENROLMENT/ UPDATE”- Certifier section
+
+    Kindly ensure all the fields are filled properly by the Certifier, as per below instructions.
+
+           S No          Filed Name                             General Instructions
+           1             Name of Certifier                          • Mention the name of Certifier
+
+           2             Designation and office                    •    Specify the designation and office name of the Certifier.
+                         name
+
+           3             Office Address                            •    Specify the complete address of the certifier, along with Department name.
+
+           4             Contact Number                            •    Specify the contact details of the certifier.
+
+           5             Certifier Type                            •  Mention the certifier type by tick mark one of box from below categories:
+                                                                              o     Gazetted Officer - Group A
+                                                                              o     Village Panchayat Head or Mukhiya
+                                                                              o     Gazetted Officer - Group B
+                                                                              o     MP/ MLA/ MLC/ Municipal Councillor
+                                                                              o     Tehsildar
+                                                                              o     Head of Recognized Educational Institution
+                                                                              o     Superintendent/ Warden/ Matron/ Head of Institution of Recognized
+                                                                                    shelter homes/ Orphanages
+                                                                              o     EPFO Officer
+           6             Checklist for Certifier                   • Verify the below checklist by tick mark the boxes:
+                                                                              o     No overwriting
+                                                                              o     Issue date is filled
+                                                                              o     Resident’s signature
+                                                                              o     Certifier’s details
+                                                                              o     Resident’s Photo is cross signed and cross stamped (paper to photo or
+                                                                                    photo to paper)
+                                                                    •   Please ensure that complete form is duly filled, and all boxes of checklist all
+                                                                        selected.
+           7             Sign & Stamp of the                       • Provide certifier sign and stamp in the space specified.
+                         certifier
+
+
+    D.    IMPORTANT INSTRUCTIONS
+
+    Below are few important steps that resident shall ensure before submitting the form:
+
+    • This document can only be used as Proof of Address (PoA). For the specified cases defined in the list of acceptable supporting documents,
+      this certificate can also be considered as valid Proof of Identity (PoI).
+    • Certificate has to be printed on Plain paper.
+    • Form has to be submit with 3 months of date of issue.
+    • Kindly ensure No writing on the form.
+    • Date of issue has to be filled properly in DD-MM-YYYY format.
+    • Resident signature or thumb impression is must.
+    • Certifier details have to be properly filled in.
+    • Resident shall paste the latest colored photograph of 3.5cm X 4.5 cm with in the defined area.
+    • Certifier cross sign & cross stamp is must on the resident photograph.
+    • Certifier complete details must be filled in.
+
+
+    *To be used as Proof of Identify (PoI) only in specific cases as mentioned in the list of applicable supporting documents.
+
+
+
+---------------------------------------------------------------------------End of Instructions-----------------------------------------------------------------------------------
+

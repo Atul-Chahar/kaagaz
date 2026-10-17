@@ -1,0 +1,25 @@
+# Names only, for documents that a cited rule lists as a requirement but that no research fragment describes.
+# These carry NO processing time (days: null) and NO issuing office, because no source for those was saved.
+# The name is the plain-English label for what the citing excerpt names; the rules that use them are cited
+# in the other fragments.
+documents:
+  - {id: marks-card-previous, name: Previous year marks card (or 12th mark sheet)}
+  - {id: disability-certificate, name: Disability certificate (if applicable)}
+  - {id: admission-proof, name: Admission details and fee details}
+  - {id: sslc-marks-card, name: SSLC (Class 10) marks card}
+  - {id: study-certificate, name: Study (bonafide) certificate from the college}
+  - {id: fee-receipt, name: College fee receipt}
+  - {id: hostel-certificate, name: Hostel admission certificate}
+  - {id: voter-id, name: Voter ID card}
+  - {id: proof-of-residence, name: Proof of residence}
+  - {id: proof-of-identity, name: Proof of identity}
+  - {id: income-proof, name: Proof of income (salary slip or bank statement)}
+  - {id: driving-licence, name: Driving licence}
+  - {id: passport, name: Indian passport}
+  - {id: school-leaving-certificate, name: School leaving certificate}
+  - {id: electricity-bill, name: Electricity bill}
+  - {id: institution-certificate-uidai-format, name: Certificate from a recognised educational institution (UIDAI format)}
+  - {id: nrega-job-card, name: NREGA job card}
+  - {id: npr-letter, name: National Population Register letter}
+  - {id: form-60, name: Form 60 (declaration for people without a PAN)}
+  - {id: aadhaar-seeding-consent-form, name: Bank consent form for Aadhaar seeding}
