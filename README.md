@@ -120,6 +120,8 @@ Every query the product runs is a parameterized file in `backend/kaagaz/queries/
 
 | Query | What it does |
 |---|---|
+| [`applies_add.cypher`](backend/kaagaz/queries/applies_add.cypher) | Student graph: the student says a conditional requirement applies to them (e.g. |
+| [`applies_remove.cypher`](backend/kaagaz/queries/applies_remove.cypher) | Student graph: a conditional requirement does not apply to the student after all. |
 | [`chain_days.cypher`](backend/kaagaz/queries/chain_days.cypher) | All-of chains only: every REQUIRES path from the scheme through documents the student does not hold, with the remaining legal processing days summed along the path by reduce(). |
 | [`document_detail.cypher`](backend/kaagaz/queries/document_detail.cypher) | One document with its issuing office, processing time source, and what it directly requires. |
 | [`documents.cypher`](backend/kaagaz/queries/documents.cypher) | Every document in the pack with its office, for the "tick what you hold" list. |
@@ -131,6 +133,7 @@ Every query the product runs is a parameterized file in `backend/kaagaz/queries/
 | [`load_bearing.cypher`](backend/kaagaz/queries/load_bearing.cypher) | The document that sits in the prerequisite trees of the most schemes in $scheme_ids (count of distinct schemes per document), skipping documents already held. |
 | [`load_bearing_pagerank.cypher`](backend/kaagaz/queries/load_bearing_pagerank.cypher) | PageRank over REQUIRES edges on the whole pack: documents that many requirements point to (directly or through other documents) score highest. |
 | [`prerequisites.cypher`](backend/kaagaz/queries/prerequisites.cypher) | Every document and "any one of" group a scheme needs, at every depth up to $depth. |
+| [`recall_applies.cypher`](backend/kaagaz/queries/recall_applies.cypher) | Student graph: conditional requirements the student said apply to them. |
 | [`recall_holdings.cypher`](backend/kaagaz/queries/recall_holdings.cypher) | Student graph: every holding with when it was saved. |
 | [`recall_snapshots.cypher`](backend/kaagaz/queries/recall_snapshots.cypher) | Student graph: the most recent saved plans. |
 | [`recall_targets.cypher`](backend/kaagaz/queries/recall_targets.cypher) | Student graph: schemes the student targets. |

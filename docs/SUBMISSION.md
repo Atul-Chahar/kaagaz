@@ -18,10 +18,13 @@ Submissions close **18 Oct 2026, 11:59 PM IST**.
 
 ## What you must do by hand
 
-1. **Before making the repo public**, decide about the 74 MB Sakala compendium PDF. It was committed in an early
-   commit and is now untracked (in `.gitignore`), but the old blob is still in git history. If you want it gone,
-   rewrite history (for example `git filter-repo --path data/sources/raw/sakala-compendium-en.pdf --invert-paths`)
-   and force-push. It is a public government PDF, so leaving it is not a data problem, only a size one.
+1. **Before making the repo public**, decide about two large public PDFs in git history: the 74 MB Sakala compendium
+   (`data/sources/raw/sakala-compendium-en.pdf`) and the 7.6 MB Karnataka holiday list (saved early as
+   `data/sources/raw/ka-holidays-2024.pdf`, later renamed). Neither is tracked now (both are in `.gitignore`, with their
+   hash and extracted text kept), but old commits still hold them. Rewriting history needed your approval, so it was
+   not done. To remove them: `git filter-repo --path data/sources/raw/sakala-compendium-en.pdf --path
+   data/sources/raw/ka-holidays-2024.pdf --invert-paths`, then force-push. They are public government files, so
+   leaving them is a size issue, not a data issue.
 2. Make the GitHub repo public (Settings, General, Danger zone, Change visibility).
 3. Record the demo video following `docs/DEMO_SCRIPT.md`. Read the numbers off the screen on the day you record:
    working days left go down every day.
