@@ -336,11 +336,14 @@ def benchmark() -> dict:
 if FRONTEND_DIST.exists():
     app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets")
 
+    DIST_ROOT = FRONTEND_DIST.resolve()
+
     @app.get("/{path:path}", include_in_schema=False)
     def spa(path: str):
         if path.startswith("api/"):
             raise HTTPException(404)
-        f = FRONTEND_DIST / path
-        if path and f.is_file():
+        f = (FRONTEND_DIST / path).resolve()
+        # only files inside the built frontend; "../" or absolute paths never leave it
+        if path and f.is_relative_to(DIST_ROOT) and f.is_file():
             return FileResponse(f)
-        return FileResponse(FRONTEND_DIST / "index.html")
+        return FileResponse(DIST_ROOT / "index.html")

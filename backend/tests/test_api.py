@@ -121,3 +121,36 @@ def test_forget_student_deletes_the_graph(sid):
     client.post(f"/api/students/{sid}/holdings", json={"doc_id": "aadhaar"})
     assert client.delete(f"/api/students/{sid}").json() == {"deleted": True}
     assert client.get(f"/api/students/{sid}").json()["outcome"] == "not_in_graph"
+
+
+def test_static_route_cannot_read_files_outside_the_frontend_build():
+    from kaagaz import api as api_mod
+    if not api_mod.FRONTEND_DIST.exists():
+        pytest.skip("frontend not built")
+    secret = "Kaagaz"  # README starts with "# Kaagaz"; any leak of it means traversal works
+    for path in ("/../../README.md", "/..%2F..%2FREADME.md", "/%2e%2e/%2e%2e/README.md", "/../../../../../../etc/hostname"):
+        r = client.get(path)
+        assert "# Kaagaz" not in r.text, path
+        assert r.status_code in (200, 404)
+        if r.status_code == 200:
+            assert "<!doctype html>" in r.text.lower()  # falls back to the app shell
+    assert secret
+
+
+def test_sentence_checker_on_a_real_plan_rejects_wrong_numbers_and_invented_documents():
+    from kaagaz import agent
+    from kaagaz.tools import Tools
+    client.post("/api/students/example")
+    t = Tools()
+    res = t.call("plan", {"student_id": "example-student", "scheme_id": "ka-ssp-fee-reimbursement-minority",
+                          "depth": 1, "remember": False})
+    compact = {"outcome": res.outcome, "message": res.message, "data": agent._compact(res.data)}
+    names = [d["name"] for d in t.pack["documents"]] + [s["name"] for s in t.pack["schemes"]]
+    v = res.data["verdict"]
+    assert v["kind"] == "on_time" and v["margin"] == 9
+    good = (f"You need the caste and income certificate, which takes {v['critical_days']} working days, "
+            f"so you have {v['margin']} days spare before 30 Nov 2026.")
+    assert agent.check_sentence(good, compact, names) == {"ok": True, "problems": []}
+    for bad in ("You are 25 days short.", "You have 28 days spare.", "You are 9 days short.", "You need a domicile certificate.",
+                "You also need a ration card."):
+        assert not agent.check_sentence(bad, compact, names)["ok"], bad

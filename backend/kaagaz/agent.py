@@ -120,26 +120,46 @@ def choose_tool(question: str, context: str) -> tuple[str, dict]:
 # ---- sentence checker -------------------------------------------------------------
 
 NUM = re.compile(r"(?<![\w.])\d+(?:\.\d+)?(?![\w.])")
+# Only these fields state facts a sentence may repeat. Everything else in a result (urls, excerpts, the list of
+# calendar dates, ids, paths) is ignored, so a number cannot pass just because it appears somewhere.
+NUMBER_KEYS = {"critical_days", "margin", "days_left", "days", "span", "reduction", "depth", "max_depth",
+               "shared_count", "needed_count", "service_days"}
+DATE_KEYS = {"date", "deadline", "window_end", "window_start", "today", "added_at", "at", "issued_on", "created_at",
+             "saved_at"}
+COUNT_KEYS = {"needed", "unknown", "options", "nodes", "holdings", "targets", "start_today", "paths", "held",
+              "snapshots", "matches"}
+SKIP_KEYS = {"dates", "path", "critical_path", "longest_chains", "trace"}
+DOC_NOUN = re.compile(r"\b((?:[a-z]+ ){0,3}(?:certificate|card|passbook|affidavit|licence|license))\b")
 
 
-def _numbers(obj) -> set[str]:
+def _fact_numbers(obj, key: str | None = None) -> set[str]:
     out: set[str] = set()
-    if isinstance(obj, bool) or obj is None:
-        return out
-    if isinstance(obj, (int, float)):
-        out.add(str(int(obj)) if float(obj).is_integer() else str(obj))
-        return out
-    if isinstance(obj, str):
-        for m in re.findall(r"\d+(?:\.\d+)?", obj):
-            out.add(m.lstrip("0") or "0")
+    if key in SKIP_KEYS:
         return out
     if isinstance(obj, dict):
-        for v in obj.values():
-            out |= _numbers(v)
-    elif isinstance(obj, (list, tuple)):
+        for k, v in obj.items():
+            out |= _fact_numbers(v, k)
+        return out
+    if isinstance(obj, list):
+        if key in COUNT_KEYS:
+            out.add(str(len(obj)))
         for v in obj:
-            out |= _numbers(v)
+            out |= _fact_numbers(v, key)
+        return out
+    if isinstance(obj, bool) or obj is None:
+        return out
+    if key in NUMBER_KEYS and isinstance(obj, (int, float)):
+        out.add(str(int(obj)) if float(obj).is_integer() else str(obj))
+    if key in DATE_KEYS and isinstance(obj, str):
+        m = re.match(r"(\d{4})-(\d{2})-(\d{2})", obj)
+        if m:
+            out |= {m.group(1), str(int(m.group(3)))}
     return out
+
+
+def _short(name: str) -> str:
+    s = re.sub(r"\s*\([^()]*\)\s*$", "", name).strip()
+    return s if len(s) >= 6 else name
 
 
 def check_sentence(sentence: str, result: dict, known_names: list[str]) -> dict:
@@ -147,16 +167,30 @@ def check_sentence(sentence: str, result: dict, known_names: list[str]) -> dict:
     problems = []
     blob = json.dumps(result, ensure_ascii=False).lower()
     low = sentence.lower()
-    for name in sorted(set(known_names), key=len, reverse=True):
+    # names: a known scheme or document (full or short name) mentioned in the sentence must be in the result
+    for name in sorted({n for full in known_names for n in (full, _short(full))}, key=len, reverse=True):
         n = name.lower().strip()
-        if len(n) >= 4 and n in low and n not in blob:
+        if len(n) >= 4 and re.search(rf"\b{re.escape(n)}\b", low) and n not in blob:
             problems.append(f"names {name!r}, which is not in the tool result")
-    allowed = _numbers(result)
+    # any "... certificate / card / affidavit" phrase must be backed by the result (its last two words at least)
+    for m in DOC_NOUN.finditer(low):
+        words = [w for w in m.group(1).split() if w not in STOP and w not in {"this", "that", "each", "one", "new"}]
+        if len(words) < 2:
+            continue  # a bare "certificate" names nothing new
+        tail = " ".join(words[-2:])
+        if tail not in blob:
+            problems.append(f"mentions {m.group(1)!r}, which is not in the tool result")
+    allowed = _fact_numbers(result)
     for m in NUM.findall(sentence):
-        norm = m.lstrip("0") or "0"
-        norm = norm.removesuffix(".0")
+        norm = (m.lstrip("0") or "0").removesuffix(".0")
         if norm not in allowed:
-            problems.append(f"states the number {m}, which is not in the tool result")
+            problems.append(f"states the number {m}, which is not a fact in the tool result")
+    # direction: a sentence must not turn "on time" into "short", or "short" into "spare"
+    kind = ((result.get("data") or {}).get("verdict") or {}).get("kind")
+    if kind in ("on_time", "at_least", "no_deadline") and re.search(r"\b(short|late|miss|too late)\b", low):
+        problems.append("says short or late, but the verdict is not late")
+    if kind in ("late", "late_at_least", "closed") and re.search(r"\b(spare|on time|in time|make it)\b", low):
+        problems.append("says spare or on time, but the verdict is late")
     if not sentence.strip():
         problems.append("empty sentence")
     if "—" in sentence:

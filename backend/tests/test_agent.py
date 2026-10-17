@@ -57,3 +57,9 @@ def test_llm_not_configured_without_env(monkeypatch):
 
 def test_words_drop_stopwords():
     assert agent._words("Does Vidyasiri need a PAN card?") == ["vidyasiri", "pan", "card"]
+
+
+def test_direction_of_the_verdict_is_checked():
+    late = {"data": {"verdict": {"kind": "late", "margin": 7, "critical_days": 21}}}
+    assert not agent.check_sentence("You have 7 days spare.", late, [])["ok"]
+    assert agent.check_sentence("You are 7 days short.", late, [])["ok"]
