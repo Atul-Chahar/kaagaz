@@ -1,0 +1,33 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    ports:
+      - "${FALKORDB_HOST_PORT:-6380}:6379"   # Redis protocol (host 6380 by default to avoid clashing with a local Redis)
+      - "${FALKORDB_BROWSER_PORT:-3000}:3000" # FalkorDB Browser
+    volumes:
+      - falkordb-data:/var/lib/falkordb/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  app:
+    build: .
+    depends_on:
+      falkordb:
+        condition: service_healthy
+    environment:
+      FALKORDB_HOST: falkordb
+      FALKORDB_PORT: "6379"
+      KAAGAZ_SEED_ON_START: "1"
+      FALKORDB_BROWSER_URL: "http://localhost:${FALKORDB_BROWSER_PORT:-3000}"
+      LLM_PROVIDER: ${LLM_PROVIDER:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+    ports:
+      - "${KAAGAZ_PORT:-8000}:8000"
+
+volumes:
+  falkordb-data:
