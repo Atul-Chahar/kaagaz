@@ -101,7 +101,7 @@ export default function Benchmark() {
             {b.deterministic_run ? (
               <>
                 <p className="note" style={{ marginBottom: 16 }} data-testid="det-meta">
-                  These are Kaagaz's own deterministic scores: the planner answers each question straight from the graph, with no language model. Run {fmtDate(b.deterministic_run.started_at)} on {b.deterministic_run.questions} questions, file <code>bench/results/{b.deterministic_run_file}</code>. The graph and the ground truth come from the same saved sources, so a high score here shows the engine reads its own data correctly, not that it beats anything.
+                  These are Kaagaz's own deterministic scores: the planner answers each question straight from the graph, with no language model. Run {fmtDate(b.deterministic_run.started_at)} on {b.deterministic_run.questions} questions, file <code>bench/results/{b.deterministic_run_file}</code>. The graph and the ground truth come from the same saved sources, so these numbers show how often the engine agrees with an independent reading of those sources. They are not a comparison with other systems.
                 </p>
                 <RunTable run={b.deterministic_run} />
                 {b.deterministic_run.disagreements && (
