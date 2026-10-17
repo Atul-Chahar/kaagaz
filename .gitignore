@@ -13,3 +13,4 @@ data/sources/.rate.json
 # source files over 5 MB (hash kept in data/sources/index.json)
 data/sources/raw/sakala-compendium-en.pdf
 data/sources/raw/dpar-ka-holidays-2026.pdf
+data/sources/raw/prs-ka-pt-act-1976.pdf

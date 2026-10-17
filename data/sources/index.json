@@ -462,6 +462,20 @@
     "text_chars": 17318
   },
   {
+    "id": "prs-ka-pt-act-1976",
+    "url": "https://prsindia.org/files/bills_acts/acts_states/karnataka/1976/1976KR35.pdf",
+    "final_url": "https://prsindia.org/files/bills_acts/acts_states/karnataka/1976/1976KR35.pdf",
+    "title": "The Karnataka Tax on Professions, Trades, Callings and Employments Act, 1976 (PRS Legislative Research copy)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "0d8b5148a9f3560356619aa32679585f20788d0378147f5e7f05ce39e64c8f5c",
+    "file": "raw/prs-ka-pt-act-1976.pdf",
+    "text_file": "text/prs-ka-pt-act-1976.txt",
+    "content_type": "application/pdf",
+    "size": 6816569,
+    "large_not_in_git": true,
+    "text_chars": 566289
+  },
+  {
     "id": "rbi-kyc-md",
     "url": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=11566",
     "final_url": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=11566",

@@ -4,6 +4,7 @@ import { Loading, StateBox, Stamp, TraceTable } from '../components/common'
 import { fmtDate, fmtDays, hostOf, plural, shortName } from '../format'
 import { go, type Session } from '../nav'
 import { verdictSentence } from '../labels'
+import { usePackUi } from '../packui'
 import WhyPanel from '../components/WhyPanel'
 import Timeline from '../components/Timeline'
 
@@ -27,6 +28,7 @@ export default function Chain({ session, setSession }: { session: Session | null
   const [alts, setAlts] = useState<Awaited<ReturnType<typeof api.alternatives>> | null>(null)
   const [pressKey, setPressKey] = useState(0)
   const whyTrigger = useRef<HTMLElement | null>(null)
+  const ui = usePackUi()
   const sid = session?.id
   const scheme = session?.scheme_id
 
@@ -101,7 +103,7 @@ export default function Chain({ session, setSession }: { session: Session | null
   if (!session || !scheme) {
     return (
       <StateBox title="No plan yet" testid="no-session">
-        <p>Pick a scholarship and tick what you hold on the <a href="#/">Start page</a>, or load the Example student there.</p>
+        <p>Pick a {ui.target} and tick what you hold on the <a href="#/">Start page</a>, or load the Example there.</p>
       </StateBox>
     )
   }
@@ -130,7 +132,7 @@ export default function Chain({ session, setSession }: { session: Session | null
           <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>{plan.scheme.name}</h1>
           <p className="who">{plan.scheme.authority}{plan.scheme.portal ? ` · ${plan.scheme.portal}` : ''}</p>
         </div>
-        <a className="btn ghost small" href="#/">Change scholarship or documents</a>
+        <a className="btn ghost small" href="#/">Change {ui.target} or documents</a>
       </div>
 
       <section className="verdict-bar" aria-labelledby="verdict-h">
@@ -210,7 +212,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                       {s.path.map((pid, i) => (
                         <span key={pid + i} style={{ display: 'contents' }}>
                           {i > 0 && <span className="arrow" aria-hidden="true">→</span>}
-                          <span className="hop">{pid === plan.scheme.id ? 'Scholarship' : shortName(itemsById[pid]?.name ?? pid)}</span>
+                          <span className="hop">{pid === plan.scheme.id ? ui.target[0].toUpperCase() + ui.target.slice(1) : shortName(itemsById[pid]?.name ?? pid)}</span>
                         </span>
                       ))}
                     </div>
@@ -234,7 +236,7 @@ export default function Chain({ session, setSession }: { session: Session | null
         <section aria-labelledby="alt-h">
           <div className="section-head">
             <h2 id="alt-h">Other options</h2>
-            <p>Other scholarships, ranked by whether you can still make them with the documents you hold. Kaagaz does not check eligibility (category, income, marks), so check that on the portal.</p>
+            <p>Other {ui.targets}, ranked by whether you can still make them with the documents you hold. Kaagaz does not check eligibility, so check that on the official portal.</p>
           </div>
           {!alts && <Loading label="Comparing other schemes" />}
           {alts && (
