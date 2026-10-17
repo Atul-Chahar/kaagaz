@@ -1,0 +1,292 @@
+Rule 8
+
+Rule 8.
+            Application for registration. -
+
+1
+[(1)
+          Every person who is liable to be registered under sub-section 
+          (1)  of  section  25  and  every  person
+          seeking  registration  under  sub-section 
+          (3)  of  section  25  (hereafter  in 
+          this  Chapter referred  to  as  "the applicant"),
+          except–
+
+          (i) a non-resident taxable person;
+
+          (ii) a person required to deduct tax at source under section 51;
+
+          (iii) a person required to collect tax at source under section 52;
+
+          (iv)  a  person  supplying  online 
+          information and  database  access  or 
+          retrieval  services  from  a place  outside 
+          India  to  a  non-taxable  online 
+          recipient  referred  to  in  section 
+          14  or  a  person supplying online money gaming from a
+          place outside India to a person in India referred to in section 14A
+          under the Integrated Goods and Services Tax Act, 2017 (13 of 2017),
+
+ shall,
+          before applying for registration, declare his Permanent Account
+          Number, State or Union territory in Part A of FORM  GST 
+          REG-01on  the  common  portal,  either 
+          directly  or  through  a  Facilitation Centre
+          notified by the Commissioner:
+
+Provided
+
+that  every 
+          person  being  an  Input  Service 
+          Distributor  shall  make  a  separate application
+          for registration as such Input Service Distributor.]
+
+(2)
+          (a) The Permanent Account Number shall be validated online by the
+          common portal from the database maintained by the Central Board of
+          Direct Taxes
+
+4
+[and
+          shall also be verified through separate one-time passwords sent to the
+          mobile number and e-mail address linked to the Permanent Account
+          Number].
+
+(b)
+
+5
+[****]
+
+(c)
+
+6
+[****]
+
+(3)
+          On successful verification of the Permanent Account Number, mobile
+          number and email address, a temporary reference number shall be
+          generated and communicated to the applicant on the said mobile number
+          and e-mail address.
+
+(4)
+          Using the reference number generated under sub-rule (3), the applicant
+          shall electronically
+
+submit an application
+
+in
+
+Part B
+
+of
+
+FORM
+              GST REG-01
+, duly signed or verified through
+          electronic verification code, along with the documents specified in
+          the said Form at the common portal, either directly or through a
+          Facilitation Centre notified by the Commissioner.
+
+2
+[
+3
+[(4A)
+          Where an applicant, other than a person notified under
+          sub-section  (6D)  of  section  25, 
+          opts  for authentication of Aadhaar number, he shall, while
+          submitting the application under sub-rule (4), undergo authentication
+          of Aadhaar number and the date of submission of the application in
+          such cases shall be the date of authentication of the Aadhaar number,
+          or fifteen days from the submission of the application in Part B of
+          FORM GST REG-01 under sub-rule (4), whichever is earlier.
+
+Provided
+          that every application made under sub-rule (4) by a person, other than
+          a person notified under sub-section (6D) of section 25, who has opted
+          for authentication of Aadhaar number and is identified on the 
+          common  portal,  based  on data  analysis 
+          and  risk  parameters,  shall  be 
+          followed  by  biometric-based Aadhaar authentication and
+          taking photograph of the applicant where the applicant is an
+          individual or of such individuals in relation to the applicant as
+          notified under sub-section (6C) of section 25 where the applicant is
+          not an individual, along with the verification of the original copy of
+          the documents uploaded with  the  application  in 
+          FORM  GST  REG-01  at  one  of 
+          the  Facilitation  Centres  notified  by  the
+          Commissioner for the purpose of this sub-rule and the application
+          shall be deemed to be complete only after completion of the process
+          laid down under this proviso.]]
+
+10
+[Provided
+          further that every application made under sub-rule  (4) 
+          by  a  person,  other  than  a  person
+          notified under sub-section (6D) of section 25, who has not opted for
+          authentication of Aadhaar number, shall be followed by taking
+          photograph of the applicant where the applicant is an individual or of
+          such individuals  in  relation  to  the 
+          applicant  as  notified  under  sub-section 
+          (6C)  of  section  25  where  the
+          applicant  is  not  an  individual, 
+          along  with  the  verification  of  the 
+          original  copy  of  the  documents uploaded with
+          the application in FORM GST REG-01 at one of the Facilitation Centers
+          notified by the Commissioner for the purpose of this sub-rule and the
+          application shall be deemed to be complete only after successful
+          verification as laid down under this proviso.]
+
+7
+[(4B)
+          The Central Government may, on the recommendations of the Council, by
+          notification specify the States or Union territories wherein the
+
+9
+[proviso
+          to] sub-rule (4A) shall not apply.]
+
+(5)
+          On receipt of an application under sub-rule (4)
+
+8
+[or
+          sub-rule (4A)], an acknowledgement shall be issued electronically to
+          the applicant in
+
+FORM GST
+              REG-02
+
+.
+
+(6)
+          A person applying for registration as a casual taxable person shall be
+          given a temporary reference number by the common portal for making
+          advance deposit of tax in accordance with the provisions of
+
+section
+            27
+
+and the
+          acknowledgement under sub-rule (5) shall be issued electronically only
+          after the said deposit.
+
+1.
+            Substituted vide 
+Notification
+              No. 51/2023-CT
+
+dated
+            29.09.2023  for "Every person, other than a non-resident
+            taxable person, a person required to deduct tax at source under
+            section 51, a person required to collect tax at source under section
+            52 and a person supplying online information and database access or
+            retrieval services from a place outside India to a non-taxable
+            online recipient referred to in section 14 of the Integrated Goods
+            and Services Tax Act, 2017 (13 of 2017) who is liable to be
+            registered under sub-section (1) of section 25 and every person
+            seeking registration under sub-section (3) of section 25 (hereafter
+            in this Chapter referred to as "the applicant") shall, before
+            applying for registration, declare his Permanent Account Number,
+            [****] State or Union territory in Part A of FORM GST REG-01 on the
+            common portal, either directly or through a Facilitation Centre
+            notified by the Commissioner:
+
+            [****]
+
+            [Provided] that every person being an Input Service Distributor
+            shall make a separate application for registration as such Input
+            Service Distributor."
+
+2.
+            Substituted vide 
+Notification
+              No. 04/2023-CT
+
+dated
+            31.03.2023  for "Every application made under sub-rule (4) by a
+            person, other than a person notified under sub-section (6D) of
+            section 25, who has opted for authentication of Aadhaar number and
+            is identified on the common portal, based on data analysis and risk
+            parameters, shall be followed by biometric-based Aadhaar
+            authentication and taking photograph of the applicant where the
+            applicant is an individual or of such individuals in relation to the
+            applicant as notified under sub-section (6C) of section 25 where the
+            applicant is not an individual, along with the verification of the
+            original copy of the documents uploaded with the application in FORM
+            GST REG-01 at one of the Facilitation Centres notified by the
+            Commissioner for the purpose of this sub-rule and the application
+            shall be deemed to be complete only after completion of the process
+            laid down under this sub-rule."
+
+3.
+            Specified vide 
+Notification
+              No. 26/2022-CT
+ dated 26.12.2022 that "the provisions of
+            sub-rule (4A) of rule 8 of the said rules shall not apply in all the
+            States and Union territories except the State of Gujarat."
+
+4.
+            Inserted vide
+
+Notification
+              No. 26/2022-CT
+
+dated
+            26.12.2022.
+
+5.
+            Omitted vide
+
+Notification
+              No. 26/2022-CT
+ dated 26.12.2022  for "The
+            mobile number declared under sub-rule (1) shall be verified through
+            a onetime password sent to the said mobile number; and".
+
+6.
+            Omitted vide
+
+Notification
+              No. 26/2022-CT
+
+dated
+            26.12.2022  for "The e-mail address declared under
+            sub-rule (1) shall be verified through a separate one-time password
+            sent to the said e-mail address.".
+
+7. Inserted
+            vide
+
+Notification
+              No. 26/2022-CT
+
+dated
+            26.12.2022.
+
+8. Inserted
+            vide
+
+Notification
+              No. 26/2022-CT
+
+dated
+            26.12.2022.
+
+9.
+            Substituted vide 
+Notification
+              No. 04/2023-CT
+
+dated
+            31.03.2023 for "provisions of".
+
+10.
+            Inserted vide
+
+Notification
+              No. 12/2024-CT
+
+dated
+            10.07.2024 (w.e.f. 11th day of February, 2025, appointed vide
+            Notification No. 09/2025-CT, dated 11.02.2025).

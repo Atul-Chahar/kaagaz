@@ -140,6 +140,20 @@
     "text_chars": 56573
   },
   {
+    "id": "cgst-rule-8",
+    "url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule8_v1.00.html",
+    "final_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule8_v1.00.html",
+    "title": "CBIC: CGST Rules, 2017 - Rule 8. Application for registration",
+    "retrieved_at": "2026-10-17",
+    "sha256": "3352eaa926c55be1517169d4fb4693be2bf673ed838775d0e66518a58ff8575e",
+    "file": "raw/cgst-rule-8.html",
+    "text_file": "text/cgst-rule-8.txt",
+    "content_type": "text/plain",
+    "size": 31784,
+    "large_not_in_git": false,
+    "text_chars": 10097
+  },
+  {
     "id": "cgst-rule-9",
     "url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule9_v1.00.html",
     "final_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule9_v1.00.html",
