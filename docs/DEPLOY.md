@@ -22,7 +22,7 @@ Put a reverse proxy with HTTPS in front of port 8000 if it is public. Do not exp
 
 ## Option B: FalkorDB Cloud + Render (or Railway, or Fly)
 
-1. Create a free FalkorDB Cloud instance at https://app.falkordb.cloud and note host, port, username, password.
+1. Create a FalkorDB Cloud instance (from falkordb.com) and note its host, port, username and password.
 2. Create a new Web Service from this repo, using the Dockerfile. Set these env vars:
 
    | Variable | Value |
@@ -32,7 +32,7 @@ Put a reverse proxy with HTTPS in front of port 8000 if it is public. Do not exp
    | `FALKORDB_USERNAME` | your FalkorDB Cloud username |
    | `FALKORDB_PASSWORD` | your FalkorDB Cloud password |
    | `KAAGAZ_SEED_ON_START` | `1` |
-   | `FALKORDB_BROWSER_URL` | `https://browser.falkordb.com` (or your Cloud console URL) |
+   | `FALKORDB_BROWSER_URL` | the Browser URL shown in your FalkorDB Cloud console |
    | `LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL` | optional, see `.env.example` |
 
 3. The container listens on port 8000. Health check path: `/api/health` (returns `"ok": true` once seeded).
