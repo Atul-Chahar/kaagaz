@@ -1,0 +1,225 @@
+{
+ "schemes": [
+  {
+   "id": "ka-ssp-fee-concession-bcwd",
+   "name": "BCWD Fee Reimbursement (Fee Concession)",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "ka-ssp-fee-reimbursement-minority",
+   "name": "Fee Reimbursement scheme for Minorities (Post-Matric)",
+   "window_end": "2026-11-30"
+  },
+  {
+   "id": "ka-ssp-pms-obc",
+   "name": "PostMatric for OBC Students Central / PM YASASVI",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "ka-ssp-pms-sc",
+   "name": "SC Post Matric Scholarship (GoI)",
+   "window_end": "2027-01-31"
+  },
+  {
+   "id": "ka-ssp-pms-st",
+   "name": "Postmatric Scholarship for ST Students",
+   "window_end": "2026-12-31"
+  },
+  {
+   "id": "ka-ssp-vidyasiri-bcwd",
+   "name": "Vidyasiri Food and Accommodation Scheme (BCWD)",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "ka-ssp-vidyasiri-minority",
+   "name": "Vidyasiri scheme for minorities",
+   "window_end": "2026-11-30"
+  },
+  {
+   "id": "nsp-aicte-pragati-degree",
+   "name": "AICTE Pragati Scholarship Scheme for Girl Students (Technical Degree)",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "nsp-csss",
+   "name": "PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS)",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "nsp-pm-yasasvi-top-class-college",
+   "name": "PM YASASVI Central Sector Scheme of Top Class Education in College for OBC, EBC and DNT Students",
+   "window_end": "2026-10-31"
+  },
+  {
+   "id": "nsp-top-class-sc",
+   "name": "Central Sector Scholarship of Top Class Education for SC Students",
+   "window_end": "2026-10-31"
+  }
+ ],
+ "documents": [
+  {
+   "id": "aadhaar",
+   "name": "Aadhaar number (UIDAI)"
+  },
+  {
+   "id": "aadhaar-face-authentication",
+   "name": "Aadhaar face authentication (e-KYC) via NSP OTR app, or biometric authentication at a CSC"
+  },
+  {
+   "id": "aadhaar-seeding-consent-form",
+   "name": "Bank consent form for Aadhaar seeding"
+  },
+  {
+   "id": "admission-proof",
+   "name": "Admission details and fee details"
+  },
+  {
+   "id": "bank-account",
+   "name": "Bank savings account"
+  },
+  {
+   "id": "bank-account-aadhaar-seeded",
+   "name": "Bank account seeded with Aadhaar in NPCI mapper (DBT-enabled)"
+  },
+  {
+   "id": "birth-certificate",
+   "name": "Birth certificate (Karnataka, urban local body registrar; event already registered)"
+  },
+  {
+   "id": "caste-certificate",
+   "name": "Caste / category certificate (issuing authority not specified by the scheme source)"
+  },
+  {
+   "id": "caste-certificate-ka",
+   "name": "Caste certificate (Karnataka; Category-A, SC/ST, OBC-Central)"
+  },
+  {
+   "id": "caste-income-certificate-ka",
+   "name": "Caste and income certificate (Karnataka; Form F, backward classes other than Category-1)"
+  },
+  {
+   "id": "disability-certificate",
+   "name": "Disability certificate (if applicable)"
+  },
+  {
+   "id": "driving-licence",
+   "name": "Driving licence"
+  },
+  {
+   "id": "electricity-bill",
+   "name": "Electricity bill"
+  },
+  {
+   "id": "fee-receipt",
+   "name": "College fee receipt"
+  },
+  {
+   "id": "form-60",
+   "name": "Form 60 (declaration for people without a PAN)"
+  },
+  {
+   "id": "hostel-certificate",
+   "name": "Hostel admission certificate"
+  },
+  {
+   "id": "income-certificate",
+   "name": "Family income certificate (issuing authority not specified by the scheme source)"
+  },
+  {
+   "id": "income-certificate-ka",
+   "name": "Income certificate (Karnataka)"
+  },
+  {
+   "id": "income-proof",
+   "name": "Proof of income (salary slip or bank statement)"
+  },
+  {
+   "id": "institution-certificate-uidai-format",
+   "name": "Certificate from a recognised educational institution (UIDAI format)"
+  },
+  {
+   "id": "marks-card-previous",
+   "name": "Previous year marks card (or 12th mark sheet)"
+  },
+  {
+   "id": "npr-letter",
+   "name": "National Population Register letter"
+  },
+  {
+   "id": "nrega-job-card",
+   "name": "NREGA job card"
+  },
+  {
+   "id": "nsp-otr",
+   "name": "NSP One Time Registration (OTR) number"
+  },
+  {
+   "id": "pan-card",
+   "name": "PAN (Instant e-PAN via Aadhaar)"
+  },
+  {
+   "id": "parent-declaration-pragati",
+   "name": "Parent Declaration (Appendix-III of AICTE Pragati FAQ)"
+  },
+  {
+   "id": "parents-property-documents",
+   "name": "Papers of property owned by the applicant's parents or guardian"
+  },
+  {
+   "id": "passport",
+   "name": "Indian passport"
+  },
+  {
+   "id": "proof-of-identity",
+   "name": "Proof of identity"
+  },
+  {
+   "id": "proof-of-residence",
+   "name": "Proof of residence"
+  },
+  {
+   "id": "property-tax-receipt",
+   "name": "House tax / property tax receipt"
+  },
+  {
+   "id": "ration-card-ka",
+   "name": "Ration card (Karnataka; new / BPL)"
+  },
+  {
+   "id": "residence-certificate-ka",
+   "name": "Residence certificate (Karnataka)"
+  },
+  {
+   "id": "school-leaving-certificate",
+   "name": "School leaving certificate"
+  },
+  {
+   "id": "sibling-affidavit",
+   "name": "Affidavit that benefits are restricted to two siblings (Top Class Education for SC)"
+  },
+  {
+   "id": "sslc-marks-card",
+   "name": "SSLC (Class 10) marks card"
+  },
+  {
+   "id": "ssp-e-attested-documents",
+   "name": "Documents e-attested on SSP (post-matric e-attestation)"
+  },
+  {
+   "id": "ssp-student-account",
+   "name": "SSP student account (Create New Account, Pre & Postmatric)"
+  },
+  {
+   "id": "study-certificate",
+   "name": "Study (bonafide) certificate from the college"
+  },
+  {
+   "id": "university-registration-number",
+   "name": "University / Educational Board registration number for the current course"
+  },
+  {
+   "id": "voter-id",
+   "name": "Voter ID card"
+  }
+ ]
+}

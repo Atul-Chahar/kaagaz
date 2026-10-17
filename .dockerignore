@@ -1,0 +1,7 @@
+**/node_modules
+**/.venv
+frontend/dist
+e2e
+docs
+data/sources/raw
+.git

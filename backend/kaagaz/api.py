@@ -35,8 +35,9 @@ async def lifespan(_app: FastAPI):
     if os.environ.get("KAAGAZ_SEED_ON_START") == "1":
         for pid in graph.list_packs():
             try:
-                if not graph.graph_exists(graph.rules_graph_name(pid)):
-                    log.info("seeding %s: %s", pid, graph.seed_pack(pid))
+                # always rebuild the shared rules graph from pack.yaml (under a second), so it never goes stale;
+                # student graphs (kaagaz:student:*) are separate and untouched
+                log.info("seeding %s: %s", pid, graph.seed_pack(pid))
             except RedisConnectionError:
                 log.warning("FalkorDB not reachable at startup; seed later with scripts/seed.sh")
     yield

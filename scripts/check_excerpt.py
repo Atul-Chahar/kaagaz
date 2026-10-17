@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from textnorm import norm  # noqa: E402
+from textnorm import norm
 
 ROOT = Path(__file__).resolve().parent.parent
 idx = {r["id"]: r for r in json.loads((ROOT / "data/sources/index.json").read_text())}

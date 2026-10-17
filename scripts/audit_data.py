@@ -20,7 +20,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from textnorm import norm  # noqa: E402
+from textnorm import norm
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "sources"
