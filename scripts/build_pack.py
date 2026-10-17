@@ -178,6 +178,7 @@ def main() -> None:
         "rules": sorted(rules.values(), key=lambda r: (r["from"], r["kind"], r["to"])),
         "example_student": meta.get("example_student"),
         "calendar": calendar,
+        "groups": meta.get("groups", []),
         "excluded_rules": excluded,
     }
     out = pack_dir / "pack.yaml"

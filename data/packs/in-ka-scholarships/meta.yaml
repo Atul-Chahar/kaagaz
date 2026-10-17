@@ -11,3 +11,13 @@ models: A college student in Karnataka (regular degree course) applying for a po
 exclude_conditions:
   - condition: Only for persons born on or after 1.10.2023
     reason: A college student was born long before 1 Oct 2023, so this Aadhaar rule does not apply to them.
+# Presentation only: how the "tick what you already hold" list is grouped on the Start screen.
+groups:
+  - label: Identity and bank
+    docs: [aadhaar, aadhaar-face-authentication, bank-account, bank-account-aadhaar-seeded, aadhaar-seeding-consent-form, pan-card, form-60, voter-id, driving-licence, passport, npr-letter, nrega-job-card, proof-of-identity]
+  - label: Certificates from the taluk office
+    docs: [caste-income-certificate-ka, caste-certificate-ka, income-certificate-ka, residence-certificate-ka, ration-card-ka, birth-certificate, caste-certificate, income-certificate, proof-of-residence, income-proof, electricity-bill]
+  - label: From your school and college
+    docs: [sslc-marks-card, marks-card-previous, study-certificate, fee-receipt, hostel-certificate, admission-proof, school-leaving-certificate, university-registration-number, institution-certificate-uidai-format]
+  - label: Scholarship portal steps
+    docs: [nsp-otr, ssp-student-account, ssp-e-attested-documents]

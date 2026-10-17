@@ -1,0 +1,26 @@
+# Karnataka Government working-day calendar for Sakala deadline counting.
+# Holiday source: GoK Notification No. DPAR 16 HHL 2025 dated 17.11.2025 (Notification-I: general holidays for
+# Government offices; Notification-II: same 20 days as public holidays under s.25 NI Act 1881). The PDF is a scan
+# with an English OCR text layer; it is served at .../HOLIDAYSLIST2024.pdf on ceg.karnataka.gov.in (linked from
+# dpar.karnataka.gov.in) even though its content is the 2026 list. OCR artefacts ("t6", "t0.11", "27 .tt") are kept
+# verbatim in excerpts; the dates were read against the clean companion rows in the same file.
+# The Sakala Act definition of "Stipulated time" (s.2(l)) does not say working or calendar days; the Schedule
+# entries in the compendium state "Working Days" per service, and appeals are uniformly 35 working days.
+# Not included: Kodagu-only local holidays (Tula Sankramana 18.10.2026 Sunday, Huthri 26.11.2026); restricted
+# holidays (optional, max two per employee); Maharshi Valmiki Jayanthi 25.10.2026, Kannada Rajyothsava 01.11.2026
+# and Naraka Chaturdashi 08.11.2026 fall on Sundays and are not separately listed. 2027 list not yet published
+# (as of 2026-10-17), so holidays_cover_until is 2026-12-31; January 2027 holidays are unknown.
+calendar:
+  unit: working_days
+  unit_cite: {source_id: sakala-compendium-en, excerpt: "Note: All the first and second Appeal disposal timelines have been uniformly notified, as 35 working days vide Notification No. DPAR 5 SSM 2025", confidence: official}
+  weekly_off: [sunday]
+  weekly_off_cite: {source_id: dpar-ka-holidays-2026, excerpt: "All Second Saturdays, Fourth Saturdays, Sundays and the following days.", confidence: official}
+  second_fourth_saturday_off: true
+  second_fourth_saturday_cite: {source_id: dpar-ka-holidays-2026, excerpt: "All Second Saturdays, Fourth Saturdays, Sundays and the following days.", confidence: official}
+  holidays:
+    - {date: 2026-10-20, name: "Mahanavami, Ayudhapooja", cite: {source_id: dpar-ka-holidays-2026, excerpt: "t6 20.10.2026 Tuesday Mahanavami, Ayudhapooj a", confidence: official}}
+    - {date: 2026-10-21, name: "Vijayadasami", cite: {source_id: dpar-ka-holidays-2026, excerpt: "t7 21.10.2026 Wednesday Vijayadasami", confidence: official}}
+    - {date: 2026-11-10, name: "Balipadyami, Deepavali", cite: {source_id: dpar-ka-holidays-2026, excerpt: "18 t0.11.2026 Tuesday Balipadyami, Deepavali", confidence: official}}
+    - {date: 2026-11-27, name: "Kanakadasa Jayanthi", cite: {source_id: dpar-ka-holidays-2026, excerpt: "t9 27 .tt.2026 Friday Kanakadasa Jayanthi", confidence: official}}
+    - {date: 2026-12-25, name: "Christmas", cite: {source_id: dpar-ka-holidays-2026, excerpt: "20 25.12.2026 Friday Christmas", confidence: official}}
+  holidays_cover_until: 2026-12-31

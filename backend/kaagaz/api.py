@@ -128,7 +128,11 @@ def documents(pack: str | None = None) -> dict:
     t = tools(_pack_param(pack))
     trace = Trace()
     rows = t._q("documents", {}, trace)
-    return {"documents": rows, "trace": trace.rows}
+    groups = t.pack.get("groups") or []
+    where = {d: g["label"] for g in groups for d in g["docs"]}
+    for r in rows:
+        r["group"] = where.get(r["id"], "Other papers")
+    return {"documents": rows, "groups": [g["label"] for g in groups] + ["Other papers"], "trace": trace.rows}
 
 
 @app.get("/api/schemes/{scheme_id}/prerequisites")
@@ -271,8 +275,10 @@ def remove_holding(student_id: str, doc_id: str) -> dict:
 
 
 @app.get("/api/plan")
-def plan(student_id: str, scheme_id: str, depth: int = MAX_DEPTH, pack: str | None = None) -> dict:
-    res = call(_pack_param(pack), "plan", {"student_id": student_id, "scheme_id": scheme_id, "depth": depth})
+def plan(student_id: str, scheme_id: str, depth: int = MAX_DEPTH, remember: bool = True,
+         pack: str | None = None) -> dict:
+    res = call(_pack_param(pack), "plan", {"student_id": student_id, "scheme_id": scheme_id, "depth": depth,
+                                           "remember": remember})
     res["cypher"] = {n: graph.query_text(n) for n in ("prerequisites", "chain_days")}
     return res
 

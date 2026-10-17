@@ -155,6 +155,19 @@ def audit_pack(path: Path) -> None:
     for s in schemes:
         visit(s, [])
 
+    cal = pack.get("calendar")
+    if cal:
+        checked["calendar"] = 0
+        for k in ("unit_cite", "weekly_off_cite", "second_fourth_saturday_cite"):
+            if cal.get(k):
+                checked["calendar"] += 1
+                check_cite(cal[k], f"{pid}/calendar/{k}")
+        for h in cal.get("holidays") or []:
+            checked["calendar"] += 1
+            check_cite(h.get("cite"), f"{pid}/calendar/holiday/{h.get('date')}")
+    for x in pack.get("excluded_rules") or []:
+        check_cite(x.get("cite"), f"{pid}/excluded/{x['from']}->{x['to']}")
+
     ex = pack.get("example_student")
     if ex:
         if ex.get("label") != "Example student":
@@ -174,7 +187,8 @@ def main() -> int:
     for p in packs:
         audit_pack(p)
     print(f"audit: {len(packs)} pack(s); checked {checked['rules']} requirement rules, {checked['days']} processing "
-          f"times, {checked['windows']} windows, {checked['offices']} issuing offices, {checked['sources']} sources")
+          f"times, {checked['windows']} windows, {checked['offices']} issuing offices, {checked.get('calendar', 0)} "
+          f"calendar facts, {checked['sources']} sources")
     if errors:
         for e in errors:
             print("AUDIT FAIL:", e)

@@ -1,0 +1,972 @@
+Aadhaar Enrolment Process - Unique Identification Authority of India | Government of India
+
+		English
+
+		हिन्दी
+
+		অসমীয়া
+
+		বাংলা
+
+		ಕನ್ನಡ
+
+		ગુજરાતી
+
+		മലയാളം
+
+		मराठी
+
+		ଓଡ଼ିଆ
+
+		ਪੰਜਾਬੀ
+
+		தமிழ்
+
+		తెలుగు
+
+		اردو
+
+ important_devices 
+ Main Content
+
+ format_size 
+ + A 
+A
+
+- A
+
+ chrome_reader_mode 
+ Screen Reader
+
+My Aadhaar
+Get Aadhaar
+Update Your Aadhaar
+Aadhaar Services
+About your Aadhaar
+
+Aadhaar on your mobile
+Downloads
+About UIDAI
+Unique Identification Authority of India
+Legal Framework
+Work with UIDAI
+Right to Information
+
+UIDAI Citizens Charter File Type: PDF File Size: 1.42 MB
+
+Archives
+
+Aadhaar Dashboard
+Ecosystem
+UIDAI Ecosystem
+Enrolment Ecosystem
+Enrolment Documents
+Authentication Ecosystem
+Authentication Devices & Documents
+Training, Testing & Certification Ecosystem
+Media & Resources
+Media
+Resources
+UIDAI Documents
+Brand Aadhaar
+Contact & Support
+Have any Question?
+Grievance Redressal Mechanism
+Right to Information
+Feedback
+
+Prevention of Sexual Harassment (POSH) at Work Place Policy Doc Type: PDF Size: 2MB
+UIDAI Headquarter
+Regional Offices
+
+		Menu		
+
+My Aadhaar
+
+Get Aadhaar
+Locate an Enrolment Center
+Book an Appointment
+Check Aadhaar Status
+Download Aadhaar
+Order Aadhaar PVC Card
+Check Aadhaar PVC Card Status
+Locate an enrolment center in Bhuvan Aadhaar
+Update Your Aadhaar
+Update Aadhaar at Enrolment/Update Center
+Check Aadhaar Update Status
+Update Demographics Data & Check Status
+Aadhaar Update History
+Aadhaar Services
+Verify an Aadhaar Number
+Verify Email/Mobile Number
+Retrieve Lost or Forgotten EID/UID
+Virtual ID (VID) Generator
+Aadhaar Paperless Offline e-kyc (Beta)
+Lock/Unlock Biometrics
+Aadhaar Authentication History
+Aadhaar Lock and Unlock Service
+Aadhaar Services on SMS
+About your Aadhaar
+Features of Aadhaar
+Usage of Aadhaar
+Aadhaar Enrolment
+Aadhaar Generation
+Updating Data on Aadhaar
+Security in UIDAI system
+Aadhaar Myth Busters
+Aadhaar on your mobile
+mAadhaar for Android
+mAadhaar App links for iOS
+Downloads
+Enrolment and Update form for Adult Residents ( Greater Than 18 Years) Doc Type: PDF Size: 1.2MB
+Charges for Various UIDAI Services at Aadhaar Kendra (PEC) Doc Type: PDF Size: 0.8MB
+Validity of downloaded Aadhaar (e-Aadhaar) as Proof of Identity Doc Type: PDF Size: 0.1MB
+New eAadhaar Doc Type: PDF Size:0.2 MB
+Handbooks Doc Type: PDF Size: 35MB
+List of Supporting Document for Aadhaar Enrolment and Update 2023 Doc Type: PDF Size: 1.6MB
+Enrolment and Update form for Child (0-5 age group) Doc Type: PDF Size: 1.2MB
+Enrolment and Update form for Child (5-18 age group) Doc Type: PDF Size: 1.2MB
+Enrolment and Update form for Resident Foreigners Doc Type: PDF Size: 1.3MB
+
+About UIDAI
+
+Unique Identification Authority of India
+Vision & Mission
+Composition of UIDAI Authority
+Organizational Structure
+Finance & Accounts
+Legal Framework
+Rules
+Regulations
+Circulars
+Notification
+Judgements
+Work with UIDAI
+Deputation/Contract
+Professional/Technical (NISG)
+Volunteers/Sabbatical
+Officers Served in the Past
+Tenders
+Internship Doc Type: PDF Size: 0.5 MB
+Right to Information
+UIDAI Citizens Charter File Type: PDF File Size: 1.42 MB
+Archives
+Aadhaar Dashboard
+
+Ecosystem
+
+UIDAI Ecosystem
+Enrolment Ecosystem
+Registrars
+Enrolment Agencies
+Aadhaar Seva Kendra
+Enrolment Documents
+MoUs
+Sanction Orders
+Aadhaar Saturation Report Doc Type: PDF Size: 0.5MB
+Authentication Ecosystem
+Operation Model
+Authentication Requesting Agency
+Authentication Service Agencies
+Authentication Devices & Documents
+Biometric Devices
+Authentication Documents
+QR Code Reader
+About Aadhaar Paperless Offline e-kyc
+Developer Section
+Training, Testing & Certification Ecosystem
+Training, Testing and Certification Policy 2023 Doc Type: PDF Size: 1.1MB
+SOP for training, testing and certification of E&U Operators
+
+Media & Resources
+
+Media
+Aadhaar Broadcast
+Press Releases
+Quote/Unquote
+Resources
+Advertisements
+Photos
+Videos
+UIDAI Documents
+Annual Reports
+Handbooks
+Parliament Questions
+Compendium
+Brand Aadhaar
+Logo
+
+Contact & Support
+
+Have any Question?
+FAQs
+Glossary
+Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
+Grievance Redressal Mechanism
+File a Complaint
+Check Complaint Status
+Right to Information
+Feedback
+Prevention of Sexual Harassment (POSH) at Work Place Policy Doc Type: PDF Size: 2MB
+UIDAI Headquarter
+Regional Offices
+
+		English
+
+		हिन्दी
+
+		অসমীয়া
+
+		বাংলা
+
+		ಕನ್ನಡ
+
+		ગુજરાતી
+
+		മലയാളം
+
+		मराठी
+
+		ଓଡ଼ିଆ
+
+		ਪੰਜਾਬੀ
+
+		தமிழ்
+
+		తెలుగు
+
+		اردو
+
+Go
+
+Have any Question?
+
+FAQs
+
+Enrolment & Update
+
+						Aadhaar Enrolment Process					
+
+Filters
+
+						Title Filter 					
+
+Filter
+
+Aadhaar Enrolment Process
+
+Expand All
+
+Collapse All
+
+						 What is the enrolment procedure for children below the age of 5 years?
+keyboard_arrow_down
+
+The UIDAI enrols residents of all ages, including infants. However, biometric information is not collected for children under the age of 5 years. For children under 5 years of age, their Aadhaar is linked to one of their parents or guardians. Such children need to submit their biometric information (Photograph, ten Fingerprints and two Irises) once they attain the age of 5 years. These biometrics needs to be updated again when they attain age of 15 years.
+
+						 What is the procedure for NRIS to enrol for Aadhaar?
+keyboard_arrow_down
+
+Any resident of India including NRIs (having valid Indian Passport) can enrol for Aadhaar. When the applicant fills an Aadhaar enrolment form (https://uidai.gov.in/images/aadhaar_enrolment_correction_form_version_2.1.pdf ), he/she also gives a signed declaration to this effect. NRIs also need to visit an Aadhaar Centre with one Proof of Identity and one Proof of Address as per the list of acceptable documents: https://uidai.gov.in/images/commdoc/valid_documents_list.pdf
+
+						 Where multiple address proofs are available for a resident (e.g... present and native), which proof would UIDAI accept, and where will it send Aadhaar Letter?
+keyboard_arrow_down
+
+The UIDAI asks the resident to confirm the address (from the multiple address proofs) which he/ she wants to register in his/ her Aadhaar. The Aadhaar Letter will be delivered on the Address registered in Aadhaar. Based on the resident’s choice & supporting documents, UIDAI captures the demographic details.
+
+						 What is the option if the address indicated on the Proof of Address (PoA) document appears to be inadequate for postal delivery? Can additional information from the residents be accepted?
+keyboard_arrow_down
+
+Yes. The resident is allowed to add minor fields to the address mentioned in the PoA document as long as these additions/modifications do not alter the base address mentioned in the PoA document. If the changes requested are substantial and change the base address that is mentioned in the PoA, an alternate PoA is required to be provided.
+
+						 Whether UIDAI has defined a process to be followed for Family enrolments?
+keyboard_arrow_down
+
+Yes. The resident and Head of the Family (HoF) should present themselves at the time of enrolment.  The resident should produce a valid Proof of Identity (POI) document for new enrolment and Name update.  The address of HoF can be shared with the family member by providing authentication.
+
+						 Whether the Ration Card, MGNREGA Card etc can be accepted as Valid Proof of Identity/Address for the family members listed in the document in case they do not have separate PoI or PoA documents?
+keyboard_arrow_down
+
+Yes. The family entitlement document is accepted as Proof of Identity/Address for enrolment of family members as long as the photograph of Head of the Family and family members is clearly visible on the document.
+
+						 What are Resident’s responsibilities in ensuring that his/her enrolment does not get rejected?
+keyboard_arrow_down
+
+Resident must review the details in English as well as in local language by looking at the resident screen available in front of him/her. Ensure that Name, Gender, DoB, Address, etc. details are entered correctly. Also, ensure that no titles/ salutations like Mr./ Mrs./ Col./ Dr. etc. are prefixed or suffixed to the name. It is recommended to provide full name instead of initials for e.g. B.K Sharma should be written as Brij Kumar Sharma. Review that photograph captured by the operator is correct and recognizable.
+
+						 My Aadhaar request is rejected, What should I do?
+keyboard_arrow_down
+
+Aadhaar generation involves various quality checks. Therefore, there are chances that your Aadhaar request got rejected due to quality or any other technical reason. If you have received SMS that your Aadhaar request has been rejected, it is recommended to re-enrol yourself.
+
+						 I have enrolled for Aadhaar multiple times but have not received my Aadhaar letter. What should I do in this case?
+keyboard_arrow_down
+
+There are chances that your Aadhaar has been generated but you have not received the Aadhaar letter by post. In this case, it is recommended to get your Aadhaar status checked, for all your EIDs, by clicking on “Check Aadhaar Status” or https://myaadhaar.uidai.gov.in/CheckAadhaarStatus or by visiting the nearest Permanent Aadhaar Enrolment centre.
+
+						 Does the online downloaded Aadhaar letter have the same validity as that of original?
+keyboard_arrow_down
+
+Yes, the online downloaded e-Aadhaar letter has the same validity as that of the original.
+
+						 How much time does it take to get my Aadhaar generated after the enrolment?
+keyboard_arrow_down
+
+Normally up to 30 days from the date of enrolment with 90% service standards. If -
+1. Quality of enrolment data meets prescribed standards laid down by UIDAI
+2. The enrolment packet passes all the validations done in CIDR
+3. No Demographic/Biometric duplicate is found
+4. No unforeseen technical issues
+
+						 Is it mandatory to provide mobile number or email id for Aadhaar enrolment?
+keyboard_arrow_down
+
+No, it is not mandatory to provide a mobile number or email id for Aadhaar enrolment. But it is always recommended to provide a mobile number and email id so that you get updates regarding your Aadhaar application status and can get a number of services based on Aadhaar through OTP-based authentication.
+
+						 Can I get myself enrolled for Aadhaar just by sending the required documents by Post?
+keyboard_arrow_down
+
+No, you have to personally visit the Aadhaar enrolment centre for getting yourself Enroled as your Biometrics will be captured.
+
+						 Is there any online method of getting enrolled for Aadhaar?
+keyboard_arrow_down
+
+No, you have to personally visit Aadhaar Enrolment Centre for getting yourself enrolled as your biometrics will be captured.
+
+						 Will the refund be provided after cancelling the appointment?
+keyboard_arrow_down
+
+Yes,  refund shall be processed on cancellation of the booked appointment. After processing the refund, the amount usually gets credited back to the user account in 7-21 days. The resident is advised to re-schedule an appointment if booked service is not availed at the UIDAI ASK.
+
+						 My Date of Birth/ Name/ Gender update request got rejected and I have been asked to contact the Regional Office. Can I do that update at Aadhaar Seva Kendra?
+keyboard_arrow_down
+
+Yes. The second time update of Date of Birth or Gender or third time update of Name of the resident comes under ‘exception update’.
+
+You can carry out the update at Aadhaar Centre and then approach the concerned Regional Office of UIDAI for approval of update under exception. These approval require due diligence by authorized officials. Details of UIDAI Regional Offices available here: 
+https://uidai.gov.in/contact-support/regional-offices.html
+
+						 I lost my Aadhaar and my mobile number is also not registered with Aadhaar. Can I get it at ASK?
+keyboard_arrow_down
+
+Yes. You may visit any UIDAI-run Aadhaar Seva Kendra to download your Aadhaar and get a printout. At ASK you would be required to provide your Aadhaar number. This service is also available at Aadhaar Enrolment Centre in Banks, Post Offices, BSNL, Central or State Government offices.
+
+						 I did not get my Aadhaar Card. Can I get it at Aadhaar Enrolment Centre?
+keyboard_arrow_down
+
+You can download your Aadhaar yourself from myAadhaar portal. For the same, you need to have a mobile number registered with Aadhaar.
+If you don’t have your mobile number registered with Aadhaar or do not want to use an online service, you can use the Aadhaar download and coloured print service available at an Aadhaar Enrolment Centre at a charge of Rs. 30/-. The physical presence of the Aadhaar holder is required for biometric authentication. Further, you can also order an Aadhaar PVC card from UIDAI website.
+
+						 How will the biometric of the differently abled and people with no fingerprints or rugged hands e.g. beedi workers or people with no fingers be captured?
+keyboard_arrow_down
+
+The exceptions in the biometric standards prescribed will ensure that these groups are not excluded from enrolment. In the case of people without hands/ fingers,  only photo will be used for identity determination and there will be markers to determine uniqueness. Please ensure that the operator has taken exception photographs at the time of enrolment.
+
+						 Where can I enrol for Aadhaar?
+keyboard_arrow_down
+
+You have to visit an Aadhaar Enrolment centre set up by Enrolment Agency to enrol for Aadhaar. You can also search nearest Enrolment centre by clicking on 
+“Locate Enrolment Center”
+ or 
+https://appointments.uidai.gov.in/easearch.aspx
+ . You have to enter State, District and locality for finding the nearest enrolment centre.
+
+						 What are the documents required for enrolment for Aadhaar?
+keyboard_arrow_down
+
+You need to fill up an application form available at Enrolment centre along with supporting documents which are Proof of Identity (PoI), Proof of Address (PoA), Proof of Relationship (PoR) and Date of Birth(DoB) document. UIDAI accepts 31 PoI and 44 PoA , 14 PoR and 14 DoB documents. View the nationally valid list of supporting documents.
+
+						 Do I need to bring original documents for Aadhaar enrolment?
+keyboard_arrow_down
+
+Yes, you need to bring original copies of supporting documents for Aadhaar enrolment. These original copies will be scanned and handed back to you after the enrolment.
+
+						 Do I have to pay any fee for Aadhaar enrolment?
+keyboard_arrow_down
+
+No, Aadhaar enrolment is totally free of cost therefore you need not pay anything at the enrolment centre.
+
+						 What kind of data gets captured during Aadhaar Enrolment?
+keyboard_arrow_down
+
+There are two types of data gets captured for Aadhaar enrolment i.e. Demographic (Name, Gender, DoB, Address, Mobile number and email id) & Bioemtric (10 Finger Prints, Both Iris and photograph). Mobile number and email id are optional.
+
+						 Can I get Enroled for Aadhaar if any of my fingers or iris is missing?
+keyboard_arrow_down
+
+Yes, you can enrol for Aadhaar even if any or all fingers / Iris are missing. Aadhaar software has provisions to handle such exceptions.
+
+						 Is there any age limit for Aadhaar enrolment?
+keyboard_arrow_down
+
+No, there is no age limit defined for Aadhaar Enrolment. Even a new born baby can also get Enroled for Aadhaar.
+
+						 Can I get my Aadhaar letter downloaded online after it is generated?
+keyboard_arrow_down
+
+Yes, once your Aadhaar is generated, you can always download e-Aadhaar letter by clicking on “Download Aadhaar” under 'Get Aadhaar' section of 'My Aadhaar' tab on the uidai.gov.in website.
+
+Frequently asked questions
+
+			Aadhaar Online Services							
+
+				E-Aadhaar							
+
+				Virtual ID (VID)							
+
+				Online Address Update Process							
+
+				Aadhaar Authentication History							
+
+				Secure QR Code Reader (beta)							
+
+				Aadhaar Paperless Offline e-kyc							
+
+				Biometric Lock/Unlock							
+
+				Aadhaar Lock/Unlock							
+
+				Aadhaar SMS Service							
+
+				Order Aadhaar PVC Card							
+
+			Your Aadhaar							
+
+				Use Aadhaar Freely							
+
+				Aadhaar Letter							
+
+				mAadhaar FAQs							
+
+				Aadhaar Features, Eligibility							
+
+				Security in UIDAI system							
+
+				Use of Aadhaar							
+
+				Protection of Individual Information in UIDAI System							
+
+				Protection of the Individual in the UIDAI System							
+
+				NRI & Aadhaar							
+
+				PAN & Aadhaar							
+
+			Enrolment & Update							
+
+				Aadhaar Enrolment Process							
+
+				Aadhaar Updation							
+
+				Enrolment Partners/Ecosystem Partners							
+
+				Enrolling Children							
+
+				Enrolling Differently-abled							
+
+				Language & Translitration							
+
+				Training, Testing & Certification							
+
+				Date of Birth Update in Aadhaar							
+
+				Aadhaar Seva Kendra							
+
+				Find Aadhaar							
+
+				myAadhaar -  Online Update Service							
+
+			Authentication							
+
+				For Residents							
+
+				Offline verification and role of OVSEs under Authentication Eco-system 							
+
+			Direct Benefit Transfer (DBT)							
+
+				Aadhaar for Direct Benefit Transfer (DBT)							
+
+			CRM Division							
+
+				Grievance Redressal Mechanism							
+
+				UIDAI Chatbot - Ask Aadhaar 							
+
+Related Pages 
+
+FAQs
+Glossary
+Aadhaar Usage-Dos and Dont's Doc Type:PDF Size:0.1MB
+
+Contact Us
+
+ phone
+Toll free :1947
+
+ email 
+help@uidai.gov.in
+
+Follow Us
+
+To Collaborate, email to us:
+
+collaborate@uidai.net.in
+
+UIDAI Head Office
+
+Unique Identification Authority of India
+
+Government of India (GoI)
+
+Bangla Sahib Road, Behind Kali Mandir, Gole Market,
+
+New Delhi - 110001
+
+Regional Offices
+
+				Andaman and Nicobar Island			
+
+				Andhra Pradesh			
+
+				Arunachal Pradesh			
+
+				Assam			
+
+				Bihar			
+
+				Chandigarh			
+
+				Chhattisgarh			
+
+				Dadar and Nagar Haveli			
+
+				Daman and Diu			
+
+				Delhi			
+
+				Goa			
+
+				Gujarat			
+
+				Haryana			
+
+				Himachal Pradesh			
+
+				Jammu and Kashmir			
+
+				Jharkhand			
+
+				Karnataka			
+
+				Kerala			
+
+				Lakshadweep			
+
+				Madhya Pradesh			
+
+				Maharashtra			
+
+				Manipur			
+
+				Meghalaya			
+
+				Mizoram			
+
+				Nagaland			
+
+				Odisha			
+
+				Puducherry			
+
+				Punjab			
+
+				Rajasthan			
+
+				Sikkim			
+
+				Tamil Nadu			
+
+				Telangana			
+
+				Tripura			
+
+				Uttar Pradesh			
+
+				Uttarakhand			
+
+				West Bengal			
+
+UIDAI Regional Office, Hyderabad
+
+6th Floor,
+
+East Block, Swarna Jayanthi Complex,
+
+Beside Maitrivanam, Ameerpet
+
+Hyderabad-500 038, 
+Telangana State
+
+UIDAI Regional Office, Hyderabad
+
+6th Floor,
+
+East Block, Swarna Jayanthi Complex,
+
+Beside Maitrivanam, Ameerpet
+
+Hyderabad-500 038, 
+Telangana State
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Ranchi
+
+1st Floor,
+
+JIADA Central Office Building,
+
+Namkum Industrial Area,Near STPI Lowadih,
+
+Ranchi - 834 010
+
+UIDAI Regional Office, Chandigarh
+
+SCO 95-98,
+
+Ground and Second Floor ,
+
+Sector 17- B,
+
+Chandigarh 160017
+
+UIDAI Regional Office, Hyderabad
+
+6th Floor,
+
+East Block, Swarna Jayanthi Complex,
+
+Beside Maitrivanam, Ameerpet
+
+Hyderabad-500 038, 
+Telangana State
+
+UIDAI Regional Office, Mumbai
+
+7th Floor,
+
+MTNL Exchange, GD Somani Marg,
+
+Cuff Parade, Colaba,
+
+Mumbai - 400 005
+
+UIDAI Regional Office, Mumbai
+
+7th Floor,
+
+MTNL Exchange, GD Somani Marg,
+
+Cuff Parade, Colaba,
+
+Mumbai - 400 005
+
+UIDAI Regional Office, Delhi
+
+Ground Floor, Supreme Court Metro Station, Pragati Maidan, New Delhi-110001
+
+UIDAI Regional Office, Mumbai
+
+7th Floor,
+
+MTNL Exchange, GD Somani Marg,
+
+Cuff Parade, Colaba,
+
+Mumbai - 400 005
+
+UIDAI Regional Office, Mumbai
+
+7th Floor,
+
+MTNL Exchange, GD Somani Marg,
+
+Cuff Parade, Colaba,
+
+Mumbai - 400 005
+
+UIDAI Regional Office, Chandigarh
+
+SCO 95-98,
+
+Ground and Second Floor ,
+
+Sector 17- B,
+
+Chandigarh 160017
+
+UIDAI Regional Office, Chandigarh
+
+SCO 95-98,
+
+Ground and Second Floor ,
+
+Sector 17- B,
+
+Chandigarh 160017
+
+UIDAI Regional Office, Chandigarh
+
+SCO 95-98,
+
+Ground and Second Floor ,
+
+Sector 17- B,
+
+Chandigarh 160017
+
+UIDAI Regional Office, Ranchi
+
+1st Floor,
+
+JIADA Central Office Building,
+
+Namkum Industrial Area,Near STPI Lowadih,
+
+Ranchi - 834 010
+
+UIDAI Regional Office, Bengaluru
+
+Khanija Bhavan,
+
+No. 49, 3rd Floor,
+
+South Wing Race Course Road,
+
+Bengaluru - 560001
+
+UIDAI Regional Office, Bengaluru
+
+Khanija Bhavan,
+
+No. 49, 3rd Floor,
+
+South Wing Race Course Road,
+
+Bengaluru - 560001
+
+UIDAI Regional Office, Bengaluru
+
+Khanija Bhavan,
+
+No. 49, 3rd Floor,
+
+South Wing Race Course Road,
+
+Bengaluru - 560001
+
+UIDAI Regional Office, Delhi
+
+Ground Floor, Supreme Court Metro Station, Pragati Maidan, New Delhi-110001
+
+UIDAI Regional Office, Mumbai
+
+7th Floor,
+
+MTNL Exchange, GD Somani Marg,
+
+Cuff Parade, Colaba,
+
+Mumbai - 400 005
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Hyderabad
+
+6th Floor,
+
+East Block, Swarna Jayanthi Complex,
+
+Beside Maitrivanam, Ameerpet
+
+Hyderabad-500 038, 
+Telangana State
+
+UIDAI Regional Office, Bengaluru
+
+Khanija Bhavan,
+
+No. 49, 3rd Floor,
+
+South Wing Race Course Road,
+
+Bengaluru - 560001
+
+UIDAI Regional Office, Chandigarh
+
+SCO 95-98,
+
+Ground and Second Floor ,
+
+Sector 17- B,
+
+Chandigarh 160017
+
+UIDAI Regional Office, Delhi
+
+Ground Floor, Supreme Court Metro Station, Pragati Maidan, New Delhi-110001
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Bengaluru
+
+Khanija Bhavan,
+
+No. 49, 3rd Floor,
+
+South Wing Race Course Road,
+
+Bengaluru - 560001
+
+UIDAI Regional Office, Hyderabad
+
+6th Floor,
+
+East Block, Swarna Jayanthi Complex,
+
+Beside Maitrivanam, Ameerpet
+
+Hyderabad-500 038, 
+Telangana State
+
+UIDAI Regional Office, Guwahati
+
+Block-V, First Floor,
+
+HOUSEFED Complex,
+
+Beltola-Basistha Road, Dispur,
+
+Guwahati - 781 006
+
+UIDAI Regional Office, Lucknow
+
+3rd Floor,
+
+Uttar Pradesh Samaj Kalyan Nirman Nigam Building,
+
+TC-46/ V,Vibhuti Khand, Gomti Nagar,
+
+Lucknow- 226 010
+
+UIDAI Regional Office, Delhi
+
+Ground Floor, Supreme Court Metro Station, Pragati Maidan, New Delhi-110001
+
+UIDAI Regional Office, Ranchi
+
+1st Floor,
+
+JIADA Central Office Building,
+
+Namkum Industrial Area,Near STPI Lowadih,
+
+Ranchi - 834 010
+
+Website Policy
+Terms & Conditions
+Privacy Policy
+Hyperlinking Policy
+Copyright Policy
+Disclaimer
+Help
+Feedback
+Sitemap
+
+Government of india
+
+My Gov
+National Portal of India
+Digital India
+GST.gov.in
+DBT Bharat
+
+Copyright © 2022 Unique Identification Authority of India All Rights Reserved
+
+JavaScript must be enabled to access this site.
+
+Supports : Firefox 37+
+
+Google Chrome 6.0+
+
+Internet Explorer 9.0+
+
+Safari 4.0+
+
+ Last reviewed and updated on: March 15, 2023
+
+keyboard_arrow_up

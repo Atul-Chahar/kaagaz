@@ -140,18 +140,32 @@
     "text_chars": 15083
   },
   {
-    "id": "ctd-ka-holidays-2026",
-    "url": "https://gstkarnataka.gov.in/whats%20new/media/pdf/Medical%20Facilities/media/pdf/whats-new/media/pdf/notifications/officers/media/pdf/notifications/public-notices/2025-12-31_Holiday_List_for_the_year_2026_20251231_120602.pdf",
-    "final_url": "https://gstkarnataka.gov.in/whats%20new/media/pdf/Medical%20Facilities/media/pdf/whats-new/media/pdf/notifications/officers/media/pdf/notifications/public-notices/2025-12-31_Holiday_List_for_the_year_2026_20251231_120602.pdf",
-    "title": "Holiday List for the year 2026 (Commercial Taxes Department, Karnataka)",
+    "id": "dfs-fi-11-9-2013-vol2",
+    "url": "https://financialservices.gov.in/sites/default/files/order-notices/F.No_.1192013-FI%2520%2528%2520Vol.II%2529.pdf",
+    "final_url": "https://financialservices.gov.in/sites/default/files/order-notices/F.No_.1192013-FI%2520%2528%2520Vol.II%2529.pdf",
+    "title": "DFS order F.No. 11/9/2013-FI (Vol.II) - Department of Financial Services, Ministry of Finance",
     "retrieved_at": "2026-10-17",
-    "sha256": "f155f751bff361520c419dcf1af5261bb0ae23bba52136716ea463da9080c10b",
-    "file": "raw/ctd-ka-holidays-2026.html",
-    "text_file": "text/ctd-ka-holidays-2026.txt",
-    "content_type": "text/html",
-    "size": 199528,
+    "sha256": "d033f0966be28987bac9a2c7ae8f8edafdec92778f635ed63c9caaa72a339ab2",
+    "file": "raw/dfs-fi-11-9-2013-vol2.pdf",
+    "text_file": "text/dfs-fi-11-9-2013-vol2.txt",
+    "content_type": "application/pdf",
+    "size": 156259,
     "large_not_in_git": false,
-    "text_chars": 22310
+    "text_chars": 7685
+  },
+  {
+    "id": "dfs-fi-6-4-2012-vol3",
+    "url": "https://financialservices.gov.in/sites/default/files/order-notices/6412012-FI%2528%2520Vol.III%2529.pdf",
+    "final_url": "https://financialservices.gov.in/sites/default/files/order-notices/6412012-FI%2528%2520Vol.III%2529.pdf",
+    "title": "DFS order F.No. 6/4/2012-FI (Vol.III) - Department of Financial Services, Ministry of Finance",
+    "retrieved_at": "2026-10-17",
+    "sha256": "eeda2a7e1729fa49042a71359996de5d4606a303b5664013d0d7dfe33bf53f70",
+    "file": "raw/dfs-fi-6-4-2012-vol3.pdf",
+    "text_file": "text/dfs-fi-6-4-2012-vol3.txt",
+    "content_type": "application/pdf",
+    "size": 148801,
+    "large_not_in_git": false,
+    "text_chars": 2773
   },
   {
     "id": "dom-ka-home",
@@ -168,6 +182,20 @@
     "text_chars": 52008
   },
   {
+    "id": "dpar-ka-holidays-2026",
+    "url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
+    "final_url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
+    "title": "Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "2fc499503bfc727439b311ac2bbdac238b11c82b626c6fe9fbea5e7910e6534b",
+    "file": "raw/dpar-ka-holidays-2026.pdf",
+    "text_file": "text/dpar-ka-holidays-2026.txt",
+    "content_type": "application/pdf",
+    "size": 7633227,
+    "large_not_in_git": true,
+    "text_chars": 26864
+  },
+  {
     "id": "itd-instant-epan-help",
     "url": "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/instant-e-pan",
     "final_url": "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/instant-e-pan",
@@ -180,20 +208,6 @@
     "size": 142708,
     "large_not_in_git": false,
     "text_chars": 14006
-  },
-  {
-    "id": "ka-holidays-2024",
-    "url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
-    "final_url": "https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf",
-    "title": "Government of Karnataka - List of Holidays 2024 (HOLIDAYSLIST2024.pdf)",
-    "retrieved_at": "2026-10-17",
-    "sha256": "2fc499503bfc727439b311ac2bbdac238b11c82b626c6fe9fbea5e7910e6534b",
-    "file": "raw/ka-holidays-2024.pdf",
-    "text_file": "text/ka-holidays-2024.txt",
-    "content_type": "application/pdf",
-    "size": 7633227,
-    "large_not_in_git": true,
-    "text_chars": 26864
   },
   {
     "id": "nsp-aicte-pragati-degree-faq",
@@ -672,6 +686,34 @@
     "text_chars": 5334
   },
   {
+    "id": "uidai-faq-enrolling-children-wb",
+    "url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
+    "final_url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
+    "title": "UIDAI FAQs: Enrolling Children (uidai.gov.in, Wayback Machine snapshot 2026-01-09)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "c14a9a70e721734c40ad0a36a5826dc83f5e00039619f7ffc1d843cec2e9d274",
+    "file": "raw/uidai-faq-enrolling-children-wb.html",
+    "text_file": "text/uidai-faq-enrolling-children-wb.txt",
+    "content_type": "text/html",
+    "size": 121450,
+    "large_not_in_git": false,
+    "text_chars": 17263
+  },
+  {
+    "id": "uidai-faq-enrolment-process-wb",
+    "url": "https://web.archive.org/web/20230315151813id_/https://uidai.gov.in/en/contact-support/have-any-question/296-english-uk/faqs/enrolment-update/aadhaar-enrolment-process.html",
+    "final_url": "https://web.archive.org/web/20230315151813id_/https://uidai.gov.in/en/contact-support/have-any-question/296-english-uk/faqs/enrolment-update/aadhaar-enrolment-process.html",
+    "title": "UIDAI FAQs: Aadhaar Enrolment Process (uidai.gov.in, Wayback Machine snapshot 2023-03-15)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "9bba10f705e648e1e340773cff564937e0d0db276812e515141f60b81cc7c344",
+    "file": "raw/uidai-faq-enrolment-process-wb.html",
+    "text_file": "text/uidai-faq-enrolment-process-wb.txt",
+    "content_type": "text/html",
+    "size": 134253,
+    "large_not_in_git": false,
+    "text_chars": 23176
+  },
+  {
     "id": "uidai-supporting-docs-goa",
     "url": "https://www.dpse.goa.gov.in/list-of-Supporting-Document-for-Aadhaar-Enrolment-and-Update.pdf",
     "final_url": "https://www.dpse.goa.gov.in/list-of-Supporting-Document-for-Aadhaar-Enrolment-and-Update.pdf",
@@ -712,5 +754,19 @@
     "size": 39261,
     "large_not_in_git": false,
     "text_chars": 61
+  },
+  {
+    "id": "vikaspedia-aadhaar-how-enroll",
+    "url": "https://en.vikaspedia.in/viewcontent/e-governance/online-citizen-services/government-to-citizen-services-g2c/all-about-aadhaar/how-and-where-to-enroll?lgn=en",
+    "final_url": "https://en.vikaspedia.in/viewcontent/e-governance/online-citizen-services/government-to-citizen-services-g2c/all-about-aadhaar/how-and-where-to-enroll?lgn=en",
+    "title": "How and where to enroll for Aadhaar - Vikaspedia",
+    "retrieved_at": "2026-10-17",
+    "sha256": "c38dcf93f48f33ec630bc5127f28139b1e2e5b365948d787078f0833b43fe09a",
+    "file": "raw/vikaspedia-aadhaar-how-enroll.html",
+    "text_file": "text/vikaspedia-aadhaar-how-enroll.txt",
+    "content_type": "text/html",
+    "size": 11307,
+    "large_not_in_git": false,
+    "text_chars": 0
   }
 ]

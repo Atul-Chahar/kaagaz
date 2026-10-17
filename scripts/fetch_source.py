@@ -149,6 +149,11 @@ def main() -> int:
         if large:
             with (RAW / ".large").open("a") as f:
                 f.write(raw_name + "\n")
+            gi = ROOT / ".gitignore"
+            line = f"data/sources/raw/{raw_name}"
+            if line not in gi.read_text().splitlines():
+                with gi.open("a") as f:
+                    f.write(line + "\n")
 
         row = {
             "id": sid,

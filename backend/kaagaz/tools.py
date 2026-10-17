@@ -86,6 +86,7 @@ class PlanArgs(BaseModel):
     student_id: StudentId
     scheme_id: Id
     depth: int = Field(default=MAX_DEPTH, ge=1, le=MAX_DEPTH)
+    remember: bool = Field(default=True, description="Save this plan to the student's memory.")
 
 
 class ExplainArgs(BaseModel):
@@ -323,7 +324,7 @@ class Tools:
         if scheme is None:
             return self._unknown("plan", a.scheme_id, trace)
         memory.ensure_student(a.student_id, trace=trace)
-        data = self.plan_core(a.student_id, scheme["id"], a.depth, trace)
+        data = self.plan_core(a.student_id, scheme["id"], a.depth, trace, save=a.remember)
         outcome: Outcome = "answered_with_path" if data["verdict"]["exact"] else "no_official_time"
         msg = _plan_sentence(data)
         return ToolResult("plan", outcome, data, trace.rows, msg)

@@ -2000,7 +2000,132 @@ rules:
     excerpt: Enter the Aadhaar number of student
     confidence: official
 example_student: null
-calendar: null
+calendar:
+  unit: working_days
+  unit_cite:
+    source_id: sakala-compendium-en
+    source_url: https://sakala.kar.nic.in/Service%20Compendium/05-05-2026%20sakala_service_compendium_English%20(Final).pdf
+    source_title: Sakala Service Compendium (English), 05-05-2026
+    retrieved_at: '2026-10-17'
+    excerpt: 'Note: All the first and second Appeal disposal timelines have been uniformly notified, as 35 working days vide
+      Notification No. DPAR 5 SSM 2025'
+    confidence: official
+  weekly_off:
+  - sunday
+  weekly_off_cite:
+    source_id: dpar-ka-holidays-2026
+    source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+    source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+      Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+    retrieved_at: '2026-10-17'
+    excerpt: All Second Saturdays, Fourth Saturdays, Sundays and the following days.
+    confidence: official
+  second_fourth_saturday_off: true
+  second_fourth_saturday_cite:
+    source_id: dpar-ka-holidays-2026
+    source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+    source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+      Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+    retrieved_at: '2026-10-17'
+    excerpt: All Second Saturdays, Fourth Saturdays, Sundays and the following days.
+    confidence: official
+  holidays:
+  - date: 2026-10-20
+    name: Mahanavami, Ayudhapooja
+    cite:
+      source_id: dpar-ka-holidays-2026
+      source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+      source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+        Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+      retrieved_at: '2026-10-17'
+      excerpt: t6 20.10.2026 Tuesday Mahanavami, Ayudhapooj a
+      confidence: official
+  - date: 2026-10-21
+    name: Vijayadasami
+    cite:
+      source_id: dpar-ka-holidays-2026
+      source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+      source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+        Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+      retrieved_at: '2026-10-17'
+      excerpt: t7 21.10.2026 Wednesday Vijayadasami
+      confidence: official
+  - date: 2026-11-10
+    name: Balipadyami, Deepavali
+    cite:
+      source_id: dpar-ka-holidays-2026
+      source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+      source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+        Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+      retrieved_at: '2026-10-17'
+      excerpt: 18 t0.11.2026 Tuesday Balipadyami, Deepavali
+      confidence: official
+  - date: 2026-11-27
+    name: Kanakadasa Jayanthi
+    cite:
+      source_id: dpar-ka-holidays-2026
+      source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+      source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+        Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+      retrieved_at: '2026-10-17'
+      excerpt: t9 27 .tt.2026 Friday Kanakadasa Jayanthi
+      confidence: official
+  - date: 2026-12-25
+    name: Christmas
+    cite:
+      source_id: dpar-ka-holidays-2026
+      source_url: https://ceg.karnataka.gov.in/frontend/opt1/pdfs/HOLIDAYSLIST2024.pdf
+      source_title: 'Government of Karnataka Notification No. DPAR 16 HHL 2025 dated 17.11.2025: General Holidays and Restricted
+        Holidays for 2026 (file name HOLIDAYSLIST2024.pdf)'
+      retrieved_at: '2026-10-17'
+      excerpt: 20 25.12.2026 Friday Christmas
+      confidence: official
+  holidays_cover_until: 2026-12-31
+groups:
+- label: Identity and bank
+  docs:
+  - aadhaar
+  - aadhaar-face-authentication
+  - bank-account
+  - bank-account-aadhaar-seeded
+  - aadhaar-seeding-consent-form
+  - pan-card
+  - form-60
+  - voter-id
+  - driving-licence
+  - passport
+  - npr-letter
+  - nrega-job-card
+  - proof-of-identity
+- label: Certificates from the taluk office
+  docs:
+  - caste-income-certificate-ka
+  - caste-certificate-ka
+  - income-certificate-ka
+  - residence-certificate-ka
+  - ration-card-ka
+  - birth-certificate
+  - caste-certificate
+  - income-certificate
+  - proof-of-residence
+  - income-proof
+  - electricity-bill
+- label: From your school and college
+  docs:
+  - sslc-marks-card
+  - marks-card-previous
+  - study-certificate
+  - fee-receipt
+  - hostel-certificate
+  - admission-proof
+  - school-leaving-certificate
+  - university-registration-number
+  - institution-certificate-uidai-format
+- label: Scholarship portal steps
+  docs:
+  - nsp-otr
+  - ssp-student-account
+  - ssp-e-attested-documents
 excluded_rules:
 - from: aadhaar
   to: birth-certificate
