@@ -2058,7 +2058,7 @@ rules:
     retrieved_at: '2026-10-17'
     excerpt: Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt
     confidence: secondary
-  condition: regular degree courses
+  note: 'Applies to everyone this pack models: regular degree courses.'
 - from: ssp-e-attested-documents
   to: hostel-certificate
   kind: REQUIRES
@@ -2080,7 +2080,7 @@ rules:
     retrieved_at: '2026-10-17'
     excerpt: Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt
     confidence: secondary
-  condition: regular degree courses (Marksheet / Promotion Certificate)
+  note: 'Applies to everyone this pack models: regular degree courses (Marksheet / Promotion Certificate).'
 - from: ssp-e-attested-documents
   to: study-certificate
   kind: REQUIRES
@@ -2091,7 +2091,7 @@ rules:
     retrieved_at: '2026-10-17'
     excerpt: Students pursuing regular degree 1. Bonafide Certificate courses* 2. Marksheet/Promotion Certificate 3. Fee Receipt
     confidence: secondary
-  condition: regular degree courses (Bonafide Certificate)
+  note: 'Applies to everyone this pack models: regular degree courses (Bonafide Certificate).'
 - from: ssp-student-account
   to: aadhaar
   kind: REQUIRES

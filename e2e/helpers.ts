@@ -1,16 +1,16 @@
 import { expect, type Page, type APIRequestContext } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-export const EXAMPLE = 'example-student'
-
-export async function loadExample(page: Page) {
+// Loads the Example student (a private copy per visitor) and returns its student id.
+export async function loadExample(page: Page): Promise<string> {
   await page.goto('/#/')
   await page.getByTestId('load-example').click()
   await expect(page.getByTestId('stamp')).toBeVisible()
+  return page.evaluate(() => JSON.parse(localStorage.getItem('kaagaz.student') ?? '{}').id as string)
 }
 
-export async function apiPlan(request: APIRequestContext, scheme: string, depth: number) {
-  const r = await request.get(`/api/plan?student_id=${EXAMPLE}&scheme_id=${scheme}&depth=${depth}&remember=false`)
+export async function apiPlan(request: APIRequestContext, sid: string, scheme: string, depth: number) {
+  const r = await request.get(`/api/plan?student_id=${sid}&scheme_id=${scheme}&depth=${depth}&remember=false`)
   expect(r.ok()).toBeTruthy()
   return (await r.json()).data
 }

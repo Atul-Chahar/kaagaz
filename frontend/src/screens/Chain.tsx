@@ -91,6 +91,20 @@ export default function Chain({ session, setSession }: { session: Session | null
     }
   }
 
+  async function toggleApplies(docId: string, on: boolean) {
+    if (!sid) return
+    setPending(p => new Set(p).add(`applies:${docId}`))
+    try {
+      if (on) await api.removeApplies(sid, docId)
+      else await api.addApplies(sid, docId)
+      await loadAll(depth ?? undefined)
+    } catch (e) {
+      setError(e as ApiError)
+    } finally {
+      setPending(p => { const n = new Set(p); n.delete(`applies:${docId}`); return n })
+    }
+  }
+
   function openWhy(id: string, el: HTMLElement | null) {
     whyTrigger.current = el
     setWhy(id)
@@ -181,6 +195,27 @@ export default function Chain({ session, setSession }: { session: Session | null
           <span className="muted">Already held:</span>
           {heldItems.map(h => <span key={h.id} className="chip held" title={h.name}>{shortName(h.name)}</span>)}
         </div>
+      )}
+
+      {plan.conditional.length > 0 && (
+        <section className="conditional" aria-labelledby="cond-h" data-testid="conditional">
+          <h2 id="cond-h" style={{ fontSize: '1.1rem', margin: '24px 0 4px' }}>Only if it applies to you</h2>
+          <p className="note" style={{ marginBottom: 8 }}>The sources say these are needed only in some cases. Kaagaz leaves them out of your chain unless you say they apply to you.</p>
+          <ul className="opts">
+            {[...new Map(plan.conditional.map(c => [c.doc_id, c])).values()].map(c => (
+              <li key={c.doc_id}>
+                <div>
+                  <div className="name">{shortName(c.name)}</div>
+                  <div className="sub">Only if: {c.condition}{c.held ? ' · you hold this' : ''}</div>
+                </div>
+                <button type="button" className="toggle" aria-pressed={c.applies} disabled={pending.has(`applies:${c.doc_id}`)}
+                  onClick={() => toggleApplies(c.doc_id, c.applies)} data-testid={`applies-${c.doc_id}`}>
+                  <span className="box" aria-hidden="true" /> This applies to me
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       <hr className="hair" />

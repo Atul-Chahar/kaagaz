@@ -8,6 +8,11 @@ pack:
   version: "2026.10.17"
 # Who this pack models: a college student in Karnataka applying for a post-matric scholarship.
 models: A college student in Karnataka (regular degree course) applying for a post-matric scholarship.
+# Conditions that are true for everyone this pack models (a regular degree student): these rules count as plain rules.
+assumed_conditions:
+  - condition: regular degree courses
+  - condition: regular degree courses (Bonafide Certificate)
+  - condition: regular degree courses (Marksheet / Promotion Certificate)
 exclude_conditions:
   - condition: Only for persons born on or after 1.10.2023
     reason: A college student was born long before 1 Oct 2023, so this Aadhaar rule does not apply to them.

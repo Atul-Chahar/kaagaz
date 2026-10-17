@@ -73,9 +73,12 @@ Converter = Callable[[str, int, int], int | None]
 
 class Planner:
     def __init__(self, graph: RuleGraph, held: set[str] | frozenset[str], unit: str | None = None,
-                 convert: Converter | None = None):
+                 convert: Converter | None = None, applies: set[str] | frozenset[str] | None = None):
         self.g = graph
         self.held = set(held)
+        # a REQUIRES edge with a condition ("only if the student has a disability") counts only when the student
+        # has said it applies to them (its target document id is in `applies`)
+        self.applies = set(applies or ())
         self.unit = unit
         self.convert = convert
         self._memo: dict[str, Finish] = {}
@@ -84,6 +87,8 @@ class Planner:
         self._stack: set[str] = set()
         self._kids: dict[str, list[Edge]] = {}
         for e in graph.edges:
+            if e.type == "REQUIRES" and e.props.get("condition") and e.dst not in self.applies:
+                continue
             self._kids.setdefault(e.src, []).append(e)
 
     # ---- core recursion -------------------------------------------------

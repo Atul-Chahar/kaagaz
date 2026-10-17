@@ -77,7 +77,7 @@ def test_every_rule_edge_carries_its_source():
 
 PARAMS = {
     "prerequisites": {"scheme_id": None, "depth": 3},
-    "chain_days": {"scheme_id": None, "held": [], "depth": 8, "limit": 5},
+    "chain_days": {"scheme_id": None, "held": [], "depth": 8, "applies": [], "limit": 5},
     "shared_documents": {"scheme_id": None, "needed": ["caste-income-certificate-ka", "aadhaar"]},
     "load_bearing": {"scheme_ids": None, "held": [], "limit": 5},
     "load_bearing_pagerank": {"limit": 5},
@@ -98,7 +98,7 @@ def test_every_rules_query_runs_and_returns_rows():
     a0 = pack()["any_of"][0]["id"]
     fill = {"scheme_id": s0, "scheme_ids": scheme_ids(), "anyof_id": a0, "q": s0}
     names = [n for n in graph.query_names() if not n.startswith(("seed_", "student_", "holding_", "target_",
-                                                                     "snapshot_", "recall_"))]
+                                                                     "snapshot_", "recall_", "applies_"))]
     assert set(names) == set(PARAMS), "every rules query must be covered by this test"
     for n in names:
         params = {k: (fill[k] if v is None else v) for k, v in PARAMS[n].items()}
@@ -144,13 +144,15 @@ def test_chain_days_cypher_agrees_with_planner_on_all_of_chains():
     for sid in scheme_ids():
         for depth in (1, 2, 4, MAX_DEPTH):
             g, _rows, _s = t.build_rule_graph(sid, depth, Trace())
+            conditional = sorted({e.dst for e in g.edges if e.props.get("condition")})
             for held in held_sets:
-                rows = graph.run(RULES, "chain_days", {"scheme_id": sid, "held": sorted(held), "depth": depth,
-                                                       "limit": 1}).rows
-                cypher = rows[0]["days"] if rows else 0
-                planner = Planner(_all_of(g), held).finish(sid).lb
-                assert cypher == planner, (sid, depth, sorted(held))
-                checked += 1
+                for applies in ([], conditional):
+                    rows = graph.run(RULES, "chain_days", {"scheme_id": sid, "held": sorted(held), "depth": depth,
+                                                           "applies": applies, "limit": 1}).rows
+                    cypher = rows[0]["days"] if rows else 0
+                    planner = Planner(_all_of(g), held, applies=set(applies)).finish(sid).lb
+                    assert cypher == planner, (sid, depth, sorted(held), applies)
+                    checked += 1
     assert checked >= 100
 
 
@@ -324,3 +326,17 @@ def test_company_pack_converts_calendar_days_into_working_days_exactly():
     assert pt["end"] == t.calendar.days_between(dt.date(2026, 10, 17), dt.date(2026, 11, 16))
     assert p["verdict"]["exact"] is True
     assert p["chain_check"]["agree"]
+
+
+
+def test_conditional_requirement_counts_only_when_it_applies(student):
+    t = Tools(PACK)
+    sid = "nsp-csss"
+    before = t.call("plan", {"student_id": student, "scheme_id": sid, "remember": False}).data
+    cond = {c["doc_id"]: c for c in before["conditional"]}
+    assert "disability-certificate" in cond and not cond["disability-certificate"]["applies"]
+    assert "disability-certificate" not in before["needed"]
+    memory.add_applies(student, "disability-certificate")
+    after = t.call("plan", {"student_id": student, "scheme_id": sid, "remember": False}).data
+    assert "disability-certificate" in after["needed"]
+    assert after["chain_check"]["agree"]

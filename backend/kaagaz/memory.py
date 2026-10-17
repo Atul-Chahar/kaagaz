@@ -13,7 +13,6 @@ import re
 from . import graph
 
 STUDENT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{2,63}$")
-EXAMPLE_ID = "example-student"
 EXAMPLE_LABEL = "Example student"
 
 
@@ -64,6 +63,27 @@ def remove_holding(student_id: str, doc_id: str, trace=None) -> int:
     return r.rows[0]["removed"] if r.rows else 0
 
 
+def add_applies(student_id: str, doc_id: str, trace=None) -> dict:
+    r = graph.run(_g(student_id), "applies_add", {"student_id": student_id, "doc_id": doc_id, "now": now_iso()},
+                  read_only=False)
+    _t(trace, r)
+    return r.rows[0]
+
+
+def remove_applies(student_id: str, doc_id: str, trace=None) -> int:
+    r = graph.run(_g(student_id), "applies_remove", {"student_id": student_id, "doc_id": doc_id}, read_only=False)
+    _t(trace, r)
+    return r.rows[0]["removed"] if r.rows else 0
+
+
+def applies(student_id: str, trace=None) -> set[str]:
+    if not exists(student_id):
+        return set()
+    r = graph.run(_g(student_id), "recall_applies", {"student_id": student_id})
+    _t(trace, r)
+    return {row["doc_id"] for row in r.rows}
+
+
 def set_target(student_id: str, scheme_id: str, deadline: str | None, deadline_source: str, trace=None) -> dict:
     r = graph.run(_g(student_id), "target_set",
                   {"student_id": student_id, "scheme_id": scheme_id, "deadline": deadline,
@@ -107,9 +127,7 @@ def save_snapshot(student_id: str, scheme_id: str, verdict: str, critical_days: 
 
 
 def reset(student_id: str) -> None:
-    name = _g(student_id)
-    if graph.graph_exists(name):
-        graph.db().select_graph(name).delete()
+    graph.delete_graph(_g(student_id))
 
 
 def _t(trace, run) -> None:

@@ -68,8 +68,12 @@ def test_unknown_scheme_is_unknown_name(sid):
 
 def test_example_student_is_labelled_and_synthetic():
     r = client.post("/api/students/example").json()
-    assert r["label"] == "Example student" and r["student_id"] == "example-student"
-    rec = client.get("/api/students/example-student").json()
+    assert r["label"] == "Example student" and r["student_id"].startswith("example-")
+    other = client.post("/api/students/example").json()["student_id"]
+    assert other != r["student_id"]  # each visitor gets a private copy
+    client.post(f"/api/students/example?replace={other}")
+    assert not memory.exists(other)  # the replaced copy is deleted
+    rec = client.get(f"/api/students/{r['student_id']}").json()
     assert rec["data"]["student"]["label"] == "Example student"
     assert {h["doc_id"] for h in rec["data"]["holdings"]} == set(r["holdings"])
 
@@ -140,9 +144,9 @@ def test_static_route_cannot_read_files_outside_the_frontend_build():
 def test_sentence_checker_on_a_real_plan_rejects_wrong_numbers_and_invented_documents():
     from kaagaz import agent
     from kaagaz.tools import Tools
-    client.post("/api/students/example")
+    ex = client.post("/api/students/example").json()["student_id"]
     t = Tools()
-    res = t.call("plan", {"student_id": "example-student", "scheme_id": "ka-ssp-fee-reimbursement-minority",
+    res = t.call("plan", {"student_id": ex, "scheme_id": "ka-ssp-fee-reimbursement-minority",
                           "depth": 1, "remember": False})
     compact = {"outcome": res.outcome, "message": res.message, "data": agent._compact(res.data)}
     names = [d["name"] for d in t.pack["documents"]] + [s["name"] for s in t.pack["schemes"]]

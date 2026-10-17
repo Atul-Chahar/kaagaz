@@ -66,7 +66,7 @@ export default function Start({ session, setSession }: { session: Session | null
   async function loadExample() {
     setBusy(true)
     try {
-      const ex = await api.example()
+      const ex = await api.example(session?.example ? session.id : undefined)
       setSession({ id: ex.student_id, scheme_id: ex.scheme_id, example: true, pack: getPack() ?? undefined, label: ex.label })
       go('/chain')
     } catch (e) {

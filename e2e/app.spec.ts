@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test'
-import { apiPlan, EXAMPLE, expectNoSeriousA11y, loadExample } from './helpers'
+import { apiPlan, expectNoSeriousA11y, loadExample } from './helpers'
 
 test.describe.configure({ mode: 'serial' })
 
 test('Example student: stepping depth 1 to max shows the verdict the graph computes at each depth', async ({ page, request }) => {
-  await loadExample(page)
-  const ex = await (await request.get(`/api/students/${EXAMPLE}`)).json()
+  const sid = await loadExample(page)
+  const ex = await (await request.get(`/api/students/${sid}`)).json()
   const scheme = ex.data.targets[0].scheme_id
-  const full = await apiPlan(request, scheme, 8)
+  const full = await apiPlan(request, sid, scheme, 8)
   const max = full.max_depth
   expect(max).toBeGreaterThan(1)
   await expect(page.getByTestId('depth-1')).toHaveAttribute('aria-pressed', 'true')
@@ -15,7 +15,7 @@ test('Example student: stepping depth 1 to max shows the verdict the graph compu
   for (let d = 1; d <= max; d++) {
     if (d > 1) await page.getByTestId('depth-next').click()
     await expect(page.getByTestId(`depth-${d}`)).toHaveAttribute('aria-pressed', 'true')
-    const expected = await apiPlan(request, scheme, d)
+    const expected = await apiPlan(request, sid, scheme, d)
     await expect(page.getByTestId('stamp')).toContainText(expected.verdict.stamp)
     // every needed document at this depth is a slip on the timeline
     for (const id of expected.needed) await expect(page.getByTestId(`slip-${id}`)).toBeVisible()
@@ -28,16 +28,16 @@ test('Example student: stepping depth 1 to max shows the verdict the graph compu
 })
 
 test('"I have this" saves to memory and the plan recomputes', async ({ page, request }) => {
-  await loadExample(page)
-  const ex = await (await request.get(`/api/students/${EXAMPLE}`)).json()
+  const sid = await loadExample(page)
+  const ex = await (await request.get(`/api/students/${sid}`)).json()
   const scheme = ex.data.targets[0].scheme_id
   await page.getByTestId('depth-2').click()
-  const before = await apiPlan(request, scheme, 2)
+  const before = await apiPlan(request, sid, scheme, 2)
   const first = before.start_today[0].id
   await expect(page.getByTestId(`todo-${first}`)).toBeVisible()
   await page.getByTestId(`have-${first}`).click()
   await expect(page.getByTestId(`todo-${first}`)).toHaveCount(0)
-  const after = await apiPlan(request, scheme, 2)
+  const after = await apiPlan(request, sid, scheme, 2)
   expect(after.held).toContain(first)
   expect(after.verdict.stamp).not.toEqual(before.verdict.stamp)
   await expect(page.getByTestId('stamp')).toContainText(after.verdict.stamp)
@@ -150,11 +150,27 @@ test('second rule pack: switch to the company pack and load the Example founder'
   await page.getByTestId('load-example').click()
   await expect(page.getByTestId('stamp')).toBeVisible()
   await expect(page.getByText('Example founder (made up, not a real person)')).toBeVisible()
-  const ex = await (await request.get('/api/students/example-student-in-ka-company?pack=in-ka-company')).json()
+  const fid = await page.evaluate(() => JSON.parse(localStorage.getItem('kaagaz.student') ?? '{}').id as string)
+  const ex = await (await request.get(`/api/students/${fid}?pack=in-ka-company`)).json()
   const scheme = ex.data.targets[0].scheme_id
-  const max = (await (await request.get(`/api/plan?student_id=example-student-in-ka-company&scheme_id=${scheme}&depth=8&remember=false&pack=in-ka-company`)).json()).data.max_depth
+  const max = (await (await request.get(`/api/plan?student_id=${fid}&scheme_id=${scheme}&depth=8&remember=false&pack=in-ka-company`)).json()).data.max_depth
   await page.getByTestId(`depth-${max}`).click()
-  const plan = (await (await request.get(`/api/plan?student_id=example-student-in-ka-company&scheme_id=${scheme}&depth=${max}&remember=false&pack=in-ka-company`)).json()).data
+  const plan = (await (await request.get(`/api/plan?student_id=${fid}&scheme_id=${scheme}&depth=${max}&remember=false&pack=in-ka-company`)).json()).data
   await expect(page.getByTestId('stamp')).toContainText(plan.verdict.stamp)
   await expectNoSeriousA11y(page, 'company chain')
+})
+
+test('"This applies to me" adds a conditional requirement to the chain, and removing it takes it out', async ({ page, request }) => {
+  const s = (await (await request.post('/api/students', { data: { label: 'Student' } })).json()).id
+  await request.put(`/api/students/${s}/target`, { data: { scheme_id: 'nsp-csss' } })
+  await page.addInitScript(id => { try { localStorage.setItem('kaagaz.student', JSON.stringify({ id, scheme_id: 'nsp-csss' })) } catch { /* ignore */ } }, s)
+  await page.goto('/#/chain')
+  await expect(page.getByTestId('conditional')).toBeVisible()
+  await expect(page.getByTestId('slip-disability-certificate')).toHaveCount(0)
+  await page.getByTestId('applies-disability-certificate').click()
+  await expect(page.getByTestId('applies-disability-certificate')).toHaveAttribute('aria-pressed', 'true')
+  await expect(page.getByTestId('slip-disability-certificate')).toBeVisible()
+  await page.getByTestId('applies-disability-certificate').click()
+  await expect(page.getByTestId('slip-disability-certificate')).toHaveCount(0)
+  await request.delete(`/api/students/${s}`)
 })

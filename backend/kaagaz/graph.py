@@ -10,6 +10,7 @@ from pathlib import Path
 
 import yaml
 from falkordb import FalkorDB
+from redis.exceptions import ResponseError
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 PACKS_DIR = Path(os.environ.get("KAAGAZ_PACKS_DIR", ROOT / "data" / "packs"))
@@ -72,6 +73,17 @@ def graph_exists(name: str) -> bool:
     return name in db().list_graphs()
 
 
+def delete_graph(name: str) -> bool:
+    """Delete a graph if it exists. Safe when two requests race to delete the same graph."""
+    try:
+        db().select_graph(name).delete()
+        return True
+    except ResponseError as e:
+        if "empty key" in str(e):
+            return False  # already gone
+        raise
+
+
 # ---- packs -------------------------------------------------------------------
 
 def list_packs() -> list[str]:
@@ -92,8 +104,7 @@ def seed_pack(pack_id: str) -> dict:
     """(Re)build the rules graph for one pack from its pack.yaml. Returns node and edge counts."""
     pack = load_pack(pack_id)
     name = rules_graph_name(pack_id)
-    if graph_exists(name):
-        db().select_graph(name).delete()
+    delete_graph(name)
     meta = pack["pack"]
     w = lambda q, params=None: run(name, q, params, read_only=False)
     w("seed_pack", {"id": meta["id"], "name": meta["name"], "jurisdiction": meta["jurisdiction"],

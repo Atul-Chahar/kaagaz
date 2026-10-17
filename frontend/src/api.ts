@@ -90,6 +90,8 @@ export interface Plan {
   held: string[]
   unknown: string[]
   hidden_more: boolean
+  applies: string[]
+  conditional: { from: string; doc_id: string; name: string; condition: string; applies: boolean; held: boolean }[]
   items: PlanItem[]
   start_today: { id: string; name: string; days: number | null; days_unit?: string; span?: number; office_name: string | null; reduction: number; on_critical: boolean; path: string[] }[]
   chain_check: { chain_days_cypher: number; planner_all_of: number; agree: boolean }
@@ -154,10 +156,12 @@ export const api = {
   prerequisites: (scheme_id: string, depth = 8) =>
     req<ToolResponse<{ nodes: { id: string; label: string; name: string; days: number | null; depth: number }[] }>>(`/api/schemes/${encodeURIComponent(scheme_id)}/prerequisites?depth=${depth}`),
   newStudent: () => req<{ id: string; label: string }>('/api/students', { method: 'POST', body: JSON.stringify({ label: 'Student' }) }),
-  example: () => req<{ student_id: string; label: string; scheme_id: string; holdings: string[]; about?: string }>('/api/students/example', { method: 'POST' }),
+  example: (replace?: string) => req<{ student_id: string; label: string; scheme_id: string; holdings: string[]; about?: string }>(`/api/students/example${replace ? `?replace=${encodeURIComponent(replace)}` : ''}`, { method: 'POST' }),
   recall: (sid: string) => req<ToolResponse<{ student: { id: string; label: string; created_at: string } | null; holdings?: { doc_id: string; name: string; issued_on: string | null; added_at: string }[]; targets?: { scheme_id: string; deadline: string | null; added_at: string }[]; snapshots?: { at: string; scheme_id: string; verdict: string; critical_days: number }[] }>>(`/api/students/${sid}`),
   setTarget: (sid: string, scheme_id: string, deadline?: string) => req(`/api/students/${sid}/target`, { method: 'PUT', body: JSON.stringify({ scheme_id, deadline: deadline || null }) }),
   addHolding: (sid: string, doc_id: string) => req<ToolResponse<unknown>>(`/api/students/${sid}/holdings`, { method: 'POST', body: JSON.stringify({ doc_id }) }),
+  addApplies: (sid: string, doc_id: string) => req(`/api/students/${sid}/applies`, { method: 'POST', body: JSON.stringify({ doc_id }) }),
+  removeApplies: (sid: string, doc_id: string) => req(`/api/students/${sid}/applies/${encodeURIComponent(doc_id)}`, { method: 'DELETE' }),
   removeHolding: (sid: string, doc_id: string) => req(`/api/students/${sid}/holdings/${encodeURIComponent(doc_id)}`, { method: 'DELETE' }),
   plan: (sid: string, scheme_id: string, depth: number, remember: boolean) =>
     req<ToolResponse<Plan>>(`/api/plan?student_id=${sid}&scheme_id=${encodeURIComponent(scheme_id)}&depth=${depth}&remember=${remember}`),

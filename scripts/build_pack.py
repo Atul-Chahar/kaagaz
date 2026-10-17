@@ -67,6 +67,7 @@ def main() -> None:
     research = Path(args.research) if args.research else RESEARCH
     meta = yaml.safe_load((pack_dir / "meta.yaml").read_text())
     exclude_conditions = {c["condition"] for c in meta.get("exclude_conditions", [])}
+    assumed_conditions = {c["condition"] for c in meta.get("assumed_conditions", [])}
 
     offices: dict[str, dict] = {}
     docs: dict[str, dict] = {}
@@ -95,9 +96,13 @@ def main() -> None:
                 excluded.append({"from": owner, "to": r.get("doc") or r.get("any_of", {}).get("id"),
                                  "condition": r["condition"], "cite": expand(r.get("cite"), f"{where}/{owner}")})
                 continue
+            cond, note = r.get("condition"), r.get("note")
+            if cond in assumed_conditions:
+                # true for everyone the pack models (meta.yaml assumed_conditions): a plain rule, the assumption noted
+                note = f"{note + ' ' if note else ''}Applies to everyone this pack models: {cond}."
+                cond = None
             if "doc" in r:
-                add_rule(owner, r["doc"], "REQUIRES", r.get("cite"), f"{where}/{owner}", r.get("note"),
-                         r.get("condition"))
+                add_rule(owner, r["doc"], "REQUIRES", r.get("cite"), f"{where}/{owner}", note, cond)
             elif "any_of" in r:
                 a = r["any_of"]
                 any_of.setdefault(a["id"], {"id": a["id"], "label": a["label"]})

@@ -222,14 +222,16 @@ def new_student(body: NewStudent) -> dict:
 
 
 @app.post("/api/students/example")
-def load_example(pack: str | None = None) -> dict:
-    """Reset and load the synthetic Example student defined in the pack."""
+def load_example(pack: str | None = None, replace: str | None = None) -> dict:
+    """Load a fresh private copy of the pack's synthetic Example student (so two visitors never reset each other).
+    `replace` is this visitor's previous Example copy, which is deleted."""
     pid = _pack_param(pack)
     ex = graph.load_pack(pid).get("example_student")
     if not ex:
         raise HTTPException(404, "this pack has no example student")
-    sid = memory.EXAMPLE_ID if pid == DEFAULT_PACK else f"{memory.EXAMPLE_ID}-{pid}"[:64]
-    memory.reset(sid)
+    if replace and replace.startswith("example-") and memory.STUDENT_ID.match(replace):
+        memory.reset(replace)
+    sid = f"example-{secrets.token_hex(5)}"
     label = ex.get("label") or memory.EXAMPLE_LABEL
     memory.ensure_student(sid, label)
     for h in ex.get("holdings", []):
@@ -272,6 +274,28 @@ def add_holding(student_id: str, body: HoldingBody, pack: str | None = None) -> 
     return call(_pack_param(pack), "remember_holding",
                 {"student_id": student_id, "doc_id": body.doc_id,
                  "issued_on": body.issued_on.isoformat() if body.issued_on else None})
+
+
+class AppliesBody(BaseModel):
+    doc_id: str
+
+
+@app.post("/api/students/{student_id}/applies")
+def add_applies(student_id: str, body: AppliesBody, pack: str | None = None) -> dict:
+    """The student says a conditional requirement (e.g. hostel certificate) applies to them."""
+    t = tools(_pack_param(pack))
+    trace = Trace()
+    if t._need(body.doc_id, "Document", trace) is None:
+        raise HTTPException(404, f"unknown document {body.doc_id}")
+    memory.ensure_student(student_id, trace=trace)
+    return memory.add_applies(student_id, body.doc_id, trace) | {"trace": trace.rows}
+
+
+@app.delete("/api/students/{student_id}/applies/{doc_id}")
+def remove_applies(student_id: str, doc_id: str) -> dict:
+    memory.check_id(student_id)
+    trace = Trace()
+    return {"removed": memory.remove_applies(student_id, doc_id, trace), "trace": trace.rows}
 
 
 @app.delete("/api/students/{student_id}/holdings/{doc_id}")
