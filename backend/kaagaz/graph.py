@@ -105,6 +105,8 @@ def seed_pack(pack_id: str) -> dict:
         row = {"id": d["id"], "name": d["name"], "days": d.get("days"), "validity": d.get("validity"),
                "office": d.get("office"), "note": d.get("note")}
         row.update(_cite(d.get("days_cite"), "days_"))
+        row["service_days"] = d.get("service_days")
+        row.update(_cite(d.get("service_days_cite"), "service_days_"))
         docs.append(row)
     w("seed_documents", {"rows": docs})
     w("seed_anyof", {"rows": [{"id": a["id"], "label": a["label"]} for a in pack.get("any_of", [])]})

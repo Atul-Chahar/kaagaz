@@ -112,7 +112,7 @@ def main() -> None:
                                     "cite": expand(o.get("office_cite"), f"{fname}/office/{o['id']}")}
         for d in frag.get("documents", []) or []:
             cur = docs.setdefault(d["id"], {"id": d["id"]})
-            for k in ("name", "office", "days", "validity", "note"):
+            for k in ("name", "office", "days", "validity", "note", "service_days"):
                 v = d.get(k)
                 if v is None:
                     continue
@@ -122,7 +122,7 @@ def main() -> None:
                     conflicts.append(f"{d['id']}.{k}: kept {cur[k]!r}, {fname} says {v!r}")
                 elif k == "note" and v not in cur[k]:
                     cur[k] = f"{cur[k]} {v}"
-            for k in ("office_cite", "days_cite", "validity_cite"):
+            for k in ("office_cite", "days_cite", "validity_cite", "service_days_cite"):
                 if d.get(k) and not cur.get(k) and (k != "days_cite" or cur.get("days") == d.get("days")):
                     cur[k] = expand(d[k], f"{fname}/doc/{d['id']}/{k}")
             add_requires(d["id"], d.get("requires"), fname)

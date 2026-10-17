@@ -1,0 +1,68 @@
+# Follow-up research (documents). Merged by id into documents.yaml by the importer.
+# Not found (left out, no guess): an official list of accepted ID / address proofs that applies to ALL AJSK certificates
+# (the AJSK "List of Documents required for Nadakacheri Services" circular NK_29 and 2021_Online_Doc.pdf are scanned
+# Kannada images with no extractable text); documents for a new Karnataka ration card; an NSP OTR processing time.
+offices: []
+
+documents:
+  - id: residence-certificate-ka
+    name: Residence certificate (Karnataka)
+    notes: >-
+      Document list from the Tumakuru district (NIC) Residence Certificate service page. That page also says
+      "within 30 days", but the Sakala legal limit (14 working days) in documents.yaml is kept. For applicants under 18
+      the father's domicile is compulsory (minor_cite).
+    minor_cite: {source_id: tumkur-residence-cert, excerpt: "Note: – if the applicant’s age is less than 18 years then domicile of the father is compulsory.", confidence: official}
+    requires:
+      - doc: school-leaving-certificate
+        cite: {source_id: tumkur-residence-cert, excerpt: "Required Documents Photocopy of the Leaving Certificate Residential proof", confidence: official}
+      - any_of: {id: residence-proof-residence-cert-ka, label: "One residential proof"}
+        cite: {source_id: tumkur-residence-cert, excerpt: "Residential proof Ration card, Voter ID, House tax, Tax receipt,", confidence: official}
+        options:
+          - doc: ration-card-ka
+            cite: {source_id: tumkur-residence-cert, excerpt: "Residential proof Ration card, Voter ID, House tax, Tax receipt,", confidence: official}
+          - doc: voter-id
+            cite: {source_id: tumkur-residence-cert, excerpt: "Residential proof Ration card, Voter ID, House tax, Tax receipt,", confidence: official}
+          - doc: property-tax-receipt
+            cite: {source_id: tumkur-residence-cert, excerpt: "Residential proof Ration card, Voter ID, House tax, Tax receipt,", confidence: official}
+          - doc: parents-property-documents
+            cite: {source_id: tumkur-residence-cert, excerpt: "Details or papers of the property which are owned by the applicant’s parents or guardian.", confidence: official}
+      - doc: birth-certificate
+        cite: {source_id: tumkur-residence-cert, excerpt: "Birth Certificate Aadhar card Note: – if the applicant’s age is less than 18 years then domicile of the father is compulsory.", confidence: official}
+      - doc: aadhaar
+        cite: {source_id: tumkur-residence-cert, excerpt: "Birth Certificate Aadhar card Note: – if the applicant’s age is less than 18 years then domicile of the father is compulsory.", confidence: official}
+
+  - id: property-tax-receipt
+    name: House tax / property tax receipt
+    requires: []
+
+  - id: parents-property-documents
+    name: Papers of property owned by the applicant's parents or guardian
+    requires: []
+
+  - id: aadhaar
+    name: Aadhaar number (UIDAI)
+    days: null   # not a legal limit; see service_days
+    service_days: 180   # UIDAI "normally up to", calendar days, 90% service standard; shown, never summed
+    service_days_cite: {source_id: uidai-faq-enrolling-children-wb, excerpt: "For Adults age 18+, normally up to 180 days from the date of enrolment.", confidence: official}
+    child_days: 30
+    child_days_cite: {source_id: uidai-faq-enrolling-children-wb, excerpt: "For child age-group (0-18 yrs) Normally up to 30 days from the date of enrolment.", confidence: official}
+    note: >-
+      UIDAI FAQ "How much time does it take to get my Aadhaar generated after the enrolment?": normally up to 180 days
+      for adults (18+) and up to 30 days for children (0-18), "with 90% service standards" (a normal service level, not a
+      legal maximum). The source counts "days from the date of enrolment" and does not say working days, so these are
+      calendar days. Kaagaz keeps the legal days unknown (null) and shows 180 as a service level only.
+      uidai.gov.in returns HTTP 500 to the fetcher, so the page was saved from its Wayback Machine snapshot of 2026-01-09.
+    requires: []
+
+  - id: bank-account-aadhaar-seeded
+    name: Bank account seeded with Aadhaar in NPCI mapper (DBT-enabled)
+    days: null
+    notes: >-
+      No official numeric limit found. NPCI's customer FAQ says linking in CBS and seeding in the NPCI mapper "should be
+      completed within a couple of working days" (timing_cite; not a stated number, so days stays null). The Department
+      of Financial Services told public sector banks that seeding must take place "without delay" and be uploaded to the
+      NPCI mapper at the end of every day (dfs_cite). npci.org.in returns HTTP 403 to the fetcher, so the NPCI FAQ was
+      saved from its Wayback Machine snapshot of 2025-09-16.
+    timing_cite: {source_id: npci-nach-faq-customers-wb, excerpt: "bank will link in their Core Banking System (CBS) and seed in NPCI mapper, this process should be completed within a couple of working days.", confidence: official}
+    dfs_cite: {source_id: dfs-fi-6-4-2012-vol3, excerpt: "It must be ensured that the seeding of beneficiaries Aadhaar into the bank account takes place without delay", confidence: official}
+    requires: []

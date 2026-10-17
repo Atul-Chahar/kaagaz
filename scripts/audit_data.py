@@ -111,6 +111,8 @@ def audit_pack(path: Path) -> None:
             if not isinstance(days, int) or days <= 0:
                 err(f"{where}: days must be null or a positive integer, got {days!r}")
             check_cite(d.get("days_cite"), f"{where}/days")
+        if d.get("service_days") is not None:
+            check_cite(d.get("service_days_cite"), f"{where}/service_days")
         if d.get("office"):
             checked["offices"] += 1
             if d["office"] not in offices:

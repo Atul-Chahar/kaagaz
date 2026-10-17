@@ -1,0 +1,13 @@
+{
+  "name": "kaagaz-e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "shots": "playwright test screenshots.spec.ts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.56.0"
+  }
+}

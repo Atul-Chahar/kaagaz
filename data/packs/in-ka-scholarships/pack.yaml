@@ -105,6 +105,19 @@ documents:
     retrieved_at: '2026-10-17'
     excerpt: YES Aadhar Enrolment at AJSK is free of Cost.
     confidence: official
+  note: 'UIDAI FAQ "How much time does it take to get my Aadhaar generated after the enrolment?": normally up to 180 days
+    for adults (18+) and up to 30 days for children (0-18), "with 90% service standards" (a normal service level, not a legal
+    maximum). The source counts "days from the date of enrolment" and does not say working days, so these are calendar days.
+    Kaagaz keeps the legal days unknown (null) and shows 180 as a service level only. uidai.gov.in returns HTTP 500 to the
+    fetcher, so the page was saved from its Wayback Machine snapshot of 2026-01-09.'
+  service_days: 180
+  service_days_cite:
+    source_id: uidai-faq-enrolling-children-wb
+    source_url: https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com
+    source_title: 'UIDAI FAQs: Enrolling Children (uidai.gov.in, Wayback Machine snapshot 2026-01-09)'
+    retrieved_at: '2026-10-17'
+    excerpt: For Adults age 18+, normally up to 180 days from the date of enrolment.
+    confidence: official
 - id: aadhaar-face-authentication
   name: Aadhaar face authentication (e-KYC) via NSP OTR app, or biometric authentication at a CSC
   office: nsp-portal
@@ -291,12 +304,16 @@ documents:
     confidence: official
 - id: parent-declaration-pragati
   name: Parent Declaration (Appendix-III of AICTE Pragati FAQ)
+- id: parents-property-documents
+  name: Papers of property owned by the applicant's parents or guardian
 - id: passport
   name: Indian passport
 - id: proof-of-identity
   name: Proof of identity
 - id: proof-of-residence
   name: Proof of residence
+- id: property-tax-receipt
+  name: House tax / property tax receipt
 - id: ration-card-ka
   name: Ration card (Karnataka; new / BPL)
   office: food-civil-supplies-ka
@@ -403,6 +420,8 @@ any_of:
   label: PAN or Form No. 60
 - id: proof-of-address-ka
   label: One address proof
+- id: residence-proof-residence-cert-ka
+  label: One residential proof
 schemes:
 - id: ka-ssp-fee-concession-bcwd
   name: BCWD Fee Reimbursement (Fee Concession)
@@ -1916,6 +1935,28 @@ rules:
     excerpt: Address proof / ration card / bank passbook / passport
     confidence: official
 - from: residence-certificate-ka
+  to: aadhaar
+  kind: REQUIRES
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: 'Birth Certificate Aadhar card Note: – if the applicant’s age is less than 18 years then domicile of the father
+      is compulsory.'
+    confidence: official
+- from: residence-certificate-ka
+  to: birth-certificate
+  kind: REQUIRES
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: 'Birth Certificate Aadhar card Note: – if the applicant’s age is less than 18 years then domicile of the father
+      is compulsory.'
+    confidence: official
+- from: residence-certificate-ka
   to: proof-of-identity
   kind: REQUIRES
   cite:
@@ -1934,6 +1975,66 @@ rules:
     source_title: AJSK FAQs
     retrieved_at: '2026-10-17'
     excerpt: ID proof and Address Proof documents are mandatory for all certificates.
+    confidence: official
+- from: residence-certificate-ka
+  to: residence-proof-residence-cert-ka
+  kind: REQUIRES
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Residential proof Ration card, Voter ID, House tax, Tax receipt,
+    confidence: official
+- from: residence-certificate-ka
+  to: school-leaving-certificate
+  kind: REQUIRES
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Required Documents Photocopy of the Leaving Certificate Residential proof
+    confidence: official
+- from: residence-proof-residence-cert-ka
+  to: parents-property-documents
+  kind: OPTION
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Details or papers of the property which are owned by the applicant’s parents or guardian.
+    confidence: official
+- from: residence-proof-residence-cert-ka
+  to: property-tax-receipt
+  kind: OPTION
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Residential proof Ration card, Voter ID, House tax, Tax receipt,
+    confidence: official
+- from: residence-proof-residence-cert-ka
+  to: ration-card-ka
+  kind: OPTION
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Residential proof Ration card, Voter ID, House tax, Tax receipt,
+    confidence: official
+- from: residence-proof-residence-cert-ka
+  to: voter-id
+  kind: OPTION
+  cite:
+    source_id: tumkur-residence-cert
+    source_url: https://tumkur.nic.in/en/service/residence-certificate/
+    source_title: Residence Certificate | District Tumakuru
+    retrieved_at: '2026-10-17'
+    excerpt: Residential proof Ration card, Voter ID, House tax, Tax receipt,
     confidence: official
 - from: ssp-e-attested-documents
   to: aadhaar
@@ -1999,7 +2100,26 @@ rules:
     retrieved_at: '2026-10-17'
     excerpt: Enter the Aadhaar number of student
     confidence: official
-example_student: null
+example_student:
+  label: Example student
+  scheme_id: ka-ssp-fee-reimbursement-minority
+  about: A made-up second-year degree student in Karnataka who lives in a college hostel and applies for Fee Reimbursement
+    for Minorities on the State Scholarship Portal. They already hold their Aadhaar, an Aadhaar-seeded bank account, college
+    papers, an SSP account and e-attested documents, and an identity proof. They do not yet hold a caste and income certificate
+    or a proof of residence.
+  holdings:
+  - aadhaar
+  - bank-account
+  - bank-account-aadhaar-seeded
+  - sslc-marks-card
+  - marks-card-previous
+  - study-certificate
+  - fee-receipt
+  - hostel-certificate
+  - university-registration-number
+  - ssp-student-account
+  - ssp-e-attested-documents
+  - proof-of-identity
 calendar:
   unit: working_days
   unit_cite:

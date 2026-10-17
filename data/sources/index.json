@@ -84,20 +84,6 @@
     "text_chars": 11
   },
   {
-    "id": "ajsk-procedure",
-    "url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Procedure",
-    "final_url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Procedure",
-    "title": "AJSK Procedure For Application (Nadakacheri)",
-    "retrieved_at": "2026-10-17",
-    "sha256": "64aa70611b5f2dd840896bc0361c8bb4d0baf833c02d0e72c5ef814ee54efe87",
-    "file": "raw/ajsk-procedure.html",
-    "text_file": "text/ajsk-procedure.txt",
-    "content_type": "text/html",
-    "size": 17600,
-    "large_not_in_git": false,
-    "text_chars": 1970
-  },
-  {
     "id": "ajsk-services",
     "url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Services",
     "final_url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Services",
@@ -138,20 +124,6 @@
     "size": 77781,
     "large_not_in_git": false,
     "text_chars": 15083
-  },
-  {
-    "id": "dfs-fi-11-9-2013-vol2",
-    "url": "https://financialservices.gov.in/sites/default/files/order-notices/F.No_.1192013-FI%2520%2528%2520Vol.II%2529.pdf",
-    "final_url": "https://financialservices.gov.in/sites/default/files/order-notices/F.No_.1192013-FI%2520%2528%2520Vol.II%2529.pdf",
-    "title": "DFS order F.No. 11/9/2013-FI (Vol.II) - Department of Financial Services, Ministry of Finance",
-    "retrieved_at": "2026-10-17",
-    "sha256": "d033f0966be28987bac9a2c7ae8f8edafdec92778f635ed63c9caaa72a339ab2",
-    "file": "raw/dfs-fi-11-9-2013-vol2.pdf",
-    "text_file": "text/dfs-fi-11-9-2013-vol2.txt",
-    "content_type": "application/pdf",
-    "size": 156259,
-    "large_not_in_git": false,
-    "text_chars": 7685
   },
   {
     "id": "dfs-fi-6-4-2012-vol3",
@@ -208,6 +180,20 @@
     "size": 142708,
     "large_not_in_git": false,
     "text_chars": 14006
+  },
+  {
+    "id": "npci-nach-faq-customers-wb",
+    "url": "https://web.archive.org/web/20250916110357id_/https://www.npci.org.in/what-we-do/nach/faqs/customers",
+    "final_url": "https://web.archive.org/web/20250916110357id_/https://www.npci.org.in/what-we-do/nach/faqs/customers",
+    "title": "NPCI NACH FAQs - Customers (npci.org.in, Wayback Machine snapshot 2025-09-16)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "ecbd88bcb8b27b855bfd91fce2d41ddbc5e773e017729e2f0d15974c3437fa38",
+    "file": "raw/npci-nach-faq-customers-wb.html",
+    "text_file": "text/npci-nach-faq-customers-wb.txt",
+    "content_type": "text/html",
+    "size": 96853,
+    "large_not_in_git": false,
+    "text_chars": 23886
   },
   {
     "id": "nsp-aicte-pragati-degree-faq",
@@ -672,20 +658,6 @@
     "text_chars": 5334
   },
   {
-    "id": "tumkur-residence-cert-2861",
-    "url": "https://tumkur.nic.in/?p=2861",
-    "final_url": "https://tumkur.nic.in/en/service/residence-certificate/",
-    "title": "Residence Certificate | District Tumakuru (p=2861)",
-    "retrieved_at": "2026-10-17",
-    "sha256": "7b7f1ff9086583d8dad4bd02b1a784669c270cc9146059b4d26b17cde052d70d",
-    "file": "raw/tumkur-residence-cert-2861.html",
-    "text_file": "text/tumkur-residence-cert-2861.txt",
-    "content_type": "text/html",
-    "size": 135395,
-    "large_not_in_git": false,
-    "text_chars": 5334
-  },
-  {
     "id": "uidai-faq-enrolling-children-wb",
     "url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
     "final_url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
@@ -698,20 +670,6 @@
     "size": 121450,
     "large_not_in_git": false,
     "text_chars": 17263
-  },
-  {
-    "id": "uidai-faq-enrolment-process-wb",
-    "url": "https://web.archive.org/web/20230315151813id_/https://uidai.gov.in/en/contact-support/have-any-question/296-english-uk/faqs/enrolment-update/aadhaar-enrolment-process.html",
-    "final_url": "https://web.archive.org/web/20230315151813id_/https://uidai.gov.in/en/contact-support/have-any-question/296-english-uk/faqs/enrolment-update/aadhaar-enrolment-process.html",
-    "title": "UIDAI FAQs: Aadhaar Enrolment Process (uidai.gov.in, Wayback Machine snapshot 2023-03-15)",
-    "retrieved_at": "2026-10-17",
-    "sha256": "9bba10f705e648e1e340773cff564937e0d0db276812e515141f60b81cc7c344",
-    "file": "raw/uidai-faq-enrolment-process-wb.html",
-    "text_file": "text/uidai-faq-enrolment-process-wb.txt",
-    "content_type": "text/html",
-    "size": 134253,
-    "large_not_in_git": false,
-    "text_chars": 23176
   },
   {
     "id": "uidai-supporting-docs-goa",
@@ -754,19 +712,5 @@
     "size": 39261,
     "large_not_in_git": false,
     "text_chars": 61
-  },
-  {
-    "id": "vikaspedia-aadhaar-how-enroll",
-    "url": "https://en.vikaspedia.in/viewcontent/e-governance/online-citizen-services/government-to-citizen-services-g2c/all-about-aadhaar/how-and-where-to-enroll?lgn=en",
-    "final_url": "https://en.vikaspedia.in/viewcontent/e-governance/online-citizen-services/government-to-citizen-services-g2c/all-about-aadhaar/how-and-where-to-enroll?lgn=en",
-    "title": "How and where to enroll for Aadhaar - Vikaspedia",
-    "retrieved_at": "2026-10-17",
-    "sha256": "c38dcf93f48f33ec630bc5127f28139b1e2e5b365948d787078f0833b43fe09a",
-    "file": "raw/vikaspedia-aadhaar-how-enroll.html",
-    "text_file": "text/vikaspedia-aadhaar-how-enroll.txt",
-    "content_type": "text/html",
-    "size": 11307,
-    "large_not_in_git": false,
-    "text_chars": 0
   }
 ]
