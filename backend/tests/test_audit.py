@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def run_audit(root: Path) -> subprocess.CompletedProcess:
-    return subprocess.run([sys.executable, str(root / "scripts" / "audit_data.py")], capture_output=True, text=True)
+    return subprocess.run([sys.executable, str(root / "scripts" / "audit_data.py")], check=False,
+                          capture_output=True, text=True)
 
 
 def copy_repo(tmp: Path) -> Path:

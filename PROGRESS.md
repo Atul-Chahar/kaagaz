@@ -5,10 +5,10 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 1. [x] Setup: git, CLAUDE.md, PROGRESS.md, DECISIONS.md, docker compose with FalkorDB running, skeleton backend and frontend, `verify.sh` stub.
 2. [x] Phase 1 data feasibility done, decision recorded, `docs/FEASIBILITY.md` written.
 3. [x] Rule pack built with full sourcing; `audit_data.py` passes.
-4. [ ] Graph seeded; all Cypher queries written and tested against real FalkorDB.
-5. [ ] Planner and tool catalogue done with unit tests.
-6. [ ] Per-student memory graphs working, with isolation and restart tests.
-7. [ ] API complete with trace logging.
+4. [x] Graph seeded; all Cypher queries written and tested against real FalkorDB.
+5. [x] Planner and tool catalogue done with unit tests.
+6. [x] Per-student memory graphs working, with isolation and restart tests.
+7. [x] API complete with trace logging.
 8. [ ] UI: all 9 screens built to section 7.
 9. [ ] Optional LLM layer with the sentence checker; app fully works without a key.
 10. [ ] Benchmark built; run it if a key exists; honest empty state if not.

@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import secrets
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
@@ -27,7 +28,21 @@ BENCH_RESULTS = ROOT / "bench" / "results"
 SOURCES_INDEX = ROOT / "data" / "sources" / "index.json"
 BROWSER_URL = os.environ.get("FALKORDB_BROWSER_URL", "http://localhost:3000")
 
-app = FastAPI(title="Kaagaz", version="0.1.0")
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    if os.environ.get("KAAGAZ_SEED_ON_START") == "1":
+        for pid in graph.list_packs():
+            try:
+                if not graph.graph_exists(graph.rules_graph_name(pid)):
+                    log.info("seeding %s: %s", pid, graph.seed_pack(pid))
+            except RedisConnectionError:
+                log.warning("FalkorDB not reachable at startup; seed later with scripts/seed.sh")
+    yield
+
+
+app = FastAPI(title="Kaagaz", version="0.1.0", lifespan=lifespan)
 
 
 @app.exception_handler(RedisConnectionError)
@@ -40,17 +55,6 @@ async def falkordb_down(_req: Request, _exc: Exception):
 @app.exception_handler(ToolError)
 async def tool_error(_req: Request, exc: ToolError):
     return JSONResponse(status_code=422, content={"error": "bad_arguments", "message": str(exc)})
-
-
-@app.on_event("startup")
-def startup() -> None:
-    if os.environ.get("KAAGAZ_SEED_ON_START") == "1":
-        for pid in graph.list_packs():
-            try:
-                if not graph.graph_exists(graph.rules_graph_name(pid)):
-                    log.info("seeding %s: %s", pid, graph.seed_pack(pid))
-            except RedisConnectionError:
-                log.warning("FalkorDB not reachable at startup; seed later with scripts/seed.sh")
 
 
 def tools(pack_id: str = DEFAULT_PACK) -> Tools:
