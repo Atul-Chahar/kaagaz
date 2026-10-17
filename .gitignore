@@ -15,3 +15,12 @@ data/sources/raw/sakala-compendium-en.pdf
 data/sources/raw/dpar-ka-holidays-2026.pdf
 data/sources/raw/prs-ka-pt-act-1976.pdf
 HANDOFF.md
+# demo video: third-party skill install, big or derived media
+.agents/
+.claude/skills/
+video/cache/
+video/out/
+video/sound_effects vol 1/
+video/sound_effects vol 1.zip
+video/audio/*.wav
+video/frames/
