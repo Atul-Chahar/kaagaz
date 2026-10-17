@@ -51,7 +51,12 @@ function verdictBase(p: Plan): string {
     case 'no_deadline':
       if (!v.exact && v.critical_days === 0) return 'No deadline is published for this one, and no step left has an official time limit, so the time needed is unknown.'
       return `No deadline is published for this one. The chain needs ${v.exact ? '' : 'at least '}${fmtDays(v.critical_days, u)}.`
-    default:
-      return "The time needed can't be computed, because none of the steps left has an official time limit."
+    default: {
+      const n = p.unknown.length
+      const steps = n === 1 ? 'The 1 step left has' : `All ${n} steps left have`
+      const time = p.deadline.date && p.days_left !== null && p.days_left >= 0
+        ? ` You have ${fmtDays(left, u)} before ${dl}.` : ''
+      return `Kaagaz can't tell whether you will make it. ${steps} no official time limit, so nobody can say how long they take.${time} Start them today.`
+    }
   }
 }

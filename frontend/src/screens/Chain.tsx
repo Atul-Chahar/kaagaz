@@ -138,7 +138,7 @@ export default function Chain({ session, setSession }: { session: Session | null
   const heldItems = plan.items.filter(i => i.label === 'Document' && i.held)
   const unknownCount = plan.unknown.length
   const stampSub = v.kind === 'closed' || v.kind === 'no_deadline' ? undefined
-    : `${plan.day_unit === 'working days' ? 'Working days' : 'Days'} · ${depth} of ${maxDepth} steps`
+    : `${plan.day_unit === 'working days' ? 'Working days' : 'Days'} · depth ${depth} of ${maxDepth}`
 
   return (
     <div>
@@ -160,7 +160,7 @@ export default function Chain({ session, setSession }: { session: Session | null
             <span>Today <b>{fmtDate(plan.today)}</b></span>
             <span>Deadline <b>{plan.deadline.date ? fmtDate(plan.deadline.date) : 'none'}</b> ({deadlineLabel(plan)}{plan.scheme.window_source_url ? <>, <a href={plan.scheme.window_source_url} target="_blank" rel="noreferrer">source</a></> : null})</span>
             {plan.days_left !== null && plan.days_left >= 0 && <span>Left <b>{fmtDays(plan.days_left, plan.day_unit)}</b></span>}
-            <span>Critical path <b data-testid="critical-days">{v.exact ? '' : 'at least '}{fmtDays(v.critical_days, plan.day_unit)}</b></span>
+            <span>Critical path <b data-testid="critical-days">{v.kind === 'cannot_compute' || (!v.exact && v.critical_days === 0) ? 'unknown' : `${v.exact ? '' : 'at least '}${fmtDays(v.critical_days, plan.day_unit)}`}</b></span>
             {unknownCount > 0 && <span><b>{unknownCount}</b> steps with no official time limit</span>}
           </div>
           {!plan.calendar_complete && plan.deadline.date && (
