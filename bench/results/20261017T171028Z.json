@@ -1,0 +1,1454 @@
+{
+ "kind": "llm",
+ "started_at": "2026-10-17T17:10:28+00:00",
+ "finished_at": "2026-10-17T17:13:07+00:00",
+ "model": "openai/gpt-oss-20b",
+ "provider": "openai",
+ "questions": 29,
+ "pack": "in-ka-scholarships",
+ "today": "2026-10-17",
+ "workers": 8,
+ "failed_calls": 0,
+ "systems": [
+  {
+   "system": "llm_alone",
+   "document_recall": 0.0896,
+   "invented_documents": 8.8571,
+   "verdict_accuracy": 0.3846,
+   "first_step_accuracy": 0.1111,
+   "n": {
+    "list_documents": 7,
+    "first_step": 9,
+    "deadline": 13
+   }
+  },
+  {
+   "system": "plain_rag",
+   "document_recall": 0.0498,
+   "invented_documents": 3.7143,
+   "verdict_accuracy": 0.4615,
+   "first_step_accuracy": 0.2222,
+   "n": {
+    "list_documents": 7,
+    "first_step": 9,
+    "deadline": 13
+   }
+  },
+  {
+   "system": "kaagaz",
+   "document_recall": 0.9307,
+   "invented_documents": 7.4286,
+   "verdict_accuracy": 0.9231,
+   "first_step_accuracy": 0.3333,
+   "n": {
+    "list_documents": 7,
+    "first_step": 9,
+    "deadline": 13
+   }
+  }
+ ],
+ "raw": [
+  {
+   "id": "L01",
+   "question": "I am a general-category student without a disability, applying fresh for the PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS). I already have Aadhaar. List every document I need, including the documents needed to get them.",
+   "llm_alone": "{\"documents\":[\"All India Common Eligibility Criteria (AICEC) Form\",\"Aadhaar Card\",\"PAN Card\",\"Self\u2011Declared Socio\u2011Economic (SSP) Certificate\",\"Identity Proof (e.g., Voter ID or Passport)\",\"Address Proof (e.g., bank statement, ration card, electricity bill)\",\"10th Standard School Leaving Certificate (Secondary Certificate)\",\"12th Standard School Leaving Certificate (Intermediate Certificate)\",\"College Admission Letter/Offer Letter\",\"Recent Academic Mark Sheets (semester or yearly)\",\"Photograph (2x2\u202fcm)\",\"Signature\",\"Bank Account Details (signed by account holder)\"],\"first_step\":\"Download and fill the All India Common Eligibility Criteria (AICEC) Form\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar Card\",\"OTR Number (obtained via Aadhaar)\",\"Class XII Mark Sheet/Certificate showing Top 20th percentile\",\"Domicile Proof Document (e.g., Aadhar-based domicile certificate or official domicile proof)\",\"College Admission Letter/Certificate of Admission\"],\"first_step\":\"OTR Number\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-csss-guidelines",
+     "nsp-home",
+     "nsp-csss-faq",
+     "nsp-aicte-pragati-degree-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-csss"
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "bank-account-aadhaar-seeded",
+      "caste-certificate",
+      "disability-certificate",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr",
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "caste-certificate-ka",
+      "driving-licence",
+      "electricity-bill",
+      "form-60",
+      "institution-certificate-uidai-format",
+      "npr-letter",
+      "nrega-job-card",
+      "pan-card",
+      "passport",
+      "ration-card-ka",
+      "sslc-marks-card",
+      "voter-id",
+      "birth-certificate",
+      "proof-of-identity",
+      "proof-of-residence"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L02",
+   "question": "I am an SC student without a disability applying fresh for the PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS). I have Aadhaar. What is every document I need, including documents needed to obtain them?",
+   "llm_alone": "{\"documents\":[\"Aadhaar card\",\"10th Standard exam certificate\",\"12th Standard exam certificate\",\"Current year mark sheet (if already enrolled in a higher year)\",\"College admission letter (proof of enrollment)\",\"Student ID card (with photo)\",\"Bank passbook with active account\",\"Income Certificate\",\"SC Caste Certificate\"],\"first_step\":\"SC Caste Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Bonafide Certificate\",\"Marksheet / Promotion Certificate\",\"Fee Receipt\",\"Hostel Admission Certificate (if applicable)\",\"Aadhaar (for e\u2011KYC)\"],\"first_step\":\"Bonafide Certificate\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-home",
+     "nsp-csss-faq",
+     "nsp-csss-guidelines",
+     "nsp-csss-faq",
+     "ssp-e-attestation-faq-v3"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-l02",
+      "scheme_id": "nsp-csss",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "form-60",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr"
+     ],
+     "first_step": "aadhaar-seeding-consent-form",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "L03",
+   "question": "A general-category student with a disability is applying fresh for the PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS) and already has Aadhaar. List all documents needed, including those needed to get them.",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card (already possessed)\",\"Permanent Disability Certificate (in the student\u2019s name)\",\"PAN Card\",\"Birth Certificate / Proof of age\",\"Class XII (or equivalent) Mark Sheet\",\"Current College Admission Letter / Referral / Registration Certificate\",\"2 recent passport\u2011size photographs\",\"Self\u2011attested Declaration Form\",\"Cancelled Cheque or Passbook (for bank details)\"],\"first_step\":\"Disability Certificate (apply at the District/State Disability Welfare Office)\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\": [], \"first_step\": null, \"verdict\": \"cannot_tell\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-csss-guidelines",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-l03",
+      "scheme_id": "nsp-csss",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "form-60",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr"
+     ],
+     "first_step": "aadhaar-seeding-consent-form",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "L04",
+   "question": "I am renewing my PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS) scholarship (general category, no disability) and I have Aadhaar. List every document I need, including documents needed to get them.",
+   "llm_alone": "{\"documents\":[\"Form\u20111 for renewal (download from PMU website and print)\",\"Aadhaar card (obtain from UIDAI by visiting an enrollment centre or online)\",\"PAN card (apply through Income Tax Department or online e\u2011filing)\",\"Bank account details \u2013 signature card or micro\u2011check (issues from your bank)\",\"Latest semester result sheet or CGPA certificate (issued by your college)\",\"Recent 2x2 photograph with plain background\",\"College enrollment certificate (issued by your college)\",\"Proof of address (e.g., latest utility bill or rental agreement, if required by your college)\"],\"first_step\":\"Download and fill Form\u20111 for renewal from the PMU website\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar Card (for login with OTR)\",\"National Digital ID (UDID) Consent Form \u2013 required if you are a disabled student (not needed for general category)\",\"Bonafide Certificate (issued by your college/university)\",\"Marksheet/Promotion Certificate (issued by your college/university)\",\"Fee Receipt/Academic Fee Verification Certificate (issued by your college/university)\",\"Hostel Admission Certificate \u2013 if you reside in a hostel (issued by your college/university)\",\"E\u2011Attestation for the above documents \u2013 obtained by signing on the e\u2011attestation portal by the respective authority of your institution\"],\"first_step\":\"Login to the National Scholarship Portal (NSP) using Aadhaar/OTR Number\",\"verdict\":\"cannot_tell\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-home",
+     "nsp-csss-faq",
+     "nsp-csss-guidelines",
+     "nsp-csss-faq",
+     "ssp-e-attestation-faq-v3"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-csss",
+      "depth": 8
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "bank-account-aadhaar-seeded",
+      "caste-certificate",
+      "disability-certificate",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr",
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "caste-certificate-ka",
+      "driving-licence",
+      "electricity-bill",
+      "form-60",
+      "institution-certificate-uidai-format",
+      "npr-letter",
+      "nrega-job-card",
+      "pan-card",
+      "passport",
+      "ration-card-ka",
+      "sslc-marks-card",
+      "voter-id",
+      "birth-certificate",
+      "proof-of-identity",
+      "proof-of-residence"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L05",
+   "question": "An SC first-year student wants the Central Sector Scholarship of Top Class Education for SC Students and already has Aadhaar. List every document needed, including documents needed to obtain them.",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card (existing)\",\"SC Caste Certificate\",\"SC Caste Certificate Application Form\",\"School Leaving Certificate (10th)\",\"10th Grade Mark Sheet\",\"12th Grade Mark Sheet (if applicable)\",\"Recent Photograph (2x2 cm)\",\"Address Proof (e.g., Rent Agreement, Electricity Bill)\",\"Bank Account Passbook / Statement\",\"Scholarship Application Form\"],\"first_step\":\"SC Caste Certificate Application Form\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"SC Certificate (obtained from District Collector/Social Justice office; requires proof of caste such as a family caste certificate or any official document proving SC status)\",\"Income Certificate (obtained from local authority/Income Tax office; requires proof of income such as salary slips, bank statements, or tax returns)\",\"Aadhaar (already possessed)\",\"Bank account details (Aadhaar\u2011seeded bank account; requires bank passbook or account statement showing Aadhaar linkage)\",\"Admission details (admission letter/seat allotment from the notified institution)\"],\"first_step\":\"SC Certificate\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "nsp-yasasvi-topclass-college-guidelines",
+     "nsp-csss-faq",
+     "nsp-topclass-sc-guidelines",
+     "nsp-topclass-sc-guidelines",
+     "nsp-topclass-sc-guidelines",
+     "nsp-topclass-sc-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-top-class-sc",
+      "depth": 8
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "admission-proof",
+      "bank-account-aadhaar-seeded",
+      "caste-certificate",
+      "income-certificate-ka",
+      "nsp-otr",
+      "sibling-affidavit",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "birth-certificate",
+      "caste-certificate-ka",
+      "driving-licence",
+      "electricity-bill",
+      "income-proof",
+      "institution-certificate-uidai-format",
+      "passport",
+      "ration-card-ka",
+      "school-leaving-certificate",
+      "sslc-marks-card",
+      "voter-id",
+      "form-60",
+      "npr-letter",
+      "nrega-job-card",
+      "pan-card",
+      "proof-of-identity",
+      "proof-of-residence"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L06",
+   "question": "A general-category girl admitted to the first year of an AICTE-approved degree course wants the AICTE Pragati Scholarship Scheme for Girl Students (Technical Degree). She has Aadhaar. List every document she needs, including documents needed to get them.",
+   "llm_alone": "{\"documents\":[\"Aadhaar card (copy)\",\"Bank account details in student\u2019s name \u2013 photocopy of bank passbook or bank statement\",\"Copy of student\u2019s admission offer/confirmation letter from the institute\",\"Copy of student\u2019s enrollment/attendance certificate for each semester\",\"Student\u2019s 10th board examination certificate (with school names and dates)\",\"Student\u2019s 12th board examination certificate (with board names and dates)\",\"Previous year (last semester) marksheet (if applicable)\",\"Bank deposit receipts or fee payment receipts for the current semester\",\"Proof of family income \u2013 Income Certificate (issued by the local authority or Income Tax Officer) \u2013 to be obtained prior to scholarship application\",\"Income/earnings details of parents \u2013 salary slips, PAN card, bank statements (to support Income Certificate)\",\"Copy of parents\u2019 Aadhaar cards (if required for Income Certificate)\",\"Copy of parents\u2019 bank details (as part of Income Certificate)\"],\"first_step\":\"Admission offer/confirmation letter from the institute\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Income Certificate\",\"Proof of Income Documents (Salary slips, Bank statements, Tax returns, etc.)\",\"General Savings Account details\"],\"first_step\":\"Income Certificate\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-yasasvi-topclass-college-guidelines",
+     "nsp-aicte-pragati-degree-guidelines"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-aicte-pragati-degree"
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "bank-account-aadhaar-seeded",
+      "income-certificate-ka",
+      "marks-card-previous",
+      "nsp-otr",
+      "parent-declaration-pragati",
+      "sslc-marks-card",
+      "study-certificate",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "birth-certificate",
+      "caste-certificate-ka",
+      "driving-licence",
+      "electricity-bill",
+      "income-proof",
+      "institution-certificate-uidai-format",
+      "passport",
+      "ration-card-ka",
+      "school-leaving-certificate",
+      "voter-id",
+      "form-60",
+      "npr-letter",
+      "nrega-job-card",
+      "pan-card",
+      "proof-of-identity",
+      "proof-of-residence"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L07",
+   "question": "An OBC girl starting the first year of an AICTE-approved degree course applies for the AICTE Pragati Scholarship Scheme for Girl Students (Technical Degree). She has Aadhaar. List all documents needed, including those needed to obtain them.",
+   "llm_alone": "{\"documents\":[\"AICTE Pragati Scholarship Application Form\",\"Certificate of Enrolment (from college registrar)\",\"Student ID Card (from college)\",\"School Leaver Certificate / 10th/12th marksheet\",\"Adhaar Card (existing)\",\"Bank Passbook (with savings account)\",\"OBC Caste Certificate (issued by District Civil Registrar)\",\"Income Certificate (issued by District Magistrate office \u2013 for qualifying category)\"],\"first_step\":\"AICTE Pragati Scholarship Application Form\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "```json\n{\n  \"documents\": [\n    \"Adhaar Card\",\n    \"Valid Income Certificate issued by State/UT Government\",\n    \"Proof of admission to the 1st year of an AICTE\u2011approved degree course (e.g., admission letter or enrollment certificate)\",\n    \"General Savings Account details / bank passbook (for DBT disbursement)\"\n  ],\n  \"first_step\": \"Valid Income Certificate issued by State/UT Government\",\n  \"verdict\": \"yes\"\n}\n```",
+    "chunks": [
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-all-scholarships",
+     "nsp-yasasvi-topclass-college-guidelines",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-aicte-pragati-degree",
+      "depth": 8
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "bank-account-aadhaar-seeded",
+      "income-certificate-ka",
+      "marks-card-previous",
+      "nsp-otr",
+      "parent-declaration-pragati",
+      "sslc-marks-card",
+      "study-certificate",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "birth-certificate",
+      "caste-certificate-ka",
+      "driving-licence",
+      "electricity-bill",
+      "income-proof",
+      "institution-certificate-uidai-format",
+      "passport",
+      "ration-card-ka",
+      "school-leaving-certificate",
+      "voter-id",
+      "form-60",
+      "npr-letter",
+      "nrega-job-card",
+      "pan-card",
+      "proof-of-identity",
+      "proof-of-residence"
+     ]
+    }
+   }
+  },
+  {
+   "id": "F01",
+   "question": "A student who already holds Aadhaar, an Aadhaar-seeded bank account, the 12th mark sheet and a family income certificate applies fresh (general category) for the PM-USP Central Sector Scheme of Scholarship (CSSS). Which document should they apply for first?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Aadhaar-seeded Bank Account\",\"12th Standard Mark Sheet\",\"Family Income Certificate\",\"Karnataka Domicile Certificate\"],\"first_step\":\"Karnataka Domicile Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"OTR registration (obtain OTR number using Aadhaar)\",\"12th mark sheet\",\"Annual Family Income Certificate\"],\"first_step\":\"OTR registration (obtain OTR number)\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-topclass-sc-faq",
+     "nsp-csss-guidelines"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f01",
+      "scheme_id": "nsp-csss",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr"
+     ],
+     "first_step": "aadhaar-face-authentication",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "F02",
+   "question": "A general-category student holding Aadhaar, an NSP OTR number (face authentication done), a bank savings account (not yet Aadhaar-seeded), the 12th mark sheet and a family income certificate applies fresh for CSSS. Which document should they apply for first?",
+   "llm_alone": "{\"documents\":[\"Aadhaar card\",\"NSP OTR card (face authenticated)\",\"Aadhaar\u2011seeded savings bank account\",\"12th grade mark sheet\",\"Family income certificate (issued by local revenue office)\",\"Proof of residence (if required by CSSS)\"],\"first_step\":\"Aadhaar\u2011seeded savings bank account\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar Card\",\"Bank Account\",\"12th Mark Sheet\",\"Family Income Certificate\"],\"first_step\":\"Aadhaar Seeding with Bank Account\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-home",
+     "ssp-ka-home",
+     "nsp-student-announcements",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-student-announcements"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f02",
+      "scheme_id": "nsp-csss"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr"
+     ],
+     "first_step": "aadhaar-seeding-consent-form",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "F03",
+   "question": "A general-category student has Aadhaar, a PAN, an NSP OTR number (face authentication done), the 12th mark sheet and a family income certificate, but no bank account at all. They apply fresh for CSSS. Which document should they apply for first?",
+   "llm_alone": "{\"documents\":[\"Bank Account Passbook or Statement\",\"Aadhaar Card\",\"PAN Card\",\"12th Mark Sheet\",\"Family Income Certificate\",\"NSP-OTR Card/Confirmation\"],\"first_step\":\"Bank Account Passbook or Statement\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"12th Mark Sheet\",\"Family Income Certificate\",\"NSP OTR Number\",\"Bank Account\"],\"first_step\":\"Bank Account\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-home",
+     "nsp-sop",
+     "nsp-csss-faq",
+     "nsp-student-announcements",
+     "nsp-aicte-pragati-degree-faq",
+     "ssp-ka-home",
+     "nsp-student-announcements",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f03",
+      "scheme_id": "nsp-csss"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr",
+      "pan-card"
+     ],
+     "first_step": "aadhaar-seeding-consent-form",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "F04",
+   "question": "An SC first-year student holds Aadhaar, an NSP OTR number (face authentication done), an Aadhaar-seeded bank account, an SC certificate, an income certificate and admission/fee details. Applying for the Central Sector Scholarship of Top Class Education for SC Students, which document should they get first?",
+   "llm_alone": "{\n  \"documents\": [\n    \"Central Sector Scholarship Application Form\",\n    \"SC Certificate\",\n    \"Income Certificate\",\n    \"Aadhaar Card\",\n    \"Aadhaar\u2011seeded Bank Account Details\",\n    \"Admission/Fee Details Letter\",\n    \"Bank Passbook/Statement\",\n    \"Photograph\",\n    \"Signature\",\n    \"Caste Certificate Application Form (to obtain SC Certificate)\",\n    \"Income Certificate Application Form (to obtain Income Certificate)\",\n    \"Bank Account Opening Form (to obtain Aadhaar\u2011seeded Bank Account)\",\n    \"College Admission Letter (to obtain Admission/Fee Details Letter)\"\n  ],\n  \"first_step\": \"Central Sector Scholarship Application Form\",\n  \"verdict\": \"yes\"\n}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"SC Certificate\",\"Income Certificate\",\"Aadhaar\",\"Aadhaar\u2011seeded Bank Account Details\",\"Admission Details\",\"Admission Rank\",\"Fee Details\"],\"first_step\":null,\"verdict\":\"cannot_tell\"}",
+    "chunks": [
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-topclass-sc-guidelines",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "npci-nach-faq-customers-wb"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f04",
+      "scheme_id": "nsp-top-class-sc"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "admission-proof",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-certificate",
+      "income-certificate-ka",
+      "income-proof",
+      "nsp-otr",
+      "school-leaving-certificate",
+      "sibling-affidavit"
+     ],
+     "first_step": "school-leaving-certificate",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "F05",
+   "question": "A girl in the first year of an AICTE-approved degree holds Aadhaar, an NSP OTR number (face authentication done), an Aadhaar-seeded bank account, her SSLC and 12th mark sheets, a bonafide certificate and an income certificate. Applying for the AICTE Pragati Scholarship (Technical Degree), which document should she get first?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Income Certificate\",\"12th Marksheet\",\"Bonafide Certificate (College Issue)\",\"Aadhaar\u2011seeded Bank Account details (e.g., cancel cheque)\",\"Proof of Enrollment/Academic Year Marks (if required)\",\"Scholarship Application Form\"],\"first_step\":\"Bonafide Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar Card\",\"Aadhaar\u2011seeded bank account (General Savings Account in her name)\",\"Income Certificate issued by State/UT Government\",\"Bonafide Certificate from the institution\",\"SSLC Marksheet\",\"12th Marksheet\",\"Admission Letter/Certificate of Admission to the first year of the AICTE\u2011approved degree program\"],\"first_step\":\"Admission Letter/Certificate of Admission\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-guidelines",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "npci-nach-faq-customers-wb",
+     "nsp-aicte-pragati-degree-faq",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f05",
+      "scheme_id": "nsp-aicte-pragati-degree",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "income-certificate-ka",
+      "income-proof",
+      "marks-card-previous",
+      "nsp-otr",
+      "parent-declaration-pragati",
+      "school-leaving-certificate",
+      "sslc-marks-card",
+      "study-certificate"
+     ],
+     "first_step": "school-leaving-certificate",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "F06",
+   "question": "A second-year SC degree student (no disability, not admitted through counselling) in Karnataka holds Aadhaar, ID and address proof, a voter ID, a Karnataka income certificate, an SSP student account, the SSLC marks card, a university registration number, e-attested documents on SSP, an NSP OTR number (face authentication done) and an Aadhaar-seeded bank account. Applying for the SC Post Matric Scholarship (GoI), which document should they apply for first?",
+   "llm_alone": "{\"documents\":[\"SSLC Marksheet (request from school)\",\"SC Income Certificate (pre\u2011existing)\",\"SSP Scholarship Certificate (apply via SSP portal)\",\"College Enrollment Confirmation/Student Registration Certificate (from college)\",\"Latest Academic Marksheet/Result (semester/college)\",\"Bank Passbook/Account Statement (Aadhaar\u2013seeded bank)\",\"Student ID Card / Proof of Identity (pre\u2011existing)\",\"Voter ID (pre\u2011existing)\",\"Aadhaar Card (pre\u2011existing)\",\"National Student Portal (NSP) OTR Number (pre\u2011existing)\"],\"first_step\":\"SSP Scholarship Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"SC Certificate\",\"Income Certificate\",\"Aadhaar\",\"Aadhaar\u2011seeded bank account\",\"Admission details (university registration number)\",\"Admission rank and fee details\",\"SSP student account\",\"SSLC marks card\",\"e\u2011attested documents on SSP\"],\"first_step\":\"SC Certificate\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "nsp-sop",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f06",
+      "scheme_id": "ka-ssp-pms-sc",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "yes"
+    }
+   }
+  },
+  {
+   "id": "F07",
+   "question": "A second-year ST degree student (no disability, not admitted through counselling) holds Aadhaar, ID and address proof, a voter ID, a Karnataka income certificate, the SSLC marks card, a university registration number, e-attested documents and an Aadhaar-seeded bank account, but has no SSP account, no NSP OTR and no caste certificate yet. Applying for the Postmatric Scholarship for ST Students, which should they apply for first?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Voter ID Card\",\"Karnataka Income Certificate\",\"SSLC Marks Card\",\"University Registration Certificate\",\"E\u2011attested Birth Certificate\",\"Aadhaar\u2011seeded Bank Account\",\"Scheduled Tribes Caste Certificate\",\"State Scholarship Portal (SSP) Account\",\"National Scholarship Portal (NSP) Online Transaction Receipt\",\"Post\u2011Matric Scholarship Application Form\"],\"first_step\":\"Scheduled Tribes Caste Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"NSP OTR application\"],\"first_step\":\"NSP OTR number\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "tumkur-income-cert",
+     "nsp-topclass-sc-faq",
+     "nsp-sop",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f07",
+      "scheme_id": "ka-ssp-pms-st"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "F08",
+   "question": "A second-year OBC degree student (Category 2A, i.e. a backward class other than Category-1; no disability) holds Aadhaar, ID and address proof, a voter ID, an SSP student account, the SSLC marks card, a university registration number, e-attested documents and an Aadhaar-seeded bank account, but no NSP OTR and no caste or income certificate. Applying for PostMatric for OBC Students Central / PM YASASVI, which should they apply for first?",
+   "llm_alone": "{\"documents\":[\"Aadhaar card\",\"Voter ID card\",\"SSLC marks card\",\"ID proof\",\"Address proof\",\"Student registration number\",\"Caste certificate (for OBC)\",\"Income certificate (if applicable)\",\"E\u2011attested copies of all above documents\",\"Aadhaar\u2011seeded bank account\",\"Photographs\",\"Affidavit (if required)\",\"SSP student account details\",\"NSP OTR (National Scholarship Portal OTR number)\"],\"first_step\":\"Apply for a Caste Certificate\",\"verdict\":\"cannot_tell\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"National Scholarship Portal OTR registration\"],\"first_step\":\"National Scholarship Portal OTR registration\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "ssp-ka-home",
+     "nsp-sop",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f08",
+      "scheme_id": "ka-ssp-pms-obc"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "F09",
+   "question": "A minority student holds Aadhaar, ID and address proof, a Karnataka income certificate, an SSP student account, the SSLC marks card, a university registration number, e-attested documents and a bank savings account that is not Aadhaar-seeded. Applying for the Fee Reimbursement scheme for Minorities (Post-Matric), which document should they get first?",
+   "llm_alone": "{\"documents\":[\"Minority certificate (or SC/ST certificate)\",\"Income certificate (Karnataka income certificate already available)\",\"SSLC marks card (already available)\",\"University registration number (already available)\",\"Fee Reimbursement Scheme application form\",\"Bank account linked with Aadhaar (Aadhaar\u2011seeded bank account)\",\"Recent bank statement from the Aadhaar\u2011seeded account\",\"Self\u2011attested copies of the above documents\",\"Photographs (as per scheme requirement)\"],\"first_step\":\"Link your existing bank savings account with Aadhaar (obtain an Aadhaar\u2011seeded bank account)\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar\u2011seeded bank account\"],\"first_step\":\"Aadhaar\u2011seeded bank account\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-sop",
+     "ssp-e-attestation-faq-v3",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "npci-nach-faq-customers-wb",
+     "ssp-ka-home",
+     "tumkur-income-cert"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-f09",
+      "scheme_id": "ka-ssp-fee-reimbursement-minority",
+      "depth": 1,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "D01",
+   "question": "An SC student holding only Aadhaar, ID and address proof and a voter ID applies for the SC Post Matric Scholarship (GoI). The deadline is 10 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"SC certificate (photo)\",\"Birth certificate\",\"Matriculation mark sheet\",\"Passport\u2011size photographs\",\"Bank account statement / passbook\",\"Address proof (current address)\",\"Voter ID (already have)\"],\"first_step\":\"Apply for SC certificate\",\"verdict\":\"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"OTR number\",\"SATS ID\",\"RD number of caste certificate\",\"bonafide certificate\",\"marksheet\",\"fee receipt\",\"hostel admission certificate\"],\"first_step\":\"OTR number\",\"verdict\":\"no\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "ssp-e-attestation-faq-v3",
+     "tumkur-income-cert",
+     "nsp-csss-faq",
+     "ssp-e-attestation-faq-v3"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d01",
+      "scheme_id": "ka-ssp-pms-sc",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "form-60",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D02",
+   "question": "A second-year SC degree student (no disability, not admitted through counselling) holds Aadhaar, ID and address proof, a voter ID, a Karnataka income certificate, an SSP account, the SSLC marks card, a university registration number, e-attested documents, an NSP OTR (face authentication done) and an Aadhaar-seeded bank account. Only the caste certificate is missing. The SC Post Matric Scholarship (GoI) deadline is 30 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"SC caste certificate (required to prove SC status) \u2013 to obtain this you need: \\u201CSC Certificate Application Form\\u201D (downloadable from district office or e\u2011caste portal), proof of residence (e.g., Aadhar card, voter ID, utility bill), proof of identity (Aadhar card), two recent 2\u202fcm face photographs, affidavit (if required), and the applicable fee (typically \u20b9100 to \u20b9200). \\u201CSSLC marks card\\u201D (original with photocopies, for last secondary exam result). \\u201CKarnataka income certificate\\u201D (original and photocopies, recent 3\u2011year income verification). \\u201CAadhaar card\\u201D (identity proof). \\u201CVoter ID\\u201D (address proof). \\u201CAadhaar\u2011seeded bank account details\\u201D (for scholarship disbursal). \\u201CUniversity admission/registration number (or admission letter)\\u201D (proof of enrolment in a recognized university). \\u201CPhotographic identification (2\u202fcm photo)\\u201D (used in application). \\u201CPhotocopies of all documents\\u201D (must be e\u2011attested, e.g., using NSP OTR).\",\"first_step\":\"SC caste certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Caste Certificate\"],\"first_step\":\"Caste Certificate\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "ssp-e-attestation-faq-v3",
+     "ssp-ka-home",
+     "tumkur-income-cert"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d02",
+      "scheme_id": "ka-ssp-pms-sc"
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "yes"
+    }
+   }
+  },
+  {
+   "id": "D03",
+   "question": "An ST student holding Aadhaar, ID and address proof and a voter ID applies for the Postmatric Scholarship for ST Students. The deadline is 15 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Postmatric Scholarship Application Form (online)\",\"ST Caste Certificate (Form\u202f27) \u2013 obtained from District Magistrate office; requires self\u2011declaration and supporting documents such as the election/Voter ID, ration card, school leaving certificate, and a recent photograph\",\"Copy of Aadhaar Card\",\"Copy of Voter ID Card\",\"Copy of Domicile/Address Proof (e.g., ration card or electricity bill)\",\"Copy of Birth Certificate (for age verification)\"],\"first_step\":\"ST Caste Certificate (Form\u202f27)\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar Card\",\"Voter ID\",\"Address Proof\",\"OTR Number\"],\"first_step\":\"National Scholarship Portal OTR registration (if not already obtained)\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "tumkur-income-cert",
+     "nsp-csss-faq",
+     "nsp-sop",
+     "nsp-csss-faq",
+     "nsp-home"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d03",
+      "scheme_id": "ka-ssp-pms-st",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "form-60",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D04",
+   "question": "A second-year ST degree student (no disability, not admitted through counselling) holds Aadhaar, ID and address proof, a voter ID, a Karnataka income certificate, an SSP account, the SSLC marks card, a university registration number, e-attested documents, an NSP OTR (face authentication done) and an Aadhaar-seeded bank account; only the caste certificate is missing. The Postmatric Scholarship for ST Students deadline is 25 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar card\",\"Voter ID\",\"Karnataka income certificate\",\"SSLC marks card\",\"University registration number\",\"SSP account details\",\"Aadhaar\u2011seeded bank account\",\"e\u2011attested copies of academic certificates\",\"Post\u2011matric scholarship application form\",\"Caste certificate (to be obtained)\",\"Birth certificate (required for caste certificate application)\",\"Proof of address (required for caste certificate application)\"],\"first_step\":\"Caste certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar card\",\"ID proof\",\"address proof\",\"voter ID\",\"Karnataka income certificate\",\"SSP account\",\"SSLC marks card\",\"university registration number\",\"e-attested documents\",\"NSP OTR number\",\"Aadhaar\u2011seeded bank account\",\"caste certificate\"],\"first_step\":\"caste certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "tumkur-income-cert",
+     "nsp-topclass-sc-faq",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d04",
+      "scheme_id": "ka-ssp-pms-st"
+     }
+    },
+    "outcome": "answered_with_path",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "yes"
+    }
+   }
+  },
+  {
+   "id": "D05",
+   "question": "An ST student holds Aadhaar, ID and address proof, a voter ID, an SSP account, the SSLC marks card, a university registration number, e-attested documents and an Aadhaar-seeded bank account, but has no caste certificate, no income certificate and no NSP OTR. The Postmatric Scholarship for ST Students deadline is 30 working days away. Can they make it?",
+   "llm_alone": "{\n  \"documents\": [\n    \"Aadhaar Card (ID proof)\",\n    \"Voter ID (address proof)\",\n    \"SSLC Marks Certificate\",\n    \"University Registration Number\",\n    \"E\u2011attested copies of SSLC marks (or other academic transcripts)\",\n    \"Aadhaar\u2011seeded Bank Account (bank passbook or debit card)\",\n    \"Caste Certificate for Scheduled Tribes (ST)\",\n    \"Income Certificate (from Taluk Panchayat or District Office)\",\n    \"NSP OTR (No\u2011Student Participation / related scholarship document)\"\n  ],\n  \"first_step\": \"Caste Certificate\",\n  \"verdict\": \"yes\"\n}",
+   "plain_rag": {
+    "answer": "{\"documents\": [\"NSP OTR registration\", \"ST caste certificate\", \"Income certificate\"], \"first_step\": \"NSP OTR registration\", \"verdict\": \"no\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "tumkur-income-cert",
+     "nsp-csss-faq",
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d05",
+      "scheme_id": "ka-ssp-pms-st",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-e-attested-documents",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "D06",
+   "question": "An OBC student holding Aadhaar, ID and address proof, a voter ID, an NSP OTR (face authentication done) and an Aadhaar-seeded bank account, but no caste or income certificate, applies for PostMatric for OBC Students Central / PM YASASVI. The deadline is 10 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Identity Proof (e.g., Voter ID, Driver\u2019s License, PAN Card)\",\"Address Proof (e.g., utility bill, rent agreement, ration card)\",\"School Leaving Certificate (Class X) or equivalent\",\"Caste Certificate (OBC) \u2013 required for eligibility\",\"Income Certificate (from local RDO or District Office) \u2013 required to prove APL\",\"Photographs (passport size, 2-3 copies)\",\"Signature Proof (on application form)\",\"Bank Account Details (e.g., passbook, cheque, or IMPS slip)\",\"Application Form for Post-Matric Scholarship (downloaded from official portal)\"],\"first_step\":\"Apply for OBC Caste Certificate\",\"verdict\":\"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"OBC Caste Certificate (RD Number)\",\"Income Certificate\"],\"first_step\":\"OBC Caste Certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-faq",
+     "nsp-otr-faq",
+     "nsp-csss-faq",
+     "nsp-home",
+     "nsp-student-announcements"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d06",
+      "scheme_id": "ka-ssp-pms-obc"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D07",
+   "question": "A backward-class student holding Aadhaar, ID and address proof, a voter ID, an NSP OTR (face authentication done) and an Aadhaar-seeded bank account, but no caste or income certificate, applies for the BCWD Fee Reimbursement (Fee Concession). The deadline is 14 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"BCWD Fee Concession Application Form\",\"Backward class certificate\",\"Income certificate (or income proof)\",\"Passport\u2011size photographs\",\"Aadhaar card copy\",\"ID proof (e.g., Voter ID)\",\"Bank account details (Aadhaar\u2011seeded bank account)\"],\"first_step\":\"Backward class certificate\",\"verdict\":\"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Caste Certificate\",\"Income Certificate\"],\"first_step\":\"Caste Certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "ssp-ka-home",
+     "tumkur-income-cert",
+     "nsp-otr-faq",
+     "nsp-otr-faq",
+     "nsp-topclass-sc-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d07",
+      "scheme_id": "ka-ssp-fee-concession-bcwd"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D08",
+   "question": "A backward-class student holding Aadhaar, ID and address proof and a voter ID, with no caste or income certificate, applies for the Vidyasiri Food and Accommodation Scheme (BCWD). The deadline is 10 working days away. Can they make it?",
+   "llm_alone": "{\"documents\": [], \"first_step\": null, \"verdict\": \"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Caste Certificate\"],\"first_step\":\"Caste Certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "tumkur-income-cert",
+     "tumkur-income-cert",
+     "ssp-ka-home",
+     "ssp-ka-home",
+     "itd-instant-epan-help",
+     "ssp-ka-home",
+     "nsp-csss-faq",
+     "bcwd-ka-postmatric-2026-27"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d08",
+      "scheme_id": "ka-ssp-vidyasiri-bcwd",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "form-60",
+      "nsp-otr",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number",
+      "voter-id"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D09",
+   "question": "A minority student holding Aadhaar and ID and address proof but no income certificate applies for the Fee Reimbursement scheme for Minorities (Post-Matric). The deadline is 20 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Identity Proof (e.g., Voter ID/PAN)\",\"Address Proof (e.g., electricity bill)\",\"Minority Certificate (needs to be applied for)\",\"Fee Reimbursement Application Form\",\"Photographs\",\"Income Certificate (if required)\"],\"first_step\":\"Minority Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Income Certificate\",\"School Leaving Certificate\",\"Caste Certificate (Minority)\",\"Passport Size Photographs\"],\"first_step\":\"Income Certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "ssp-ka-home",
+     "tumkur-income-cert",
+     "tumkur-income-cert",
+     "itd-instant-epan-help",
+     "dom-ka-home",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d09",
+      "scheme_id": "ka-ssp-fee-reimbursement-minority"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "form-60",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "no"
+    }
+   }
+  },
+  {
+   "id": "D10",
+   "question": "A minority student holding Aadhaar, ID and address proof and an SSP account, but no income certificate and no Aadhaar-seeded bank account, applies for the Vidyasiri scheme for minorities. The deadline is 30 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Identity Proof (e.g., PAN, voter ID)\",\"Address Proof (e.g., electricity bill, rent agreement)\",\"Income Certificate (requires Aadhaar, Identity Proof, Address Proof)\",\"Aadhaar\u2011seeded Bank Account (open online at bank using Aadhaar)\",\"SSLC Mark Sheet\",\"12th Mark Sheet\",\"Minority Certificate (if issued by local authority)\",\"Vidyasiri Application Form\"],\"first_step\":\"Apply for Income Certificate\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Income Certificate\",\"Aadhaar-seeded Bank Account\",\"Admission details\",\"Admission rank and fee details\",\"ID and address proof\",\"SSP account\"],\"first_step\":\"Income Certificate\",\"verdict\":\"no\"}",
+    "chunks": [
+     "nsp-topclass-sc-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "ssp-ka-home",
+     "npci-nach-faq-customers-wb",
+     "npci-nach-faq-customers-wb",
+     "nsp-csss-faq",
+     "npci-nach-faq-customers-wb"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d10",
+      "scheme_id": "ka-ssp-vidyasiri-minority",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-seeding-consent-form",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-income-certificate-ka",
+      "form-60",
+      "proof-of-identity",
+      "proof-of-residence",
+      "sslc-marks-card",
+      "ssp-student-account",
+      "university-registration-number"
+     ],
+     "first_step": "caste-income-certificate-ka",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "D11",
+   "question": "An OBC student holding only Aadhaar applies for the PM YASASVI Central Sector Scheme of Top Class Education in College. The deadline is 10 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"10th Grade Mark Sheet\",\"12th Grade Mark Sheet\",\"College Admission Letter / Certificate\",\"Bank Account Details (Name, Account Number, IFSC Code)\",\"OBC Certificate (from District Office)\",\"Photographs (passport\u2011size)\",\"Signed Application Form\"],\"first_step\":\"Obtain 10th and 12th grade mark sheets\",\"verdict\":\"yes\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Aadhaar card\",\"Online application form\"],\"first_step\":\"Online application form\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-all-scholarships",
+     "nsp-yasasvi-topclass-college-guidelines",
+     "nsp-csss-faq",
+     "nsp-all-scholarships",
+     "nsp-csss-faq",
+     "nsp-yasasvi-topclass-college-guidelines",
+     "nsp-csss-faq",
+     "nsp-topclass-sc-guidelines"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d11",
+      "scheme_id": "nsp-pm-yasasvi-top-class-college"
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "bank-account",
+      "caste-certificate",
+      "form-60",
+      "income-certificate",
+      "nsp-otr"
+     ],
+     "first_step": "form-60",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "D12",
+   "question": "A general-category student holding Aadhaar, the 12th mark sheet and a family income certificate, but no NSP OTR and no bank account, applies fresh for the PM-USP Central Sector Scheme of Scholarship (CSSS). The deadline is 5 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"12th Board Mark Sheet\",\"Income Certificate\",\"Bank Account (in student\u2019s name)\",\"Address Proof (for bank account opening)\",\"OTR (NSP OTR)\"],\"first_step\":\"OTR (NSP OTR)\",\"verdict\":\"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"nsp-csss-faq\",\"nsp-home\"],\"first_step\":\"nsp-csss-faq\",\"verdict\":\"yes\"}",
+    "chunks": [
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-csss-faq",
+     "nsp-aicte-pragati-degree-faq",
+     "nsp-home",
+     "nsp-csss-faq",
+     "nsp-csss-faq"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d12",
+      "scheme_id": "nsp-csss",
+      "depth": 1,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "bank-account-aadhaar-seeded",
+      "income-certificate",
+      "marks-card-previous",
+      "nsp-otr"
+     ],
+     "first_step": "bank-account-aadhaar-seeded",
+     "verdict": "cannot_tell"
+    }
+   }
+  },
+  {
+   "id": "D13",
+   "question": "An SC first-year student holding Aadhaar, an Aadhaar-seeded bank account, an SC certificate, an income certificate, admission details and the sibling affidavit, but no NSP OTR, applies for the Central Sector Scholarship of Top Class Education for SC Students. The deadline is 3 working days away. Can they make it?",
+   "llm_alone": "{\"documents\":[\"Aadhaar Card\",\"Aadhaar\u2011seeded bank account statement\",\"SC Certificate\",\"Income Certificate (FB\u201116 or equivalent)\",\"Admission Letter from the college\",\"Sibling Affidavit\",\"10th Grade Marksheet\",\"12th Grade Marksheet\",\"National Scheme OTR Certificate (or proof of completion)\",\"Passport\u2011size photographs\",\"Proof of domicile (Certificate of Residence)\"],\"first_step\":\"Obtain the National Scheme OTR Certificate\",\"verdict\":\"no\"}",
+   "plain_rag": {
+    "answer": "{\"documents\":[\"Valid SC Certificate\",\"Income Certificate\",\"Aadhaar Card\",\"Aadhaar\u2011seeded bank account details\",\"Admission details (including admission rank and fee details)\",\"Sibling affidavit\"],\"first_step\":\"Obtain NSP OTR number by registering on the National Scholarship Portal\",\"verdict\":\"no\"}",
+    "chunks": [
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-faq",
+     "ssp-ka-home",
+     "nsp-topclass-sc-faq",
+     "nsp-topclass-sc-guidelines",
+     "ssp-ka-home",
+     "nsp-topclass-sc-guidelines"
+    ]
+   },
+   "kaagaz": {
+    "route": {
+     "tool": "plan",
+     "args": {
+      "student_id": "bench-d13",
+      "scheme_id": "nsp-top-class-sc",
+      "depth": 8,
+      "remember": true
+     }
+    },
+    "outcome": "no_official_time",
+    "answer": {
+     "doc_ids": [
+      "aadhaar",
+      "aadhaar-face-authentication",
+      "aadhaar-seeding-consent-form",
+      "admission-proof",
+      "bank-account",
+      "bank-account-aadhaar-seeded",
+      "caste-certificate",
+      "income-certificate-ka",
+      "income-proof",
+      "nsp-otr",
+      "school-leaving-certificate",
+      "sibling-affidavit"
+     ],
+     "first_step": "school-leaving-certificate",
+     "verdict": "no"
+    }
+   }
+  }
+ ]
+}

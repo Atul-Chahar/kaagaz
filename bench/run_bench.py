@@ -21,7 +21,7 @@ import datetime as dt
 import json
 import re
 import sys
-import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 BENCH = Path(__file__).resolve().parent
@@ -200,9 +200,8 @@ def kaagaz_llm(t: Tools, q: dict) -> tuple[dict, dict]:
     if q["type"] == "deadline":
         deadline = t.calendar.date_of(t.today(), q["working_days_left"]).isoformat()
     memory.set_target(sid, q["scheme_id"], deadline, "student" if deadline else "published_window")
-    schemes = ", ".join(f"{s['id']} = {s['name']}" for s in t.pack["schemes"])
     ctx = (f"Context: student_id={sid}. The student's holdings and deadline are already saved in memory. "
-           f"Scheme ids: {schemes}.")
+           + agent.id_directory(t))
     raw = {"route": None}
     try:
         name, args = agent.choose_tool(question_text(q), ctx)
@@ -232,6 +231,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--deterministic", action="store_true", help="score Kaagaz's planner alone (no LLM)")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--workers", type=int, default=8, help="questions asked at the same time")
     args = ap.parse_args()
     if not args.deterministic and not agent.llm_configured():
         print("Benchmark not run: no LLM configured. Set LLM_PROVIDER, LLM_API_KEY and LLM_MODEL (see .env.example), "
@@ -265,27 +265,41 @@ def main() -> int:
 
     cfg = agent.config()
     rag = BM25Index()
-    raw_rows, sys_answers = [], {"llm_alone": [], "plain_rag": [], "kaagaz": []}
-    for q in questions:
+    # NVIDIA NIM's free tier (and most hosted APIs) queue every request; one call can wait a long time, so questions
+    # run in parallel, well under the ~40 requests a minute the free tier allows. A failed call is a wrong answer.
+    def ask_model(system: str, user: str) -> tuple[str, str | None]:
+        try:
+            return agent.complete(system, user, 900), None
+        except agent.LLMError as e:
+            return "", str(e)
+
+    def one(q: dict) -> tuple[dict, dict]:
         row = {"id": q["id"], "question": q["question"]}
-        alone = agent.complete("You help Indian students with scholarship paperwork. " + ANSWER_SPEC,
-                               question_text(q), 900)
+        alone, err = ask_model("You help Indian students with scholarship paperwork. " + ANSWER_SPEC, question_text(q))
         row["llm_alone"] = alone
-        sys_answers["llm_alone"].append(to_answer(q, parse_json(alone), docs))
+        if err:
+            row["llm_alone_error"] = err
         ctx = rag.top(q["question"])
         rag_prompt = "Sources:\n" + "\n---\n".join(f"[{sid}] {c}" for sid, c in ctx) + f"\n\nQuestion: {q['question']}"
-        rag_out = agent.complete("Answer only from the sources given. " + ANSWER_SPEC, rag_prompt, 900)
-        row["plain_rag"] = {"answer": rag_out, "chunks": [sid for sid, _ in ctx]}
-        sys_answers["plain_rag"].append(to_answer(q, parse_json(rag_out), docs))
+        rag_out, err = ask_model("Answer only from the sources given. " + ANSWER_SPEC, rag_prompt)
+        row["plain_rag"] = {"answer": rag_out, "chunks": [sid for sid, _ in ctx]} | ({"error": err} if err else {})
         ans, raw = kaagaz_llm(t, q)
         row["kaagaz"] = raw | {"answer": ans}
-        sys_answers["kaagaz"].append(ans)
-        raw_rows.append(row)
-        time.sleep(0.5)
+        print(f"{q['id']} done{' (with errors)' if 'error' in json.dumps(row) else ''}", flush=True)
+        return row, {"llm_alone": to_answer(q, parse_json(alone), docs),
+                     "plain_rag": to_answer(q, parse_json(rag_out), docs), "kaagaz": ans}
+
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        results = list(pool.map(one, questions))  # map keeps question order
+    raw_rows = [r for r, _ in results]
+    sys_answers = {s: [a[s] for _, a in results] for s in ("llm_alone", "plain_rag", "kaagaz")}
+    errors = sum(1 for r in raw_rows for k in ("llm_alone_error",) if k in r)
+    errors += sum(1 for r in raw_rows if "error" in r["plain_rag"] or "error" in r["kaagaz"])
     run = {"kind": "llm", "started_at": started.isoformat(timespec="seconds"),
            "finished_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
            "model": cfg["model"], "provider": cfg["provider"], "questions": len(questions), "pack": PACK,
            "today": t.today().isoformat(),
+           "workers": args.workers, "failed_calls": errors,
            "systems": [score(s, a, questions) for s, a in sys_answers.items()], "raw": raw_rows}
     path = out_dir / f"{stamp}.json"
     path.write_text(json.dumps(run, indent=1))

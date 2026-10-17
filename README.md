@@ -178,7 +178,8 @@ The only things the agent (or the UI, or MCP) can call, each with validated argu
 - Every tool call and query is logged as a trace row (tool, arguments, milliseconds, rows) and shown.
 - Optional LLM layer (`LLM_PROVIDER` = `anthropic` or any OpenAI-compatible endpoint): the model picks one tool and
   writes one sentence. The sentence is checked: every scheme or document name it mentions and every number it states
-  must be in the tool result, otherwise the sentence built from the result is shown instead.
+  must be in the tool result, otherwise the sentence built from the result is shown instead. Setup, the chosen NVIDIA
+  NIM model (`openai/gpt-oss-20b`) and how it was chosen: [`docs/LLM_SETUP.md`](docs/LLM_SETUP.md).
 
 ### MCP server
 
@@ -207,8 +208,21 @@ then the model), and Kaagaz (the model picks one tool, the answer is read from t
 recall, invented documents per answer, verdict accuracy, first-step accuracy. `make bench` writes
 `bench/results/<timestamp>.json` with model name, date and raw answers.
 
-**Latest LLM run: not run.** No LLM key was available while building, so there are no three-system numbers. The
-Benchmark page says "Benchmark not run yet. Add an LLM key and run `make bench`." until a real run exists.
+**Latest LLM run: 17 Oct 2026, `openai/gpt-oss-20b` on NVIDIA NIM, 29 questions** (`bench/results/20261017T171028Z.json`,
+0 failed calls):
+
+| System | Document recall | Invented documents per answer | Verdict accuracy | First step right |
+|---|---|---|---|---|
+| Model alone | 9% | 8.86 | 38% (5 of 13) | 1 of 9 |
+| Plain RAG | 5% | 3.71 | 46% (6 of 13) | 2 of 9 |
+| Kaagaz | 93% | 7.43 | 92% (12 of 13) | 3 of 9 |
+
+Kaagaz's invented-documents number is high because for 5 of the 7 "list every document" questions the model called
+`prerequisites`, which returns every document any applicant might need (including conditional ones such as a
+disability certificate), instead of `plan`, which uses the student's own situation. An earlier run the same evening
+(`20261017T163237Z.json`, before the routing prompt said to use `plan` when a student is known) scored Kaagaz 81%
+recall and 54% verdict accuracy; both files are kept. Same caveat as above: the ground truth and the graph come from
+the same sources.
 
 **Kaagaz planner on its own (no LLM, `make bench-deterministic`), 17 Oct 2026:** document recall 93%, 1.43 invented
 documents per answer, verdict accuracy 92% (12 of 13), first-step accuracy 33% (3 of 9). The results file lists all 13
@@ -264,7 +278,7 @@ second per site, cache) and wrote fragments in `data/research/`; `scripts/build_
 - When every option in an "any one of" group has no official time, Kaagaz cannot rank them; it shows one (the first
   by id) on the timeline and lists the others as "or any one of".
 - No live deployment yet (no cloud credentials were available); `docs/DEPLOY.md` has the steps.
-- The three-system LLM benchmark has not been run (no key).
+- The three-system LLM benchmark is small (29 questions, one model) and its ground truth comes from the same sources as the graph.
 
 ## Tests
 

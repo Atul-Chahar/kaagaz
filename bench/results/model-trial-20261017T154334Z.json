@@ -1,0 +1,748 @@
+{
+ "date": "20261017T154334Z",
+ "base_url": "https://integrate.api.nvidia.com/v1",
+ "results": [
+  {
+   "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+   "route_correct": 1,
+   "sentence_passed": 0,
+   "errors": 2,
+   "median_route_ms": 143923.5,
+   "median_sentence_ms": 39680.0,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 26473,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 8
+     },
+     "route_ok": false,
+     "sentence_ms": 33099,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "route_ms": 112326,
+     "tool": "resolve",
+     "args": {
+      "name": "PM YASASVI Top Class"
+     },
+     "route_ok": false,
+     "sentence_ms": 39768,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 175521,
+     "tool": "resolve",
+     "args": {
+      "name": "Vidyasiri for Minorities"
+     },
+     "route_ok": false,
+     "sentence_ms": 39592,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 274114,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 163436,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    }
+   ]
+  },
+  {
+   "model": "nvidia/nemotron-nano-3-30b-a3b",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'2b2dcd47-c858-425a-9c04-4cacf2eac993\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "route_correct": 2,
+   "sentence_passed": 0,
+   "errors": 0,
+   "median_route_ms": 3287.5,
+   "median_sentence_ms": 3195.5,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 3383,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 1
+     },
+     "route_ok": false,
+     "sentence_ms": 3781,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "route_ms": 2659,
+     "tool": "resolve",
+     "args": {
+      "name": "PM YASASVI Top Class"
+     },
+     "route_ok": false,
+     "sentence_ms": 4686,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 4557,
+     "tool": "resolve",
+     "args": {
+      "name": "Vidyasiri for Minorities"
+     },
+     "route_ok": false,
+     "sentence_ms": 2610,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "route_ms": 3192,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": true,
+     "sentence_ms": 2582,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "route_ms": 3166,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": false,
+     "sentence_ms": 2371,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 6779,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 7692,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    }
+   ]
+  },
+  {
+   "model": "z-ai/glm-5.3-flash",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "deepseek-ai/deepseek-v4.1-flash",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "openai/gpt-oss-20b",
+   "route_correct": 2,
+   "sentence_passed": 0,
+   "errors": 0,
+   "median_route_ms": 3440.0,
+   "median_sentence_ms": 2027.0,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 3680,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 1
+     },
+     "route_ok": false,
+     "sentence_ms": 2141,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "route_ms": 4931,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 3
+     },
+     "route_ok": false,
+     "sentence_ms": 2182,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 6301,
+     "tool": "resolve",
+     "args": {
+      "name": "Vidyasiri for Minorities"
+     },
+     "route_ok": false,
+     "sentence_ms": 1698,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "route_ms": 3200,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": true,
+     "sentence_ms": 1913,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "route_ms": 2817,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 8,
+      "remember": true
+     },
+     "route_ok": false,
+     "sentence_ms": 2208,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 706,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 1739,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    }
+   ]
+  },
+  {
+   "model": "moonshotai/kimi-k2.6",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'23d4f03a-b8a6-4adb-a183-7daa083a09cc\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "mistralai/mistral-large-2-instruct",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'7fadd4de-e22a-48e4-90e9-f02ef14a74b9\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "nv-mistralai/mistral-nemo-12b-instruct",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'f8c05193-d2e2-4f0f-bb4d-7ad70070002b\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "google/gemma-4-31b-it",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError(\"LLM request failed: ReadTimeout('The read operation timed out')\")",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "nvidia/llama-3.1-nemotron-70b-instruct",
+   "route_correct": 0,
+   "sentence_passed": 0,
+   "errors": 6,
+   "median_route_ms": null,
+   "median_sentence_ms": null,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "error": "LLMError('LLM HTTP 404: {\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function \\'9b96341b-9791-4db9-a00d-4e43aa192a39\\': Not found for account \\'Dp1Xo0nAqbrFq2Jc_EQMAM54vuxS6SGBHCtCAs2Ba10\\'\"}')",
+     "route_ok": false,
+     "sentence_ok": false
+    }
+   ]
+  },
+  {
+   "model": "stepfun-ai/step-5-preview",
+   "route_correct": 2,
+   "sentence_passed": 0,
+   "errors": 2,
+   "median_route_ms": 8084.5,
+   "median_sentence_ms": 4004.0,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 30751,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": false,
+     "sentence_ms": 12013,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "error": "LLMError('model did not call a tool')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 9387,
+     "tool": "resolve",
+     "args": {
+      "name": "Vidyasiri for Minorities"
+     },
+     "route_ok": false,
+     "sentence_ms": 3707,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "route_ms": 6782,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": true,
+     "sentence_ms": 3129,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "error": "LLMError('model did not call a tool')",
+     "route_ok": false,
+     "sentence_ok": false
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 1954,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 4301,
+     "sentence": "",
+     "sentence_ok": false,
+     "problems": [
+      "empty sentence"
+     ]
+    }
+   ]
+  }
+ ]
+}

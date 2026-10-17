@@ -18,19 +18,14 @@ Submissions close **18 Oct 2026, 11:59 PM IST**.
 
 ## What you must do by hand
 
-1. **Before making the repo public**, decide about two large public PDFs in git history: the 74 MB Sakala compendium
-   (`data/sources/raw/sakala-compendium-en.pdf`) and the 7.6 MB Karnataka holiday list (saved early as
-   `data/sources/raw/ka-holidays-2024.pdf`, later renamed). Neither is tracked now (both are in `.gitignore`, with their
-   hash and extracted text kept), but old commits still hold them. Rewriting history needed your approval, so it was
-   not done. To remove them: `git filter-repo --path data/sources/raw/sakala-compendium-en.pdf --path
-   data/sources/raw/ka-holidays-2024.pdf --invert-paths`, then force-push. They are public government files, so
-   leaving them is a size issue, not a data issue.
+1. Large PDFs in git history: done. The 74 MB Sakala compendium and the two holiday-list PDFs were removed from every
+   commit with `git filter-repo` and the cleaned history was force-pushed on 17 Oct 2026. A full backup of the old
+   history was kept as a git bundle outside the repo. The files are still listed in `data/sources/index.json` with
+   their hash, and their extracted text is still in the repo.
 2. Make the GitHub repo public (Settings, General, Danger zone, Change visibility).
 3. Record the demo video following `docs/DEMO_SCRIPT.md`. Read the numbers off the screen on the day you record:
    working days left go down every day.
-4. Optional but strong: add an LLM key to `.env` (`LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`; see `.env.example`), run
-   `make bench`, check `bench/results/<timestamp>.json`, and commit it. The Benchmark page and README then show the
-   real three-system numbers. Update the "Benchmark" section of the README with the numbers from that file.
+4. LLM: see `docs/LLM_SETUP.md` (NVIDIA NIM key in `.env`, chosen model, how to re-run the benchmark).
 5. Optional: deploy with `docs/DEPLOY.md` and put the URL in the README.
 6. Submit the form on WeMakeDevs with the repo URL, video link and track.
 7. Optional: edit and post `docs/BLOG_DRAFT.md` for the blog prize.

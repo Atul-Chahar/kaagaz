@@ -40,7 +40,7 @@ VERIFY: ALL CHECKS PASSED
 | Conditional rules ("only if you live in a hostel") counted only when the student says they apply | integration + e2e tests |
 | Fixed tool catalogue (7 tools), names resolved before queries, 5 outcomes, trace rows | validation tests, API tests, e2e Ask test |
 | Ask without an LLM key (name search), "not in the graph" and "unknown name" | e2e test; API tests |
-| Optional LLM layer with a checked sentence (fact numbers, names, verdict direction) | `agent.py`; tests incl. a real plan payload; no key here, so not run live |
+| Optional LLM layer with a checked sentence (fact numbers, names, verdict direction) | `agent.py`; tests incl. a real plan payload; run live with `openai/gpt-oss-20b` on NVIDIA NIM (`docs/LLM_SETUP.md`) |
 | Benchmark: 29 questions written from sources by a separate pass; deterministic planner scores; honest LLM empty state | `bench/`; Benchmark page; e2e test |
 | Second rule pack (company in Karnataka), pack switcher, exact calendar-to-working-day conversion | integration + e2e tests; `company-chain-*` screenshots |
 | MCP server with the same tools | `tests/test_mcp.py` (in-process client) |
@@ -53,12 +53,27 @@ VERIFY: ALL CHECKS PASSED
 
 - **Live deployment: BLOCKED.** No FalkorDB Cloud credentials or deploy token were in the environment, and no
   accounts were created. `docs/DEPLOY.md` has exact steps.
-- **Three-system LLM benchmark: not run.** No LLM key was available. The page and README say "not run"; no numbers
-  were invented. Add a key and run `make bench`.
+- **Three-system LLM benchmark: run** on 17 Oct 2026 with `openai/gpt-oss-20b` (NVIDIA NIM), 29 questions, 0 failed
+  calls (`bench/results/20261017T171028Z.json`). Kaagaz: recall 93%, verdict 92% (12 of 13), first step 3 of 9,
+  7.43 invented documents per answer (the model sent most "list" questions to `prerequisites`). Model alone: 9%,
+  38%, 1 of 9, 8.86. Plain RAG: 5%, 46%, 2 of 9, 3.71. Table and caveats in the README.
 - **Hindi UI strings: not added.** They could not be checked carefully; the i18n structure for the app shell is ready.
-- **Large files in git history:** two public PDFs (74 MB Sakala compendium, 7.6 MB holiday list) are in early
-  commits. Rewriting history was denied by the tool permission system, so it needs your decision (command in
-  `docs/SUBMISSION.md`).
+- **Large files in git history: fixed (17 Oct 2026).** The three large PDFs were removed from every commit with
+  `git filter-repo` and the history was force-pushed with your permission. A backup bundle of the old history was
+  kept outside the repo.
+
+## LLM (NVIDIA NIM), added 17 Oct 2026 evening
+
+- Chosen model: `openai/gpt-oss-20b`. In a 6-question trial of Kaagaz's own two jobs it picked the right tool and
+  ids 5 of 6 times and wrote a sentence that passed the checker 5 of 6 times; median 3.6 s to route, 8.1 s per
+  sentence. 12 models were tried; most were not usable on this key (404) or timed out. Details and how to run it:
+  `docs/LLM_SETUP.md`.
+- The trial found and fixed two real bugs: reasoning tokens used up the 120-token sentence budget (empty answers),
+  and the model was never given the scheme and document ids (it could only call `resolve`). It also found two false
+  alarms in the sentence checker (a "Category-1" inside a document name, and a date's month), now fixed with tests.
+- The free endpoint queues every request in a queue shared by all users (about 40 requests a minute per key), so one
+  call can wait a long time. The benchmark now asks 8 questions at once and records a failed call as a wrong answer:
+  the full run took 2 min 39 s instead of 29 min.
 
 ## Official versus secondary data
 
@@ -85,5 +100,5 @@ VERIFY: ALL CHECKS PASSED
    red "12 DAYS SHORT" and the hatched overrun. Then try the **Rule pack** switcher and the Example founder.
 4. Read `docs/FEASIBILITY.md` and the README's "Limitations" so you can answer judges' questions about unknown times,
    conditional rules and the CSSS renewal-only window.
-5. Decide on the two PDFs in git history, make the repo public, add an LLM key and run `make bench` if you can, then
+5. Make the repo public, then
    record the video from `docs/DEMO_SCRIPT.md` and submit (checklist in `docs/SUBMISSION.md`).

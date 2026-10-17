@@ -44,8 +44,10 @@ the second-and-fourth-Saturday rule before any verdict made sense.
 
 The benchmark is honest too. A separate pass wrote 29 questions from the sources alone. The planner agreed on 12 of 13
 deadline questions but only 3 of 9 "what first" questions, mostly because when no step has a legal time limit there is
-no right order. I left those numbers as they are. I did not have an LLM key, so the "LLM alone vs RAG vs Kaagaz"
-comparison has not run, and the page says so.
+no right order. I left those numbers as they are. With an NVIDIA NIM key and the small `gpt-oss-20b` model, the
+"LLM alone vs RAG vs Kaagaz" run gave document recall of 9%, 5% and 93%, and verdict accuracy of 38%, 46% and 92%.
+Kaagaz still listed too many documents when the model asked for a scheme's general rules instead of the student's
+plan. That number is in the table too.
 
 ## What is next
 

@@ -351,7 +351,8 @@ def ask(body: AskBody, pack: str | None = None) -> dict:
 @app.get("/api/benchmark")
 def benchmark() -> dict:
     files = sorted(BENCH_RESULTS.glob("*.json"))
-    llm_runs = [f for f in files if not f.name.startswith("deterministic-")]
+    # model-trial-* files are latency trials for choosing a model, not benchmark runs
+    llm_runs = [f for f in files if not f.name.startswith(("deterministic-", "model-trial-"))]
     det_runs = [f for f in files if f.name.startswith("deterministic-")]
     return {
         "llm_run": json.loads(llm_runs[-1].read_text()) if llm_runs else None,

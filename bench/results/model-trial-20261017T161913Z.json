@@ -1,0 +1,202 @@
+{
+ "date": "20261017T161913Z",
+ "base_url": "https://integrate.api.nvidia.com/v1",
+ "results": [
+  {
+   "model": "openai/gpt-oss-20b",
+   "route_correct": 5,
+   "sentence_passed": 5,
+   "errors": 0,
+   "median_route_ms": 3633.5,
+   "median_sentence_ms": 8069.5,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 3294,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": false,
+     "sentence_ms": 6835,
+     "sentence": "Yes, a caste and income certificate (Karnataka Form\u202fF) is required for PostMatric for OBC Students.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "route_ms": 4499,
+     "tool": "explain",
+     "args": {
+      "scheme_id": "nsp-pm-yasasvi-top-class-college",
+      "doc_id": "hostel-certificate"
+     },
+     "route_ok": true,
+     "sentence_ms": 5414,
+     "sentence": "The PM YASASVI central sector scheme of Top Class Education does not require a hostel admission certificate.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 2827,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-vidyasiri-minority"
+     },
+     "route_ok": true,
+     "sentence_ms": 10311,
+     "sentence": "The Vidyasiri minority scheme requires twenty\u2011seven documents across eight steps, including a bank account seeded with Aadhaar, a caste\u2011income certificate, SSLC marks card, SSP student account, and university registration number.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "route_ms": 2680,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc"
+     },
+     "route_ok": true,
+     "sentence_ms": 28053,
+     "sentence": "Your scholarship deadline is 31 October 2026; today is 17 October 2026, so 9 working days remain, though 20 and 21 October are holidays.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "route_ms": 4408,
+     "tool": "remember_holding",
+     "args": {
+      "student_id": "model-trial-student",
+      "doc_id": "caste-income-certificate-ka"
+     },
+     "route_ok": true,
+     "sentence_ms": 9304,
+     "sentence": "You hold a caste and income certificate for Karnataka, Form\u202fF, backward classes beyond Category\u202f1, saved\u00a02026\u201110\u201117.",
+     "sentence_ok": false,
+     "problems": [
+      "states the number 1, which is not a fact in the tool result",
+      "states the number 10, which is not a fact in the tool result"
+     ]
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 3973,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 4296,
+     "sentence": "You have a saved Aadhaar number and a target scheme, ka\u2011ssp\u2011pms\u2011obc, and a snapshot shows you are late at least 21 days.",
+     "sentence_ok": true,
+     "problems": []
+    }
+   ]
+  },
+  {
+   "model": "nvidia/nemotron-3-super-120b-a12b",
+   "route_correct": 4,
+   "sentence_passed": 3,
+   "errors": 0,
+   "median_route_ms": 3685.5,
+   "median_sentence_ms": 12815.5,
+   "rows": [
+    {
+     "question": "Does PostMatric for OBC Students need a caste and income certificate?",
+     "route_ms": 1895,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 8
+     },
+     "route_ok": false,
+     "sentence_ms": 8779,
+     "sentence": "Yes, the PostMatric for OBC Students scheme requires a caste and income certificate.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "Does PM YASASVI Top Class need a hostel certificate?",
+     "route_ms": 4411,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "nsp-pm-yasasvi-top-class-college",
+      "depth": 8
+     },
+     "route_ok": false,
+     "sentence_ms": 5339,
+     "sentence": "The PM YASASVI Top Class scheme's required documents do not include a hostel certificate.",
+     "sentence_ok": false,
+     "problems": [
+      "mentions 'include a hostel certificate', which is not in the tool result"
+     ]
+    },
+    {
+     "question": "What documents do I need for Vidyasiri for Minorities, including the documents needed to get them?",
+     "route_ms": 6001,
+     "tool": "prerequisites",
+     "args": {
+      "scheme_id": "ka-ssp-vidyasiri-minority",
+      "depth": 8
+     },
+     "route_ok": true,
+     "sentence_ms": 28335,
+     "sentence": "Get bank account seeded with Aadhaar (consent form and savings at bank), caste and income certificate from taluk office, SSLC marks card, university registration number, Aadhaar from UIDAI, and college documents including fee receipt.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "Am I going to make the deadline for my scholarship?",
+     "route_ms": 2960,
+     "tool": "plan",
+     "args": {
+      "student_id": "model-trial-student",
+      "scheme_id": "ka-ssp-pms-obc",
+      "depth": 8,
+      "remember": true
+     },
+     "route_ok": true,
+     "sentence_ms": 15824,
+     "sentence": "No, you will not make the deadline; the data shows you are at least 12 days short of the October\u202f31,\u202f2026 cutoff.",
+     "sentence_ok": true,
+     "problems": []
+    },
+    {
+     "question": "I just received my caste and income certificate today.",
+     "route_ms": 5223,
+     "tool": "remember_holding",
+     "args": {
+      "student_id": "model-trial-student",
+      "doc_id": "caste-income-certificate-ka"
+     },
+     "route_ok": true,
+     "sentence_ms": 9807,
+     "sentence": "You have received your Karnataka caste and income certificate (Form\u202fF, backward classes other than Category\u20111), saved on 2026-10-17.",
+     "sentence_ok": false,
+     "problems": [
+      "states the number 1, which is not a fact in the tool result",
+      "states the number 10, which is not a fact in the tool result"
+     ]
+    },
+    {
+     "question": "What do you remember about me?",
+     "route_ms": 1320,
+     "tool": "recall",
+     "args": {
+      "student_id": "model-trial-student"
+     },
+     "route_ok": true,
+     "sentence_ms": 30642,
+     "sentence": "I recall you as the model trial student (synthetic) with ID model-trial-student, created 2026-10-17, holding Aadhaar number (UIDAI) document, targeting the ka-ssp-pms-obc scheme, and having snapshots that marked it late with 21 critical days.",
+     "sentence_ok": false,
+     "problems": [
+      "states the number 10, which is not a fact in the tool result"
+     ]
+    }
+   ]
+  }
+ ]
+}

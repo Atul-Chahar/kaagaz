@@ -54,7 +54,9 @@ export default function Ask({ session }: { session: Session | null }) {
           <OutcomeBadge outcome={res.outcome} />
           <p className="text">{res.answer}</p>
           <p className="note">
-            {res.mode === 'llm' ? 'Routed by the language model' : 'Routed by name search (no language model)'} to the tool <code>{res.tool}</code>.{' '}
+            {res.mode === 'llm' ? 'Routed by the language model'
+              : res.route_error ? `Routed by name search, because the language model call failed (${res.route_error})`
+              : 'Routed by name search (no language model)'} to the tool <code>{res.tool}</code>.{' '}
             {res.answer_source === 'llm_checked' && 'The sentence was written by the model and passed the check.'}
             {res.answer_source === 'built_from_result' && 'The sentence was built directly from the tool result.'}
             {res.answer_source === 'built_from_result_after_failed_check' && `The model's sentence failed the check (${res.check?.problems.join('; ')}), so this sentence was built from the result instead.`}

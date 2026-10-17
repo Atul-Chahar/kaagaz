@@ -53,10 +53,30 @@ class LLMError(RuntimeError):
     pass
 
 
+# Reasoning models (gpt-oss, Nemotron, DeepSeek and others on OpenAI-compatible servers) spend output tokens on
+# hidden reasoning before the answer. Without room for it, a short answer budget comes back empty.
+REASONING_HEADROOM = 1500
+
+
+def _openai_body(c: dict, body: dict) -> dict:
+    body = {"model": c["model"], **body, "max_tokens": body["max_tokens"] + REASONING_HEADROOM}
+    effort = (os.environ.get("LLM_REASONING_EFFORT") or "").strip().lower()
+    if effort in ("low", "medium", "high"):
+        body["reasoning_effort"] = effort
+    return body
+
+
+def _timeout() -> float:
+    try:
+        return float(os.environ.get("LLM_TIMEOUT_S") or 90)
+    except ValueError:
+        return 90.0
+
+
 def _post(url: str, headers: dict, body: dict) -> dict:
     for attempt in range(3):
         try:
-            r = httpx.post(url, headers=headers, json=body, timeout=90)
+            r = httpx.post(url, headers=headers, json=body, timeout=_timeout())
         except httpx.HTTPError as e:
             if attempt == 2:
                 raise LLMError(f"LLM request failed: {e!r}") from e
@@ -82,9 +102,33 @@ def complete(system: str, user: str, max_tokens: int = 600) -> str:
         return "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text").strip()
     data = _post(f"{c['base_url'] or 'https://api.openai.com/v1'}/chat/completions",
                  {"Authorization": f"Bearer {c['api_key']}"} if c["api_key"] else {},
-                 {"model": c["model"], "max_tokens": max_tokens,
-                  "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]})
-    return (data["choices"][0]["message"].get("content") or "").strip()
+                 _openai_body(c, {"max_tokens": max_tokens,
+                                  "messages": [{"role": "system", "content": system},
+                                               {"role": "user", "content": user}]}))
+    return _strip_thinking(_message(data).get("content") or "")
+
+
+def _message(data: dict) -> dict:
+    try:
+        return data["choices"][0]["message"]
+    except (KeyError, IndexError, TypeError) as e:
+        raise LLMError(f"LLM reply had no message: {str(data)[:200]}") from e
+
+
+def _strip_thinking(text: str) -> str:
+    """Some reasoning models put their thinking in <think>...</think> before the answer; keep only the answer."""
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    if "</think>" in text:  # an opening tag the server dropped
+        text = text.split("</think>", 1)[1]
+    return text.strip()
+
+
+def id_directory(t: Tools) -> str:
+    """Every scheme and document id with its name, so the model can fill tool arguments with real ids.
+    The tools still validate every id; a wrong one gives an "unknown name" outcome, never a query on a guess."""
+    schemes = "; ".join(f"{s['id']} = {s['name']}" for s in t.pack["schemes"])
+    docs = "; ".join(f"{d['id']} = {d['name']}" for d in t.pack["documents"])
+    return f"Scheme ids: {schemes}. Document ids: {docs}."
 
 
 def choose_tool(question: str, context: str) -> tuple[str, dict]:
@@ -92,7 +136,10 @@ def choose_tool(question: str, context: str) -> tuple[str, dict]:
     c = config()
     tools = catalogue()
     system = ("You route a student's question about scholarship documents to exactly one tool. "
-              "Use ids from the context when they fit. Never answer directly. " + context)
+              "Use ids from the context when they fit. Never answer directly. "
+              "When the context has a student_id, use plan for what this student needs, what to do first, or whether "
+              "they make a deadline, because only plan uses the student's saved documents and conditions; "
+              "prerequisites is for the general rules of a scheme. " + context)
     if c["provider"] == "anthropic":
         data = _post(f"{c['base_url'] or 'https://api.anthropic.com'}/v1/messages",
                      {"x-api-key": c["api_key"], "anthropic-version": "2023-06-01"},
@@ -107,10 +154,11 @@ def choose_tool(question: str, context: str) -> tuple[str, dict]:
         raise LLMError("model did not call a tool")
     data = _post(f"{c['base_url'] or 'https://api.openai.com/v1'}/chat/completions",
                  {"Authorization": f"Bearer {c['api_key']}"} if c["api_key"] else {},
-                 {"model": c["model"], "max_tokens": 400, "tool_choice": "required",
-                  "tools": [{"type": "function", "function": t} for t in tools],
-                  "messages": [{"role": "system", "content": system}, {"role": "user", "content": question}]})
-    calls = data["choices"][0]["message"].get("tool_calls") or []
+                 _openai_body(c, {"max_tokens": 400, "tool_choice": "required",
+                                  "tools": [{"type": "function", "function": t} for t in tools],
+                                  "messages": [{"role": "system", "content": system},
+                                               {"role": "user", "content": question}]}))
+    calls = _message(data).get("tool_calls") or []
     if not calls:
         raise LLMError("model did not call a tool")
     fn = calls[0]["function"]
@@ -153,7 +201,7 @@ def _fact_numbers(obj, key: str | None = None) -> set[str]:
     if key in DATE_KEYS and isinstance(obj, str):
         m = re.match(r"(\d{4})-(\d{2})-(\d{2})", obj)
         if m:
-            out |= {m.group(1), str(int(m.group(3)))}
+            out |= {m.group(1), str(int(m.group(2))), str(int(m.group(3)))}
     return out
 
 
@@ -181,7 +229,12 @@ def check_sentence(sentence: str, result: dict, known_names: list[str]) -> dict:
         if tail not in blob:
             problems.append(f"mentions {m.group(1)!r}, which is not in the tool result")
     allowed = _fact_numbers(result)
-    for m in NUM.findall(sentence):
+    # a digit inside a name the result itself contains ("Category-1", "Form 16") is part of that name, not a stated
+    # number; it is set aside only when the same phrase (spaces or hyphens) is in the result
+    flat = re.sub(r"[\s-]+", " ", blob)
+    unnamed = re.sub(r"\b(?:category|form|class|section|rule)[\s-]+\w+",
+                     lambda m: " " if re.sub(r"[\s-]+", " ", m.group(0)) in flat else m.group(0), low)
+    for m in NUM.findall(unnamed):
         norm = (m.lstrip("0") or "0").removesuffix(".0")
         if norm not in allowed:
             problems.append(f"states the number {m}, which is not a fact in the tool result")
@@ -248,7 +301,8 @@ def ask(t: Tools, question: str, student_id: str | None, scheme_id: str | None) 
     route_error = None
     hits: list[dict] = []
     if mode == "llm":
-        ctx = f"Context: student_id={student_id or 'none'}, current scheme_id={scheme_id or 'none'}."
+        ctx = (f"Context: student_id={student_id or 'none'}, current scheme_id={scheme_id or 'none'}. "
+               + id_directory(t))
         try:
             name, args = choose_tool(question, ctx)
         except (LLMError, KeyError, ValueError) as e:
