@@ -1,0 +1,7265 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head><title>
+	Help | State Scholarship Portal - Government of Karnataka
+</title><link rel="icon" href="images/kar_logo.png" type="image/png" /><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Dynamic SEO Metadata -->
+    <meta id="metaDescription" name="description" content="Get help and guidance for the State Scholarship Portal (SSP) of the Government of Karnataka. Find information about scholarship applications, registration, login, payments, documents and other SSP services." /><meta id="metaKeywords" name="keywords" content="SSP Karnataka help, State Scholarship Portal help, SSP help Karnataka, Karnataka scholarship help, SSP application help, SSP registration help, SSP login help, scholarship application Karnataka, SSP student help, Karnataka government scholarship" /><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link href="CSS/fontawesome/css/all.css" rel="stylesheet" type="text/css" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" /><link href="https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@300;400;500;600;700;800&amp;family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700;800&amp;family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" /><link href="css/hpstyles.css?v=7.5" rel="stylesheet" />
+
+<script type="text/javascript">
+(function () {
+
+    "use strict";
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        /* =========================================================
+           1. PREVENT BACK NAVIGATION
+           ========================================================= */
+
+        try {
+
+            window.history.pushState(
+                null,
+                "",
+                window.location.href
+            );
+
+            window.addEventListener("popstate", function () {
+
+                window.history.pushState(
+                    null,
+                    "",
+                    window.location.href
+                );
+
+            });
+
+        }
+        catch (err) {
+
+            console.warn(
+                "History protection could not be initialized.",
+                err
+            );
+
+        }
+
+
+        /* =========================================================
+           2. DISABLE RIGHT CLICK
+           ========================================================= */
+
+        document.addEventListener(
+            "contextmenu",
+            function (e) {
+
+                e.preventDefault();
+
+                return false;
+
+            },
+            false
+        );
+
+
+        /* =========================================================
+           3. DISABLE COMMON DEV TOOLS SHORTCUTS
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (e) {
+
+                var key =
+                    (e.key || "").toUpperCase();
+
+                var isF12 =
+                    e.key === "F12";
+
+                var isDevTools =
+                    e.ctrlKey &&
+                    e.shiftKey &&
+                    (
+                        key === "I" ||
+                        key === "J" ||
+                        key === "C"
+                    );
+
+                var isViewSource =
+                    e.ctrlKey &&
+                    key === "U";
+
+
+                if (
+                    isF12 ||
+                    isDevTools ||
+                    isViewSource
+                ) {
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    return false;
+
+                }
+
+            },
+            true
+        );
+
+
+        /* =========================================================
+           4. GET MAIN TAB ELEMENTS
+           ========================================================= */
+
+        var tabsSection =
+            document.getElementById("tabsSection");
+
+
+        if (!tabsSection) {
+
+            console.warn(
+                "tabsSection not found."
+            );
+
+            return;
+
+        }
+
+
+        var tabButtons =
+            tabsSection.querySelectorAll(".tab-btn");
+
+        var tabPanes =
+            tabsSection.querySelectorAll(".tab-pane");
+
+
+        /* =========================================================
+           5. MAIN TAB FUNCTION
+           ========================================================= */
+
+        function activateMainTab(
+            tabName,
+            shouldScroll
+        ) {
+
+            if (!tabName) {
+                return;
+            }
+
+
+            var targetButton =
+                tabsSection.querySelector(
+                    '.tab-btn[data-tab="' +
+                    tabName +
+                    '"]'
+                );
+
+
+            var targetPane =
+                document.getElementById(
+                    "tab-" + tabName
+                );
+
+
+            if (
+                !targetButton ||
+                !targetPane
+            ) {
+
+                console.warn(
+                    "Main tab not found:",
+                    tabName
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------------------
+               Hide all main tabs
+               --------------------------------------------- */
+
+            tabPanes.forEach(function (pane) {
+
+                pane.classList.remove("active");
+
+                pane.setAttribute(
+                    "hidden",
+                    "hidden"
+                );
+
+                pane.style.display = "none";
+
+            });
+
+
+            /* ---------------------------------------------
+               Reset all tab buttons
+               --------------------------------------------- */
+
+            tabButtons.forEach(function (button) {
+
+                button.classList.remove("active");
+
+                button.setAttribute(
+                    "aria-selected",
+                    "false"
+                );
+
+                button.setAttribute(
+                    "tabindex",
+                    "-1"
+                );
+
+            });
+
+
+            /* ---------------------------------------------
+               Activate selected tab
+               --------------------------------------------- */
+
+            targetButton.classList.add("active");
+
+            targetButton.setAttribute(
+                "aria-selected",
+                "true"
+            );
+
+            targetButton.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            targetPane.classList.add("active");
+
+            targetPane.removeAttribute("hidden");
+
+            targetPane.style.display = "block";
+
+
+            if (shouldScroll) {
+
+                setTimeout(function () {
+
+                    tabsSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }, 100);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           6. MAIN TAB CLICK
+           ========================================================= */
+
+        tabButtons.forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function (e) {
+
+                    e.preventDefault();
+
+                    var tabName =
+                        this.getAttribute("data-tab");
+
+                    activateMainTab(
+                        tabName,
+                        false
+                    );
+
+                }
+            );
+
+        });
+
+
+        /* =========================================================
+           7. MAIN TAB KEYBOARD
+           ========================================================= */
+
+        tabButtons.forEach(function (button, index) {
+
+            button.addEventListener(
+                "keydown",
+                function (e) {
+
+                    var newIndex =
+                        index;
+
+
+                    if (e.key === "ArrowRight") {
+
+                        e.preventDefault();
+
+                        newIndex =
+                            (index + 1) %
+                            tabButtons.length;
+
+                    }
+                    else if (e.key === "ArrowLeft") {
+
+                        e.preventDefault();
+
+                        newIndex =
+                            (
+                                index -
+                                1 +
+                                tabButtons.length
+                            ) %
+                            tabButtons.length;
+
+                    }
+                    else if (e.key === "Home") {
+
+                        e.preventDefault();
+
+                        newIndex = 0;
+
+                    }
+                    else if (e.key === "End") {
+
+                        e.preventDefault();
+
+                        newIndex =
+                            tabButtons.length - 1;
+
+                    }
+                    else {
+
+                        return;
+
+                    }
+
+
+                    var nextButton =
+                        tabButtons[newIndex];
+
+
+                    if (nextButton) {
+
+                        var tabName =
+                            nextButton.getAttribute(
+                                "data-tab"
+                            );
+
+
+                        activateMainTab(
+                            tabName,
+                            false
+                        );
+
+
+                        nextButton.focus();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* =========================================================
+           8. POSTMATRIC / PREMATRIC
+           
+           IMPORTANT:
+           Direct binding is used here.
+
+           LAST DATES
+           ldTogglePost -> ld-post
+           ldTogglePre  -> ld-pre
+
+           SCHEMES
+           schTogglePost -> sch-post
+           schTogglePre  -> sch-pre
+
+           PROCESS
+           prTogglePost -> proc-post
+           prTogglePre  -> proc-pre
+           ========================================================= */
+
+        function setupPrePostToggle(
+            postButtonId,
+            preButtonId,
+            postPanelId,
+            prePanelId
+        ) {
+
+            var postButton =
+                document.getElementById(
+                    postButtonId
+                );
+
+            var preButton =
+                document.getElementById(
+                    preButtonId
+                );
+
+            var postPanel =
+                document.getElementById(
+                    postPanelId
+                );
+
+            var prePanel =
+                document.getElementById(
+                    prePanelId
+                );
+
+
+            /* ---------------------------------------------
+               DEBUG
+               --------------------------------------------- */
+
+            console.log(
+                "Initializing toggle:",
+                postButtonId,
+                preButtonId,
+                postPanelId,
+                prePanelId
+            );
+
+
+            if (!postButton) {
+
+                console.error(
+                    "Postmatric button not found:",
+                    postButtonId
+                );
+
+                return;
+
+            }
+
+
+            if (!preButton) {
+
+                console.error(
+                    "Prematric button not found:",
+                    preButtonId
+                );
+
+                return;
+
+            }
+
+
+            if (!postPanel) {
+
+                console.error(
+                    "Postmatric panel not found:",
+                    postPanelId
+                );
+
+                return;
+
+            }
+
+
+            if (!prePanel) {
+
+                console.error(
+                    "Prematric panel not found:",
+                    prePanelId
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------------------
+               SHOW POSTMATRIC
+               --------------------------------------------- */
+
+            function showPostmatric() {
+
+                /* Button state */
+
+                postButton.classList.add(
+                    "pp-active"
+                );
+
+                postButton.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+
+                preButton.classList.remove(
+                    "pp-active"
+                );
+
+                preButton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+
+                /* Panel state */
+
+                prePanel.classList.remove(
+                    "pp-show"
+                );
+
+                prePanel.setAttribute(
+                    "hidden",
+                    "hidden"
+                );
+
+                prePanel.style.display =
+                    "none";
+
+
+                postPanel.classList.add(
+                    "pp-show"
+                );
+
+                postPanel.removeAttribute(
+                    "hidden"
+                );
+
+                postPanel.style.display =
+                    "block";
+
+
+                console.log(
+                    "POSTMATRIC activated:",
+                    postPanelId
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               SHOW PREMATRIC
+               --------------------------------------------- */
+
+            function showPrematric() {
+
+                /* Button state */
+
+                preButton.classList.add(
+                    "pp-active"
+                );
+
+                preButton.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+
+                postButton.classList.remove(
+                    "pp-active"
+                );
+
+                postButton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+
+                /* Panel state */
+
+                postPanel.classList.remove(
+                    "pp-show"
+                );
+
+                postPanel.setAttribute(
+                    "hidden",
+                    "hidden"
+                );
+
+                postPanel.style.display =
+                    "none";
+
+
+                prePanel.classList.add(
+                    "pp-show"
+                );
+
+                prePanel.removeAttribute(
+                    "hidden"
+                );
+
+                prePanel.style.display =
+                    "block";
+
+
+                console.log(
+                    "PREMATRIC activated:",
+                    prePanelId
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               POST BUTTON CLICK
+               --------------------------------------------- */
+
+            postButton.addEventListener(
+                "click",
+                function (e) {
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    showPostmatric();
+
+                }
+            );
+
+
+            /* ---------------------------------------------
+               PRE BUTTON CLICK
+               --------------------------------------------- */
+
+            preButton.addEventListener(
+                "click",
+                function (e) {
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    showPrematric();
+
+                }
+            );
+
+
+            /* ---------------------------------------------
+               INITIAL STATE
+               --------------------------------------------- */
+
+            showPostmatric();
+
+        }
+
+
+        /* =========================================================
+           9. INITIALIZE LAST DATES TOGGLE
+           ========================================================= */
+
+        setupPrePostToggle(
+            "ldTogglePost",
+            "ldTogglePre",
+            "ld-post",
+            "ld-pre"
+        );
+
+
+        /* =========================================================
+           10. INITIALIZE SCHEMES TOGGLE
+           ========================================================= */
+
+        setupPrePostToggle(
+            "schTogglePost",
+            "schTogglePre",
+            "sch-post",
+            "sch-pre"
+        );
+
+
+        /* =========================================================
+           11. INITIALIZE PROCESS TOGGLE
+           ========================================================= */
+
+        setupPrePostToggle(
+            "prTogglePost",
+            "prTogglePre",
+            "proc-post",
+            "proc-pre"
+        );
+
+
+        /* =========================================================
+           12. LINKS THAT ACTIVATE MAIN TAB
+           ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function (e) {
+
+                var link =
+                    e.target.closest(
+                        "[data-activatetab]"
+                    );
+
+
+                if (!link) {
+                    return;
+                }
+
+
+                var tabName =
+                    link.getAttribute(
+                        "data-activatetab"
+                    );
+
+
+                if (!tabName) {
+                    return;
+                }
+
+
+                var href =
+                    link.getAttribute(
+                        "href"
+                    );
+
+
+                /*
+                 * Allow external links normally.
+                 */
+
+                if (
+                    href &&
+                    href !== "#" &&
+                    href.charAt(0) !== "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                e.preventDefault();
+
+
+                activateMainTab(
+                    tabName,
+                    true
+                );
+
+
+                /* Close jump menu */
+
+                var jumpMenu =
+                    document.getElementById(
+                        "jumpNavMenu"
+                    );
+
+
+                var jumpToggle =
+                    document.getElementById(
+                        "jumpNavToggle"
+                    );
+
+
+                if (jumpMenu) {
+
+                    jumpMenu.classList.remove(
+                        "open"
+                    );
+
+                }
+
+
+                if (jumpToggle) {
+
+                    jumpToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           13. STATISTICS CARDS
+           ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function (e) {
+
+                var card =
+                    e.target.closest(
+                        ".custom-scroll-link"
+                    );
+
+
+                if (!card) {
+                    return;
+                }
+
+
+                var tab =
+                    card.getAttribute(
+                        "data-activatetab"
+                    );
+
+
+                var target =
+                    card.getAttribute(
+                        "data-target"
+                    );
+
+
+                if (tab) {
+
+                    activateMainTab(
+                        tab,
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                if (target) {
+
+                    var section =
+                        document.querySelector(
+                            target
+                        );
+
+
+                    if (section) {
+
+                        section.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           14. STATISTICS KEYBOARD
+           ========================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (e) {
+
+                if (
+                    e.key !== "Enter" &&
+                    e.key !== " "
+                ) {
+
+                    return;
+
+                }
+
+
+                var card =
+                    e.target.closest(
+                        ".custom-scroll-link"
+                    );
+
+
+                if (!card) {
+                    return;
+                }
+
+
+                e.preventDefault();
+
+
+                var tab =
+                    card.getAttribute(
+                        "data-activatetab"
+                    );
+
+
+                if (tab) {
+
+                    activateMainTab(
+                        tab,
+                        true
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           15. INITIAL MAIN TAB
+           ========================================================= */
+
+        activateMainTab(
+            "lastdates",
+            false
+        );
+
+
+        /* =========================================================
+           16. DEBUG INFORMATION
+           ========================================================= */
+
+        console.log(
+            "=========================================="
+        );
+
+        console.log(
+            "SSP navigation initialized successfully."
+        );
+
+        console.log(
+            "Main tabs:",
+            tabButtons.length
+        );
+
+        console.log(
+            "Main panes:",
+            tabPanes.length
+        );
+
+        console.log(
+            "Post/Pre toggles initialized."
+        );
+
+        console.log(
+            "=========================================="
+        );
+
+    });
+
+})();
+</script> 
+
+   <style type="text/css">
+    .noscript-overlay {
+        position: fixed;
+        inset: 0;
+        background: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #DC2626;
+        font-family: 'Source Sans 3', Arial, sans-serif;
+        z-index: 9999;
+        font-size: 16px;
+        line-height: 1.5;
+        gap: 8px;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+</style> 
+
+</head>
+
+
+
+    
+
+    <meta name="author"
+          content="State Scholarship Portal, Government of Karnataka" />
+
+    <meta name="robots"
+          content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+          content="Help | State Scholarship Portal – Government of Karnataka" />
+
+    <meta property="og:description"
+          content="Get help and guidance for SSP registration, scholarship applications, login, documents, payments and other State Scholarship Portal services." />
+
+    <meta property="og:type"
+          content="website" />
+
+    <link rel="alternate"
+      hreflang="en"
+      href="https://ssp.karnataka.gov.in/help/">
+
+<link rel="alternate"
+      hreflang="kn"
+      href="https://ssp.karnataka.gov.in/help/">
+
+<link rel="alternate"
+      hreflang="x-default"
+      href="https://ssp.karnataka.gov.in/help/">
+
+    <style>
+        /* Container & Base Layout */
+.help-page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+}
+
+/* Header Styling */
+.help-header {
+    margin-bottom: 2rem;
+}
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+}
+.help-header h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin: 0 0 0.25rem 0;
+    color: #0f172a;
+}
+.help-header .subtitle {
+    font-size: 1.15rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Intro Callout Card */
+.help-intro-card {
+    display: flex;
+    gap: 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #0284c7;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.intro-icon {
+    font-size: 1.75rem;
+    color: #0284c7;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+}
+.intro-text p {
+    margin: 0 0 0.5rem 0;
+    line-height: 1.6;
+    color: #334155;
+    font-size: 1rem;
+}
+.intro-text p.sub-note {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* Section Header */
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1.25rem;
+}
+
+/* Grid Layout */
+.formats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Cards Design */
+.format-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.format-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Format Icons Customization */
+.format-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+.pdf-icon { background: #fee2e2; color: #dc2626; }
+.word-icon { background: #dbeafe; color: #2563eb; }
+.excel-icon { background: #dcfce7; color: #16a34a; }
+.ppt-icon { background: #ffedd5; color: #ea580c; }
+.flash-icon { background: #f3e8ff; color: #9333ea; }
+
+.format-meta h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+.file-ext {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 2px;
+}
+
+.card-body p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0 0 1.25rem 0;
+}
+
+/* Buttons */
+.download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.dl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.dl-btn:hover {
+    background-color: #e2e8f0;
+    border-color: #94a3b8;
+}
+.dl-btn.primary {
+    background-color: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+}
+.dl-btn.primary:hover {
+    background-color: #0369a1;
+}
+.dl-btn.outline {
+    background-color: transparent;
+    color: #0284c7;
+    border-color: #bae6fd;
+}
+.dl-btn.outline:hover {
+    background-color: #f0f9ff;
+    border-color: #0284c7;
+}
+.policy-page-wrapper {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    padding: 40px 20px 80px;
+    color: #334155;
+    line-height: 1.7;
+    min-height: 80vh;
+}
+/* ── Modern Breadcrumb ── */
+.premium-breadcrumb {
+    background: #ffffff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    margin-bottom: 30px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.premium-breadcrumb a {
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.premium-breadcrumb a:hover {
+    color: #1e3a8a; /* Gov Blue */
+}
+.premium-breadcrumb .separator {
+    margin: 0 10px;
+    color: #cbd5e1;
+    font-size: 0.75rem;
+}
+.premium-breadcrumb .current {
+    color: #0f172a;
+}
+    </style>
+
+
+
+<body>
+
+<form method="post" action="./help" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="xko4Hpw73QvKPVwlmi0wv6F5f4ZpECeYvhE91iePSXf8CHv6LXgiLo/0NbWeikOe5VDT7OqKqQSY8dHvm+KtXSoY+pL0wiL23v64jb+V5q66IywJezhlQ/b4qcWICVNPZNUwVnyt8Nsr1rCjYIIk5L2LLJfBe2NJqKhqKTa4uZ0dOpwe9L0cV2s8CDF2s3xzAmQKjJ6O85W1bBqCx07m9iVm/IThY5JQGk6OPUDirJVzCYlbcMAK/xOHT8vfySxB0D5Y/q17Zlv5EN34W5w9RIFZz/JGUHSxk4ZXGNEk7j2mdi131NJ+3D2Lz1ZKT+GJmOa2L8djahtlAslusOeDvnU1f8XcE7X6ilHwW+p918hyqzolUBuAINTeLye4diGrRd/mnY6rVksM6R2e3Yx2ekXRZgP8nY/Qk7eCD1o8EIpuW/RM6997Gff8J2PjyNaL1CJ35AH+qGquujNwmoamgVMPJPIQy/yiy3P8O9aJWMrsKC0POB0UvTKjqwbbObRo6GmAt0lIHVlgkuZm+KIzyYYBXGsG71RTcFgh0BwhnLftYsMVkDcCi0p84QaUKtfXatuSoj+YYoauELeqaRgE/up/Ka0G0nI8QC5R1YtM7wFnDaGcgD6nT8EeU7ScxlJ4jMu+5SNisn7z5mWY+L2MKK/I+Nmf9MBJeFnE2L1JuJbFMWo0bn5RRasG1pvPPX9UkKktiUVYLkMpsP2zvePw1UM+9LgHWPblsCj0QDgAkGXUR/UO96vYCj1tNE6vHdQSMxYMo3y1YSh4HuBA5HSLyIsQGOomIdz41sMsUQaItZYLmtcVqaDLFHc8q4N6hrcxEam1cHCAL3AWLmmAktmSdA==" />
+
+
+<script src="Scripts/WebForms/MsAjax/MicrosoftAjax.js" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BDEA3729" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="uRc6FF4JuaxTA47Z9aTGNHE1aG7/cYGjd4xsDoGwLygJSpSviXt0jLl/8TmqVvVsyhSySaVEOSc7RWFnyrDydeGMM1/8SDZ+Mj5Cw3EX5m42bIJqp5AjTAw0MyfKfIpkLB1mSPOPEEfwusiGLoLYDkMB7MKmXY42sSaQHmoMm6UiKbmdxfGxLkwoVAvPJeP2" />
+
+<div>
+
+
+           <noscript>
+                <div class="noscript-overlay">
+                    <strong>JavaScript is disabled.</strong>
+                    <span>Please enable JavaScript to use this portal.</span>
+                </div>
+            </noscript>
+
+
+
+    
+
+
+    <input type="hidden" name="ctl00$hdnLabels" id="hdnLabels" value="{&quot;btn_Accesschildheader&quot;:&quot;ಇಲಾಖೆಗಳು, ವಿಶ್ವವಿದ್ಯಾಲಯಗಳು ಮತ್ತು ನೋಡಲ್ ಅಧಿಕಾರಿಗಳಿಗಾಗಿ ಪ್ರವೇಶ ಪೋರ್ಟಲ್‌ಗಳು&quot;,&quot;btn_ceologin&quot;:&quot;ಕಾಲೇಜು ಸಬಲೀಕರಣ ಅಧಿಕಾರಿ ಲಾಗಿನ್&quot;,&quot;btn_cislogin&quot;:&quot;ವಿಶ್ವವಿದ್ಯಾಲಯ/ ಕಾಲೇಜು CIS ಲಾಗಿನ್&quot;,&quot;btn_inologin&quot;:&quot;ಶಾಲೆ ನೋಡಲ್ ಅಧಿಕಾರಿ (INO) ಲಾಗಿನ್&quot;,&quot;btn_Instiheader&quot;:&quot;ಸಂಸ್ಥೆ ಮತ್ತು ವಿಭಾಗದ ಲಾಗಿನ್‌ಗಳು&quot;,&quot;btn_login&quot;:&quot;ಲಾಗಿನ್&quot;,&quot;btn_loginpost&quot;:&quot;ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿ ಲಾಗಿನ್ (11 ನೇ ತರಗತಿಯ ನಂತರ)&quot;,&quot;btn_loginpre&quot;:&quot;ಮೆಟ್ರಿಕ್ ಪೂರ್ವ ವಿದ್ಯಾರ್ಥಿ ಲಾಗಿನ್ (1 ರಿಂದ 10 ನೇ ತರಗತಿ)&quot;,&quot;btn_nilayalogin&quot;:&quot;ನಿಲಯ ತಂತ್ರಾಂಶ&quot;,&quot;btn_register&quot;:&quot;ನಿಮ್ಮ ಬಳಿ SSP ID ಇದೆಯೇ? / ನಿಮ್ಮ SSP ID ತಿಳಿಯಿರಿ&quot;,&quot;btn_shphmislogin&quot;:&quot;SSP HMIS ಲಾಗಿನ್&quot;,&quot;btn_shplogin&quot;:&quot;ರಾಜ್ಯ ಹಾಸ್ಟೆಲ್ ತಂತ್ರಾಂಶ&quot;,&quot;btn_ssplogin&quot;:&quot;ಪ್ರಾಯೋಜಕ ಇಲಾಖೆ ಲಾಗಿನ್&quot;,&quot;btn_unidatalogin&quot;:&quot;ವಿಶ್ವವಿದ್ಯಾಲಯ (UNIDATA) ಲಾಗಿನ್&quot;,&quot;card_about&quot;:&quot;ನಮ್ಮ ಬಗ್ಗೆ&quot;,&quot;card_applicant&quot;:&quot;ವಿದ್ಯಾರ್ಥಿಗಳ ಲಾಗಿನ್&quot;,&quot;card_dept&quot;:&quot;ಪ್ರಾಯೋಜಕ ಇಲಾಖೆ ಲಾಗಿನ್&quot;,&quot;card_hostel&quot;:&quot;ಹಾಸ್ಟೆಲ್ ತಂತ್ರಾಂಶಗಳು&quot;,&quot;card_unicollege&quot;:&quot;ವಿಶ್ವವಿದ್ಯಾಲಯ / ಶೈಕ್ಷಣಿಕ ಸಂಸ್ಥೆ ಲಾಗಿನ್&quot;,&quot;cvcvc&quot;:&quot;rt&quot;,&quot;footer_content&quot;:&quot;ವಿಷಯ ಮತ್ತು ಡೇಟಾ&quot;,&quot;footer_lastupdated&quot;:&quot;ನವೀಕರಣ ದಿನಾಂಕ&quot;,&quot;footer_networktext&quot;:&quot;ನೆಟ್‌ವರ್ಕ್ ಮತ್ತು ರಾಜ್ಯ ಡೇಟಾ ಕೇಂದ್ರ&quot;,&quot;footer_nictext&quot;:&quot;ಸಾಫ್ಟ್‌ವೇರ್ ಅಭಿವೃದ್ಧಿಪಡಿಸಿದವರು&quot;,&quot;footer_ownedby&quot;:&quot;ಒಡೆತನ ಮತ್ತು ನಿರ್ವಹಣೆ&quot;,&quot;footer_portalstats&quot;:&quot;ತಂತ್ರಾಂಶದ ಅಂಕಿಅಂಶಗಳು&quot;,&quot;footer_social&quot;:&quot;ನವೀಕರಣಗಳಿಗಾಗಿ ಚಂದಾದಾರರಾಗಿ&quot;,&quot;footer_techsupport&quot;:&quot;ತಾಂತ್ರಿಕ ಬೆಂಬಲ&quot;,&quot;footer_visitors&quot;:&quot;ಒಟ್ಟು ಸಂದರ್ಶಕರ ಸಂಖ್ಯೆ&quot;,&quot;helpline_title&quot;:&quot;ಸಂಪರ್ಕಿಸಿ&quot;,&quot;lbl_AboutUs&quot;:&quot;ನಮ್ಮ ಬಗ್ಗೆ&quot;,&quot;lbl_checkrd&quot;:&quot;Check your RD number Details&quot;,&quot;lbl_dbtapp&quot;:&quot;DBT Karnataka App&quot;,&quot;lbl_Department&quot;:&quot;ಇಲಾಖೆ&quot;,&quot;lbl_Downloads&quot;:&quot;ಡೌನ್‌ಲೋಡ್‌&quot;,&quot;lbl_Home&quot;:&quot;ಮುಖಪುಟ&quot;,&quot;lbl_impolinks&quot;:&quot;ಪ್ರಮುಖ ಲಿಂಕ್‌ಗಳು&quot;,&quot;lbl_kutumba&quot;:&quot;KUTUMBA portal&quot;,&quot;lbl_nad&quot;:&quot;National Academic Depository (NAD)&quot;,&quot;lbl_nav_rti&quot;:&quot;ಮಾಹಿತಿ ಹಕ್ಕು&quot;,&quot;lbl_npci&quot;:&quot;NPCI- Aadhar seeding status&quot;,&quot;lbl_nspotr&quot;:&quot;NSP - OTR generation&quot;,&quot;lbl_Schemes&quot;:&quot;ಯೋಜನೆಗಳು&quot;,&quot;lbl_ScreenReader&quot;:&quot;ಸ್ಕ್ರೀನ್ ರೀಡರ್&quot;,&quot;lbl_SkipContent&quot;:&quot;ವಿಷಯಕ್ಕೆ ತೆರಳಿ&quot;,&quot;lbl_uidai&quot;:&quot;Aadhaar (UIDAI) portal&quot;,&quot;lbl_uucms&quot;:&quot;UUCMS portal&quot;,&quot;lbl_viewing&quot;:&quot;ಪ್ರಸ್ತುತ ವೀಕ್ಷಿಸುತ್ತಿರುವುದು&quot;,&quot;link_About&quot;:&quot;ನಮ್ಮ ಬಗ್ಗೆ&quot;,&quot;link_Archives&quot;:&quot;ಆರ್ಕೈವ್‌ಗಳು&quot;,&quot;link_collegelogin&quot;:&quot;ವಿಶ್ವವಿದ್ಯಾಲಯ/ ರಿಜಿಸ್ಟ್ರಾರ್/ ಕಾಲೇಜು CIS ಲಾಗಿನ್&quot;,&quot;link_contact&quot;:&quot;ಸಂಪರ್ಕಿಸಿ&quot;,&quot;link_createaccount&quot;:&quot;ಹೊಸ ಖಾತೆ ಸೃಜಿಸಿ (ಮೆಟ್ರಿಕ್ ಪೂರ್ವ ಮತ್ತು ಮೆಟ್ರಿಕ್ ನಂತರ)&quot;,&quot;link_deptlogin&quot;:&quot;ಇಲಾಖೆಯ SSP ಲಾಗಿನ್&quot;,&quot;link_downloads&quot;:&quot;ಡೌನ್‌ಲೋಡ್‌ಗಳು&quot;,&quot;link_empofficer&quot;:&quot;ಕಾಲೇಜು ಸಬಲೀಕರಣ ಅಧಿಕಾರಿ ಲಾಗಿನ್&quot;,&quot;link_feedback&quot;:&quot;ಪ್ರತಿಕ್ರಿಯೆ&quot;,&quot;link_Help&quot;:&quot;ಸಹಾಯ&quot;,&quot;link_inoofficer&quot;:&quot;ಶಾಲಾ ಸಂಸ್ಥೆಯ ನೋಡಲ್ ಅಧಿಕಾರಿ ಲಾಗಿನ್&quot;,&quot;link_kutumba&quot;:&quot;ನಿಮ್ಮ ಕುಟುಂಬ ID ತಿಳಿಯಿರಿ&quot;,&quot;link_nilaya&quot;:&quot;ನಿಲಯ ತಂತ್ರಾಂಶ&quot;,&quot;link_policy&quot;:&quot;ವೆಬ್‌ಸೈಟ್ ನೀತಿಗಳು&quot;,&quot;link_postlogin&quot;:&quot;ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಲಾಗಿನ್ (2026-27 ಸಾಲಿನ ಅರ್ಜಿಗೆ)&quot;,&quot;link_prelogin&quot;:&quot;ಮೆಟ್ರಿಕ್ ಪೂರ್ವ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಲಾಗಿನ್ (2026-27 ಸಾಲಿನ ಅರ್ಜಿಗೆ)&quot;,&quot;link_screenreader&quot;:&quot;ಸ್ಕ್ರೀನ್ ರೀಡರ್&quot;,&quot;link_shpobc&quot;:&quot;ಹಿಂದುಳಿದ ವರ್ಗಗಳ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಹಾಸ್ಟೆಲ್ ಗಳಲ್ಲಿ ಹಾಸ್ಟಲ್ ಸೀಟ್ ಗೆ SHP ಯಲ್ಲಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಲಾಗಿನ್ (ರಾಜ್ಯ ಹಾಸ್ಟೆಲ್ ತಂತ್ರಾಂಶ)&quot;,&quot;link_shportal&quot;:&quot;ರಾಜ್ಯ ಹಾಸ್ಟೆಲ್ ತಂತ್ರಾಂಶ ಲಾಗಿನ್&quot;,&quot;link_shpst&quot;:&quot;ST ಮತ್ತು ಅಲ್ಪಸಂಖ್ಯಾತ ಹಾಸ್ಟೆಲ್ ಗಳಲ್ಲಿ ಹಾಸ್ಟಲ್ ಸೀಟ್ ಗೆ SHP ಯಲ್ಲಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಲಾಗಿನ್ (ರಾಜ್ಯ ಹಾಸ್ಟೆಲ್ ತಂತ್ರಾಂಶ)&quot;,&quot;link_sitemap&quot;:&quot;ಸೈಟ್‌ಮ್ಯಾಪ್&quot;,&quot;link_ssphmis&quot;:&quot;SSP HMIS ಲಾಗಿನ್&quot;,&quot;link_terms&quot;:&quot;ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳು&quot;,&quot;link_univ&quot;:&quot;ವಿಶ್ವವಿದ್ಯಾಲಯ UNIDATA ಲಾಗಿನ್&quot;,&quot;notice_board&quot;:&quot;ಸೂಚನಾ ಫಲಕ&quot;,&quot;portal_govname&quot;:&quot;ಕರ್ನಾಟಕ ಸರ್ಕಾರ&quot;,&quot;portal_name&quot;:&quot;ರಾಜ್ಯ ವಿದ್ಯಾರ್ಥಿವೇತನ ತಂತ್ರಾಂಶ&quot;,&quot;process_lastdates_post_heading&quot;:&quot;ಮೆಟ್ರಿಕ್ ನಂತರ ಕೊನೆಯ ದಿನಾಂಕ&quot;,&quot;process_lastdates_pre_heading&quot;:&quot;2026-27 ಸಾಲಿನ ಮೆಟ್ರಿಕ್ ಪೂರ್ವ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕ&quot;,&quot;process_post_heading&quot;:&quot;ಮೆಟ್ರಿಕ್ ನಂತರ (11ನೇ ತರಗತಿ ಮೇಲ್ಪಟ್ಟು)&quot;,&quot;process_pre_heading&quot;:&quot;ಮೆಟ್ರಿಕ್ ಪೂರ್ವ (1 ರಿಂದ 10ನೇ ತರಗತಿ)&quot;,&quot;quickapply_desc&quot;:&quot;ಮೆಟ್ರಿಕ್ ಪೂರ್ವ/ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕಾಗಿ ಹೊಸ ಖಾತೆ ಸೃಜಿಸಿ ಅಥವಾ ಲಾಗಿನ್ ಆಗಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ&quot;,&quot;quickapply_title&quot;:&quot;🎓 2026-27 ನೇ ಸಾಲಿನ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ (ಮೆಟ್ರಿಕ್ ಪೂರ್ವ/ ಮೆಟ್ರಿಕ್ ನಂತರದ ವಿದ್ಯಾರ್ಥಿವೇತನಕ್ಕಾಗಿ ಹೊಸ ಖಾತೆ ಸೃಜಿಸಿ ಅಥವಾ ಲಾಗಿನ್ ಆಗಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ)&quot;,&quot;stat_depts&quot;:&quot;ಇಲಾಖೆಗಳು&quot;,&quot;stat_districts&quot;:&quot;ಒಳಗೊಂಡ ಜಿಲ್ಲೆಗಳು&quot;,&quot;stat_schemes&quot;:&quot;ಸಕ್ರಿಯ ಯೋಜನೆಗಳು&quot;,&quot;stat_students&quot;:&quot;ಪ್ರತಿ ವರ್ಷ ಪ್ರಯೋಜನ ಪಡೆಯತ್ತಿರುವ ವಿದ್ಯಾರ್ಥಿಗಳು&quot;,&quot;tab_documents&quot;:&quot;ದಾಖಲೆಗಳು&quot;,&quot;tab_lastdates&quot;:&quot;FY 2026-27 ಸಾಲಿನ ವಿದ್ಯಾರ್ಥಿವೇತನ ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಕೊನೆಯ ದಿನಾಂಕಗಳು&quot;,&quot;tab_process&quot;:&quot;ಅರ್ಜಿ ಸಲ್ಲಿಕೆ ಪ್ರಕ್ರಿಯೆ&quot;,&quot;tab_schemes&quot;:&quot;ವಿದ್ಯಾರ್ಥಿವೇತನ ಯೋಜನೆಗಳ ವಿವರಗಳು&quot;}" />
+
+    <input type="hidden" name="ctl00$hdnActiveTab" id="hdnActiveTab" value="lastdates" />
+
+
+  
+
+
+
+    <!-- =========================================================
+         TOP BAR
+         ========================================================= -->
+
+    <div id="mainTopBar" class="top-bar">
+
+        <div class="top-bar-inner">
+
+
+            <!-- =================================================
+                 TOP NAVIGATION
+                 ================================================= -->
+
+            <ul class="top-nav-links">
+
+                <li>
+
+                    <a href="#maincontent"
+                       aria-label="Skip to main content">
+
+                        <i aria-hidden="true"
+                           class="fa-solid fa-arrow-down">
+                        </i>
+
+                        <span class="lbl"
+                              data-key="lbl_SkipContent">
+                            Skip to main content
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="screenreader"
+                       id="lnkScreenReader">
+
+                        <i aria-hidden="true"
+                           class="fa-solid fa-universal-access">
+                        </i>
+
+                        <span class="lbl"
+                              data-key="lbl_ScreenReader">
+                            Screen Reader
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="Downloads"
+                       id="lnkDownloads">
+
+                        <i aria-hidden="true"
+                           class="fa-solid fa-download">
+                        </i>
+
+                        <span class="lbl d-none d-sm-inline"
+                              data-key="lbl_Downloads">
+                            Downloads
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="RTI"
+                       id="lnkrti"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        <i aria-hidden="true"
+                           class="fa-solid fa-file-alt">
+                        </i>
+
+                        <span class="lbl d-none d-sm-inline"
+                              data-key="lbl_nav_rti">
+                            RTI
+                        </span>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- =================================================
+                 HEADER CONTROLS
+                 ================================================= -->
+
+            <div class="top-controls">
+
+
+                <!-- =================================================
+                     SEARCH BOX
+                     ================================================= -->
+          <!-- =========================================================
+     SEARCH BUTTON
+     ========================================================= -->
+
+<div class="search-bar-wrapper"
+     id="searchBarWrapper"
+     style="
+        display:flex;
+        align-items:center;
+        width:290px;
+        max-width:290px;
+        margin:0 8px;
+     ">
+
+ <div class="search-input-box"
+     style="
+        display:flex;
+        align-items:center;
+        width:100%;
+        height:40px;
+        padding:0 5px 0 13px;
+        border-radius:8px;
+        background:#FFFFFF;
+        border:1px solid #A3BBF3;
+        box-shadow:0 3px 10px rgba(22,47,106,0.15);
+     ">
+
+    
+
+        <label for="pageSearchInput"
+               style="
+                    position:absolute;
+                    width:1px;
+                    height:1px;
+                    padding:0;
+                    margin:-1px;
+                    overflow:hidden;
+                    clip:rect(0,0,0,0);
+                    white-space:nowrap;
+                    border:0;
+               ">
+            Search this page
+        </label>
+
+        <input type="search"
+               id="pageSearchInput"
+               name="pageSearchInput"
+               role="searchbox"
+               aria-label="Search this page"
+               placeholder="Search..."
+               autocomplete="on"
+               style="
+                    flex:1;
+                    min-width:80px;
+                    height:36px;
+                    border:0;
+                    outline:none;
+                    background:transparent;
+                    font-family:'Outfit',Arial,sans-serif;
+                    font-size:14px;
+                    color:#0f172a;
+                    padding:0 4px;
+               " />
+
+        <span id="searchMatchCount"
+              class="search-count-badge"
+              aria-live="polite"
+              aria-atomic="true"
+              style="
+                    font-size:11px;
+                    color:#64748b;
+                    white-space:nowrap;
+                    margin:0 3px;
+               ">
+        </span>
+
+        <div id="searchNavControls"
+             style="
+                display:flex;
+                align-items:center;
+                gap:1px;
+             ">
+
+            <button type="button"
+                    id="prevSearchBtn"
+                    class="nav-arrow-btn"
+                    title="Previous match"
+                    aria-label="Previous search result"
+                    style="
+                        width:28px;
+                        height:28px;
+                        padding:0;
+                        border:0;
+                        border-radius:5px;
+                        background:#edf7f8;
+                        color:#087783;
+                        cursor:pointer;
+                    ">
+                <span class="material-symbols-outlined"
+                      aria-hidden="true"
+                      style="font-size:17px;">
+                    &lt;
+                </span>
+            </button>
+
+            <button type="button"
+                    id="nextSearchBtn"
+                    class="nav-arrow-btn"
+                    title="Next match"
+                    aria-label="Next search result"
+                    style="
+                        width:28px;
+                        height:28px;
+                        padding:0;
+                        border:0;
+                        border-radius:5px;
+                        background:#edf7f8;
+                        color:#087783;
+                        cursor:pointer;
+                    ">
+                <span class="material-symbols-outlined"
+                      aria-hidden="true"
+                      style="font-size:17px;">
+                    &gt;
+                </span>
+            </button>
+
+        </div>
+
+        <button type="button"
+                id="closeSearchBtn"
+                class="search-close-btn"
+                title="Close search"
+                aria-label="Close search"
+                style="
+                    width:28px;
+                    height:28px;
+                    padding:0;
+                    border:0;
+                    border-radius:5px;
+                    background:transparent;
+                    color:#64748b;
+                    cursor:pointer;
+                    margin-left:2px;
+                ">
+            <span class="material-symbols-outlined"
+                  aria-hidden="true"
+                  style="font-size:18px;">
+                close
+            </span>
+        </button>
+
+    </div>
+</div>
+
+
+<!-- =========================================================
+     SEARCH BOX
+     ========================================================= -->
+
+
+
+
+<!-- =========================================================
+     SEARCH SCRIPT ---1
+     ========================================================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    var searchToggleBtn =
+        document.getElementById("searchToggleBtn");
+
+    var searchBarWrapper =
+        document.getElementById("searchBarWrapper");
+
+    var pageSearchInput =
+        document.getElementById("pageSearchInput");
+
+
+    if (!searchToggleBtn || !searchBarWrapper) {
+        return;
+    }
+
+
+    /* Open Search */
+
+    searchToggleBtn.addEventListener("click", function () {
+
+        searchToggleBtn.style.display = "none";
+
+        searchBarWrapper.style.display = "flex";
+
+        if (pageSearchInput) {
+            setTimeout(function () {
+                pageSearchInput.focus();
+            }, 50);
+        }
+
+    });
+
+
+    /* Ctrl + F */
+
+    document.addEventListener("keydown", function (e) {
+
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "f") {
+
+            e.preventDefault();
+
+            searchToggleBtn.style.display = "none";
+
+            searchBarWrapper.style.display = "flex";
+
+            if (pageSearchInput) {
+                setTimeout(function () {
+                    pageSearchInput.focus();
+                }, 50);
+            }
+
+        }
+
+    });
+
+});
+</script>
+
+
+            <!-- =================================================
+                     LANGUAGE SELECTOR
+                     ================================================= -->
+
+          <div class="lang-wrapper">
+
+
+    <button type="button"
+            id="langIconBtn"
+            class="lang-label"
+            title="Translate this page"
+            aria-label="Translate this page"
+            style="background:transparent;border:0;padding:0 18px;cursor:pointer;color:#fff;line-height:1;"
+            onclick="var kn=document.getElementById('rKannada'),en=document.getElementById('rEnglish');(en.checked?kn:en).click();">
+
+      <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false">
+    <text x="2" y="15" font-size="15" font-weight="700" fill="currentColor"
+          font-family="'Noto Sans Kannada','Nirmala UI','Tunga',sans-serif">ಅ</text>
+    <text x="12" y="29" font-size="17" font-weight="700" fill="currentColor"
+          font-family="Arial,Helvetica,sans-serif">A</text>
+</svg>
+
+    </button>
+
+
+    <span id="languageSelectionLabel"
+          style="
+              position:absolute;
+              width:1px;
+              height:1px;
+              padding:0;
+              margin:-1px;
+              overflow:hidden;
+              clip:rect(0,0,0,0);
+              white-space:nowrap;
+              border:0;
+          ">
+        Select website language
+    </span>
+
+
+    <div class="lang-radio-group"
+         role="radiogroup"
+         aria-labelledby="languageSelectionLabel"
+         style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+
+
+        <input type="radio"
+               name="langRadio"
+               id="rKannada"
+               value="kn-IN" />
+
+        <label for="rKannada">
+            ಕನ್ನಡ
+        </label>
+
+
+        <input type="radio"
+               name="langRadio"
+               id="rEnglish"
+               value="en-US" />
+
+        <label for="rEnglish">
+            English
+        </label>
+
+
+    </div>
+
+
+    <label for="ddlLanguages"
+           style="
+              position:absolute;
+              width:1px;
+              height:1px;
+              padding:0;
+              margin:-1px;
+              overflow:hidden;
+              clip:rect(0,0,0,0);
+              white-space:nowrap;
+              border:0;
+           ">
+        Select Language
+    </label>
+
+
+    <select name="ctl00$ddlLanguages" id="ddlLanguages" style="
+            display:none;
+            position:absolute;
+            left:-9999px;
+        ">
+	<option selected="selected" value="kn-IN">ಕನ್ನಡ</option>
+	<option value="en-US">English</option>
+
+</select>
+
+
+</div>
+
+
+                <!-- =================================================
+                     ACCESSIBILITY SETTINGS
+                     ================================================= -->
+
+                <div class="settings-dropdown"
+                     id="settingsDropdown">
+
+
+                    <button type="button"
+                            class="theme-toggle-btn"
+                            id="settingsToggleBtn"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#settingsOffcanvas"
+                            aria-controls="settingsOffcanvas"
+                            title="Accessibility Settings"
+                            aria-label="Accessibility Settings">
+
+                        <i class="fa-regular fa-universal-access"
+                           aria-hidden="true">
+                        </i>
+
+                    </button>
+
+
+                    <!-- =================================================
+                         SETTINGS OFFCANVAS
+                         ================================================= -->
+
+                  
+<div class="offcanvas offcanvas-end settings-offcanvas"
+     tabindex="-1"
+     id="settingsOffcanvas"
+     aria-labelledby="settingsOffcanvasLabel">
+
+
+    <div class="offcanvas-header border-bottom">
+
+
+        <h2 class="offcanvas-title fw-bold"
+            id="settingsOffcanvasLabel">
+
+            <i class="fa-solid fa-sliders me-2 text-primary"
+               aria-hidden="true">
+            </i>
+
+            Accessibility Settings
+
+        </h2>
+
+
+        <button type="button"
+                class="btn-close shadow-none"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close accessibility settings">
+        </button>
+
+
+    </div>
+
+
+    <div class="offcanvas-body d-flex flex-column gap-4 p-4">
+
+
+        <!-- FONT SIZE -->
+
+      <!-- FONT SIZE -->
+
+<div class="card border shadow-sm">
+
+    <div class="card-body">
+
+        <span class="fw-semibold d-block mb-2 text-secondary">
+            Font Size
+        </span>
+
+        <div class="btn-group w-100"
+             role="group"
+             aria-label="Font size controls">
+
+            <!-- DECREASE FONT SIZE -->
+
+            <button class="btn btn-outline-primary font-ctrl-btn"
+                    id="btnAminus"
+                    type="button"
+                    title="Decrease font size"
+                    aria-label="A − Decrease font size">
+
+                A<sup>−</sup>
+
+            </button>
+
+
+            <!-- RESET FONT SIZE -->
+
+            <button class="btn btn-outline-primary font-ctrl-btn"
+                    id="btnAreset"
+                    type="button"
+                    title="Reset font size"
+                    aria-label="A Reset font size">
+
+                A
+
+            </button>
+
+
+            <!-- INCREASE FONT SIZE -->
+
+            <button class="btn btn-outline-primary font-ctrl-btn"
+                    id="btnAplus"
+                    type="button"
+                    title="Increase font size"
+                    aria-label="A + Increase font size">
+
+                A<sup>+</sup>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+        <!-- COLOR THEME -->
+
+        <div class="card border shadow-sm">
+
+            <div class="card-body">
+
+                <span class="fw-semibold d-block mb-2 text-secondary">
+                    Color Theme
+                </span>
+
+
+                <button id="toggleThemeBtn"
+                        type="button"
+                        class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-2 py-2"
+                        title="Cycle color theme"
+                        aria-label="Cycle color theme">
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACCESSIBILITY TOOLS -->
+
+        <div class="card border shadow-sm">
+
+            <div class="card-body">
+
+                <span class="fw-semibold d-block mb-3 text-secondary">
+                    Accessibility Tools
+                </span>
+
+
+                <div class="row g-2">
+
+
+                    <!-- HIDE IMAGES -->
+
+                    <div class="col-6">
+
+                        <button type="button"
+                                class="btn btn-outline-primary a11y-card-btn w-100 p-2"
+                                id="btnHideImages"
+                                onclick="toggleHideImages()"
+                                aria-label="Hide Images">
+
+                            <i class="fa-solid fa-image-slash fa-lg mb-2"
+                               aria-hidden="true">
+                            </i>
+
+                            <span>
+                                Hide Images
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- BIG CURSOR -->
+
+                    <div class="col-6">
+
+                        <button type="button"
+                                class="btn btn-outline-primary a11y-card-btn w-100 p-2"
+                                id="btnBigCursor"
+                                onclick="toggleBigCursor()"
+                                aria-label="Big Cursor">
+
+                            <i class="fa-solid fa-arrow-pointer fa-lg mb-2"
+                               aria-hidden="true">
+                            </i>
+
+                            <span>
+                                Big Cursor
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- HIGHLIGHT LINKS -->
+
+                    <div class="col-12">
+
+                        <button type="button"
+                                class="btn btn-outline-primary a11y-card-btn w-100 p-2 d-flex align-items-center justify-content-center gap-2"
+                                id="btnHighlightLinks"
+                                onclick="toggleHighlightLinks()"
+                                aria-label="Highlight Links">
+
+                            <i class="fa-solid fa-link"
+                               aria-hidden="true">
+                            </i>
+
+                            <span>
+                                Highlight Links
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         HEADER BRAND
+         ========================================================= -->
+
+    <div class="header-brand">
+
+        <div class="header-brand-inner new-header-layout">
+
+
+            <div class="header-left-cm">
+
+                <img src='Images/cm_kn.jpeg'
+                     ondrag="return false;"
+                     alt="Chief Minister of Karnataka" />
+
+            </div>
+
+
+            <div class="header-center-gok">
+
+                <div class="header-gok-emblem">
+
+                    <img src='Images/dparceg_kn.jpeg'
+                         ondrag="return false;"
+                         alt="Government of Karnataka Emblem" />
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right-logo">
+
+                <img src='Images/pkitbtegov_kn.jpeg'
+                     ondrag="return false;"
+                     alt="PKIT BTE GOV Logo" />
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MAIN NAVIGATION
+         ========================================================= -->
+
+    <nav class="navbar navbar-expand-lg custom-main-navbar sticky-top"
+         aria-label="Main navigation">
+
+        <div class="container-fluid px-lg-5 px-3">
+
+
+            <button class="navbar-toggler border-0 shadow-none"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#mainTopNavbarOffcanvas"
+                    aria-label="Open main navigation"
+                    aria-controls="mainTopNavbarOffcanvas">
+
+                <i class="fa-solid fa-bars text-white"
+                   aria-hidden="true"
+                   style="font-size:1.5rem;">
+                </i>
+
+            </button>
+
+
+            <div class="offcanvas offcanvas-start custom-offcanvas"
+                 tabindex="-1"
+                 id="mainTopNavbarOffcanvas"
+                 aria-labelledby="offcanvasNavbarLabel">
+
+
+                <div class="offcanvas-header border-bottom border-light border-opacity-25">
+
+                    <h2 class="offcanvas-title text-white fw-bold"
+                        id="offcanvasNavbarLabel">
+
+                        <i class="fa-solid fa-bars-staggered me-2"
+                           aria-hidden="true">
+                        </i>
+
+                        Menu
+
+                    </h2>
+
+
+                    <button type="button"
+                            class="btn-close btn-close-white shadow-none"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close main navigation">
+                    </button>
+
+                </div>
+
+
+                <div class="offcanvas-body">
+
+
+                    <ul class="navbar-nav w-100 justify-content-start gap-1">
+
+
+                        <!-- HOME -->
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               href="Homepage.aspx">
+
+                                <i class="fa-solid fa-house-chimney me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="lbl_Home">
+                                    Home
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- Department -->
+
+                        <li class="nav-item dropdown">
+
+    <a class="nav-link dropdown-toggle"
+       href="about.aspx"
+       id="departmentDropdownNav"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
+
+       <i class="fa-solid fa-building-columns me-2"
+   aria-hidden="true">
+</i>
+
+        <span class="lbl"
+              data-key="lbl_AboutUs">
+            Department
+        </span>
+
+    </a>
+
+    <ul class="dropdown-menu shadow-lg border-0"
+        aria-labelledby="departmentDropdownNav">
+
+        <!-- About Us -->
+       <!-- About Us -->
+<li>
+
+    <a class="dropdown-item"
+       href="about.aspx">
+
+        <i class="fa-solid fa-circle-info me-2"
+           aria-hidden="true">
+        </i>
+
+        <span class="lbl"
+              data-key="lbl_AboutUs">
+            About Us
+        </span>
+
+    </a>
+
+</li>
+
+
+<!-- Schemes -->
+<li>
+    <a class="dropdown-item"
+       href="Schemes.aspx">
+
+        <i class="fa-solid fa-list-check me-2"
+           aria-hidden="true"></i>
+
+        <span class="lbl"
+              data-key="lbl_Schemes">
+            Schemes
+        </span>
+
+    </a>
+</li>
+
+    </ul>
+
+</li>
+
+
+                        <!-- STUDENT CORNER -->
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="studentDropdownNav"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+
+                                <i class="fa-solid fa-user-graduate me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="card_applicant">
+                                    Student Corner
+                                </span>
+
+                            </a>
+
+
+                            <ul class="dropdown-menu shadow-lg border-0"
+                                aria-labelledby="studentDropdownNav">
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/post_sa_2627/login"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_loginpost">
+                                            Student Login (Postmatric)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/ssppre/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_loginpre">
+                                            Student Login (Prematric)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+
+                        <!-- DEPARTMENT LOGIN -->
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="deptDropdownNav"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+
+                                <i class="fa-solid fa-building-columns me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="card_dept">
+                                    Department Login
+                                </span>
+
+                            </a>
+
+
+                            <ul class="dropdown-menu shadow-lg border-0"
+                                aria-labelledby="deptDropdownNav">
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/2223_Processing"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_ssplogin">
+                                            Department Login (SSP)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+
+                        <!-- UNIVERSITY / INSTITUTION -->
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="deptunicollege"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+
+                                <i class="fa-solid fa-building-columns me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="card_unicollege">
+                                    University/Institutional Login
+                                </span>
+
+                            </a>
+
+
+                            <ul class="dropdown-menu shadow-lg border-0"
+                                aria-labelledby="deptunicollege">
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/cis/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_cislogin">
+                                            University / College (CIS)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://unidata.karnataka.gov.in/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_unidatalogin">
+                                            University (UNIDATA)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/2223_processing/LoginPage_CIS"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_ceologin">
+                                            College Empowerment Officer
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/2223_Processing"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_inologin">
+                                            Nodal Officer (INO)
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+
+                        <!-- HOSTEL -->
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="depthostel"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+
+                                <i class="fa-solid fa-bed me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="card_hostel">
+                                    Hostel
+                                </span>
+
+                            </a>
+
+
+                            <ul class="dropdown-menu shadow-lg border-0"
+                                aria-labelledby="depthostel">
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://ssp.postmatric.karnataka.gov.in/hmis/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_shphmislogin">
+                                            SSP HMIS Login
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       href="https://shp.karnataka.gov.in/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_shplogin">
+                                            State Hostel Portal
+                                        </span>
+
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+
+                        <!-- IMPORTANT LINKS -->
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="rtiDropdownimpo"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+
+                                <i class="fa-solid fa-up-right-from-square me-2"
+                                   aria-hidden="true">
+                                </i>
+
+                                <span class="lbl"
+                                      data-key="lbl_impolinks">
+                                    Important Links
+                                </span>
+
+                            </a>
+
+
+                            <ul class="dropdown-menu shadow-lg border-0"
+                                aria-labelledby="rtiDropdownimpo">
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="Contactus"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_contact">
+                                            Contact Us
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://uidai.gov.in/hi"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_uidai">
+                                            Aadhaar (UIDAI) portal
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://www.npci.org.in/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_npci">
+                                            NPCI- Aadhar seeding status
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://scholarships.gov.in/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_nspotr">
+                                            NSP - OTR generation
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://ajsk.karnataka.gov.in/nkcv/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_checkrd">
+                                            Check your RD number Details
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://play.google.com/store/apps/details?id=com.dbtkarnataka&hl=en-US"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_dbtapp">
+                                            DBT Karnataka App
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://nad.karnataka.gov.in/#/YuvaNidhi"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_nad">
+                                            National Academic Depository (NAD)
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://uucms.karnataka.gov.in/Login/Index"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_uucms">
+                                            UUCMS portal
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://kutumba.karnataka.gov.in/kn/Index"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="lbl_kutumba">
+                                            KUTUMBA portal
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="https://www.nilaya.karnataka.gov.in/"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+
+                                        <span class="lbl"
+                                              data-key="btn_nilayalogin">
+                                            Nilaya Portal
+                                        </span>
+
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+
+                        <!-- GOOGLE SEARCH -->
+
+                        <li class="nav-search-item">
+
+                            <div class="nav-search">
+
+                                <div class="gcse-search"></div>
+
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
+
+    <main id="maincontent10"
+          role="main"
+          tabindex="-1"
+          style="
+              width:100%;
+              scroll-margin-top:80px;
+          ">
+
+        
+    <main id="maincontent" class="help-page-wrapper policy-page-wrapper" tabindex="-1">
+        <div class="text-center text-md-start">
+    <nav class="premium-breadcrumb" aria-label="breadcrumb">
+        <a href="Homepage"><i class="fa-solid fa-house-chimney me-2"></i>Home</a>
+        <span class="separator"><i class="fa-solid fa-chevron-right"></i></span>
+        <span class="current">Help</span>
+    </nav>
+</div>
+        <!-- Header Banner Section -->
+        <header class="help-header">
+            <div class="header-badge"><i class="fas fa-question-circle"></i> Support & Documentation</div>
+            <h1>Help Center</h1>
+            <p class="subtitle">Viewing Information in Various File Formats</p>
+        </header>
+
+        <!-- Intro Callout Box -->
+        <div class="help-intro-card">
+            <div class="intro-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="intro-text">
+                <p>
+                    The information provided by this Web site is available in various formats, such as Portable Document Format (PDF), Word, Excel, PowerPoint, and HTML. To view these files properly, your web browser requires the corresponding plug-ins or viewer software.
+                </p>
+                <p class="sub-note">
+                    If your system lacks the required applications, you can download the free viewers and compatibility tools from the official links listed below.
+                </p>
+            </div>
+        </div>
+
+        <!-- Document Formats Grid -->
+        <section class="formats-section">
+            <h2 class="section-title">Required Plug-ins & Viewers</h2>
+
+            <div class="formats-grid">
+                
+                <!-- PDF Format Card -->
+                <div class="format-card">
+                    <div class="card-top">
+                        <div class="format-icon pdf-icon">
+                            <i class="far fa-file-pdf"></i>
+                        </div>
+                        <div class="format-meta">
+                            <h3>Portable Document Format (PDF)</h3>
+                            <span class="file-ext">.pdf</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Requires Adobe Acrobat Reader or a modern browser with built-in PDF viewing capabilities.</p>
+                        <div class="download-links">
+                            <a href="https://get.adobe.com/reader/" target="_blank" rel="noopener noreferrer" class="dl-btn primary">
+                                <i class="fas fa-download"></i> Adobe Acrobat Reader
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Format Card -->
+                <div class="format-card">
+                    <div class="card-top">
+                        <div class="format-icon word-icon">
+                            <i class="far fa-file-word"></i>
+                        </div>
+                        <div class="format-meta">
+                            <h3>Word Files</h3>
+                            <span class="file-ext">.doc / .docx</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Viewable using Microsoft Word, Word Viewer, or LibreOffice Writer.</p>
+                        <div class="download-links">
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn">
+                                <i class="fas fa-external-link-alt"></i> Word Viewer (till 2003)
+                            </a>
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn outline">
+                                <i class="fas fa-download"></i> Office Compatibility Pack (2007+)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Excel Format Card -->
+                <div class="format-card">
+                    <div class="card-top">
+                        <div class="format-icon excel-icon">
+                            <i class="far fa-file-excel"></i>
+                        </div>
+                        <div class="format-meta">
+                            <h3>Excel Spreadsheets</h3>
+                            <span class="file-ext">.xls / .xlsx</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Viewable using Microsoft Excel, Excel Viewer, or spreadsheet software.</p>
+                        <div class="download-links">
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn">
+                                <i class="fas fa-external-link-alt"></i> Excel Viewer 2003
+                            </a>
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn outline">
+                                <i class="fas fa-download"></i> Office Compatibility Pack (2007+)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PowerPoint Format Card -->
+                <div class="format-card">
+                    <div class="card-top">
+                        <div class="format-icon ppt-icon">
+                            <i class="far fa-file-powerpoint"></i>
+                        </div>
+                        <div class="format-meta">
+                            <h3>PowerPoint Presentations</h3>
+                            <span class="file-ext">.ppt / .pptx</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Viewable using Microsoft PowerPoint or PowerPoint Viewer toolkits.</p>
+                        <div class="download-links">
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn">
+                                <i class="fas fa-external-link-alt"></i> PowerPoint Viewer 2003
+                            </a>
+                            <a href="https://www.microsoft.com/en-us/download" target="_blank" rel="noopener noreferrer" class="dl-btn outline">
+                                <i class="fas fa-download"></i> Office Compatibility Pack (2007+)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flash / Multimedia Card -->
+                <div class="format-card">
+                    <div class="card-top">
+                        <div class="format-icon flash-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="format-meta">
+                            <h3>Flash / Interactive Content</h3>
+                            <span class="file-ext">.swf / .flv</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Interactive vector graphics or video streams requiring browser extensions.</p>
+                        <div class="download-links">
+                            <a href="https://get.adobe.com/flashplayer/" target="_blank" rel="noopener noreferrer" class="dl-btn">
+                                <i class="fas fa-external-link-alt"></i> Adobe Flash Player
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    </main>
+
+
+    <div class="footer-logos-track">
+
+                <div class="footer-logos-scroll">
+
+
+                    <a href="https://www.nic.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="National Informatics Centre">
+
+                        <img src="Images/nic.png"
+                             alt="NIC" />
+
+                    </a>
+
+
+                    <a href="https://www.digitalindia.gov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Digital India">
+
+                        <img src="Images/indiagov.png"
+                             alt="Digital India" />
+
+                    </a>
+
+
+                    <img src="Images/GOK.png"
+                         alt="Government of Karnataka" />
+
+
+                    <a href="https://www.nic.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="National Informatics Centre">
+
+                        <img src="Images/nic.png"
+                             alt="NIC" />
+
+                    </a>
+
+
+                    <a href="https://www.mygov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="MyGov">
+
+                        <img src="Images/mygov.png"
+                             alt="Government of India" />
+
+                    </a>
+
+
+                    <a href="https://www.digitalindia.gov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Digital India">
+
+                        <img src="Images/indiagov.png"
+                             alt="Digital India" />
+
+                    </a>
+
+
+                    <a href="https://data.gov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Open Government Data">
+
+                        <img src="Images/data-gov-logo.png"
+                             alt="Open Government Data" />
+
+                    </a>
+
+
+                    <a href="https://www.w3.org/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="World Wide Web Consortium">
+
+                        <img src="Images/w3c.png"
+                             alt="W3C" />
+
+                    </a>
+
+
+                    <a href="https://www.pmindia.gov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Prime Minister's Office">
+
+                        <img src="Images/pm-india-logo.png"
+                             alt="Prime Minister's Office" />
+
+                    </a>
+
+
+                    <a href="#"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="SSL Secure">
+
+                        <img src="Images/SSLcertificate.png"
+                             alt="SSL Secure" />
+
+                    </a>
+
+
+                    <a href="https://www.meity.gov.in/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Ministry of Electronics and Information Technology">
+
+                        <img src="Images/Meity_logo.png"
+                             alt="MeitY" />
+
+                    </a>
+
+
+                </div>
+
+            </div>
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="portal-footer">
+
+        <div class="footer-inner">
+
+
+            <div class="policy-bar"
+                 style="border:none">
+
+
+                <a href="webpolicies"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-file-shield">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_policy">
+                        Website Policies
+                    </span>
+
+                </a>
+
+
+                <a href="screenreader"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-eye">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_screenreader">
+                        Screen Reader
+                    </span>
+
+                </a>
+
+
+                <a href="Downloads"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-download">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_downloads">
+                        Downloads
+                    </span>
+
+                </a>
+
+
+                <a href="Termsconditions"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-file-contract">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_terms">
+                        Terms &amp; Conditions
+                    </span>
+
+                </a>
+
+
+                <a href="Contactus"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-phone">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_contact">
+                        Contact Us
+                    </span>
+
+                </a>
+
+
+                <a href="SiteMap"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-sitemap">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_sitemap">
+                        Sitemap
+                    </span>
+
+                </a>
+
+
+                <a href="Archives"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-inbox">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_Archives">
+                        Archives
+                    </span>
+
+                </a>
+
+
+                <a href="help"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-regular fa-lightbulb">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_Help">
+                        Help
+                    </span>
+
+                </a>
+
+
+                <a href="FeedbackForm"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-ear-listen">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_feedback">
+                        Feedback Form
+                    </span>
+
+                </a>
+
+
+                <a href="about"
+                   class="policy-link">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-circle-info">
+                    </i>
+
+                    <span class="lbl"
+                          data-key="link_About">
+                        About
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER GRID
+                 ================================================= -->
+
+            <div class="footer-grid-2col">
+
+
+                <!-- LEFT -->
+
+                <div class="footer-left-wrap">
+
+
+                    <div class="mb-4">
+
+                        <div class="footer-col-title">
+
+                            <span class="lbl"
+                                  data-key="footer_content">
+                                Content &amp; Data
+                            </span>
+
+                        </div>
+
+
+                        <p class="footer-text">
+
+                            <span class="lbl"
+                                  data-key="footer_ownedby">
+                                Owned &amp; Maintained by
+                            </span>
+
+                            <br />
+
+                            <strong class="text-white">
+                                Centre for e-Governance, Government of Karnataka
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="footer-col-title">
+
+                            <span class="lbl"
+                                  data-key="footer_portalstats">
+                                Portal Stats
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-stats">
+
+
+                            <div class="footer-stat-box">
+
+                                <div class="footer-stat-label">
+
+                                    <span class="lbl"
+                                          data-key="footer_lastupdated">
+                                        Last Updated
+                                    </span>
+
+                                </div>
+
+
+                                <div class="footer-stat-value">
+
+                                    <span id="lblLastUpdated">28/09/2026</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="footer-stat-box">
+
+                                <div class="footer-stat-label">
+
+                                    <span class="lbl"
+                                          data-key="footer_visitors">
+                                        Total Visitors
+                                    </span>
+
+                                </div>
+
+
+                                <div class="footer-stat-value">
+
+                                    <span id="lbldailycount">47127838</span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <div class="footer-right-wrap">
+
+
+                    <div class="tech-support-row">
+
+
+                        <div class="tech-support-text">
+
+
+                            <div class="footer-col-title">
+
+                                <span class="lbl"
+                                      data-key="footer_techsupport">
+                                    Technical Support
+                                </span>
+
+                            </div>
+
+
+                            <p class="footer-text">
+
+                                <span class="lbl"
+                                      data-key="footer_nictext">
+                                    Software developed by
+                                </span>
+
+                                <br />
+
+                                <strong class="text-white">
+                                    NIC, Karnataka State Unit, Bangalore
+                                </strong>
+
+                            </p>
+
+
+                            <p class="footer-text mt-3">
+
+                                <span class="lbl"
+                                      data-key="footer_networktext">
+                                    Network &amp; State Data Centre by
+                                </span>
+
+                                <br />
+
+                                <strong class="text-white">
+                                    Centre for e-Governance, Government of Karnataka
+                                </strong>
+
+                            </p>
+
+
+                        </div>
+
+
+                        <div class="footer-nic-logo">
+
+                            <a href="https://www.nic.in/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="National Informatics Centre">
+
+                                <img src="Images/nic.png"
+                                     alt="NIC Logo" />
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="footer-social-section">
+
+
+                        <div class="footer-col-title mb-0">
+
+                            <span class="lbl"
+                                  data-key="footer_social">
+                                Citizen Engagement
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-social-links">
+
+
+                            <a class="footer-social-link"
+                               href="#"
+                               aria-label="State Scholarship Portal on Facebook"
+                               title="Facebook">
+
+                                <i class="fa-brands fa-facebook-f"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+
+                            <a class="footer-social-link"
+                               href="#"
+                               aria-label="State Scholarship Portal on Instagram"
+                               title="Instagram">
+
+                                <i class="fa-brands fa-instagram"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+
+                            <a class="footer-social-link"
+                               href="#"
+                               aria-label="State Scholarship Portal on X"
+                               title="X (Twitter)">
+
+                                <i class="fa-brands fa-x-twitter"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+
+                            <a class="footer-social-link"
+                               href="#"
+                               aria-label="State Scholarship Portal on YouTube"
+                               title="YouTube">
+
+                                <i class="fa-brands fa-youtube"
+                                   aria-hidden="true">
+                                </i>
+
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER LOGOS
+                 ================================================= -->
+
+            
+
+
+            <p class="footer-copy">
+                © 2026 Government of Karnataka. All rights reserved. |
+                Karnataka State Scholarship Portal (SSP)
+            </p>
+
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         ELIGIBILITY MODAL
+         ========================================================= -->
+
+    <div class="elig-modal-overlay"
+         id="eligModal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="eligModalTitle">
+
+
+        <div class="elig-modal">
+
+
+            <div class="elig-modal-head">
+
+
+                <div class="elig-modal-title"
+                     id="eligModalTitle">
+
+                    Scheme Eligibility
+
+                </div>
+
+
+                <button type="button"
+                        class="elig-modal-close"
+                        id="eligModalClose"
+                        aria-label="Close eligibility dialog">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-xmark">
+                    </i>
+
+                </button>
+
+
+            </div>
+
+
+            <div class="elig-modal-body"
+                 id="eligModalBody">
+
+                <div class="elig-loading">
+
+                    <i aria-hidden="true"
+                       class="fa-solid fa-spinner fa-spin me-2">
+                    </i>
+
+                    Loading eligibility...
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         SCROLL TO TOP
+         ========================================================= -->
+
+    <div class="scroll-to-top-wrap"
+         id="scrollTopWrap"
+         tabindex="0"
+         role="button"
+         aria-label="Scroll to top of the page">
+
+
+        <svg class="progress-ring"
+             width="52"
+             height="52"
+             aria-hidden="true">
+
+            <circle class="progress-ring-bg"
+                    stroke-width="3"
+                    fill="transparent"
+                    r="24"
+                    cx="26"
+                    cy="26" />
+
+            <circle class="progress-ring-circle"
+                    stroke-width="3"
+                    fill="transparent"
+                    r="24"
+                    cx="26"
+                    cy="26" />
+
+        </svg>
+
+
+        <button id="scrollTopBtn"
+                type="button"
+                tabindex="-1"
+                aria-hidden="true"
+                aria-label="Scroll to top">
+
+            <i aria-hidden="true"
+               class="fa-solid fa-arrow-up">
+            </i>
+
+        </button>
+
+
+    </div>
+
+
+    <div class="cursor-dot"
+         id="cursorDot">
+    </div>
+
+    <div class="cursor-outline"
+         id="cursorOutline">
+    </div>
+
+
+</div>
+
+</form>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script type="text/javascript"
+        src="scripts/jquery.min.js">
+</script>
+
+<script type="text/javascript"
+        src="scripts/bootstrap.bundle.min.js">
+</script>
+
+
+<script type="text/javascript">
+
+(function () {
+
+    'use strict';
+
+
+    /* =========================================================
+       INTERSECTION OBSERVER
+       ========================================================= */
+
+    if ('IntersectionObserver' in window) {
+
+        var io = new IntersectionObserver(function (entries) {
+
+            entries.forEach(function (e) {
+
+                if (e.isIntersecting) {
+
+                    e.target.classList.add('visible');
+
+                    io.unobserve(e.target);
+
+                }
+
+            });
+
+        }, {
+            threshold: 0.06
+        });
+
+
+        document.querySelectorAll('.reveal')
+            .forEach(function (el) {
+
+                io.observe(el);
+
+            });
+
+    } else {
+
+        document.querySelectorAll('.reveal')
+            .forEach(function (el) {
+
+                el.classList.add('visible');
+
+            });
+
+    }
+
+
+    /* =========================================================
+       TICKER
+       ========================================================= */
+
+    (function initTicker() {
+
+        var tickerInner =
+            document.getElementById('tickerInner');
+
+        var tickerWrap =
+            document.getElementById('tickerTrackWrap');
+
+        var tickerBtn =
+            document.getElementById('tickerPauseBtn');
+
+        var tickerBtnIcon =
+            document.getElementById('tickerBtnIcon');
+
+        var tickerPaused = false;
+
+        var tickerDragging = false,
+            tickerStartX = 0,
+            tickerScrollLeft = 0;
+
+
+        function setTickerPause(p) {
+
+            tickerPaused = p;
+
+            if (tickerInner) {
+
+                tickerInner.classList.toggle(
+                    'paused',
+                    p
+                );
+
+            }
+
+
+            if (tickerBtnIcon) {
+
+                tickerBtnIcon.className =
+                    p
+                        ? 'fa-solid fa-play'
+                        : 'fa-solid fa-pause';
+
+            }
+
+
+            if (tickerBtn) {
+
+                tickerBtn.title =
+                    p
+                        ? 'Play ticker'
+                        : 'Pause ticker';
+
+            }
+
+
+            if (tickerWrap) {
+
+                tickerWrap.classList.toggle(
+                    'draggable',
+                    p
+                );
+
+                if (!p) {
+
+                    tickerWrap.scrollLeft = 0;
+
+                }
+
+            }
+
+        }
+
+
+        if (tickerBtn) {
+
+            tickerBtn.addEventListener(
+                'click',
+                function () {
+
+                    setTickerPause(!tickerPaused);
+
+                }
+            );
+
+        }
+
+
+        if (tickerWrap) {
+
+            tickerWrap.addEventListener(
+                'mousedown',
+                function (e) {
+
+                    if (!tickerPaused) return;
+
+                    tickerDragging = true;
+
+                    tickerStartX =
+                        e.pageX -
+                        tickerWrap.offsetLeft;
+
+                    tickerScrollLeft =
+                        tickerWrap.scrollLeft;
+
+                    tickerWrap.classList.add(
+                        'dragging'
+                    );
+
+                }
+            );
+
+
+            document.addEventListener(
+                'mousemove',
+                function (e) {
+
+                    if (
+                        !tickerDragging ||
+                        !tickerPaused
+                    ) {
+                        return;
+                    }
+
+                    var x =
+                        e.pageX -
+                        tickerWrap.offsetLeft;
+
+                    var walk =
+                        (x - tickerStartX) * 1.5;
+
+                    tickerWrap.scrollLeft =
+                        tickerScrollLeft - walk;
+
+                }
+            );
+
+
+            document.addEventListener(
+                'mouseup',
+                function () {
+
+                    tickerDragging = false;
+
+                    if (tickerWrap) {
+
+                        tickerWrap.classList.remove(
+                            'dragging'
+                        );
+
+                    }
+
+                }
+            );
+
+
+            tickerWrap.addEventListener(
+                'touchstart',
+                function (e) {
+
+                    if (!tickerPaused) return;
+
+                    tickerStartX =
+                        e.touches[0].pageX;
+
+                    tickerScrollLeft =
+                        tickerWrap.scrollLeft;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            tickerWrap.addEventListener(
+                'touchmove',
+                function (e) {
+
+                    if (!tickerPaused) return;
+
+                    var x =
+                        e.touches[0].pageX;
+
+                    var walk =
+                        tickerStartX - x;
+
+                    tickerWrap.scrollLeft =
+                        tickerScrollLeft + walk;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+        }
+
+    })();
+
+
+    /* =========================================================
+       FLUID MARQUEE
+       ========================================================= */
+
+    (function initFluidMarquee() {
+
+        var inner =
+            document.getElementById('tickerInner');
+
+        if (
+            !inner ||
+            inner.dataset.duplicated
+        ) {
+            return;
+        }
+
+
+        var original =
+            inner.innerHTML.trim();
+
+        if (!original) return;
+
+
+        inner.innerHTML =
+            '<span class="ticker-seg">' +
+            original +
+            '</span>' +
+
+            '<span class="ticker-seg" aria-hidden="true">' +
+            original +
+            '</span>';
+
+
+        inner.dataset.duplicated = 'true';
+
+    })();
+
+
+    /* =========================================================
+       NOTICE BOARD
+       ========================================================= */
+
+    (function initNoticeBoard() {
+
+        var ns =
+            document.getElementById('noticeScroll');
+
+        var viewport =
+            ns
+                ? ns.closest('.notice-viewport')
+                : null;
+
+        var pauseBtn =
+            document.getElementById(
+                'noticePauseBtn'
+            );
+
+        var pauseIcon =
+            document.getElementById(
+                'noticeBtnIcon'
+            );
+
+        var paused = false;
+
+        var nbDragging = false,
+            nbStartY = 0,
+            nbScrollTop = 0;
+
+
+        function setNoticePause(p) {
+
+            paused = p;
+
+
+            if (ns) {
+
+                if (p) {
+
+                    ns.style.animationPlayState =
+                        'paused';
+
+                    ns.classList.add('paused');
+
+                } else {
+
+                    ns.style.animationPlayState =
+                        'running';
+
+                    ns.classList.remove('paused');
+
+                }
+
+            }
+
+
+            if (pauseIcon) {
+
+                pauseIcon.className =
+                    p
+                        ? 'fa-solid fa-play'
+                        : 'fa-solid fa-pause';
+
+            }
+
+
+            if (pauseBtn) {
+
+                pauseBtn.title =
+                    p
+                        ? 'Play scroll'
+                        : 'Pause scroll';
+
+            }
+
+
+            if (viewport) {
+
+                viewport.classList.toggle(
+                    'nb-draggable',
+                    p
+                );
+
+
+                if (!p) {
+
+                    viewport.scrollTop = 0;
+
+                }
+
+            }
+
+        }
+
+
+        if (pauseBtn) {
+
+            var newBtn =
+                pauseBtn.cloneNode(true);
+
+            pauseBtn.parentNode.replaceChild(
+                newBtn,
+                pauseBtn
+            );
+
+            pauseBtn = newBtn;
+
+            pauseIcon =
+                document.getElementById(
+                    'noticeBtnIcon'
+                );
+
+
+            pauseBtn.addEventListener(
+                'click',
+                function () {
+
+                    setNoticePause(!paused);
+
+                }
+            );
+
+        }
+
+
+        if (ns) {
+
+            ns.addEventListener(
+                'mouseenter',
+                function () {
+
+                    if (!paused && ns) {
+
+                        ns.style.animationPlayState =
+                            'paused';
+
+                    }
+
+                }
+            );
+
+
+            ns.addEventListener(
+                'mouseleave',
+                function () {
+
+                    if (!paused && ns) {
+
+                        ns.style.animationPlayState =
+                            'running';
+
+                    }
+
+                }
+            );
+
+
+            ns.addEventListener(
+                'touchstart',
+                function () {
+
+                    if (!paused && ns) {
+
+                        ns.style.animationPlayState =
+                            'paused';
+
+                    }
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            ns.addEventListener(
+                'touchend',
+                function () {
+
+                    if (!paused && ns) {
+
+                        ns.style.animationPlayState =
+                            'running';
+
+                    }
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+        }
+
+
+        if (viewport) {
+
+            viewport.addEventListener(
+                'mousedown',
+                function (e) {
+
+                    if (!paused) return;
+
+                    nbDragging = true;
+
+                    nbStartY = e.pageY;
+
+                    nbScrollTop =
+                        viewport.scrollTop;
+
+                    viewport.classList.add(
+                        'nb-dragging'
+                    );
+
+                    e.preventDefault();
+
+                }
+            );
+
+
+            document.addEventListener(
+                'mousemove',
+                function (e) {
+
+                    if (
+                        !nbDragging ||
+                        !paused
+                    ) {
+                        return;
+                    }
+
+                    var walk =
+                        (nbStartY - e.pageY) * 1.2;
+
+                    viewport.scrollTop =
+                        nbScrollTop + walk;
+
+                }
+            );
+
+
+            document.addEventListener(
+                'mouseup',
+                function () {
+
+                    nbDragging = false;
+
+                    if (viewport) {
+
+                        viewport.classList.remove(
+                            'nb-dragging'
+                        );
+
+                    }
+
+                }
+            );
+
+
+            viewport.addEventListener(
+                'touchstart',
+                function (e) {
+
+                    if (!paused) return;
+
+                    nbStartY =
+                        e.touches[0].pageY;
+
+                    nbScrollTop =
+                        viewport.scrollTop;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            viewport.addEventListener(
+                'touchmove',
+                function (e) {
+
+                    if (!paused) return;
+
+                    var y =
+                        e.touches[0].pageY;
+
+                    var walk =
+                        nbStartY - y;
+
+                    viewport.scrollTop =
+                        nbScrollTop + walk;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+        }
+
+    })();
+
+
+    /* =========================================================
+       SCROLL CARDS
+       ========================================================= */
+
+    document
+        .querySelectorAll('[data-scrollcard="true"]')
+        .forEach(function (card) {
+
+            var inner =
+                card.querySelector(
+                    '.cc-body-inner'
+                );
+
+            var arrowT =
+                card.querySelector(
+                    '.arrow-top'
+                );
+
+            var arrowB =
+                card.querySelector(
+                    '.arrow-bot'
+                );
+
+
+            if (!inner) return;
+
+
+            function updateArrows() {
+
+                var atTop =
+                    inner.scrollTop <= 2;
+
+                var atBottom =
+                    inner.scrollTop +
+                    inner.clientHeight >=
+                    inner.scrollHeight - 2;
+
+
+                if (arrowT) {
+
+                    arrowT.classList.toggle(
+                        'visible',
+                        !atTop
+                    );
+
+                }
+
+
+                if (arrowB) {
+
+                    arrowB.classList.toggle(
+                        'visible',
+                        !atBottom
+                    );
+
+                }
+
+            }
+
+
+            inner.addEventListener(
+                'scroll',
+                updateArrows,
+                {
+                    passive: true
+                }
+            );
+
+
+            updateArrows();
+
+
+            var STEP = 60;
+
+
+            if (arrowT) {
+
+                arrowT.addEventListener(
+                    'click',
+                    function (e) {
+
+                        e.preventDefault();
+
+                        inner.scrollBy({
+                            top: -STEP,
+                            behavior: 'smooth'
+                        });
+
+                    }
+                );
+
+            }
+
+
+            if (arrowB) {
+
+                arrowB.addEventListener(
+                    'click',
+                    function (e) {
+
+                        e.preventDefault();
+
+                        inner.scrollBy({
+                            top: STEP,
+                            behavior: 'smooth'
+                        });
+
+                    }
+                );
+
+            }
+
+        });
+
+
+    /* =========================================================
+       FONT SIZE
+       ========================================================= */
+
+    var root =
+        document.documentElement;
+
+    var MIN_FS = 1.0,
+        MAX_FS = 1.5,
+        DEF_FS = 1.15;
+
+
+    var curFS =
+        parseFloat(
+            localStorage.getItem('ssp-font') ||
+            DEF_FS
+        );
+
+
+    function applyFS(v) {
+
+        v =
+            Math.max(
+                MIN_FS,
+                Math.min(
+                    MAX_FS,
+                    +v.toFixed(2)
+                )
+            );
+
+
+        root.style.fontSize =
+            v + 'em';
+
+
+        localStorage.setItem(
+            'ssp-font',
+            v
+        );
+
+
+        curFS = v;
+
+
+        [
+            'btnAminus',
+            'btnAreset',
+            'btnAplus'
+        ].forEach(function (id) {
+
+            var el =
+                document.getElementById(id);
+
+            if (el) {
+
+                el.classList.remove(
+                    'active'
+                );
+
+            }
+
+        });
+
+
+        var activeId =
+            Math.abs(v - DEF_FS) < 0.01
+                ? 'btnAreset'
+                : (
+                    v > DEF_FS
+                        ? 'btnAplus'
+                        : 'btnAminus'
+                );
+
+
+        var a =
+            document.getElementById(
+                activeId
+            );
+
+
+        if (a) {
+
+            a.classList.add(
+                'active'
+            );
+
+        }
+
+    }
+
+
+    var bm =
+        document.getElementById(
+            'btnAminus'
+        );
+
+    var br =
+        document.getElementById(
+            'btnAreset'
+        );
+
+    var bp =
+        document.getElementById(
+            'btnAplus'
+        );
+
+
+    if (bm) {
+
+        bm.onclick = function () {
+
+            applyFS(curFS - 0.1);
+
+        };
+
+    }
+
+
+    if (br) {
+
+        br.onclick = function () {
+
+            applyFS(DEF_FS);
+
+        };
+
+    }
+
+
+    if (bp) {
+
+        bp.onclick = function () {
+
+            applyFS(curFS + 0.1);
+
+        };
+
+    }
+
+
+    applyFS(curFS);
+
+
+    /* =========================================================
+       THEMES
+       ========================================================= */
+
+    var themes = [
+        'maroon',
+        'blue',
+        'dark'
+    ];
+
+
+    var curTheme =
+        localStorage.getItem('ssp-theme') ||
+        'blue';
+
+
+    function applyTheme(t) {
+
+        document.body.setAttribute(
+            'data-theme',
+            t
+        );
+
+
+        localStorage.setItem(
+            'ssp-theme',
+            t
+        );
+
+
+        curTheme = t;
+
+
+        var btn =
+            document.getElementById(
+                'toggleThemeBtn'
+            );
+
+
+        if (btn) {
+
+            var icons = {
+
+                maroon: 'fa-palette',
+
+                blue: 'fa-droplet',
+
+                dark: 'fa-moon'
+
+            };
+
+
+            var themeNames = {
+
+                maroon: 'Maroon',
+
+                blue: 'Blue',
+
+                dark: 'Dark Mode'
+
+            };
+
+
+            btn.innerHTML =
+                '<i aria-hidden="true" class="fa-solid ' +
+                (icons[t] || 'fa-palette') +
+                '"></i> ' +
+
+                '<span style="font-family:var(--ff-head);font-weight:600;font-size:0.9rem;">' +
+
+                (themeNames[t] || t) +
+
+                '</span>';
+
+
+            btn.title =
+                'Theme: ' +
+                t.charAt(0).toUpperCase() +
+                t.slice(1);
+
+        }
+
+    }
+
+
+    var themeBtn =
+        document.getElementById(
+            'toggleThemeBtn'
+        );
+
+
+    if (themeBtn) {
+
+        themeBtn.onclick = function () {
+
+            applyTheme(
+                themes[
+                    (
+                        themes.indexOf(curTheme) +
+                        1
+                    ) %
+                    themes.length
+                ]
+            );
+
+        };
+
+    }
+
+
+    applyTheme(curTheme);
+
+
+    /* =========================================================
+       ACTIVE TAB
+       ========================================================= */
+
+    var hdnActiveTab =
+        document.getElementById(
+            'hdnActiveTab'
+        );
+
+
+    function activateTab(target) {
+
+        document
+            .querySelectorAll('.tab-btn')
+            .forEach(function (b) {
+
+                b.classList.remove('active');
+
+                b.setAttribute(
+                    'aria-selected',
+                    'false'
+                );
+
+            });
+
+
+        document
+            .querySelectorAll('.tab-pane')
+            .forEach(function (p) {
+
+                p.classList.remove('active');
+
+            });
+
+
+        var btn =
+            document.querySelector(
+                '.tab-btn[data-tab="' +
+                target +
+                '"]'
+            );
+
+
+        var pane =
+            document.getElementById(
+                'tab-' + target
+            );
+
+
+        if (btn) {
+
+            btn.classList.add('active');
+
+            btn.setAttribute(
+                'aria-selected',
+                'true'
+            );
+
+        }
+
+
+        if (pane) {
+
+            pane.classList.add('active');
+
+        }
+
+
+        if (hdnActiveTab) {
+
+            hdnActiveTab.value =
+                target;
+
+        }
+
+
+        /* =====================================================
+           URL + TITLE
+           ===================================================== */
+
+        try {
+
+            var sectionName =
+                target === 'lastdates'
+                    ? 'Last Dates'
+                    : target.charAt(0).toUpperCase() +
+                      target.slice(1);
+
+
+            document.title =
+                'Karnataka State Scholarship Portal - ' +
+                sectionName;
+
+
+            var newUrl =
+                window.location.pathname +
+                '?section=' +
+                encodeURIComponent(target);
+
+
+            window.history.pushState(
+                {
+                    path: newUrl
+                },
+                '',
+                newUrl
+            );
+
+        } catch (err) {
+
+            console.warn(
+                'Tab URL update could not be completed.'
+            );
+
+        }
+
+
+        /* =====================================================
+           SLIDING TAB BAR
+           ===================================================== */
+
+        var navBar =
+            document.querySelector(
+                '.tab-nav-bar'
+            );
+
+
+        if (navBar) {
+
+            navBar.setAttribute(
+                'data-active',
+                target
+            );
+
+
+            navBar.classList.remove(
+                'liquid-squish'
+            );
+
+
+            void navBar.offsetWidth;
+
+
+            navBar.classList.add(
+                'liquid-squish'
+            );
+
+        }
+
+    }
+
+
+    window.activateTab =
+        activateTab;
+
+
+    document
+        .querySelectorAll('.tab-btn')
+        .forEach(function (btn) {
+
+            btn.addEventListener(
+                'click',
+                function (e) {
+
+                    e.preventDefault();
+
+                    activateTab(
+                        btn.getAttribute(
+                            'data-tab'
+                        )
+                    );
+
+                }
+            );
+
+        });
+
+
+    var serverTab =
+        hdnActiveTab
+            ? hdnActiveTab.value
+            : 'lastdates';
+
+
+    if (
+        serverTab &&
+        serverTab !== 'lastdates'
+    ) {
+
+        activateTab(serverTab);
+
+    }
+
+
+    /* =========================================================
+       ACCORDION
+       ========================================================= */
+
+    document.addEventListener(
+        'click',
+        function (e) {
+
+            var btn =
+                e.target.closest(
+                    '.ssp-acc-btn'
+                );
+
+
+            if (!btn) return;
+
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+
+            var accordionContainer =
+                btn.closest('.ssp-accordion') ||
+                btn.closest('.tab-pane');
+
+
+            var bodyId =
+                btn.getAttribute(
+                    'data-target'
+                );
+
+
+            var body =
+                bodyId
+                    ? document.getElementById(
+                        bodyId
+                    )
+                    : btn.nextElementSibling;
+
+
+            var isOpen =
+                btn.classList.contains(
+                    'open'
+                );
+
+
+            if (
+                !isOpen &&
+                accordionContainer
+            ) {
+
+                accordionContainer
+                    .querySelectorAll(
+                        '.ssp-acc-btn.open'
+                    )
+                    .forEach(
+                        function (openBtn) {
+
+                            openBtn.classList.remove(
+                                'open'
+                            );
+
+                            openBtn.setAttribute(
+                                'aria-expanded',
+                                'false'
+                            );
+
+
+                            var openBodyId =
+                                openBtn.getAttribute(
+                                    'data-target'
+                                );
+
+
+                            var openBody =
+                                openBodyId
+                                    ? document.getElementById(
+                                        openBodyId
+                                    )
+                                    : openBtn.nextElementSibling;
+
+
+                            if (openBody) {
+
+                                openBody.classList.remove(
+                                    'show'
+                                );
+
+                            }
+
+                        }
+                    );
+
+            }
+
+
+            btn.classList.toggle(
+                'open',
+                !isOpen
+            );
+
+
+            if (body) {
+
+                body.classList.toggle(
+                    'show',
+                    !isOpen
+                );
+
+            }
+
+
+            btn.setAttribute(
+                'aria-expanded',
+                String(!isOpen)
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       LANGUAGE
+       ========================================================= */
+
+    var ddl =
+        document.getElementById(
+            'ddlLanguages'
+        );
+
+
+    var savedLang =
+        'kn-IN';
+
+
+    document
+        .querySelectorAll(
+            'input[name="langRadio"]'
+        )
+        .forEach(function (r) {
+
+            r.checked =
+                r.value === savedLang;
+
+
+            r.addEventListener(
+                'change',
+                function () {
+
+                    if (!ddl) return;
+
+
+                    var activeBtn =
+                        document.querySelector(
+                            '.tab-btn.active'
+                        );
+
+
+                    if (
+                        activeBtn &&
+                        hdnActiveTab
+                    ) {
+
+                        hdnActiveTab.value =
+                            activeBtn.getAttribute(
+                                'data-tab'
+                            );
+
+                    }
+
+
+                    ddl.value =
+                        r.value;
+
+
+                    if (
+                        typeof __doPostBack ===
+                        'function'
+                    ) {
+
+                        __doPostBack(
+                            ddl.name,
+                            ''
+                        );
+
+                    } else {
+
+                        var ev =
+                            document.createEvent(
+                                'Event'
+                            );
+
+
+                        ev.initEvent(
+                            'change',
+                            true,
+                            true
+                        );
+
+
+                        ddl.dispatchEvent(ev);
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =========================================================
+       APPLY LABELS
+       ========================================================= */
+
+    (function applyLabels() {
+
+        var hdn =
+            document.getElementById(
+                'hdnLabels'
+            );
+
+
+        if (
+            !hdn ||
+            !hdn.value
+        ) {
+            return;
+        }
+
+
+        try {
+
+            var map =
+                JSON.parse(
+                    hdn.value
+                );
+
+
+            document
+                .querySelectorAll(
+                    '[data-key]'
+                )
+                .forEach(function (el) {
+
+                    var k =
+                        el.getAttribute(
+                            'data-key'
+                        );
+
+
+                    if (
+                        map[k] !== undefined &&
+                        map[k] !== null &&
+                        map[k] !== ''
+                    ) {
+
+                        el.textContent =
+                            map[k];
+
+                    }
+
+                });
+
+        } catch (ex) {
+
+        }
+
+    })();
+
+
+    /* =========================================================
+       ELIGIBILITY MODAL
+       ========================================================= */
+
+    var eligModal =
+        document.getElementById(
+            'eligModal'
+        );
+
+
+    var eligBody =
+        document.getElementById(
+            'eligModalBody'
+        );
+
+
+    var eligTitle =
+        document.getElementById(
+            'eligModalTitle'
+        );
+
+
+    var eligClose =
+        document.getElementById(
+            'eligModalClose'
+        );
+
+
+    var lang =
+        'kn-IN';
+
+
+    function openEligModal(
+        schemeId,
+        schemeName,
+        MetricType
+    ) {
+
+        if (!eligModal) return;
+
+
+        eligModal.classList.add(
+            'open'
+        );
+
+
+        if (eligTitle) {
+
+            eligTitle.textContent =
+                schemeName +
+                ' — Eligibility';
+
+        }
+
+
+        if (eligBody) {
+
+            eligBody.innerHTML =
+
+                '<div class="skeleton-loader">' +
+
+                '   <div class="skeleton-row pill"></div>' +
+
+                '   <div class="skeleton-row long"></div>' +
+
+                '   <div class="skeleton-row med"></div>' +
+
+                '   <div style="height:1px;background:var(--col-border);margin:12px 0;"></div>' +
+
+                '   <div class="skeleton-row pill" style="width:25%;"></div>' +
+
+                '   <div class="skeleton-row long"></div>' +
+
+                '</div>';
+
+        }
+
+
+        var xhr =
+            new XMLHttpRequest();
+
+
+        xhr.open(
+            'GET',
+            'SchemeEligibility.ashx?scheme_id=' +
+            encodeURIComponent(schemeId) +
+            '&lang=' +
+            encodeURIComponent(lang) +
+            '&MetricType=' +
+            encodeURIComponent(MetricType),
+            true
+        );
+
+
+        xhr.onreadystatechange =
+            function () {
+
+                if (
+                    xhr.readyState !== 4
+                ) {
+                    return;
+                }
+
+
+                if (
+                    xhr.status === 200
+                ) {
+
+                    try {
+
+                        var data =
+                            JSON.parse(
+                                xhr.responseText
+                            );
+
+
+                        if (
+                            !data.eligibility ||
+                            data.eligibility.length === 0
+                        ) {
+
+                            eligBody.innerHTML =
+                                '<p style="color:var(--col-muted);text-align:left;padding:20px;">No eligibility details found for this scheme.</p>';
+
+                            return;
+
+                        }
+
+
+                        var html = '';
+
+
+                        data.eligibility.forEach(
+                            function (item) {
+
+                                html +=
+                                    '<div class="elig-row">' +
+
+                                    '<span class="elig-badge">' +
+                                    escHtml(
+                                        item.EligibilityName
+                                    ) +
+                                    '</span>' +
+
+                                    '<span class="elig-desc">' +
+                                    escHtml(
+                                        item.EligibilityDescription
+                                    ) +
+                                    '</span>' +
+
+                                    '</div>';
+
+                            }
+                        );
+
+
+                        eligBody.innerHTML =
+                            html;
+
+
+                    } catch (e) {
+
+                        eligBody.innerHTML =
+                            '<p style="color:#DC2626;padding:16px;text-align:left;">Failed to get eligibility data.</p>';
+
+                    }
+
+
+                } else {
+
+                    eligBody.innerHTML =
+                        '<p style="color:#DC2626;padding:16px;text-align:left;">Unable to load eligibility. Please try again.</p>';
+
+                }
+
+            };
+
+
+        xhr.setRequestHeader(
+            'Accept',
+            'application/json'
+        );
+
+
+        xhr.setRequestHeader(
+            'X-Requested-With',
+            'XMLHttpRequest'
+        );
+
+
+        xhr.send();
+
+    }
+
+
+    function escHtml(str) {
+
+        var d =
+            document.createElement(
+                'div'
+            );
+
+
+        d.appendChild(
+            document.createTextNode(
+                str || ''
+            )
+        );
+
+
+        return d.innerHTML;
+
+    }
+
+
+    document.addEventListener(
+        'click',
+        function (e) {
+
+            var li =
+                e.target.closest(
+                    '.scheme-li'
+                );
+
+
+            if (!li) return;
+
+
+            var schemeId =
+                li.getAttribute(
+                    'data-scheme-id'
+                );
+
+
+            var MetricType =
+                li.getAttribute(
+                    'data-metric-type'
+                );
+
+
+            if (
+                !/^\d{1,10}$/.test(
+                    schemeId || ''
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                !/^[A-Za-z0-9_-]{1,30}$/.test(
+                    MetricType || ''
+                )
+            ) {
+                return;
+            }
+
+
+            var schemeName =
+                li.textContent
+                    .trim()
+                    .replace(/ⓘ/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+
+
+            if (
+                schemeId &&
+                schemeId !== '0'
+            ) {
+
+                openEligModal(
+                    schemeId,
+                    schemeName,
+                    MetricType
+                );
+
+            }
+
+        }
+    );
+
+
+    if (eligClose) {
+
+        eligClose.addEventListener(
+            'click',
+            function () {
+
+                eligModal.classList.remove(
+                    'open'
+                );
+
+            }
+        );
+
+    }
+
+
+    if (eligModal) {
+
+        eligModal.addEventListener(
+            'click',
+            function (e) {
+
+                if (
+                    e.target ===
+                    eligModal
+                ) {
+
+                    eligModal.classList.remove(
+                        'open'
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    document.addEventListener(
+        'keydown',
+        function (e) {
+
+            if (
+                e.key === 'Escape' &&
+                eligModal
+            ) {
+
+                eligModal.classList.remove(
+                    'open'
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       SCROLL PROGRESS
+       ========================================================= */
+
+    var scrollWrap =
+        document.getElementById(
+            'scrollTopWrap'
+        );
+
+
+    var circle =
+        document.querySelector(
+            '.progress-ring-circle'
+        );
+
+
+    if (
+        scrollWrap &&
+        circle
+    ) {
+
+        var radius =
+            circle.r.baseVal.value;
+
+
+        var circumference =
+            radius * 2 * Math.PI;
+
+
+        circle.style.strokeDasharray =
+            circumference +
+            ' ' +
+            circumference;
+
+
+        circle.style.strokeDashoffset =
+            circumference;
+
+
+        window.addEventListener(
+            'scroll',
+            function () {
+
+                var scrollY =
+                    window.scrollY;
+
+
+                var docHeight =
+                    document.documentElement
+                        .scrollHeight -
+                    window.innerHeight;
+
+
+                scrollWrap.classList.toggle(
+                    'show',
+                    scrollY > 200
+                );
+
+
+                if (docHeight <= 0) {
+                    return;
+                }
+
+
+                var scrollPercent =
+                    scrollY / docHeight;
+
+
+                var offset =
+                    circumference -
+                    (
+                        scrollPercent *
+                        circumference
+                    );
+
+
+                circle.style.strokeDashoffset =
+                    offset;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        scrollWrap.addEventListener(
+            'click',
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+
+            }
+        );
+
+
+        scrollWrap.addEventListener(
+            'keydown',
+            function (e) {
+
+                if (
+                    e.key === 'Enter' ||
+                    e.key === ' '
+                ) {
+
+                    e.preventDefault();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       ANIMATE COUNT
+       ========================================================= */
+
+    function animateCount(
+        el,
+        target,
+        suffix,
+        duration
+    ) {
+
+        if (!el) return;
+
+
+        var startTime = null;
+
+
+        var num =
+            parseInt(
+                target.replace(
+                    /[^0-9]/g,
+                    ''
+                )
+            );
+
+
+        function step(ts) {
+
+            if (!startTime) {
+
+                startTime = ts;
+
+            }
+
+
+            var prog =
+                Math.min(
+                    (ts - startTime) /
+                    duration,
+                    1
+                );
+
+
+            var eased =
+                1 -
+                Math.pow(
+                    1 - prog,
+                    3
+                );
+
+
+            el.textContent =
+                Math.floor(
+                    eased * num
+                ).toLocaleString(
+                    'en-IN'
+                ) +
+                suffix;
+
+
+            if (prog < 1) {
+
+                requestAnimationFrame(
+                    step
+                );
+
+            }
+
+        }
+
+
+        requestAnimationFrame(
+            step
+        );
+
+    }
+
+
+    var statsBar =
+        document.querySelector(
+            '.stats-bar'
+        );
+
+
+    if (
+        statsBar &&
+        'IntersectionObserver' in window
+    ) {
+
+        var statsIO =
+            new IntersectionObserver(
+                function (entries) {
+
+                    if (
+                        entries[0].isIntersecting
+                    ) {
+
+                        animateCount(
+                            document.getElementById(
+                                'statStudents'
+                            ),
+                            '3500000',
+                            '+',
+                            1800
+                        );
+
+
+                        statsIO.disconnect();
+
+                    }
+
+                },
+                {
+                    threshold:0.3
+                }
+            );
+
+
+        statsIO.observe(
+            statsBar
+        );
+
+    }
+
+
+    /* =========================================================
+       BOOTSTRAP TOOLTIPS
+       ========================================================= */
+
+    if (
+        typeof bootstrap !== 'undefined' &&
+        bootstrap.Tooltip
+    ) {
+
+        document
+            .querySelectorAll(
+                '[data-bs-toggle="tooltip"]'
+            )
+            .forEach(function (el) {
+
+                new bootstrap.Tooltip(el);
+
+            });
+
+    }
+
+
+    /* =========================================================
+       PILL TOGGLES
+       ========================================================= */
+
+
+    (function initPillToggles() {
+
+        "use strict";
+
+
+        /* =========================================================
+           INITIALIZE EACH POSTMATRIC / PREMATRIC GROUP
+           ========================================================= */
+
+        function bindPillGroup(pill) {
+
+            if (!pill) {
+                return;
+            }
+
+
+            var btns =
+                Array.prototype.slice.call(
+                    pill.querySelectorAll(".pp-btn")
+                );
+
+
+            if (!btns.length) {
+                return;
+            }
+
+
+            /* -----------------------------------------------------
+               Find the parent tab
+               ----------------------------------------------------- */
+
+            var tabPane =
+                pill.closest(".tab-pane");
+
+
+            if (!tabPane) {
+                return;
+            }
+
+
+            /* -----------------------------------------------------
+               Activate panel using data-target
+               ----------------------------------------------------- */
+
+            function activateButton(
+                button,
+                animate
+            ) {
+
+                if (!button) {
+                    return;
+                }
+
+
+                var targetId =
+                    button.getAttribute(
+                        "data-target"
+                    );
+
+
+                if (!targetId) {
+
+                    console.warn(
+                        "data-target missing:",
+                        button.id
+                    );
+
+                    return;
+                }
+
+
+                var targetPanel =
+                    document.getElementById(
+                        targetId
+                    );
+
+
+                if (!targetPanel) {
+
+                    console.error(
+                        "Target panel not found:",
+                        targetId
+                    );
+
+                    return;
+                }
+
+
+                /* -------------------------------------------------
+                   Find currently active button
+                   ------------------------------------------------- */
+
+                var previousButton =
+                    pill.querySelector(
+                        ".pp-btn.pp-active"
+                    );
+
+
+                var previousIndex =
+                    previousButton
+                        ? btns.indexOf(
+                            previousButton
+                        )
+                        : 0;
+
+
+                var newIndex =
+                    btns.indexOf(button);
+
+
+                if (newIndex < 0) {
+                    return;
+                }
+
+
+                /* -------------------------------------------------
+                   Button state
+                   ------------------------------------------------- */
+
+                btns.forEach(function (btn) {
+
+                    var isActive =
+                        btn === button;
+
+
+                    btn.classList.toggle(
+                        "pp-active",
+                        isActive
+                    );
+
+
+                    btn.setAttribute(
+                        "aria-pressed",
+                        isActive
+                            ? "true"
+                            : "false"
+                    );
+
+                });
+
+
+                /* -------------------------------------------------
+                   Store active state
+                   ------------------------------------------------- */
+
+                pill.setAttribute(
+                    "data-active",
+                    newIndex === 0
+                        ? "0"
+                        : "1"
+                );
+
+
+                /* -------------------------------------------------
+                   Get ONLY panels in this tab
+                   ------------------------------------------------- */
+
+                var panels =
+                    Array.prototype.slice.call(
+                        tabPane.querySelectorAll(
+                            ".pp-panel"
+                        )
+                    );
+
+
+                /* -------------------------------------------------
+                   Hide all panels
+                   ------------------------------------------------- */
+
+                panels.forEach(function (panel) {
+
+                    panel.classList.remove(
+                        "pp-show",
+                        "pp-from-right",
+                        "pp-from-left"
+                    );
+
+                    panel.setAttribute(
+                        "hidden",
+                        "hidden"
+                    );
+
+                    panel.style.display =
+                        "none";
+
+                });
+
+
+                /* -------------------------------------------------
+                   Animation direction
+                   ------------------------------------------------- */
+
+                var goRight =
+                    newIndex > previousIndex;
+
+
+                /* -------------------------------------------------
+                   Show exact target panel
+                   ------------------------------------------------- */
+
+                targetPanel.removeAttribute(
+                    "hidden"
+                );
+
+
+                targetPanel.classList.add(
+                    "pp-show"
+                );
+
+
+                if (animate !== false) {
+
+                    targetPanel.classList.add(
+                        goRight
+                            ? "pp-from-right"
+                            : "pp-from-left"
+                    );
+
+                }
+
+
+                targetPanel.style.display =
+                    "block";
+
+
+                console.log(
+                    "Pill activated:",
+                    button.id,
+                    "→",
+                    targetId
+                );
+
+            }
+
+
+            /* =====================================================
+               BUTTON CLICK
+               ===================================================== */
+
+            btns.forEach(function (btn) {
+
+                btn.addEventListener(
+                    "click",
+                    function (e) {
+
+                        e.preventDefault();
+
+                        e.stopPropagation();
+
+                        activateButton(
+                            btn,
+                            true
+                        );
+
+                    }
+                );
+
+            });
+
+
+            /* =====================================================
+               INITIAL STATE
+               ===================================================== */
+
+            var initialButton =
+                pill.querySelector(
+                    ".pp-btn.pp-active"
+                );
+
+
+            if (!initialButton) {
+
+                initialButton =
+                    btns[0];
+
+            }
+
+
+            if (initialButton) {
+
+                activateButton(
+                    initialButton,
+                    false
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           INITIALIZE ALL PILL GROUPS
+           ========================================================= */
+
+        var pillGroups =
+            document.querySelectorAll(
+                ".prepost-pill"
+            );
+
+
+        Array.prototype.forEach.call(
+            pillGroups,
+            function (pill) {
+
+                bindPillGroup(pill);
+
+            }
+        );
+
+
+        console.log(
+            "Postmatric / Prematric pill toggles initialized:",
+            pillGroups.length
+        );
+
+
+    })();
+
+
+
+    /* =========================================================
+       TAB BAR INITIALIZATION
+       ========================================================= */
+
+    (function () {
+
+        var navBar =
+            document.querySelector(
+                '.tab-nav-bar'
+            );
+
+
+        var activeBtn =
+            navBar
+                ? navBar.querySelector(
+                    '.tab-btn.active'
+                )
+                : null;
+
+
+        if (
+            navBar &&
+            activeBtn
+        ) {
+
+            navBar.setAttribute(
+                'data-active',
+                activeBtn.getAttribute(
+                    'data-tab'
+                ) ||
+                'lastdates'
+            );
+
+        }
+
+    })();
+
+
+})();
+
+
+/* =============================================================
+   CUSTOM CURSOR
+   ============================================================= */
+
+var cursorDot =
+    document.getElementById(
+        'cursorDot'
+    );
+
+
+var cursorOutline =
+    document.getElementById(
+        'cursorOutline'
+    );
+
+
+if (
+    cursorDot &&
+    cursorOutline &&
+    window.innerWidth > 991
+) {
+
+    window.addEventListener(
+        'mousemove',
+        function (e) {
+
+            var posX =
+                e.clientX;
+
+
+            var posY =
+                e.clientY;
+
+
+            cursorDot.style.left =
+                posX + 'px';
+
+
+            cursorDot.style.top =
+                posY + 'px';
+
+
+            cursorOutline.style.left =
+                posX + 'px';
+
+
+            cursorOutline.style.top =
+                posY + 'px';
+
+        }
+    );
+
+}
+
+
+/* =============================================================
+   MAGNETIC BUTTONS
+   ============================================================= */
+
+document
+    .querySelectorAll('.qab-btn')
+    .forEach(function (btn) {
+
+        btn.addEventListener(
+            'mousemove',
+            function (e) {
+
+                var rect =
+                    btn.getBoundingClientRect();
+
+
+                var h =
+                    rect.width / 2;
+
+
+                var v =
+                    rect.height / 2;
+
+
+                var x =
+                    e.clientX -
+                    rect.left -
+                    h;
+
+
+                var y =
+                    e.clientY -
+                    rect.top -
+                    v;
+
+
+                btn.style.transform =
+                    'translate(' +
+                    (x * 0.15) +
+                    'px, ' +
+                    (y * 0.15) +
+                    'px) scale(1.02)';
+
+            }
+        );
+
+
+        btn.addEventListener(
+            'mouseleave',
+            function () {
+
+                btn.style.transform =
+                    'translate(0px, 0px) scale(1)';
+
+            }
+        );
+
+    });
+
+
+/* =============================================================
+   SPOTLIGHT CARDS
+   ============================================================= */
+
+function initSpotlights() {
+
+    var cards =
+        document.querySelectorAll(
+            '.ld-card, .helpline-card, .process-block'
+        );
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                'spotlight-card'
+            );
+
+
+            card.addEventListener(
+                'mousemove',
+                function (e) {
+
+                    var rect =
+                        card.getBoundingClientRect();
+
+
+                    var x =
+                        e.clientX -
+                        rect.left;
+
+
+                    var y =
+                        e.clientY -
+                        rect.top;
+
+
+                    card.style.setProperty(
+                        '--mouse-x',
+                        x + 'px'
+                    );
+
+
+                    card.style.setProperty(
+                        '--mouse-y',
+                        y + 'px'
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+initSpotlights();
+
+
+/* =============================================================
+   SMOOTH SCROLL + TAB
+   ============================================================= */
+
+function smoothScrollAndActivate(
+    targetId,
+    tabId
+) {
+
+    if (
+        tabId &&
+        typeof window.activateTab ===
+        'function'
+    ) {
+
+        window.activateTab(
+            tabId
+        );
+
+    }
+
+
+    if (targetId) {
+
+        var targetElement =
+            document.querySelector(
+                targetId
+            );
+
+
+        if (targetElement) {
+
+            var headerOffset = 60;
+
+
+            var elementPosition =
+                targetElement.getBoundingClientRect()
+                    .top;
+
+
+            var offsetPosition =
+                elementPosition +
+                window.pageYOffset -
+                headerOffset;
+
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
+        }
+
+    }
+
+}
+
+
+/* =============================================================
+   JUMP NAV
+   ============================================================= */
+
+var jumpNav =
+    document.getElementById(
+        'pageJumpNav'
+    );
+
+
+var jumpToggle =
+    document.getElementById(
+        'jumpNavToggle'
+    );
+
+
+var jumpLinks =
+    document.querySelectorAll(
+        '.jump-nav-menu a'
+    );
+
+
+if (
+    jumpNav &&
+    jumpToggle
+) {
+
+    jumpToggle.addEventListener(
+        'click',
+        function (e) {
+
+            e.stopPropagation();
+
+
+            jumpNav.classList.toggle(
+                'active'
+            );
+
+
+            var isExpanded =
+                jumpNav.classList.contains(
+                    'active'
+                );
+
+
+            jumpToggle.setAttribute(
+                'aria-expanded',
+                isExpanded
+            );
+
+
+            document.body.classList.toggle(
+                'jump-nav-open',
+                isExpanded
+            );
+
+        }
+    );
+
+
+    jumpLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                'click',
+                function (e) {
+
+                    var targetId =
+                        this.getAttribute(
+                            'href'
+                        );
+
+
+                    if (
+                        targetId &&
+                        targetId.startsWith('#')
+                    ) {
+
+                        e.preventDefault();
+
+
+                        jumpNav.classList.remove(
+                            'active'
+                        );
+
+
+                        jumpToggle.setAttribute(
+                            'aria-expanded',
+                            'false'
+                        );
+
+
+                        document.body.classList.remove(
+                            'jump-nav-open'
+                        );
+
+
+                        var tabToActivate =
+                            this.getAttribute(
+                                'data-activatetab'
+                            );
+
+
+                        smoothScrollAndActivate(
+                            targetId,
+                            tabToActivate
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        'click',
+        function (e) {
+
+            if (
+                !jumpNav.contains(
+                    e.target
+                )
+            ) {
+
+                jumpNav.classList.remove(
+                    'active'
+                );
+
+
+                jumpToggle.setAttribute(
+                    'aria-expanded',
+                    'false'
+                );
+
+
+                document.body.classList.remove(
+                    'jump-nav-open'
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =============================================================
+   STATS CARD KEYBOARD ACCESSIBILITY
+   ============================================================= */
+
+document
+    .querySelectorAll(
+        '.custom-scroll-link'
+    )
+    .forEach(function (card) {
+
+
+        card.addEventListener(
+            'click',
+            function (e) {
+
+                e.preventDefault();
+
+
+                var targetId =
+                    this.getAttribute(
+                        'data-target'
+                    );
+
+
+                var tabToActivate =
+                    this.getAttribute(
+                        'data-activatetab'
+                    );
+
+
+                smoothScrollAndActivate(
+                    targetId,
+                    tabToActivate
+                );
+
+            }
+        );
+
+
+        card.addEventListener(
+            'keydown',
+            function (e) {
+
+                if (
+                    e.key === 'Enter' ||
+                    e.key === ' '
+                ) {
+
+                    e.preventDefault();
+
+                    this.click();
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =============================================================
+   MAGNETIC BUTTONS – HOVER
+   ============================================================= */
+
+(function initMagneticButtons() {
+
+    var canHover =
+        window.matchMedia(
+            '(hover: hover) and (pointer: fine)'
+        ).matches;
+
+
+    var reduceMotion =
+        window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+
+    if (
+        !canHover ||
+        reduceMotion
+    ) {
+        return;
+    }
+
+
+    var strength = 0.35,
+        maxPull = 14;
+
+
+    document
+        .querySelectorAll('.qab-btn')
+        .forEach(function (btn) {
+
+
+            btn.addEventListener(
+                'mousemove',
+                function (e) {
+
+                    var r =
+                        btn.getBoundingClientRect();
+
+
+                    var relX =
+                        e.clientX -
+                        r.left;
+
+
+                    var relY =
+                        e.clientY -
+                        r.top;
+
+
+                    var dx =
+                        Math.max(
+                            -maxPull,
+                            Math.min(
+                                maxPull,
+                                (
+                                    relX -
+                                    r.width / 2
+                                ) *
+                                strength
+                            )
+                        );
+
+
+                    var dy =
+                        Math.max(
+                            -maxPull,
+                            Math.min(
+                                maxPull,
+                                (
+                                    relY -
+                                    r.height / 2
+                                ) *
+                                strength
+                            )
+                        );
+
+
+                    btn.style.transform =
+                        'translate(' +
+                        dx.toFixed(1) +
+                        'px,' +
+                        (dy - 2).toFixed(1) +
+                        'px)';
+
+
+                    btn.style.setProperty(
+                        '--mx',
+                        (
+                            relX /
+                            r.width *
+                            100
+                        ).toFixed(1) +
+                        '%'
+                    );
+
+
+                    btn.style.setProperty(
+                        '--my',
+                        (
+                            relY /
+                            r.height *
+                            100
+                        ).toFixed(1) +
+                        '%'
+                    );
+
+                }
+            );
+
+
+            btn.addEventListener(
+                'mouseleave',
+                function () {
+
+                    btn.style.transform =
+                        '';
+
+                }
+            );
+
+        });
+
+})();
+
+
+/* =============================================================
+   HIDE IMAGES
+   ============================================================= */
+
+function toggleHideImages() {
+
+    var isHidden =
+        document.body.classList.toggle(
+            'hide-images'
+        );
+
+
+    var btn =
+        document.getElementById(
+            'btnHideImages'
+        );
+
+
+    if (btn) {
+
+        btn.classList.toggle(
+            'active',
+            isHidden
+        );
+
+    }
+
+
+    localStorage.setItem(
+        'a11y-hide-images',
+        isHidden
+    );
+
+}
+
+
+/* =============================================================
+   BIG CURSOR
+   ============================================================= */
+
+function toggleBigCursor() {
+
+    var isBig =
+        document.body.classList.toggle(
+            'big-cursor'
+        );
+
+
+    var btn =
+        document.getElementById(
+            'btnBigCursor'
+        );
+
+
+    if (btn) {
+
+        btn.classList.toggle(
+            'active',
+            isBig
+        );
+
+    }
+
+
+    localStorage.setItem(
+        'a11y-big-cursor',
+        isBig
+    );
+
+}
+
+
+/* =============================================================
+   HIGHLIGHT LINKS
+   ============================================================= */
+
+function toggleHighlightLinks() {
+
+    var isHighlighted =
+        document.body.classList.toggle(
+            'highlight-links'
+        );
+
+
+    var btn =
+        document.getElementById(
+            'btnHighlightLinks'
+        );
+
+
+    if (btn) {
+
+        btn.classList.toggle(
+            'active',
+            isHighlighted
+        );
+
+    }
+
+
+    localStorage.setItem(
+        'a11y-highlight-links',
+        isHighlighted
+    );
+
+}
+
+
+/* =============================================================
+   LOAD ACCESSIBILITY SETTINGS
+   ============================================================= */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        if (
+            localStorage.getItem(
+                'a11y-hide-images'
+            ) === 'true'
+        ) {
+
+            toggleHideImages();
+
+        }
+
+
+        if (
+            localStorage.getItem(
+                'a11y-big-cursor'
+            ) === 'true'
+        ) {
+
+            toggleBigCursor();
+
+        }
+
+
+        if (
+            localStorage.getItem(
+                'a11y-highlight-links'
+            ) === 'true'
+        ) {
+
+            toggleHighlightLinks();
+
+        }
+
+    }
+);
+
+
+/* =============================================================
+   SEARCH
+   SINGLE SEARCH IMPLEMENTATION
+   ============================================================= */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const wrapper =
+            document.getElementById(
+                'searchBarWrapper'
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                'pageSearchInput'
+            );
+
+
+        const countDisplay =
+            document.getElementById(
+                'searchMatchCount'
+            );
+
+
+        const closeBtn =
+            document.getElementById(
+                'closeSearchBtn'
+            );
+
+
+        const prevBtn =
+            document.getElementById(
+                'prevSearchBtn'
+            );
+
+
+        const nextBtn =
+            document.getElementById(
+                'nextSearchBtn'
+            );
+
+
+        if (
+            !searchInput ||
+            !wrapper
+        ) {
+            return;
+        }
+
+
+        let matches = [];
+
+        let currentIndex = -1;
+
+
+        function activateFloating() {
+
+            wrapper.classList.add(
+                'is-floating'
+            );
+
+        }
+
+
+        function deactivateFloating() {
+
+            if (
+                searchInput.value.trim() === ''
+            ) {
+
+                wrapper.classList.remove(
+                    'is-floating'
+                );
+
+
+                clearHighlights();
+
+            }
+
+        }
+
+
+        function clearHighlights() {
+
+            const highlighted =
+                document.querySelectorAll(
+                    'mark.site-search-highlight'
+                );
+
+
+            highlighted.forEach(
+                mark => {
+
+                    const parent =
+                        mark.parentNode;
+
+
+                    if (parent) {
+
+                        parent.replaceChild(
+                            document.createTextNode(
+                                mark.textContent
+                            ),
+                            mark
+                        );
+
+
+                        parent.normalize();
+
+                    }
+
+                }
+            );
+
+
+            matches = [];
+
+            currentIndex = -1;
+
+
+            if (countDisplay) {
+
+                countDisplay.style.display =
+                    'none';
+
+
+                countDisplay.textContent =
+                    '';
+
+            }
+
+        }
+
+
+        function performCtrlFSearch() {
+
+            clearHighlights();
+
+
+            const query =
+                searchInput.value.trim();
+
+
+            if (!query) return;
+
+
+            const targetContainer =
+                document.querySelector('main') ||
+                document.body;
+
+
+            const walker =
+                document.createTreeWalker(
+                    targetContainer,
+                    NodeFilter.SHOW_TEXT,
+                    {
+                        acceptNode:
+                            function (node) {
+
+                                const parent =
+                                    node.parentElement;
+
+
+                                if (!parent) {
+
+                                    return NodeFilter.FILTER_REJECT;
+
+                                }
+
+
+                                const tag =
+                                    parent.tagName.toLowerCase();
+
+
+                                if (
+                                    tag === 'script' ||
+                                    tag === 'style' ||
+                                    tag === 'noscript' ||
+                                    tag === 'textarea' ||
+                                    parent.closest(
+                                        '.search-bar-wrapper'
+                                    )
+                                ) {
+
+                                    return NodeFilter.FILTER_REJECT;
+
+                                }
+
+
+                                return node.nodeValue
+                                    .toLowerCase()
+                                    .includes(
+                                        query.toLowerCase()
+                                    )
+                                    ? NodeFilter.FILTER_ACCEPT
+                                    : NodeFilter.FILTER_SKIP;
+
+                            }
+                    }
+                );
+
+
+            const nodesToProcess = [];
+
+
+            while (
+                walker.nextNode()
+            ) {
+
+                nodesToProcess.push(
+                    walker.currentNode
+                );
+
+            }
+
+
+            const regex =
+                new RegExp(
+                    '(' +
+                    query.replace(
+                        /[.*+?^${}()|[\]\\]/g,
+                        '\\$&'
+                    ) +
+                    ')',
+                    'gi'
+                );
+
+
+            nodesToProcess.forEach(
+                node => {
+
+                    const parent =
+                        node.parentNode;
+
+
+                    if (!parent) return;
+
+
+                    const frag =
+                        document.createDocumentFragment();
+
+
+                    let lastIdx = 0;
+
+
+                    node.nodeValue.replace(
+                        regex,
+                        function (
+                            match,
+                            p1,
+                            offset
+                        ) {
+
+                            frag.appendChild(
+                                document.createTextNode(
+                                    node.nodeValue.slice(
+                                        lastIdx,
+                                        offset
+                                    )
+                                )
+                            );
+
+
+                            const mark =
+                                document.createElement(
+                                    'mark'
+                                );
+
+
+                            mark.className =
+                                'site-search-highlight';
+
+
+                            mark.textContent =
+                                match;
+
+
+                            frag.appendChild(
+                                mark
+                            );
+
+
+                            matches.push(
+                                mark
+                            );
+
+
+                            lastIdx =
+                                offset +
+                                match.length;
+
+                        }
+                    );
+
+
+                    frag.appendChild(
+                        document.createTextNode(
+                            node.nodeValue.slice(
+                                lastIdx
+                            )
+                        )
+                    );
+
+
+                    parent.replaceChild(
+                        frag,
+                        node
+                    );
+
+                }
+            );
+
+
+            if (
+                matches.length > 0
+            ) {
+
+                currentIndex = 0;
+
+                updateActiveMatch();
+
+            } else if (countDisplay) {
+
+                countDisplay.style.display =
+                    'inline-block';
+
+                countDisplay.textContent =
+                    '0 matches';
+
+            }
+
+        }
+
+
+        function updateActiveMatch() {
+
+            matches.forEach(
+                function (mark, i) {
+
+                    if (
+                        i === currentIndex
+                    ) {
+
+                        mark.classList.add(
+                            'active-match'
+                        );
+
+
+                        mark.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+
+                    } else {
+
+                        mark.classList.remove(
+                            'active-match'
+                        );
+
+                    }
+
+                }
+            );
+
+
+            if (
+                countDisplay &&
+                matches.length > 0
+            ) {
+
+                countDisplay.style.display =
+                    'inline-block';
+
+
+                countDisplay.textContent =
+                    (
+                        currentIndex + 1
+                    ) +
+                    '/' +
+                    matches.length;
+
+            }
+
+        }
+
+
+        function navigateMatch(
+            direction
+        ) {
+
+            if (
+                matches.length === 0
+            ) {
+                return;
+            }
+
+
+            if (
+                direction === 'next'
+            ) {
+
+                currentIndex =
+                    (
+                        currentIndex + 1
+                    ) %
+                    matches.length;
+
+            } else {
+
+                currentIndex =
+                    (
+                        currentIndex -
+                        1 +
+                        matches.length
+                    ) %
+                    matches.length;
+
+            }
+
+
+            updateActiveMatch();
+
+        }
+
+
+        searchInput.addEventListener(
+            'focus',
+            activateFloating
+        );
+
+
+        searchInput.addEventListener(
+            'input',
+            function () {
+
+                activateFloating();
+
+                performCtrlFSearch();
+
+            }
+        );
+
+
+        searchInput.addEventListener(
+            'keydown',
+            function (e) {
+
+                if (
+                    e.key === 'Enter'
+                ) {
+
+                    e.preventDefault();
+
+
+                    navigateMatch(
+                        e.shiftKey
+                            ? 'prev'
+                            : 'next'
+                    );
+
+                } else if (
+                    e.key === 'Escape'
+                ) {
+
+                    searchInput.value =
+                        '';
+
+
+                    deactivateFloating();
+
+
+                    searchInput.blur();
+
+                }
+
+            }
+        );
+
+
+        if (closeBtn) {
+
+            closeBtn.addEventListener(
+                'click',
+                function () {
+
+                    searchInput.value =
+                        '';
+
+
+                    wrapper.classList.remove(
+                        'is-floating'
+                    );
+
+
+                    clearHighlights();
+
+                }
+            );
+
+        }
+
+
+        if (nextBtn) {
+
+            nextBtn.addEventListener(
+                'click',
+                function () {
+
+                    navigateMatch(
+                        'next'
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (prevBtn) {
+
+            prevBtn.addEventListener(
+                'click',
+                function () {
+
+                    navigateMatch(
+                        'prev'
+                    );
+
+                }
+            );
+
+        }
+
+
+        document.addEventListener(
+            'click',
+            function (e) {
+
+                if (
+                    !wrapper.contains(
+                        e.target
+                    )
+                ) {
+
+                    deactivateFloating();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =============================================================
+   EXTERNAL LINK CONFIRMATION
+   ============================================================= */
+
+document.addEventListener(
+    'click',
+    function (e) {
+
+        const link =
+            e.target.closest('a');
+
+
+        if (
+            !link ||
+            !link.href
+        ) {
+            return;
+        }
+
+
+        if (
+            link.closest(
+                '.ignore-external-alert'
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const targetUrl =
+            new URL(
+                link.href,
+                window.location.href
+            );
+
+
+        const currentUrl =
+            new URL(
+                window.location.href
+            );
+
+
+        if (
+            targetUrl.hostname ===
+            currentUrl.hostname
+        ) {
+
+            return;
+
+        }
+
+
+        const confirmLeave =
+            confirm(
+                'This would take you to an external website that opens in a new tab. Do you want to continue anyway?'
+            );
+
+
+        if (!confirmLeave) {
+
+            e.preventDefault();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
