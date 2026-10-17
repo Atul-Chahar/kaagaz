@@ -70,3 +70,21 @@ shown as is.
 
 **Why panel, 390 dark.** Path chips, quotes with source, retrieval date and an "Official" tag per step, readable in
 night mode. Good.
+
+## Round 3 (17 Oct 2026, after the second rule pack and the adversarial review fixes)
+
+**Company chain, 1440 light.** The professional tax slip said "30 working days", but the law says 30 calendar days.
+The planner already converted it correctly (20 working days from 17 Oct); only the label and slip width used the raw
+number. Fix: every plan item carries its unit and converted span; the slip reads "30 calendar days (20 working days)"
+and is 20 days long. Also the note under the verdict said "Sakala" for GST and professional tax; it is now neutral.
+
+**Start, 390 light.** The new pack switcher made the page 408 px wide (the overflow test caught it), and the long
+"Renewals only, closes 31 Oct 2026" date did too. Fix: pack buttons wrap; on phones the date sits under the scheme
+name. A worse bug showed in the same image: the default page used the company pack's words ("Example founder",
+"Search goals") over the scholarship list, because the UI fell back to the first pack alphabetically. Fix: the API
+flags the default pack and the UI uses it; an e2e check now asserts "Pick a scholarship" on first load.
+
+**Chain (OBC, late), 1440 light.** The new "Only if it applies to you" list sits between the timeline and Start today
+and reads clearly. "Other options" showed "AT LEAST 0 DAYS" for CSSS (no fresh window and no known times), which
+means nothing. Fix: that case stamps "TIME UNKNOWN" with a plain sentence. The scheme note from the sources (how the
+SSP's "Caste, Income, EWS, whichever is applicable" was mapped) now shows under the scheme name.

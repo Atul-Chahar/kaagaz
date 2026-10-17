@@ -43,7 +43,7 @@ number. The Karnataka Sakala limits turned out to be working days, so I had to a
 the second-and-fourth-Saturday rule before any verdict made sense.
 
 The benchmark is honest too. A separate pass wrote 29 questions from the sources alone. The planner agreed on 12 of 13
-deadline questions but only 2 of 9 "what first" questions, mostly because when no step has a legal time limit there is
+deadline questions but only 3 of 9 "what first" questions, mostly because when no step has a legal time limit there is
 no right order. I left those numbers as they are. I did not have an LLM key, so the "LLM alone vs RAG vs Kaagaz"
 comparison has not run, and the page says so.
 

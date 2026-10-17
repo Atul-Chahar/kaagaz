@@ -358,3 +358,10 @@ pre.cypher { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5;
 .todo .right a, .src a, .note a { overflow-wrap: anywhere; }
 .model svg text { font-size: 12px; }
 @media (max-width: 600px) { .qlist .qabout { flex-basis: 100%; } }
+
+.pack-switch .depth-steps { flex-wrap: wrap; max-width: 100%; }
+.pack-switch .depth-steps button { height: auto; min-height: 36px; padding: 6px 14px; font-family: var(--font-body); white-space: normal; text-align: left; }
+@media (max-width: 600px) {
+  .scheme-opt { grid-template-columns: 18px minmax(0, 1fr); }
+  .scheme-opt .when { grid-column: 2; text-align: left; white-space: normal; }
+}

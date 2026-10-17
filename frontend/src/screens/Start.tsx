@@ -21,7 +21,8 @@ export default function Start({ session, setSession }: { session: Session | null
   const [ownDate, setOwnDate] = useState('')
   const [packs, setPacks] = useState<PackInfo[]>([])
   const [pack, setPackState] = useState<string | null>(getPack())
-  const ui = packs.find(p => p.id === (pack ?? packs[0]?.id))?.ui ?? {}
+  const defaultPack = packs.find(p => p.default)?.id ?? packs[0]?.id
+  const ui = packs.find(p => p.id === (pack ?? defaultPack))?.ui ?? {}
   const target = ui.target ?? 'scholarship'
 
   useEffect(() => { api.packs().then(setPacks).catch(() => setPacks([])) }, [])
@@ -115,12 +116,12 @@ export default function Start({ session, setSession }: { session: Session | null
       {error && <div style={{ marginTop: 24 }}><StateBox title="Something went wrong" error>{error.includes('docker') ? <p>{error}</p> : <p>{error}</p>}</StateBox></div>}
 
       {packs.length > 1 && (
-        <div className="depth" role="group" aria-label="Rule pack" style={{ marginTop: 24 }}>
+        <div className="depth pack-switch" role="group" aria-label="Rule pack" style={{ marginTop: 24 }}>
           <span className="label">Rule pack</span>
           <div className="depth-steps">
             {packs.map(p => (
-              <button key={p.id} type="button" style={{ padding: '0 14px', fontFamily: 'var(--font-body)' }}
-                aria-pressed={(pack ?? packs[0].id) === p.id} onClick={() => switchPack(p.id)} data-testid={`pack-${p.id}`}>{p.name}</button>
+              <button key={p.id} type="button"
+                aria-pressed={(pack ?? defaultPack) === p.id} onClick={() => switchPack(p.id)} data-testid={`pack-${p.id}`}>{p.name}</button>
             ))}
           </div>
           <span className="hint">The engine is the same; only the rules change.</span>

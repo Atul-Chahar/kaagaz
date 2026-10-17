@@ -251,6 +251,8 @@ def days_left(deadline: dt.date | None, today: dt.date) -> int | None:
 
 def verdict(f: Finish, left: int | None) -> Verdict:
     if left is None:
+        if not f.exact and f.lb == 0:
+            return Verdict("no_deadline", 0, False, None, None, "TIME UNKNOWN")
         return Verdict("no_deadline", f.lb, f.exact, None, None,
                        f"{f.lb} DAYS NEEDED" if f.exact else f"AT LEAST {f.lb} DAYS")
     if left < 0:

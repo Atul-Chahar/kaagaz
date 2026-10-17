@@ -258,6 +258,8 @@ second per site, cache) and wrote fragments in `data/research/`; `scripts/build_
 - GST registration's 7 working days assume Aadhaar authentication; Rule 9 allows up to thirty days otherwise. The
   Why panel says so.
 - Legal time limits are maximums; real offices can be faster or slower. Kaagaz plans against the legal limit.
+- When every option in an "any one of" group has no official time, Kaagaz cannot rank them; it shows one (the first
+  by id) on the timeline and lists the others as "or any one of".
 - No live deployment yet (no cloud credentials were available); `docs/DEPLOY.md` has the steps.
 - The three-system LLM benchmark has not been run (no key).
 

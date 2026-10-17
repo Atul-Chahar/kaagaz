@@ -13,7 +13,7 @@ export function usePackUi(): PackUi {
     api.packs().then(p => { cache = p; setPacks(p) }).catch(() => setPacks([]))
   }, [])
   const id = getPack()
-  const ui = (packs ?? []).find(p => p.id === id)?.ui ?? (packs ?? [])[0]?.ui ?? {}
+  const ui = (packs ?? []).find(p => p.id === id)?.ui ?? (packs ?? []).find(p => p.default)?.ui ?? {}
   const target = ui.target ?? 'scholarship'
   return { target, targets: ui.targets ?? `${target}s`, example: ui.example }
 }

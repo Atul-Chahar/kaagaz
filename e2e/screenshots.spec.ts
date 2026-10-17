@@ -29,6 +29,7 @@ for (const v of VARIANTS) {
       await page.goto('/#/')
       await page.locator('.scheme-opt').nth(1).click()
       await expect(page.locator('.hold').first()).toBeVisible()
+      await page.evaluate(() => window.scrollTo(0, 0))
       await page.screenshot({ path: `${OUT}/start-${tag}.png`, fullPage: true, animations: 'disabled' })
     })
 

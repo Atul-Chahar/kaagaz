@@ -49,7 +49,8 @@ function verdictBase(p: Plan): string {
     case 'closed':
       return `The application window closed on ${dl}.`
     case 'no_deadline':
-      return `No deadline is published for this scheme. The chain needs ${v.exact ? '' : 'at least '}${fmtDays(v.critical_days, u)}.`
+      if (!v.exact && v.critical_days === 0) return 'No deadline is published for this one, and no step left has an official time limit, so the time needed is unknown.'
+      return `No deadline is published for this one. The chain needs ${v.exact ? '' : 'at least '}${fmtDays(v.critical_days, u)}.`
     default:
       return "The time needed can't be computed, because none of the steps left has an official time limit."
   }

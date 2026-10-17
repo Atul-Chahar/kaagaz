@@ -25,3 +25,4 @@ One line per decision, with the reason.
 - 2026-10-17: The professional tax time (30 days) comes from the PRS copy of the Karnataka Tax on Professions Act (secondary): indiacode.nic.in returned 403 and pt.kar.nic.in was unreachable. Tagged secondary.
 - 2026-10-17: The Example label comes from the pack ("Example student", "Example founder"); the audit requires it to start with "Example ".
 - 2026-10-17: MIT licence for the code (common for hackathon repos, lets judges run and reuse it). Saved government sources keep their own terms; the licence covers the code and the generated pack files. The owner can change this before making the repo public.
+- 2026-10-17: Adversarial review findings and fixes are listed in docs/ADVERSARIAL_REVIEW.md; all eleven were fixed (none ignored).

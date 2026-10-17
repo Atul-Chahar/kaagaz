@@ -148,7 +148,7 @@ async function req<T>(rawPath: string, init?: RequestInit): Promise<T> {
   return r.json() as Promise<T>
 }
 
-export interface PackInfo { id: string; name: string; jurisdiction: string; version: string; ui?: Record<string, string> }
+export interface PackInfo { id: string; name: string; jurisdiction: string; version: string; default?: boolean; ui?: Record<string, string> }
 
 export const api = {
   packs: () => req<PackInfo[]>('/api/packs'),

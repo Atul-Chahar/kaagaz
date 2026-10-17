@@ -95,7 +95,9 @@ def health() -> dict:
 
 @app.get("/api/packs")
 def packs() -> list[dict]:
-    return [graph.load_pack(p)["pack"] | {"id": p} for p in graph.list_packs()]
+    # the default pack first, flagged, so the UI's wording always matches the data it shows by default
+    ids = sorted(graph.list_packs(), key=lambda p: (p != DEFAULT_PACK, p))
+    return [graph.load_pack(p)["pack"] | {"id": p, "default": p == DEFAULT_PACK} for p in ids]
 
 
 @app.get("/api/tools")

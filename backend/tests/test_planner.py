@@ -161,6 +161,7 @@ def test_verdict_unknown_is_a_lower_bound_never_on_time():
 
 def test_verdict_without_deadline():
     assert verdict(Finish(12, True), None).kind == "no_deadline"
+    assert verdict(Finish(0, False), None).stamp == "TIME UNKNOWN"  # never "AT LEAST 0 DAYS"
 
 
 

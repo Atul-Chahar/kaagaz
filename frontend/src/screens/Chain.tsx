@@ -147,6 +147,7 @@ export default function Chain({ session, setSession }: { session: Session | null
           <p className="eyebrow">{session.example ? `${session.label ?? 'Example student'} (made up, not a real person)` : 'Your chain'}</p>
           <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>{plan.scheme.name}</h1>
           <p className="who">{plan.scheme.authority}{plan.scheme.portal ? ` · ${plan.scheme.portal}` : ''}</p>
+          {plan.scheme.note && <p className="note" style={{ maxWidth: '70ch', marginTop: 6 }} data-testid="scheme-note">Note from the sources: {plan.scheme.note}</p>}
         </div>
         <a className="btn ghost small" href="#/">Change {ui.target} or documents</a>
       </div>
