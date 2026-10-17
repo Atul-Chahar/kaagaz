@@ -1,0 +1,446 @@
+{
+ "kind": "deterministic",
+ "started_at": "2026-10-17T09:21:54+00:00",
+ "finished_at": "2026-10-17T09:21:56+00:00",
+ "model": null,
+ "questions": 29,
+ "pack": "in-ka-scholarships",
+ "today": "2026-10-17",
+ "note": "Kaagaz planner answers from the structured question (scheme id, held ids, working days left); no language model. Ground truth and graph come from the same saved sources.",
+ "systems": [
+  {
+   "system": "kaagaz_deterministic",
+   "document_recall": 0.9567,
+   "invented_documents": 2.2857,
+   "verdict_accuracy": 0.9231,
+   "first_step_accuracy": 0.2222,
+   "n": {
+    "list_documents": 7,
+    "first_step": 9,
+    "deadline": 13
+   }
+  }
+ ],
+ "disagreements": [
+  {
+   "id": "L01",
+   "missing": [],
+   "extra_in_graph": [
+    "caste-certificate",
+    "disability-certificate"
+   ]
+  },
+  {
+   "id": "L02",
+   "missing": [],
+   "extra_in_graph": [
+    "disability-certificate"
+   ]
+  },
+  {
+   "id": "L03",
+   "missing": [],
+   "extra_in_graph": [
+    "caste-certificate"
+   ]
+  },
+  {
+   "id": "L04",
+   "missing": [],
+   "extra_in_graph": [
+    "caste-certificate",
+    "disability-certificate",
+    "income-certificate"
+   ]
+  },
+  {
+   "id": "L05",
+   "missing": [
+    "income-certificate"
+   ],
+   "extra_in_graph": [
+    "income-certificate-ka",
+    "income-proof",
+    "school-leaving-certificate"
+   ]
+  },
+  {
+   "id": "L06",
+   "missing": [
+    "income-certificate"
+   ],
+   "extra_in_graph": [
+    "income-certificate-ka",
+    "income-proof",
+    "school-leaving-certificate"
+   ]
+  },
+  {
+   "id": "L07",
+   "missing": [
+    "caste-certificate",
+    "income-certificate"
+   ],
+   "extra_in_graph": [
+    "income-certificate-ka",
+    "income-proof",
+    "school-leaving-certificate"
+   ]
+  },
+  {
+   "id": "F01",
+   "truth": [
+    "aadhaar-face-authentication"
+   ],
+   "graph": "caste-certificate"
+  },
+  {
+   "id": "F03",
+   "truth": [
+    "bank-account"
+   ],
+   "graph": "aadhaar-seeding-consent-form"
+  },
+  {
+   "id": "F04",
+   "truth": [
+    "sibling-affidavit"
+   ],
+   "graph": "school-leaving-certificate"
+  },
+  {
+   "id": "F05",
+   "truth": [
+    "parent-declaration-pragati"
+   ],
+   "graph": "school-leaving-certificate"
+  },
+  {
+   "id": "F06",
+   "truth": [
+    "caste-certificate-ka"
+   ],
+   "graph": "caste-income-certificate-ka"
+  },
+  {
+   "id": "F07",
+   "truth": [
+    "caste-certificate-ka"
+   ],
+   "graph": "caste-income-certificate-ka"
+  },
+  {
+   "id": "F09",
+   "truth": [
+    "aadhaar-seeding-consent-form"
+   ],
+   "graph": "caste-income-certificate-ka"
+  },
+  {
+   "id": "D13",
+   "truth": {
+    "verdict": "cannot_tell",
+    "critical_days": null
+   },
+   "graph": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  }
+ ],
+ "raw": [
+  {
+   "id": "L01",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "caste-certificate",
+     "disability-certificate",
+     "form-60",
+     "income-certificate",
+     "marks-card-previous",
+     "nsp-otr"
+    ]
+   }
+  },
+  {
+   "id": "L02",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "caste-certificate",
+     "disability-certificate",
+     "form-60",
+     "income-certificate",
+     "marks-card-previous",
+     "nsp-otr"
+    ]
+   }
+  },
+  {
+   "id": "L03",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "caste-certificate",
+     "disability-certificate",
+     "form-60",
+     "income-certificate",
+     "marks-card-previous",
+     "nsp-otr"
+    ]
+   }
+  },
+  {
+   "id": "L04",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "caste-certificate",
+     "disability-certificate",
+     "form-60",
+     "income-certificate",
+     "marks-card-previous",
+     "nsp-otr"
+    ]
+   }
+  },
+  {
+   "id": "L05",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "admission-proof",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "caste-certificate",
+     "form-60",
+     "income-certificate-ka",
+     "income-proof",
+     "nsp-otr",
+     "school-leaving-certificate",
+     "sibling-affidavit"
+    ]
+   }
+  },
+  {
+   "id": "L06",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "form-60",
+     "income-certificate-ka",
+     "income-proof",
+     "marks-card-previous",
+     "nsp-otr",
+     "parent-declaration-pragati",
+     "school-leaving-certificate",
+     "sslc-marks-card",
+     "study-certificate"
+    ]
+   }
+  },
+  {
+   "id": "L07",
+   "answer": {
+    "doc_ids": [
+     "aadhaar",
+     "aadhaar-face-authentication",
+     "aadhaar-seeding-consent-form",
+     "bank-account",
+     "bank-account-aadhaar-seeded",
+     "form-60",
+     "income-certificate-ka",
+     "income-proof",
+     "marks-card-previous",
+     "nsp-otr",
+     "parent-declaration-pragati",
+     "school-leaving-certificate",
+     "sslc-marks-card",
+     "study-certificate"
+    ]
+   }
+  },
+  {
+   "id": "F01",
+   "answer": {
+    "first_step": "caste-certificate"
+   }
+  },
+  {
+   "id": "F02",
+   "answer": {
+    "first_step": "aadhaar-seeding-consent-form"
+   }
+  },
+  {
+   "id": "F03",
+   "answer": {
+    "first_step": "aadhaar-seeding-consent-form"
+   }
+  },
+  {
+   "id": "F04",
+   "answer": {
+    "first_step": "school-leaving-certificate"
+   }
+  },
+  {
+   "id": "F05",
+   "answer": {
+    "first_step": "school-leaving-certificate"
+   }
+  },
+  {
+   "id": "F06",
+   "answer": {
+    "first_step": "caste-income-certificate-ka"
+   }
+  },
+  {
+   "id": "F07",
+   "answer": {
+    "first_step": "caste-income-certificate-ka"
+   }
+  },
+  {
+   "id": "F08",
+   "answer": {
+    "first_step": "caste-income-certificate-ka"
+   }
+  },
+  {
+   "id": "F09",
+   "answer": {
+    "first_step": "caste-income-certificate-ka"
+   }
+  },
+  {
+   "id": "D01",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D02",
+   "answer": {
+    "verdict": "yes",
+    "critical_days": 21,
+    "exact": true
+   }
+  },
+  {
+   "id": "D03",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D04",
+   "answer": {
+    "verdict": "yes",
+    "critical_days": 21,
+    "exact": true
+   }
+  },
+  {
+   "id": "D05",
+   "answer": {
+    "verdict": "cannot_tell",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D06",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D07",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D08",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D09",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D10",
+   "answer": {
+    "verdict": "cannot_tell",
+    "critical_days": 21,
+    "exact": false
+   }
+  },
+  {
+   "id": "D11",
+   "answer": {
+    "verdict": "cannot_tell",
+    "critical_days": 0,
+    "exact": false
+   }
+  },
+  {
+   "id": "D12",
+   "answer": {
+    "verdict": "cannot_tell",
+    "critical_days": 0,
+    "exact": false
+   }
+  },
+  {
+   "id": "D13",
+   "answer": {
+    "verdict": "no",
+    "critical_days": 21,
+    "exact": false
+   }
+  }
+ ]
+}

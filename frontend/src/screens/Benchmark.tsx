@@ -104,6 +104,11 @@ export default function Benchmark() {
                   These are Kaagaz's own deterministic scores: the planner answers each question straight from the graph, with no language model. Run {fmtDate(b.deterministic_run.started_at)} on {b.deterministic_run.questions} questions, file <code>bench/results/{b.deterministic_run_file}</code>. The graph and the ground truth come from the same saved sources, so a high score here shows the engine reads its own data correctly, not that it beats anything.
                 </p>
                 <RunTable run={b.deterministic_run} />
+                {b.deterministic_run.disagreements && (
+                  <p className="note" style={{ marginTop: 12 }} data-testid="det-disagreements">
+                    On {b.deterministic_run.disagreements.length} of {b.deterministic_run.questions} questions the graph's answer differs from the answer written from the sources. Each one is listed in the results file. Most come from rules that apply only to some students (for example "caste certificate for reserved category students"), which Kaagaz keeps as required because it does not know a student's category, and from first steps where no official time limit decides the order.
+                  </p>
+                )}
               </>
             ) : (
               <StateBox title="Not run yet"><p>Run <code>make bench-deterministic</code> to score the planner on its own.</p></StateBox>

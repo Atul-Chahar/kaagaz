@@ -17,3 +17,6 @@ One line per decision, with the reason.
 - 2026-10-17: Real students see the full depth by default; the Example student opens at depth 1 so the demo can step down. Both can use the stepper.
 - 2026-10-17: Kaagaz does not check eligibility (caste, income, marks). "Other options" ranks by time and shared documents and says so in plain words.
 - 2026-10-17: The Wayback Machine copy of the official UIDAI FAQ is used because uidai.gov.in returned HTTP 500 to the fetcher; it is still the official page's text, so confidence stays official, and the URL shows the archive.
+- 2026-10-17: Benchmark ground truth (bench/questions.jsonl, 29 questions) was written by a subagent from the saved source texts only, with access to the id vocabulary but not to the pack or research files. The deterministic run lists every question where the graph disagrees with it (bench/results/deterministic-*.json, "disagreements"); the planner was not tuned to the questions.
+- 2026-10-17: For "list every document" questions, documents the student already holds count as part of the answer when they are in the chain, for every system.
+- 2026-10-17: No LLM key exists in this environment, so the three-system LLM benchmark has not run. The Benchmark page shows the honest empty state and, separately labeled, the planner-only deterministic run.

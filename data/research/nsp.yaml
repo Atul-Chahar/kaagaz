@@ -86,9 +86,11 @@ schemes:
         cite: {source_id: nsp-csss-guidelines, excerpt: "Income certificate will be required only for the fresh applicants;", confidence: official}
       - doc: caste-certificate
         note: Only for reserved category students (fresh).
+        condition: Only for students in a reserved category (fresh applicants)
         cite: {source_id: nsp-csss-faq, excerpt: "FRESH: 12th Mark Sheet, Family Income Certificate, Category/ caste Certification for reserved category students, Disability Certificate (if applicable)", confidence: official}
       - doc: disability-certificate
         note: If applicable (fresh).
+        condition: Only if the student has a disability (fresh applicants)
         cite: {source_id: nsp-csss-faq, excerpt: "FRESH: 12th Mark Sheet, Family Income Certificate, Category/ caste Certification for reserved category students, Disability Certificate (if applicable)", confidence: official}
       - doc: bank-account-aadhaar-seeded
         cite: {source_id: nsp-csss-faq, excerpt: "The scholarship amount will be disbursed in the Aadhaar Seeded Bank Account.", confidence: official}

@@ -11,7 +11,7 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 7. [x] API complete with trace logging.
 8. [x] UI: all 9 screens built to section 7.
 9. [x] Optional LLM layer with the sentence checker; app fully works without a key.
-10. [ ] Benchmark built; run it if a key exists; honest empty state if not.
+10. [x] Benchmark built; run it if a key exists; honest empty state if not.
 11. [ ] Full test suite, axe and screenshots passing; at least two design review rounds done.
 12. [ ] Adversarial review: subagent reviews whole repo against spec in fresh context; gaps affecting correctness, honesty or hackathon requirements fixed.
 13. [ ] Docs and submission package (section 11).

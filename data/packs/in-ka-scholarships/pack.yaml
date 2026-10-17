@@ -1649,6 +1649,7 @@ rules:
       Disability Certificate (if applicable)'
     confidence: official
   note: Only for reserved category students (fresh).
+  condition: Only for students in a reserved category (fresh applicants)
 - from: nsp-csss
   to: disability-certificate
   kind: REQUIRES
@@ -1661,6 +1662,7 @@ rules:
       Disability Certificate (if applicable)'
     confidence: official
   note: If applicable (fresh).
+  condition: Only if the student has a disability (fresh applicants)
 - from: nsp-csss
   to: income-certificate
   kind: REQUIRES

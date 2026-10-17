@@ -106,7 +106,9 @@ def kaagaz_deterministic(t: Tools, q: dict) -> dict:
     p = Planner(g, held)
     f = p.finish(q["scheme_id"])
     if q["type"] == "list_documents":
-        return {"doc_ids": p.needed()}
+        # "every document I need" includes the ones the student already holds, if they are in the chain
+        in_tree = {n for n in g.nodes if g.nodes[n].label == "Document"}
+        return {"doc_ids": sorted(set(p.needed()) | (held & in_tree))}
     if q["type"] == "first_step":
         plan = t.plan_core("bench-probe", q["scheme_id"], MAX_DEPTH, Trace(), held=held, save=False)
         return {"first_step": plan["start_today"][0]["id"] if plan["start_today"] else None}
@@ -213,7 +215,7 @@ def kaagaz_llm(t: Tools, q: dict) -> tuple[dict, dict]:
     d = res.data
     ans: dict = {}
     if name == "plan":
-        ans = {"doc_ids": d.get("needed", []),
+        ans = {"doc_ids": sorted(set(d.get("needed", [])) | {i["id"] for i in d.get("items", []) if i["held"]}),
                "first_step": d["start_today"][0]["id"] if d.get("start_today") else None,
                "verdict": {"on_time": "yes", "late": "no", "late_at_least": "no"}.get(d["verdict"]["kind"],
                                                                                     "cannot_tell")}

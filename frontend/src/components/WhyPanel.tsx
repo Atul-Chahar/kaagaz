@@ -87,7 +87,8 @@ export default function WhyPanel({ schemeId, item, plan, onClose, onToggle, pend
               {path?.rules.map((r, i) => (
                 <li key={i} className={crit.has(path.nodes[i + 1].id) && crit.has(path.nodes[i].id) ? 'crit' : ''}>
                   <div className="from-to">{path.nodes[i].name} {path.types[i] === 'OPTION' ? 'can use' : 'needs'} {path.nodes[i + 1].name}</div>
-                  {r.condition && <div className="note">Only if: {r.condition}</div>}
+                  {r.condition && <div className="note">Condition: {r.condition}</div>}
+                  {r.note && <div className="note">Note: {r.note}</div>}
                   <blockquote>"{r.excerpt}"</blockquote>
                   <div className="src">
                     <a href={r.source_url} target="_blank" rel="noreferrer" data-testid="why-source">{r.source_title}</a>

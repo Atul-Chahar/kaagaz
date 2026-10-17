@@ -190,6 +190,7 @@ export interface BenchRun {
   pack: string
   systems: BenchSystemScore[]
   note?: string
+  disagreements?: Record<string, unknown>[]
 }
 
 export interface BenchResponse {
