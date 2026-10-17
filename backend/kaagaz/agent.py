@@ -154,8 +154,7 @@ def check_sentence(sentence: str, result: dict, known_names: list[str]) -> dict:
     allowed = _numbers(result)
     for m in NUM.findall(sentence):
         norm = m.lstrip("0") or "0"
-        if norm.endswith(".0"):
-            norm = norm[:-2]
+        norm = norm.removesuffix(".0")
         if norm not in allowed:
             problems.append(f"states the number {m}, which is not in the tool result")
     if not sentence.strip():

@@ -84,6 +84,20 @@
     "text_chars": 11
   },
   {
+    "id": "ajsk-procedure",
+    "url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Procedure",
+    "final_url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Procedure",
+    "title": "AJSK Procedure For Application (Nadakacheri)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "64aa70611b5f2dd840896bc0361c8bb4d0baf833c02d0e72c5ef814ee54efe87",
+    "file": "raw/ajsk-procedure.html",
+    "text_file": "text/ajsk-procedure.txt",
+    "content_type": "text/html",
+    "size": 17600,
+    "large_not_in_git": false,
+    "text_chars": 1970
+  },
+  {
     "id": "ajsk-services",
     "url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Services",
     "final_url": "https://nadakacheri.karnataka.gov.in/AJSK/Home/Services",

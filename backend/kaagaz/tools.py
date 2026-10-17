@@ -17,7 +17,8 @@ from zoneinfo import ZoneInfo
 from pydantic import BaseModel, Field, StringConstraints, ValidationError, field_validator
 
 from . import graph, memory
-from .planner import MAX_DEPTH, Edge, Node, Planner, RuleGraph, days_left, reduction_if_held, verdict
+from .planner import MAX_DEPTH, Edge, Node, Planner, RuleGraph, reduction_if_held, verdict
+from .workdays import WorkCalendar
 
 Outcome = Literal["answered_with_path", "answered_from_memory", "not_in_graph", "unknown_name", "no_official_time"]
 Id = Annotated[str, StringConstraints(pattern=r"^[a-z0-9][a-z0-9-]{0,80}$")]
@@ -144,6 +145,7 @@ class Tools:
         self.pack = graph.load_pack(pack_id)
         self.tz = ZoneInfo(self.pack["pack"].get("timezone", "UTC"))
         self._today = today
+        self.calendar = WorkCalendar.from_pack(self.pack)
 
     def today(self) -> dt.date:
         return self._today or dt.datetime.now(self.tz).date()
@@ -236,7 +238,7 @@ class Tools:
         fin = p.finish(scheme_id)
         dl = self._deadline(student_id, scheme, trace)
         deadline = dt.date.fromisoformat(dl["date"]) if dl["date"] else None
-        left = days_left(deadline, self.today())
+        left = self.calendar.days_between(self.today(), deadline) if deadline else None
         v = verdict(fin, left)
         crit = p.critical_path()
         crit_set = set(crit)
@@ -291,6 +293,12 @@ class Tools:
             "today": self.today().isoformat(),
             "deadline": dl,
             "days_left": left,
+            "day_unit": "working days" if self.calendar.working else "days",
+            "calendar_complete": self.calendar.complete_until(deadline),
+            "calendar_covers_until": self.calendar.covers_until.isoformat() if self.calendar.covers_until else None,
+            "holidays_ahead": self.calendar.holidays_between(self.today(), deadline) if deadline else [],
+            "dates": [self.calendar.date_of(self.today(), i).isoformat()
+                      for i in range(max(fin.lb, left or 0) + 12)],
             "verdict": {"kind": v.kind, "stamp": v.stamp, "critical_days": v.critical_days, "exact": v.exact,
                         "margin": v.margin},
             "critical_path": crit,

@@ -31,3 +31,6 @@ markers = ["integration: needs a real FalkorDB (docker compose)"]
 
 [tool.ruff]
 line-length = 110
+
+[tool.ruff.lint]
+ignore = ["SIM905"]  # a split() word list reads better than a 70-item literal
