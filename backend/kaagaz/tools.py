@@ -374,10 +374,14 @@ class Tools:
                             "shared": sh["shared"], "shared_count": sh["shared_count"],
                             "needed_count": len(sub["needed"])})
 
+        # can make it, then might make it (lower bound only), then no deadline, then short, then closed
+        order = {"on_time": 0, "at_least": 1, "cannot_compute": 2, "no_deadline": 2, "late_at_least": 3, "late": 3,
+                 "closed": 4}
+
         def rank(o: dict) -> tuple:
             v = o["verdict"]
-            can = v["kind"] == "on_time"
-            return (not can, -(v["margin"] or 0) if can else 0, -o["shared_count"], o["scheme_id"])
+            spare = -(v["margin"] or 0) if v["kind"] == "on_time" else (v["margin"] or 0)
+            return (order[v["kind"]], spare, -o["shared_count"], o["scheme_id"])
 
         options.sort(key=rank)
         can = [o for o in options if o["verdict"]["kind"] == "on_time"]

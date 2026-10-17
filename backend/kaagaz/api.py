@@ -278,6 +278,14 @@ def remove_holding(student_id: str, doc_id: str) -> dict:
     return {"removed": n, "trace": trace.rows}
 
 
+@app.delete("/api/students/{student_id}")
+def forget_student(student_id: str) -> dict:
+    """Delete a student's whole memory graph (kaagaz:student:<id>)."""
+    existed = memory.exists(memory.check_id(student_id))
+    memory.reset(student_id)
+    return {"deleted": existed}
+
+
 @app.get("/api/plan")
 def plan(student_id: str, scheme_id: str, depth: int = MAX_DEPTH, remember: bool = True,
          pack: str | None = None) -> dict:

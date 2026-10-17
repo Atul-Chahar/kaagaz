@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { api, ApiError, type Plan, type PlanItem } from '../api'
-import { fmtDate, fmtDays, hostOf } from '../format'
+import { fmtDate, fmtDays, hostOf, shortName } from '../format'
 import { Cypher, Loading, OutcomeBadge, StateBox } from './common'
 
 type Explain = Awaited<ReturnType<typeof api.explain>>
@@ -49,7 +49,8 @@ export default function WhyPanel({ schemeId, item, plan, onClose, onToggle, pend
         <div className="why-head">
           <div>
             <p className="eyebrow">Why this is in your chain</p>
-            <h2 id="why-title" tabIndex={-1} ref={head} style={{ outline: 'none' }}>{item.name}</h2>
+            <h2 id="why-title" tabIndex={-1} ref={head} style={{ outline: 'none' }}>{shortName(item.name)}</h2>
+            {shortName(item.name) !== item.name && <p className="note" style={{ marginTop: 4 }}>{item.name}</p>}
           </div>
           <button type="button" className="close" onClick={onClose} aria-label="Close the why panel">Close</button>
         </div>
@@ -76,7 +77,7 @@ export default function WhyPanel({ schemeId, item, plan, onClose, onToggle, pend
                 {path.nodes.map((n, i) => (
                   <span key={n.id + i} style={{ display: 'contents' }}>
                     {i > 0 && <span className="arrow" aria-hidden="true">→</span>}
-                    <span className="hop">{n.label === 'AnyOf' ? `One of: ${n.name}` : n.name}</span>
+                    <span className="hop">{n.label === 'AnyOf' ? `One of: ${n.name}` : n.label === 'Scheme' ? 'Scholarship' : shortName(n.name)}</span>
                   </span>
                 ))}
               </div>

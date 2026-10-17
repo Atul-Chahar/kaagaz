@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { Plan, PlanItem } from '../api'
-import { fmtDate, fmtDays } from '../format'
+import { fmtDate, fmtDays, shortName } from '../format'
 
 const ROW = 56
 const TOP = 64
@@ -48,7 +48,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
   const span = Math.max(maxEnd, left ?? 0) + 4
   const narrow = width < 640
   const px = Math.max(narrow ? 14 : 18, Math.min(44, (width - 24) / span))
-  const inner = Math.max(width, span * px + LABEL_W)
+  const inner = Math.max(width, span * px + LABEL_W + 120)
   const height = TOP + Math.max(rows.length, 1) * ROW + 16
   const step = [1, 2, 5, 10, 20, 30].find(s => s * px >= 64) ?? 30
   const ticks = Array.from({ length: Math.floor(span / step) + 1 }, (_, i) => i * step)
@@ -61,14 +61,21 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
   }
 
   // red tape: through every critical slip, deepest first, then a knot at the end
+  // the tape runs along the lower edge of each critical slip (below the text) and is tied between slips with a curve
   let tape = ''
   let knot: { x: number; y: number } | null = null
   critOrder.forEach((id, k) => {
     const i = rows.findIndex(r => r.id === id)
     const g = geom(rows[i], i)
-    const cy = g.y + 22
-    tape += `${k === 0 ? 'M' : 'L'} ${g.x - 6} ${cy} L ${g.x + g.w + 6} ${cy} `
-    knot = { x: g.x + g.w + 6, y: cy }
+    const cy = g.y + 47 // just under the slip, so the tape never crosses its text
+    const end = g.x + Math.max(g.w, 14) + 6
+    if (k === 0) tape += `M ${g.x - 6} ${cy} `
+    else if (knot) {
+      const mx = Math.max(knot.x, g.x - 6) + 10
+      tape += `C ${mx} ${knot.y}, ${mx} ${cy}, ${Math.max(g.x - 6, knot.x)} ${cy} `
+    }
+    tape += `L ${end} ${cy} `
+    knot = { x: end, y: cy }
   })
 
   const late = plan.verdict.kind === 'late' || plan.verdict.kind === 'late_at_least'
@@ -91,7 +98,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
           <div className="tl-today" style={{ left: 12 }} aria-hidden="true"><span>{fmtDate(plan.today)}</span></div>
           {left !== null && plan.deadline.date && (
             <div className="tl-deadline" style={{ left: 12 + left * px }} data-testid="deadline-line">
-              <span>Deadline {fmtDate(plan.deadline.date)}</span>
+              <span style={12 + left * px > width - 190 ? { left: 'auto', right: 8 } : undefined}>Deadline {fmtDate(plan.deadline.date)}</span>
             </div>
           )}
           {rows.length === 0 && (
@@ -100,14 +107,15 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
           {rows.map((r, i) => {
             const g = geom(r, i)
             const inside = g.w >= 140
-            const label = `${r.name}. ${g.known ? `${fmtDays(r.days, plan.day_unit)} by law` : 'No official time limit found'}. Starts ${r.start === 0 ? 'today' : `after ${fmtDays(r.start ?? 0, plan.day_unit)}`}.${r.on_critical ? ' On the critical path.' : ''}`
+            // the accessible name starts with exactly the visible text (short name, then days), then adds detail
+            const label = `${shortName(r.name)} ${g.known ? `${fmtDays(r.days, plan.day_unit)} by law` : 'unknown time, no official time limit found'}. Starts ${r.start === 0 ? 'today' : `after ${fmtDays(r.start ?? 0, plan.day_unit)}`}.${r.on_critical ? ' On the critical path.' : ''} Full name: ${r.name}.`
             const cls = `slip ${r.on_critical ? 'crit' : ''} ${g.known ? '' : 'unknown'} ${entering.has(r.id) ? 'enter' : ''}`
             return (
               <div key={r.id} role="listitem" style={{ display: 'contents' }}>
                 <button type="button" className={cls} style={{ left: g.x, top: g.y, width: inside ? g.w : Math.max(g.w, 14) }}
                   onClick={e => onOpen(r.id, e.currentTarget)} aria-label={label} data-testid={`slip-${r.id}`} data-critical={r.on_critical}>
                   {inside && <>
-                    <span className="t">{r.name}</span>
+                    <span className="t">{shortName(r.name)}</span>{' '}
                     <span className="d">{g.known ? fmtDays(r.days, plan.day_unit) : 'unknown time'}</span>
                   </>}
                 </button>
@@ -115,7 +123,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
                   <button type="button" className={`slip-label ${entering.has(r.id) ? 'enter' : ''}`} tabIndex={-1} aria-hidden="true"
                     onClick={e => onOpen(r.id, e.currentTarget)}
                     style={{ position: 'absolute', left: g.x + Math.max(g.w, 14) + 8, top: g.y + 4, border: 0, background: 'transparent', textAlign: 'left', cursor: 'pointer', padding: 0, maxWidth: 260 }}>
-                    <span style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, whiteSpace: 'nowrap' }}>{r.name}</span>
+                    <span style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, whiteSpace: 'nowrap' }}>{shortName(r.name)}</span>
                     <span className="days" style={{ fontSize: '0.7rem', color: g.known ? 'var(--ink-soft)' : 'var(--stamp-blue)' }}>{g.known ? fmtDays(r.days, plan.day_unit) : 'unknown time'}</span>
                   </button>
                 )}

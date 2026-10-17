@@ -187,6 +187,14 @@ def name_search_route(t: Tools, question: str, student_id: str | None, scheme_id
         best = schemes[0]["score"]
         tied = [s for s in schemes if s["score"] == best]
         scheme = next((s for s in tied if s["id"] == scheme_id), tied[0])
+    if scheme:
+        # words used up by the scheme's own name must not also pick the document ("top class" is a scheme name)
+        used = {w for w in specific if w in scheme["name"].lower() or w in scheme["id"]}
+        for d in docs:
+            name = d["name"].lower()
+            d["score"] = sum(1 for w in specific if w not in used and (w in name or w in d["id"]))
+            d["score"] += 0.1 * sum(1 for w in words if w in GENERIC and (w in name or w in d["id"]))
+        docs = sorted([d for d in docs if d["score"] >= 1], key=lambda h: -h["score"])
     doc = docs[0] if docs else None
     if doc and (scheme or scheme_id):
         return "explain", {"scheme_id": scheme["id"] if scheme else scheme_id, "doc_id": doc["id"]}, hits

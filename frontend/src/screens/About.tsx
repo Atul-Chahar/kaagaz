@@ -68,16 +68,17 @@ export default function About({ session }: { session: Session | null }) {
       <h1>How FalkorDB does the work</h1>
       <p className="lede" style={{ marginTop: 12 }}>Kaagaz is a graph problem: each document can need other documents, at any depth, with "any one of these" choices on the way. Without the graph there is no chain to walk, no critical path and no verdict.</p>
       <hr className="hair" />
+      <section>
+        <h2 style={{ marginBottom: 16 }}>Data model</h2>
+        <ModelDiagram />
+        {stats && (
+          <p className="note" style={{ marginTop: 16 }} data-testid="graph-stats">
+            Live counts in <code>{stats.graph}</code>: {stats.rows.map(r => `${r.n} ${r.name}`).join(', ')}.
+          </p>
+        )}
+      </section>
+      <hr className="hair" />
       <div className="grid2">
-        <section>
-          <h2 style={{ marginBottom: 16 }}>Data model</h2>
-          <ModelDiagram />
-          {stats && (
-            <p className="note" style={{ marginTop: 16 }} data-testid="graph-stats">
-              Live counts in <code>{stats.graph}</code>: {stats.rows.map(r => `${r.n} ${r.name}`).join(', ')}.
-            </p>
-          )}
-        </section>
         <section>
           <h2 style={{ marginBottom: 16 }}>How the hackathon rules are met</h2>
           <ul style={{ paddingLeft: 18, margin: 0, display: 'grid', gap: 10 }}>
@@ -88,7 +89,9 @@ export default function About({ session }: { session: Session | null }) {
             <li><b>Data is public.</b> Rules come from saved government pages and PDFs. The Example student is made up.</li>
             <li><b>AI disclosure.</b> Built with Claude Code (Anthropic).</li>
           </ul>
-          <h3 style={{ margin: '24px 0 8px' }}>Load-bearing documents</h3>
+        </section>
+        <section>
+          <h2 style={{ marginBottom: 16 }}>Load-bearing documents</h2>
           {lb ? (
             <>
               <p className="note">Documents that sit in the most scholarship chains{session ? ' you target' : ''} (<code>load_bearing.cypher</code>), and the top PageRank scores over REQUIRES edges on the whole pack (<code>load_bearing_pagerank.cypher</code>).</p>

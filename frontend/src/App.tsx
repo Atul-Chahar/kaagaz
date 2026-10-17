@@ -72,7 +72,7 @@ export default function App() {
               <a key={r.path} href={`#${r.path}`} aria-current={path === r.path ? 'page' : undefined}>{r.label}</a>
             ))}
           </nav>
-          <button className="theme-btn" type="button" onClick={toggleTheme} aria-label={`Switch to ${effective === 'dark' ? 'day' : 'night'} mode`}>
+          <button className="theme-btn" type="button" onClick={toggleTheme} title={`Switch to ${effective === 'dark' ? 'light' : 'dark'} colours`}>
             {effective === 'dark' ? 'Day office' : 'Night office'}
           </button>
         </div>

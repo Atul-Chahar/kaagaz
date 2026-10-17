@@ -22,3 +22,9 @@ export function hostOf(url: string): string {
 export function plural(n: number, one: string, many: string): string {
   return `${n} ${n === 1 ? one : many}`
 }
+
+// Short display name: drops a trailing "(…)" qualifier, which the Why panel still shows in full.
+export function shortName(name: string): string {
+  const s = name.replace(/\s*\([^()]*\)\s*$/, '').trim()
+  return s.length >= 6 ? s : name
+}

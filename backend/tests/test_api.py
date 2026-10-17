@@ -106,3 +106,18 @@ def test_falkordb_down_gives_plain_error(monkeypatch):
     finally:
         monkeypatch.undo()
         graph.db.cache_clear()
+
+
+def test_ask_name_search_does_not_reuse_scheme_words_for_the_document(monkeypatch):
+    monkeypatch.delenv("LLM_PROVIDER", raising=False)
+    r = client.post("/api/ask", json={"question": "Does PM YASASVI Top Class need a hostel certificate?"}).json()
+    assert r["args"] == {"scheme_id": "nsp-pm-yasasvi-top-class-college", "doc_id": "hostel-certificate"}
+    assert r["outcome"] == "not_in_graph"
+    r = client.post("/api/ask", json={"question": "Do I need a PAN card for Vidyasiri?"}).json()
+    assert r["args"]["doc_id"] == "pan-card"
+
+
+def test_forget_student_deletes_the_graph(sid):
+    client.post(f"/api/students/{sid}/holdings", json={"doc_id": "aadhaar"})
+    assert client.delete(f"/api/students/{sid}").json() == {"deleted": True}
+    assert client.get(f"/api/students/{sid}").json()["outcome"] == "not_in_graph"

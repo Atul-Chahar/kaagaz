@@ -6,7 +6,7 @@ import type { Session } from '../nav'
 const EXAMPLES = [
   'What do I need for Vidyasiri for Minorities?',
   'Does PostMatric for OBC Students need a caste and income certificate?',
-  'Does the Top Class SC scholarship need a ration card?',
+  'Does PM YASASVI Top Class need a hostel certificate?',
   'Do I need a PAN card for Vidyasiri?',
   'How do I get a domicile certificate?',
 ]

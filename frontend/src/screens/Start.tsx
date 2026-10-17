@@ -107,7 +107,7 @@ export default function Start({ session, setSession }: { session: Session | null
           <input id="scheme-search" type="search" placeholder="Search by name, department or portal" value={q} onChange={e => setQ(e.target.value)} />
           {!schemes && !error && <Loading label="Reading scholarships from the graph" />}
           {schemes && shown.length === 0 && <p className="note" style={{ marginTop: 12 }}>No scholarship in this rule pack matches "{q}".</p>}
-          <ul className="scheme-list" role="radiogroup" aria-labelledby="step1">
+          <ul className="scheme-list" aria-label="Scholarships in this rule pack">
             {shown.map(s => {
               const w = windowLine(s)
               return (

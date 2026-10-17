@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { api, ApiError, type Plan, type PlanItem, type ToolResponse } from '../api'
 import { Loading, StateBox, Stamp, TraceTable } from '../components/common'
-import { fmtDate, fmtDays, hostOf, plural } from '../format'
+import { fmtDate, fmtDays, hostOf, plural, shortName } from '../format'
 import { go, type Session } from '../nav'
 import { verdictSentence } from '../labels'
 import WhyPanel from '../components/WhyPanel'
@@ -176,7 +176,7 @@ export default function Chain({ session, setSession }: { session: Session | null
       {heldItems.length > 0 && (
         <div className="held-row" aria-label="Documents you already hold">
           <span className="muted">Already held:</span>
-          {heldItems.map(h => <span key={h.id} className="chip held">{h.name}</span>)}
+          {heldItems.map(h => <span key={h.id} className="chip held" title={h.name}>{shortName(h.name)}</span>)}
         </div>
       )}
 
@@ -194,11 +194,11 @@ export default function Chain({ session, setSession }: { session: Session | null
               const it = itemsById[s.id] as PlanItem | undefined
               const src = it?.days_source ?? it?.rule
               const group = plan.items.find(a => a.label === 'AnyOf' && a.chosen === s.id)
-              const others = group?.options?.filter(o => o !== s.id).map(o => itemsById[o]?.name ?? o)
+              const others = group?.options?.filter(o => o !== s.id).map(o => shortName(itemsById[o]?.name ?? o))
               return (
                 <li key={s.id} data-testid={`todo-${s.id}`}>
                   <div>
-                    <div className="doc">{s.name}</div>
+                    <div className="doc" title={s.name}>{shortName(s.name)}</div>
                     <div className="sub">
                       <span>{s.office_name ?? 'Issuing office not in the sources'}</span>
                       <span className="days">{s.days ? `${fmtDays(s.days, plan.day_unit)} by law` : 'No official time limit found'}</span>
@@ -210,7 +210,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                       {s.path.map((pid, i) => (
                         <span key={pid + i} style={{ display: 'contents' }}>
                           {i > 0 && <span className="arrow" aria-hidden="true">→</span>}
-                          <span className="hop">{pid === plan.scheme.id ? 'Scholarship' : itemsById[pid]?.name ?? pid}</span>
+                          <span className="hop">{pid === plan.scheme.id ? 'Scholarship' : shortName(itemsById[pid]?.name ?? pid)}</span>
                         </span>
                       ))}
                     </div>
@@ -227,14 +227,14 @@ export default function Chain({ session, setSession }: { session: Session | null
             })}
           </ol>
           {needed.length > plan.start_today.length && (
-            <p className="note" style={{ marginTop: 12 }}>{needed.length - plan.start_today.length} more documents wait for one of these first. Click any slip in the chain to see why it is there.</p>
+            <p className="note" style={{ marginTop: 12 }}>{plural(needed.length - plan.start_today.length, 'more document waits', 'more documents wait')} for one of these first. Click any slip in the chain to see why it is there.</p>
           )}
         </section>
 
         <section aria-labelledby="alt-h">
           <div className="section-head">
             <h2 id="alt-h">Other options</h2>
-            <p>Scholarships you can still make with the documents you have, ranked by days spare.</p>
+            <p>Other scholarships, ranked by whether you can still make them with the documents you hold. Kaagaz does not check eligibility (category, income, marks), so check that on the portal.</p>
           </div>
           {!alts && <Loading label="Comparing other schemes" />}
           {alts && (
