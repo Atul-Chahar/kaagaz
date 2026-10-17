@@ -146,8 +146,8 @@ export default function Start({ session, setSession }: { session: Session | null
                       <span className="meta">{s.authority}{s.portal ? ` · ${s.portal}` : ''}</span>
                     </span>
                     <span className="when">
-                      <span className={w.cls === 'late' ? 'tag late' : w.cls === 'muted' ? 'muted' : ''}>{w.text}</span>
-                      {s.window_end && (s.days_left ?? -1) >= 0 && <><br /><span className="muted">{fmtDays(s.days_left ?? 0)} left</span></>}
+                      <span className={w.cls === 'soon' ? 'tag blue' : w.cls === 'muted' ? 'muted' : ''}>{w.text}</span>
+                      {s.window_end && (s.days_left ?? -1) >= 0 && <><br /><span className="muted">{fmtDays(s.days_left ?? 0, s.day_unit)} left</span></>}
                     </span>
                   </label>
                 </li>

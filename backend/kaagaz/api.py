@@ -122,7 +122,8 @@ def schemes(pack: str | None = None) -> dict:
     for r in rows:
         s = dict(r["scheme"])
         end = s.get("window_end")
-        s["days_left"] = (dt.date.fromisoformat(end) - today).days if end else None
+        s["days_left"] = t.calendar.days_between(today, dt.date.fromisoformat(end)) if end else None
+        s["day_unit"] = "working days" if t.calendar.working else "days"
         s["direct_requirements"] = r["direct_requirements"]
         out.append(s)
     return {"today": today.isoformat(), "schemes": out, "trace": trace.rows}

@@ -39,6 +39,7 @@ export interface Scheme {
   window_excerpt?: string
   window_confidence?: string
   days_left?: number | null
+  day_unit?: string
   direct_requirements?: number
 }
 
