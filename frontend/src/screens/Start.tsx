@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { api, ApiError, getPack, setPack, type PackInfo, type Scheme } from '../api'
 import { Loading, StateBox } from '../components/common'
-import { fmtDays } from '../format'
+import { fmtDays, legalTime } from '../format'
 import { go, type Session } from '../nav'
 import { windowLine } from '../labels'
 
-interface Doc { id: string; name: string; days: number | null; office_name: string | null; group: string }
+interface Doc { id: string; name: string; days: number | null; days_unit?: string | null; office_name: string | null; group: string }
 
 export default function Start({ session, setSession }: { session: Session | null; setSession: (s: Session | null) => void }) {
   const [schemes, setSchemes] = useState<Scheme[] | null>(null)
@@ -18,6 +18,7 @@ export default function Start({ session, setSession }: { session: Session | null
   const tree = treeState && treeState.scheme === picked ? treeState.ids : null
   const [held, setHeld] = useState<Set<string>>(new Set())
   const [busy, setBusy] = useState(false)
+  const [ownDate, setOwnDate] = useState('')
   const [packs, setPacks] = useState<PackInfo[]>([])
   const [pack, setPackState] = useState<string | null>(getPack())
   const ui = packs.find(p => p.id === (pack ?? packs[0]?.id))?.ui ?? {}
@@ -66,7 +67,7 @@ export default function Start({ session, setSession }: { session: Session | null
     setBusy(true)
     try {
       const ex = await api.example()
-      setSession({ id: ex.student_id, scheme_id: ex.scheme_id, example: true, pack: getPack() ?? undefined })
+      setSession({ id: ex.student_id, scheme_id: ex.scheme_id, example: true, pack: getPack() ?? undefined, label: ex.label })
       go('/chain')
     } catch (e) {
       setError((e as ApiError).message)
@@ -79,7 +80,7 @@ export default function Start({ session, setSession }: { session: Session | null
     try {
       let id = session && !session.example && (session.pack ?? null) === getPack() ? session.id : null
       if (!id) id = (await api.newStudent()).id
-      await api.setTarget(id, picked)
+      await api.setTarget(id, picked, ownDate || undefined)
       const before = new Set<string>()
       try {
         const r = await api.recall(id)
@@ -105,9 +106,9 @@ export default function Start({ session, setSession }: { session: Session | null
           <p className="promise">Every scheme finder tells you what you are eligible for. Kaagaz tells you <em>whether you are already too late</em>, and which certificate to apply for today.</p>
         </div>
         <div className="example-card">
-          <h2 style={{ fontSize: '1.15rem' }}>See it with the Example student</h2>
+          <h2 style={{ fontSize: '1.15rem' }}>See it with the {ui.example_label ?? 'Example student'}</h2>
           <p>{ui.example ?? 'A made-up student profile (not a real person) applying for a Karnataka scholarship. It shows the hidden certificate chain and the verdict in one click.'}</p>
-          <button className="btn" type="button" onClick={loadExample} disabled={busy} data-testid="load-example">Load the Example student</button>
+          <button className="btn" type="button" onClick={loadExample} disabled={busy} data-testid="load-example">Load the {ui.example_label ?? 'Example student'}</button>
         </div>
       </section>
 
@@ -178,7 +179,7 @@ export default function Start({ session, setSession }: { session: Session | null
                           setHeld(n)
                         }} />
                         <span>{d.name}</span>
-                        <span className="days">{d.days ? fmtDays(d.days, 'working days') : ''}</span>
+                        <span className="days">{d.days ? legalTime(d.days, d.days_unit, 'working days') : ''}</span>
                       </label>
                     ))}
                   </fieldset>
@@ -192,6 +193,10 @@ export default function Start({ session, setSession }: { session: Session | null
           <span className="step-n">Step 3 of 3</span>
           <h2 id="step3" style={{ fontSize: '1.3rem' }}>Go</h2>
           <p>{picked ? `${held.size} document${held.size === 1 ? '' : 's'} ticked. Kaagaz remembers this for your next visit.` : `Pick a ${target} to continue.`}</p>
+          <label htmlFor="own-date" style={{ display: 'block', fontSize: '0.9rem', margin: '0 0 6px' }}>
+            Your own deadline <span className="muted">({pickedScheme?.window_end ? 'optional; the published one is used if empty' : 'no deadline is published for this one'})</span>
+          </label>
+          <input id="own-date" type="date" value={ownDate} onChange={e => setOwnDate(e.target.value)} style={{ marginBottom: 16 }} />
           <button className="btn" type="button" disabled={!picked || busy} onClick={goPlan} data-testid="go">Show my chain</button>
         </aside>
       </div>

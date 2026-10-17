@@ -114,7 +114,7 @@ def main() -> None:
                                     "cite": expand(o.get("office_cite"), f"{fname}/office/{o['id']}")}
         for d in frag.get("documents", []) or []:
             cur = docs.setdefault(d["id"], {"id": d["id"]})
-            for k in ("name", "office", "days", "validity", "note", "service_days"):
+            for k in ("name", "office", "days", "days_unit", "validity", "note", "service_days"):
                 v = d.get(k)
                 if v is None:
                     continue

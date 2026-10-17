@@ -88,5 +88,12 @@ class WorkCalendar:
                 n += 1
         return d
 
+    def calendar_to_working(self, today: dt.date, start: int, days: int) -> int | None:
+        """Working days taken by `days` calendar days that begin `start` working days after today."""
+        if not self.working:
+            return None
+        begin = self.date_of(today, start)
+        return self.days_between(today, begin + dt.timedelta(days=days)) - start
+
     def holidays_between(self, a: dt.date, b: dt.date) -> list[dict]:
         return [{"date": d.isoformat(), "name": n} for d, n in sorted(self.holidays.items()) if a < d <= b]

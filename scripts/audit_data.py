@@ -110,6 +110,8 @@ def audit_pack(path: Path) -> None:
             checked["days"] += 1
             if not isinstance(days, int) or days <= 0:
                 err(f"{where}: days must be null or a positive integer, got {days!r}")
+            if d.get("days_unit") not in (None, "working_days", "calendar_days"):
+                err(f"{where}: days_unit must be working_days or calendar_days")
             check_cite(d.get("days_cite"), f"{where}/days")
         if d.get("service_days") is not None:
             check_cite(d.get("service_days_cite"), f"{where}/service_days")
@@ -172,8 +174,8 @@ def audit_pack(path: Path) -> None:
 
     ex = pack.get("example_student")
     if ex:
-        if ex.get("label") != "Example student":
-            err(f"{pid}: example student must be labelled 'Example student'")
+        if not str(ex.get("label", "")).startswith("Example "):
+            err(f"{pid}: the synthetic example must be labelled 'Example ...' (e.g. 'Example student')")
         for h in ex.get("holdings", []):
             if h not in docs:
                 err(f"{pid}: example student holds unknown document {h}")

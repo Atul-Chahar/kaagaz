@@ -1,0 +1,322 @@
+How to get Digital Signature Certificate | CCA
+
+      Skip to main content
+
+A
++
+
+A
+-
+
+A
+
+Skip to main content
+   |   
+Screen reader access
+  |   
+Abbreviations
+
+Search
+
+Controller of Certifying Authorities
+
+Ministry of Electronics & Information Technology
+
+Government of India
+
+Home
+
+About CCA
+
+Services
+
+FAQ
+
+Contact us
+
+Follow us :
+
+Menu
+
+PKI Framework
+
+Root CA of India
+
+Licensed CAs
+
+Root Certificate
+
+CA Certificates
+
+eSign
+
+Guidelines
+
+Breadcrumbs
+
+Breadcrumb
+
+Home
+
+How to get Digital Signature Certificate
+
+How to get Digital Signature Certificate
+
+Whether CCA issue Digital Signature Certificates to end-entities?
+
+The Office of Controller of Certifying Authorities (CCA), issues Certificate only to Certifying Authorities(CAs). CAs issue Digital Signature Certificates to end-entities.
+
+How do I get a Digital Signature Certificate (DSC)?
+
+One can approach any one of the Licensed CAs for getting a Digital Signature Certificate. The list of Licensed CAs is available at 
+http://www.cca.gov.in/licensed_ca.html
+. The different categories of certificates offered by different CAs are listed at 
+http://www.cca.gov.in/CAServicesOverview.html
+. The contact address of each CA and their help desk numbers are available in the disclosure record of each CA published at 
+http://www.cca.gov.in/licensed_ca.html
+.
+
+What are the identity verification options available to a DSC applicant?
+
+The identity verification options available to a DSC applicant are:-
+
+Which are the CAs issuing Class 2 and Class 3 DSCs to public at present? Please provide their contact details?
+
+SL
+
+Licensed CAs
+
+EMAIL & PHONE
+
+1
+
+Safescrypt CA
+
+Shankara[dot]narayanan[at]sifycorp[dot]com
+, 90032 77877
+
+2
+
+nCode CA
+
+ithead[at]ncode[dot]in, +91-79 4007300
+
+3
+
+eMudhra CA
+
+sales[at]emudhra[dot]com
+, +918046156901
+
+4
+
+Capricorn CA
+
+sales[at]Certificate[dot]Digital, +91 11 614 000 60
+
+5
+
+Verasys(Vsign CA
+
+huzefa[at]thanawala[at]verasys[dot]in
+, 9819315990 
+
+			Madhumita[dot]harshe[at]verasys[dot]in, 9136040449
+
+6
+
+IDSign CA
+
+info[at]idsignca[dot]com, 1800-572-1734
+
+7
+
+Pantasign CA
+
+info[at]pantasign[dot]com
+, +91 9389807192
+
+8
+
+XtraTrust CA
+
+info[at]xtratrust[dot]com, 079-48488686 / 77790 31928
+
+9
+
+ProDigiSign CA
+
+support[at]prodigisign[dot]com, 7777090977,9370418998, devendra[dot]singh[at]prodigisign[dot]in
+
+10
+
+SignX  CA
+
+info[at]signxca[dot]com
+, 9622233007,9797625290
+
+11
+
+Care4Sign CA
+
+info[at]care4sign[dot]com, +91-84312 39191
+
+12
+
+RISL (RajComp) CA
+
+kumardeepak[dot]doit[at]rajasthan[dot]gov[dot]in, 0141-2928055 
+
+13
+
+Protean(NSDL e-GOV)
+
+esign-help[at]proteantech[dot]in, 
+nishan[at]proteantech[dot]in
+, & 022 4090 4242/40904232
+
+14
+
+CDAC  CA
+
+ess[at]cdac[dot]in,jahnavib[at]cdac[dot]in
+ & 9860263344, riship[at]cdac[dot]in & 7720002182
+
+Why self attested documents are not accepted by CAs for DSC issuance?
+
+Wherever self attestation has been facilitated as a part of submitting an Application for service, the original documents are required to be produced at the point of getting the service. In the case of Digital Signature Certificate (DSC) Applicants, they can directly approach Certifying Authorities (CA) at the CA premises with original supporting documents, in which case self-attestation of copies will be sufficient.
+
+How does one know about the different classes of certificates offered by the Licensed CAs?.
+
+The services offered by CAs are available on the website of each CA. The summary of service offered by CAs are available at http://www.cca.gov.in/cca/?q=CAServicesOverview.html..
+
+Where can I find the Identity Verification and key storage requirements for different type and Class of Certificates?
+
+The verification requirements are mentioned in the Identity Verification Guidelines (CCA-IVG) and Key generation and storage requirements are mentioned in Section 6.1.1 of X.509 Certificate Policy for India PKI (CCA-CP). Both documents are available at cca.gov.in
+
+Paper based application form and supporting documents(all attested)
+
+Aadhaar eKYC based verification for Aadhaar holder(no supporting documents are required)(no attestation)
+
+Banking KYC or eKYC. Banking eKYC is dependent on CAs tie-up with banks for getting electronic KYC information of banking customers.(no attestation required)
+
+Does the Office of CCA regulate or intervene in disputes between a Certifying Authority and its business partners?
+
+No. The Office of the Controller of Certifying Authorities (CCA) does not regulate or intervene in commercial or contractual disputes between a CA and its business partners. Such matters must be resolved directly between the concerned parties as per their agreement.
+
+Whom should a business partner approach for issues such as non-payment of commission or other financial disputes with a CA?
+
+Business partners should approach the respective Certifying Authority with whom they have entered into an agreement. The CA is responsible for maintaining a complaint redressal mechanism to address such issues.
+
+Can business partners or subscribers file complaints with the Office of CCA regarding payment delays or business-related disputes?
+
+Issues such as commission payment delays or other business disputes are outside the purview of the CCA and should be resolved directly with the concerned Certifying Authority.
+
+FAQ
+
+Show — FAQ
+
+Hide — FAQ
+
+How to get Digital Signature Certificate
+
+Digital Signature Certificate
+
+Classes of certificates
+
+DSC Management
+
+DSC for Organisational person
+
+Digital Signature
+
+Signature Verification
+
+Long term archival
+
+Root CA
+
+India PKI(Public Key Certificates) Policies
+
+Certifying Authority
+
+Licensing of CAs
+
+Cross-border
+
+eSign Service
+
+Time stamping Service
+
+SSL Certificates
+
+Issuance of DSC to Foreign Nationals
+
+Dispute Resolution
+
+ABOUT US
+
+About CCA
+
+Vision & Mission
+
+Organization Structure
+
+Organisation Members/Who's Who
+
+QUICK LINKS
+
+eSign Online Service
+
+Timestamping Service
+
+Recruitment
+
+Tenders
+
+Resource Center
+
+Tutorials
+
+PKI Outreach
+
+Closed CAs
+
+IT ACT
+
+REACH US
+
+Contact Us
+
+RTI
+
+Public Grievances
+
+FAQ
+
+RFD 
+
+ | 
+Help
+ | 
+Web Information Manager
+ | 
+Feedback
+ | 
+Disclaimer
+ | 
+Copyright
+ | 
+Website Policies
+ | 
+Archives
+ | 
+Terms & Conditions
+ | 
+Sitemap
+
+© 2025 Ministry of Electronics and Information Technology(MeitY), Government Of India
+
+Website owned by Controller of Certifying Authorities(CCA)
+
+Updated Date :

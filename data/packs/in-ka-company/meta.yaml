@@ -1,0 +1,30 @@
+pack:
+  id: in-ka-company
+  name: Starting a private limited company in Karnataka, India
+  jurisdiction: Government of India (MCA, GST, Income Tax) and Karnataka (Labour, Commercial Taxes)
+  language: en
+  currency: INR
+  timezone: Asia/Kolkata
+  version: "2026.10.17"
+  ui:
+    target: goal
+    example_label: Example founder
+    targets: goals
+    example: A made-up founder (not a real person) who wants their new company to issue GST invoices by a date they chose. It shows the registration chain in one click.
+models: A founder setting up a private limited company in Karnataka.
+groups:
+  - label: Founder's own documents
+    docs: [aadhaar, pan-card, co-dsc]
+  - label: Company papers
+    docs: [co-moa-aoa, co-registered-office-proof, co-spice-incorporation-certificate, co-din, co-company-pan, co-company-tan]
+  - label: Registrations after incorporation
+    docs: [co-gstin, co-shop-establishment-ka, co-professional-tax-ka, co-bank-current-account]
+# Synthetic demo profile. Not a real person.
+example_student:
+  label: Example founder
+  scheme_id: in-company-ready-to-hire
+  deadline: 2026-11-30   # a made-up target date chosen by the example founder (goals have no published deadline)
+  about: >-
+    A made-up founder who has their own Aadhaar and PAN, a digital signature, draft MoA and AoA and proof of the
+    registered office, and wants the company ready to hire staff by 30 Nov 2026.
+  holdings: [aadhaar, pan-card, co-dsc, co-moa-aoa, co-registered-office-proof]

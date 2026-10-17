@@ -21,5 +21,5 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 ## Stretch (only after 1 to 11 green)
 - [x] S1 Live deployment: BLOCKED for a live URL (no FalkorDB Cloud credentials or deploy token in the environment; no accounts created). docs/DEPLOY.md written with exact steps; docker compose stack tested locally.
 - [x] S2 MCP server (backend/kaagaz/mcp_server.py, same 7 tools, tests/test_mcp.py passes in-process)
-- [ ] S3 Second rule pack
+- [x] S3 Second rule pack: starting a company in Karnataka (in-ka-company), same sourcing and audit, pack switcher on Start, exact working/calendar day conversion, e2e + integration tests.
 - [x] S4 i18n structure ready for the app shell (frontend/src/i18n.ts), English only: no Hindi strings, because they could not be checked carefully.

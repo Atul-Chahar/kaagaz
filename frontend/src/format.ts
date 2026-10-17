@@ -15,6 +15,18 @@ export function fmtDays(n: number | null | undefined, unit = 'days'): string {
   return `${n} ${u}`
 }
 
+// A legal time in its own unit, plus what it means in the plan's unit when they differ.
+// unit: 'working_days' | 'calendar_days' | undefined (same as the plan); planUnit: 'working days' | 'days'
+export function legalTime(days: number | null | undefined, unit: string | null | undefined, planUnit: string, span?: number): string {
+  if (days === null || days === undefined) return 'unknown time'
+  const own = unit === 'calendar_days' ? (days === 1 ? 'calendar day' : 'calendar days')
+    : unit === 'working_days' ? (days === 1 ? 'working day' : 'working days')
+    : planUnit === 'working days' ? (days === 1 ? 'working day' : 'working days') : (days === 1 ? 'day' : 'days')
+  const sameUnit = !unit || (unit === 'working_days') === (planUnit === 'working days')
+  if (sameUnit || span === undefined) return `${days} ${own}`
+  return `${days} ${own} (${fmtDays(span, planUnit)})`
+}
+
 export function hostOf(url: string): string {
   try { return new URL(url).hostname.replace(/^www\./, '') } catch { return url }
 }

@@ -230,11 +230,13 @@ def load_example(pack: str | None = None) -> dict:
         raise HTTPException(404, "this pack has no example student")
     sid = memory.EXAMPLE_ID if pid == DEFAULT_PACK else f"{memory.EXAMPLE_ID}-{pid}"[:64]
     memory.reset(sid)
-    memory.ensure_student(sid, memory.EXAMPLE_LABEL)
+    label = ex.get("label") or memory.EXAMPLE_LABEL
+    memory.ensure_student(sid, label)
     for h in ex.get("holdings", []):
         memory.add_holding(sid, h, None)
-    memory.set_target(sid, ex["scheme_id"], None, "published_window")
-    return {"student_id": sid, "label": memory.EXAMPLE_LABEL, "scheme_id": ex["scheme_id"],
+    deadline = str(ex["deadline"]) if ex.get("deadline") else None
+    memory.set_target(sid, ex["scheme_id"], deadline, "example_own_date" if deadline else "published_window")
+    return {"student_id": sid, "label": label, "scheme_id": ex["scheme_id"],
             "holdings": ex.get("holdings", []), "about": ex.get("about")}
 
 

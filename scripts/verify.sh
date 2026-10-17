@@ -39,7 +39,7 @@ step "frontend typecheck" bash -c "cd frontend && pnpm -s typecheck"
 step "frontend lint" bash -c "cd frontend && pnpm -s lint"
 step "frontend production build" bash -c "cd frontend && pnpm -s build"
 step "end-to-end + accessibility (Playwright, axe)" bash -c "cd e2e && npx playwright test app.spec.ts"
-step "screenshots (1440/390, light/dark)" bash -c "cd e2e && npx playwright test screenshots.spec.ts && test \$(ls $ROOT/docs/screenshots/*.png | wc -l) -ge 32"
+step "screenshots (1440/390, light/dark)" bash -c "cd e2e && npx playwright test screenshots.spec.ts && test \$(ls $ROOT/docs/screenshots/*.png | wc -l) -ge 36"
 step "docker image builds" bash -c "docker build -q -t kaagaz-app:verify . >/dev/null"
 
 echo

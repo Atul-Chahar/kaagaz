@@ -106,6 +106,7 @@ def seed_pack(pack_id: str) -> dict:
                "office": d.get("office"), "note": d.get("note")}
         row.update(_cite(d.get("days_cite"), "days_"))
         row["service_days"] = d.get("service_days")
+        row["days_unit"] = d.get("days_unit")
         row.update(_cite(d.get("service_days_cite"), "service_days_"))
         docs.append(row)
     w("seed_documents", {"rows": docs})

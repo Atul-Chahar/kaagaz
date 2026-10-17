@@ -147,6 +147,15 @@ class Tools:
         self.tz = ZoneInfo(self.pack["pack"].get("timezone", "UTC"))
         self._today = today
         self.calendar = WorkCalendar.from_pack(self.pack)
+        self.pack_unit = "working_days" if self.calendar.working else "calendar_days"
+
+    def planner(self, g: RuleGraph, held: set[str]) -> Planner:
+        return Planner(g, held, unit=self.pack_unit, convert=self._convert)
+
+    def _convert(self, from_unit: str, start: int, days: int) -> int | None:
+        if from_unit == "calendar_days" and self.pack_unit == "working_days":
+            return self.calendar.calendar_to_working(self.today(), start, days)
+        return None
 
     def today(self) -> dt.date:
         return self._today or dt.datetime.now(self.tz).date()
@@ -214,7 +223,8 @@ class Tools:
         cut: set[str] = set()
         for r in rows:
             if r["id"] not in nodes:
-                nodes[r["id"]] = Node(r["id"], r["label"], r["name"], r["days"], dict(r["props"]))
+                nodes[r["id"]] = Node(r["id"], r["label"], r["name"], r["days"], dict(r["props"]),
+                                      days_unit=(r["props"] or {}).get("days_unit"))
             src, dst, typ = r["path"][-2], r["path"][-1], r["hop_types"][-1]
             edges.setdefault((src, dst, typ), Edge(src, dst, typ, dict(r["hop"] or {})))
             if r["label"] == "Document" and r["depth"] == depth and r["out_requires"] > 0:
@@ -235,7 +245,7 @@ class Tools:
         g, rows, scheme = self.build_rule_graph(scheme_id, depth, trace)
         holdings = memory.holdings(student_id, trace) if held is None else [{"doc_id": h} for h in held]
         held_ids = {h["doc_id"] for h in holdings}
-        p = Planner(g, held_ids)
+        p = self.planner(g, held_ids)
         fin = p.finish(scheme_id)
         dl = self._deadline(student_id, scheme, trace)
         deadline = dt.date.fromisoformat(dl["date"]) if dl["date"] else None
@@ -257,10 +267,12 @@ class Tools:
                     "held": nid in held_ids, "needed": nid in needed, "on_critical": nid in crit_set,
                     "days_source": _days_source(n.props), "note": n.props.get("note"),
                     "hidden_below": nid in g.cut}
+            item["days_unit"] = n.days_unit or self.pack_unit
             if n.label == "Document" and nid in needed:
                 st = p.start_of(nid)
                 f = p.finish(nid)
-                item.update({"start": st.lb, "end": f.lb, "exact": f.exact})
+                # span = this step's own length in the pack's unit (a calendar-day limit converted to working days)
+                item.update({"start": st.lb, "end": f.lb, "exact": f.exact, "span": f.lb - st.lb})
             if n.label == "AnyOf":
                 item["satisfied"] = p.satisfied(nid)
                 item["chosen"] = p._choice.get(nid)
@@ -271,9 +283,12 @@ class Tools:
         start_today = []
         for d in ready:
             n = g.nodes[d]
-            start_today.append({"id": d, "name": n.name, "days": n.days,
+            start_today.append({"id": d, "name": n.name, "days": n.days, "days_unit": n.days_unit or self.pack_unit,
+                                "span": p.finish(d).lb - p.start_of(d).lb,
                                 "office_name": first_row[d]["office_name"] if d in first_row else None,
-                                "reduction": reduction_if_held(g, held_ids, d), "on_critical": d in crit_set,
+                                "reduction": reduction_if_held(g, held_ids, d, unit=self.pack_unit,
+                                                               convert=self._convert),
+                                "on_critical": d in crit_set,
                                 "path": first_row[d]["path"] if d in first_row else [scheme_id, d]})
         start_today.sort(key=lambda s: (-s["reduction"], not s["on_critical"], -(s["days"] or 0), s["id"]))
         # graph cross-check: chain_days.cypher must agree with the planner on all-of chains
@@ -282,6 +297,7 @@ class Tools:
         chain_rows = self._q("chain_days", {"scheme_id": scheme_id, "held": sorted(held_ids), "depth": depth,
                                             "limit": 5}, trace)
         chain_max = chain_rows[0]["days"] if chain_rows else 0
+        # chain_days.cypher sums the raw legal numbers, so compare it with the planner on raw numbers (no unit change)
         planner_allof = Planner(allof, held_ids).finish(scheme_id).lb
         max_depth_rows = self._q("prerequisites", {"scheme_id": scheme_id, "depth": MAX_DEPTH}, trace)
         max_depth = max((r["depth"] for r in max_depth_rows), default=0)

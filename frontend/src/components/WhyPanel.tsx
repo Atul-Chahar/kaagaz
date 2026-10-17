@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { api, ApiError, type Plan, type PlanItem } from '../api'
-import { fmtDate, fmtDays, hostOf, shortName } from '../format'
+import { fmtDate, hostOf, legalTime, shortName } from '../format'
 import { Cypher, Loading, OutcomeBadge, StateBox } from './common'
 
 type Explain = Awaited<ReturnType<typeof api.explain>>
@@ -57,7 +57,7 @@ export default function WhyPanel({ schemeId, item, plan, onClose, onToggle, pend
 
         <dl className="kv">
           <dt>Legal time</dt>
-          <dd className="days">{days !== null ? `${fmtDays(days, plan.day_unit)}` : <span className="tag blue">No official time limit found</span>}</dd>
+          <dd className="days">{days !== null ? legalTime(days, item.days_unit, plan.day_unit, item.span) : <span className="tag blue">No official time limit found</span>}</dd>
           <dt>Issued by</dt>
           <dd>{item.office_name ?? 'Not stated in the saved sources'}</dd>
           <dt>Status</dt>
@@ -100,7 +100,7 @@ export default function WhyPanel({ schemeId, item, plan, onClose, onToggle, pend
               ))}
               {ds && (
                 <li>
-                  <div className="from-to">Legal time for {item.name}: {fmtDays(days, plan.day_unit)}</div>
+                  <div className="from-to">Legal time for {shortName(item.name)}: {legalTime(days, item.days_unit, plan.day_unit, item.span)}</div>
                   <blockquote>"{ds.excerpt}"</blockquote>
                   <div className="src">
                     <a href={ds.source_url} target="_blank" rel="noreferrer">{ds.source_title}</a>

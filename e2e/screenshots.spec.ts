@@ -36,9 +36,11 @@ for (const v of VARIANTS) {
       await prep(page, v.theme)
       await example(page)
       await page.waitForTimeout(600)
+      await page.evaluate(() => window.scrollTo(0, 0))
       await page.screenshot({ path: `${OUT}/chain-depth1-${tag}.png`, fullPage: true, animations: 'disabled' })
       await page.getByTestId('depth-2').click()
       await page.waitForTimeout(600)
+      await page.evaluate(() => window.scrollTo(0, 0))
       await page.screenshot({ path: `${OUT}/chain-depth2-${tag}.png`, fullPage: true, animations: 'disabled' })
       await page.locator('[data-testid^="slip-"]').first().click()
       await expect(page.getByTestId('why-panel').getByTestId('why-source').first()).toBeVisible()
@@ -58,8 +60,21 @@ for (const v of VARIANTS) {
       await expect(page.getByTestId('stamp')).toBeVisible()
       await expect(page.getByTestId('alternatives')).toBeVisible()
       await page.waitForTimeout(600)
+      await page.evaluate(() => window.scrollTo(0, 0))
       await page.screenshot({ path: `${OUT}/chain-late-${tag}.png`, fullPage: true, animations: 'disabled' })
       await request.delete(`/api/students/${s}`)
+    })
+
+    test(`company ${tag}`, async ({ page }) => {
+      await prep(page, v.theme)
+      await page.goto('/#/')
+      await page.getByTestId('pack-in-ka-company').click()
+      await page.getByTestId('load-example').click()
+      await expect(page.getByTestId('alternatives')).toBeVisible()
+      await page.getByTestId('depth-6').click()
+      await page.waitForTimeout(600)
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await page.screenshot({ path: `${OUT}/company-chain-${tag}.png`, fullPage: true, animations: 'disabled' })
     })
 
     test(`ask ${tag}`, async ({ page }) => {

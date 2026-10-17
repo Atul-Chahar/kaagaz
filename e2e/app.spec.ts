@@ -140,3 +140,21 @@ test('390 px wide: no screen scrolls sideways (the timeline scrolls inside its o
     expect(await page.evaluate(() => document.documentElement.scrollWidth), `chain depth ${d}`).toBeLessThanOrEqual(390)
   }
 })
+
+test('second rule pack: switch to the company pack and load the Example founder', async ({ page, request }) => {
+  const packs = await (await request.get('/api/packs')).json()
+  expect(packs.map((p: { id: string }) => p.id)).toContain('in-ka-company')
+  await page.goto('/#/')
+  await page.getByTestId('pack-in-ka-company').click()
+  await expect(page.getByRole('heading', { name: 'Pick a goal' })).toBeVisible()
+  await page.getByTestId('load-example').click()
+  await expect(page.getByTestId('stamp')).toBeVisible()
+  await expect(page.getByText('Example founder (made up, not a real person)')).toBeVisible()
+  const ex = await (await request.get('/api/students/example-student-in-ka-company?pack=in-ka-company')).json()
+  const scheme = ex.data.targets[0].scheme_id
+  const max = (await (await request.get(`/api/plan?student_id=example-student-in-ka-company&scheme_id=${scheme}&depth=8&remember=false&pack=in-ka-company`)).json()).data.max_depth
+  await page.getByTestId(`depth-${max}`).click()
+  const plan = (await (await request.get(`/api/plan?student_id=example-student-in-ka-company&scheme_id=${scheme}&depth=${max}&remember=false&pack=in-ka-company`)).json()).data
+  await expect(page.getByTestId('stamp')).toContainText(plan.verdict.stamp)
+  await expectNoSeriousA11y(page, 'company chain')
+})

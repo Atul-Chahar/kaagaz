@@ -29,7 +29,7 @@ ROOT = BENCH.parent
 sys.path.insert(0, str(ROOT / "backend"))
 
 from kaagaz import agent, memory
-from kaagaz.planner import MAX_DEPTH, Planner, verdict
+from kaagaz.planner import MAX_DEPTH, verdict
 from kaagaz.tools import Tools, Trace
 
 PACK = "in-ka-scholarships"
@@ -103,7 +103,7 @@ def score(system: str, answers: list[dict], questions: list[dict]) -> dict:
 def kaagaz_deterministic(t: Tools, q: dict) -> dict:
     g, _rows, _s = t.build_rule_graph(q["scheme_id"], MAX_DEPTH, Trace())
     held = set(q.get("held", []))
-    p = Planner(g, held)
+    p = t.planner(g, held)
     f = p.finish(q["scheme_id"])
     if q["type"] == "list_documents":
         # "every document I need" includes the ones the student already holds, if they are in the chain

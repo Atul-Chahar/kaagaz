@@ -15,6 +15,7 @@ result is marked inexact, with the unknown documents listed.
 from __future__ import annotations
 
 import datetime as dt
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -28,6 +29,8 @@ class Node:
     name: str
     days: int | None = None
     props: dict = field(default_factory=dict, compare=False, hash=False)
+    # unit of `days` when it differs from the unit the pack counts in ("working_days" / "calendar_days"); None = same
+    days_unit: str | None = None
 
 
 @dataclass(frozen=True)
@@ -63,10 +66,18 @@ class CycleError(ValueError):
     pass
 
 
+# convert(from_unit, start, days) -> the same duration in the pack's unit, for a step starting `start` pack-units
+# from today. Returns None when it cannot be converted exactly (then the planner keeps a safe lower bound).
+Converter = Callable[[str, int, int], int | None]
+
+
 class Planner:
-    def __init__(self, graph: RuleGraph, held: set[str] | frozenset[str]):
+    def __init__(self, graph: RuleGraph, held: set[str] | frozenset[str], unit: str | None = None,
+                 convert: Converter | None = None):
         self.g = graph
         self.held = set(held)
+        self.unit = unit
+        self.convert = convert
         self._memo: dict[str, Finish] = {}
         self._choice: dict[str, str | None] = {}   # AnyOf id -> chosen option id (None if satisfied)
         self._via: dict[str, str | None] = {}      # node id -> child id that sets its finish
@@ -92,13 +103,25 @@ class Planner:
         else:
             best = self._max_children(nid, [e for e in kids if e.type == "REQUIRES"])
             if node.label == "Document":
-                days = node.days
-                res = Finish((days or 0) + best.lb, best.exact and days is not None)
+                days, exact_days = self._days(node, best.lb)
+                res = Finish((days or 0) + best.lb, best.exact and days is not None and exact_days)
             else:
                 res = best
         self._stack.discard(nid)
         self._memo[nid] = res
         return res
+
+    def _days(self, node: Node, start: int) -> tuple[int | None, bool]:
+        """The document's legal time in the pack's unit, and whether that number is exact."""
+        if node.days is None or not node.days_unit or not self.unit or node.days_unit == self.unit:
+            return node.days, True
+        if self.convert is not None:
+            converted = self.convert(node.days_unit, start, node.days)
+            if converted is not None:
+                return converted, True
+        if node.days_unit == "working_days" and self.unit == "calendar_days":
+            return node.days, False  # N working days take at least N calendar days: a safe lower bound
+        return 0, False  # no safe bound without a calendar: count nothing, mark unknown
 
     def _max_children(self, nid: str, kids: list[Edge]) -> Finish:
         best, via, exact = 0, None, True
@@ -242,8 +265,8 @@ def _d(n: int) -> str:
     return "DAY" if n == 1 else "DAYS"
 
 
-def reduction_if_held(graph: RuleGraph, held: set[str], doc: str) -> int:
+def reduction_if_held(graph: RuleGraph, held: set[str], doc: str, **kw) -> int:
     """How many days the critical path would drop if this document were already in hand."""
-    base = Planner(graph, held).finish(graph.root).lb
-    after = Planner(graph, set(held) | {doc}).finish(graph.root).lb
+    base = Planner(graph, held, **kw).finish(graph.root).lb
+    after = Planner(graph, set(held) | {doc}, **kw).finish(graph.root).lb
     return base - after

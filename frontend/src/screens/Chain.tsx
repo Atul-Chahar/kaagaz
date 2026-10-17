@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { api, ApiError, type Plan, type PlanItem, type ToolResponse } from '../api'
 import { Loading, StateBox, Stamp, TraceTable } from '../components/common'
-import { fmtDate, fmtDays, hostOf, plural, shortName } from '../format'
+import { fmtDate, fmtDays, hostOf, legalTime, plural, shortName } from '../format'
 import { go, type Session } from '../nav'
 import { verdictSentence } from '../labels'
 import { usePackUi } from '../packui'
@@ -13,6 +13,7 @@ type Cache = Record<number, ToolResponse<Plan>>
 function deadlineLabel(p: Plan): string {
   const s = p.scheme
   if (p.deadline.source === 'student') return 'your own date'
+  if (p.deadline.source === 'example_own_date') return "the example's own made-up date"
   if (p.deadline.source === 'last_published_window') return `last published window (${s.window_year ?? ''})`
   if (p.deadline.source === 'published_window') return `published window ${s.window_year ?? ''}`
   return 'none published'
@@ -128,7 +129,7 @@ export default function Chain({ session, setSession }: { session: Session | null
     <div>
       <div className="chain-head">
         <div>
-          <p className="eyebrow">{session.example ? 'Example student (made up, not a real person)' : 'Your chain'}</p>
+          <p className="eyebrow">{session.example ? `${session.label ?? 'Example student'} (made up, not a real person)` : 'Your chain'}</p>
           <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>{plan.scheme.name}</h1>
           <p className="who">{plan.scheme.authority}{plan.scheme.portal ? ` · ${plan.scheme.portal}` : ''}</p>
         </div>
@@ -150,7 +151,7 @@ export default function Chain({ session, setSession }: { session: Session | null
             <p className="note" style={{ marginTop: 8 }}>Holidays after {fmtDate(plan.calendar_covers_until)} are not published yet, so the working days left may be slightly fewer than shown.</p>
           )}
           {plan.day_unit === 'working days' && (
-            <p className="note" style={{ marginTop: 8 }}>Sakala time limits count working days. Sundays, second and fourth Saturdays and the {plural(plan.holidays_ahead.length, 'government holiday', 'government holidays')} before the deadline are not counted.</p>
+            <p className="note" style={{ marginTop: 8 }}>The legal time limits here count working days. Sundays, second and fourth Saturdays and the {plural(plan.holidays_ahead.length, 'government holiday', 'government holidays')} before the deadline are not counted. A limit given in calendar days is converted on the same calendar.</p>
           )}
         </div>
         <div className="stamp-slot">
@@ -203,7 +204,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                     <div className="doc" title={s.name}>{shortName(s.name)}</div>
                     <div className="sub">
                       <span>{s.office_name ?? 'Issuing office not in the sources'}</span>
-                      <span className="days">{s.days ? `${fmtDays(s.days, plan.day_unit)} by law` : 'No official time limit found'}</span>
+                      <span className="days">{s.days ? `${legalTime(s.days, s.days_unit, plan.day_unit, s.span)} by law` : 'No official time limit found'}</span>
                       {s.on_critical && <span className="tag late">critical path</span>}
                       {s.reduction > 0 && <span>Cuts {fmtDays(s.reduction, plan.day_unit)} off your chain</span>}
                     </div>

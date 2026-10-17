@@ -140,6 +140,34 @@
     "text_chars": 56573
   },
   {
+    "id": "cca-how-to-get-dsc",
+    "url": "https://cca.gov.in/digital_signature.html",
+    "final_url": "https://cca.gov.in/digital_signature.html",
+    "title": "Controller of Certifying Authorities: How to get Digital Signature Certificate",
+    "retrieved_at": "2026-10-17",
+    "sha256": "0abd2b2163aaf33a29a179c5def829d25c2f620078598784e40392b616b55213",
+    "file": "raw/cca-how-to-get-dsc.html",
+    "text_file": "text/cca-how-to-get-dsc.txt",
+    "content_type": "text/html",
+    "size": 43934,
+    "large_not_in_git": false,
+    "text_chars": 6310
+  },
+  {
+    "id": "cgst-act-section-31",
+    "url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/acts/2017_CGST_act/active/chapter7/section31_v1.00.html",
+    "final_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/acts/2017_CGST_act/active/chapter7/section31_v1.00.html",
+    "title": "CBIC: Central Goods and Services Tax Act, 2017 - Section 31. Tax invoice",
+    "retrieved_at": "2026-10-17",
+    "sha256": "c71ce18adb562e5be6fcc3305fdb56ca4544df787755e0f9516f21f3c604023b",
+    "file": "raw/cgst-act-section-31.html",
+    "text_file": "text/cgst-act-section-31.txt",
+    "content_type": "text/plain",
+    "size": 21027,
+    "large_not_in_git": false,
+    "text_chars": 7965
+  },
+  {
     "id": "cgst-rule-8",
     "url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule8_v1.00.html",
     "final_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule8_v1.00.html",
@@ -210,6 +238,20 @@
     "text_chars": 26864
   },
   {
+    "id": "ekarmika-home",
+    "url": "https://www.ekarmika.karnataka.gov.in/ekarmika/static/home.aspx",
+    "final_url": "https://www.ekarmika.karnataka.gov.in/ekarmika/static/home.aspx",
+    "title": "e-Karmika: Karnataka Shops and Commercial Establishments (Labour Department, Govt of Karnataka) - Home",
+    "retrieved_at": "2026-10-17",
+    "sha256": "f368d019b635d060df4469d1a941818ecad99916ace6404f2301bf9f3a8296b6",
+    "file": "raw/ekarmika-home.html",
+    "text_file": "text/ekarmika-home.txt",
+    "content_type": "text/html",
+    "size": 52831,
+    "large_not_in_git": false,
+    "text_chars": 3346
+  },
+  {
     "id": "itd-instant-epan-help",
     "url": "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/instant-e-pan",
     "final_url": "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/instant-e-pan",
@@ -224,6 +266,20 @@
     "text_chars": 14006
   },
   {
+    "id": "ka-shops-act-1961-wb",
+    "url": "https://web.archive.org/web/20200131014450id_/http://labour.kar.nic.in:80/labour/karshopscommercial-1961.htm",
+    "final_url": "https://web.archive.org/web/20200131014450id_/http://labour.kar.nic.in:80/labour/karshopscommercial-1961.htm",
+    "title": "Department of Labour, Govt of Karnataka: The Karnataka Shops and Commercial Establishments Act, 1961 [Wayback copy of labour.kar.nic.in]",
+    "retrieved_at": "2026-10-17",
+    "sha256": "c376a75b4b27b75f648054014b85c75675703ac2a0d2a69552f1e00443584957",
+    "file": "raw/ka-shops-act-1961-wb.html",
+    "text_file": "text/ka-shops-act-1961-wb.txt",
+    "content_type": "text/html",
+    "size": 13959,
+    "large_not_in_git": false,
+    "text_chars": 2286
+  },
+  {
     "id": "mca-spice-plus-faqs-wb",
     "url": "https://web.archive.org/web/20230605171434id_/https://www.mca.gov.in/Ministry/pdf/SPICe+and_linked_filings_FAQs_V3_13%20Jan_2022_updated.pdf",
     "final_url": "https://web.archive.org/web/20230605171434id_/https://www.mca.gov.in/Ministry/pdf/SPICe+and_linked_filings_FAQs_V3_13%20Jan_2022_updated.pdf",
@@ -236,20 +292,6 @@
     "size": 382467,
     "large_not_in_git": false,
     "text_chars": 64804
-  },
-  {
-    "id": "mca-spice-plus-help-wb",
-    "url": "https://web.archive.org/web/20210306171835id_/http://www.mca.gov.in/Ministry/pdf/SPICe+_help.pdf",
-    "final_url": "https://web.archive.org/web/20210306171835id_/http://www.mca.gov.in/Ministry/pdf/SPICe+_help.pdf",
-    "title": "MCA: SPICe+ help (instruction kit) [Wayback copy of mca.gov.in]",
-    "retrieved_at": "2026-10-17",
-    "sha256": "2a7e524b5328cb98da3154e9a52dc27a48150dd2542b53075a6e4a99565c37fe",
-    "file": "raw/mca-spice-plus-help-wb.pdf",
-    "text_file": "text/mca-spice-plus-help-wb.txt",
-    "content_type": "application/pdf",
-    "size": 1048576,
-    "large_not_in_git": false,
-    "text_chars": 0
   },
   {
     "id": "npci-nach-faq-customers-wb",

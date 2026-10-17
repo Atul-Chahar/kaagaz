@@ -161,3 +161,25 @@ def test_verdict_unknown_is_a_lower_bound_never_on_time():
 
 def test_verdict_without_deadline():
     assert verdict(Finish(12, True), None).kind == "no_deadline"
+
+
+
+def test_working_days_in_a_calendar_day_pack_are_a_lower_bound():
+    g = graph([Node("A", "Document", "A", 40, days_unit="working_days"), doc("B", 30)],
+              [("S", "A", "REQUIRES"), ("S", "B", "REQUIRES")])
+    assert Planner(g, set(), unit="calendar_days").finish("S") == Finish(40, False)
+
+
+def test_calendar_days_in_a_working_day_pack_are_converted_or_marked_unknown():
+    g = graph([Node("A", "Document", "A", 30, days_unit="calendar_days"), doc("B", 5)],
+              [("S", "A", "REQUIRES"), ("A", "B", "REQUIRES")])
+    # without a calendar there is no safe bound: count nothing for A and mark the answer as a lower bound
+    assert Planner(g, set(), unit="working_days").finish("S") == Finish(5, False)
+    # with a converter the step is exact; the converter sees the step's start (after B: 5)
+    seen = []
+
+    def convert(unit, start, days):
+        seen.append((unit, start, days))
+        return 21
+    assert Planner(g, set(), unit="working_days", convert=convert).finish("S") == Finish(26, True)
+    assert seen == [("calendar_days", 5, 30)]

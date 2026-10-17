@@ -310,3 +310,17 @@ def test_alternatives_rank_reachable_schemes(student):
     assert kinds == sorted(kinds, reverse=True)  # every "can make it" option is listed first
     for a, b in itertools.pairwise(o for o in opts if o["verdict"]["kind"] == "on_time"):
         assert a["verdict"]["margin"] >= b["verdict"]["margin"]
+
+
+def test_company_pack_converts_calendar_days_into_working_days_exactly():
+    graph.seed_pack("in-ka-company")
+    t = Tools("in-ka-company", today=dt.date(2026, 10, 17))
+    assert t.pack_unit == "working_days"
+    held = {"aadhaar", "pan-card", "co-dsc", "co-moa-aoa", "co-registered-office-proof",
+            "co-spice-incorporation-certificate", "co-din", "co-company-pan", "co-company-tan", "co-bank-current-account"}
+    p = t.plan_core("x-probe", "in-company-ready-to-hire", MAX_DEPTH, Trace(), held=held, save=False)
+    pt = next(i for i in p["items"] if i["id"] == "co-professional-tax-ka")
+    # 30 calendar days from 17 Oct 2026 end on 16 Nov 2026; count the working days in that span on the pack calendar
+    assert pt["end"] == t.calendar.days_between(dt.date(2026, 10, 17), dt.date(2026, 11, 16))
+    assert p["verdict"]["exact"] is True
+    assert p["chain_check"]["agree"]

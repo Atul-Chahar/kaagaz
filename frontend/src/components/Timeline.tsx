@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { Plan, PlanItem } from '../api'
-import { fmtDate, fmtDays, shortName } from '../format'
+import { fmtDate, fmtDays, legalTime, shortName } from '../format'
 
 const ROW = 56
 const TOP = 64
@@ -56,7 +56,8 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
   const geom = (r: PlanItem, i: number) => {
     const x = 12 + (r.start ?? 0) * px
     const known = r.days !== null && r.days !== undefined
-    const w = known ? Math.max(r.days! * px, 6) : Math.max(0.8 * px, 14)
+    const len = r.span ?? r.days ?? 0 // length in the plan's unit (a calendar-day limit is converted)
+    const w = known ? Math.max(len * px, 6) : Math.max(0.8 * px, 14)
     return { x, w, y: TOP + i * ROW, known }
   }
 
@@ -108,7 +109,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
             const g = geom(r, i)
             const inside = g.w >= 140
             // the accessible name starts with exactly the visible text (short name, then days), then adds detail
-            const label = `${shortName(r.name)} ${g.known ? `${fmtDays(r.days, plan.day_unit)} by law` : 'unknown time, no official time limit found'}. Starts ${r.start === 0 ? 'today' : `after ${fmtDays(r.start ?? 0, plan.day_unit)}`}.${r.on_critical ? ' On the critical path.' : ''} Full name: ${r.name}.`
+            const label = `${shortName(r.name)} ${g.known ? `${legalTime(r.days, r.days_unit, plan.day_unit, r.span)} by law` : 'unknown time, no official time limit found'}. Starts ${r.start === 0 ? 'today' : `after ${fmtDays(r.start ?? 0, plan.day_unit)}`}.${r.on_critical ? ' On the critical path.' : ''} Full name: ${r.name}.`
             const cls = `slip ${r.on_critical ? 'crit' : ''} ${g.known ? '' : 'unknown'} ${entering.has(r.id) ? 'enter' : ''}`
             return (
               <div key={r.id} role="listitem" style={{ display: 'contents' }}>
@@ -116,7 +117,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
                   onClick={e => onOpen(r.id, e.currentTarget)} aria-label={label} data-testid={`slip-${r.id}`} data-critical={r.on_critical}>
                   {inside && <>
                     <span className="t">{shortName(r.name)}</span>{' '}
-                    <span className="d">{g.known ? fmtDays(r.days, plan.day_unit) : 'unknown time'}</span>
+                    <span className="d">{g.known ? legalTime(r.days, r.days_unit, plan.day_unit, r.span) : 'unknown time'}</span>
                   </>}
                 </button>
                 {!inside && (
@@ -124,7 +125,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
                     onClick={e => onOpen(r.id, e.currentTarget)}
                     style={{ position: 'absolute', left: g.x + Math.max(g.w, 14) + 8, top: g.y + 4, border: 0, background: 'transparent', textAlign: 'left', cursor: 'pointer', padding: 0, maxWidth: 260 }}>
                     <span style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, whiteSpace: 'nowrap' }}>{shortName(r.name)}</span>
-                    <span className="days" style={{ fontSize: '0.7rem', color: g.known ? 'var(--ink-soft)' : 'var(--stamp-blue)' }}>{g.known ? fmtDays(r.days, plan.day_unit) : 'unknown time'}</span>
+                    <span className="days" style={{ fontSize: '0.7rem', color: g.known ? 'var(--ink-soft)' : 'var(--stamp-blue)' }}>{g.known ? legalTime(r.days, r.days_unit, plan.day_unit, r.span) : 'unknown time'}</span>
                   </button>
                 )}
               </div>

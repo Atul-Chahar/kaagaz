@@ -57,3 +57,13 @@ def test_complete_only_while_holiday_list_covers_deadline():
     c = cal(cover="2026-12-31")
     assert c.complete_until(dt.date(2026, 12, 31))
     assert not c.complete_until(dt.date(2027, 1, 31))
+
+
+def test_calendar_to_working_counts_working_days_inside_the_span():
+    c = cal(holidays=["2026-10-20"])
+    t = dt.date(2026, 10, 17)
+    # 14 calendar days from today end on 31 Oct; that span holds 9 working days (see the test above)
+    assert c.calendar_to_working(t, 0, 14) == c.days_between(t, dt.date(2026, 10, 31))
+    # starting 2 working days later (21 Oct)
+    assert c.calendar_to_working(t, 2, 10) == c.days_between(t, dt.date(2026, 10, 31)) - 2
+    assert WorkCalendar.from_pack({}).calendar_to_working(t, 0, 5) is None

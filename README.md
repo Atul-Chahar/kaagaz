@@ -95,7 +95,23 @@ Scheme ─────────> Document ─────────> AnyOf 
 Office ──────────────┘
 ```
 
-The current pack: 11 schemes, 41 documents, 10 "any one of" groups, 13 offices, 143 requirement rules.
+The scholarship pack: 11 schemes, 41 documents, 10 "any one of" groups, 13 offices, 143 requirement rules.
+
+## Global by design: a second rule pack
+
+The engine knows nothing about India. Countries, processes and calendars live in rule packs (`data/packs/<id>/`).
+A second pack, **starting a private limited company in Karnataka** (`in-ka-company`), runs on the same engine, the
+same queries and the same UI; switch packs on the Start screen and press **Load the Example founder**.
+
+- 2 goals ("ready to issue GST invoices", "ready to hire staff"), 13 documents, 3 "any one of" groups, 30 rules.
+- Legal times found: GST registration 7 working days (CGST Rule 9), Karnataka shops and establishments registration
+  7 working days (Sakala), professional tax registration 30 calendar days (Karnataka Tax on Professions Act s.5(3),
+  from a secondary copy because the official site was unreachable). No official time was found for MCA
+  incorporation (SPICe+), DIN, company PAN and TAN, DSC or the bank account, so those stay unknown.
+- Goals have no published deadline: the user sets their own date.
+- Units are never mixed. Each document stores `days_unit`. The 30 calendar days for professional tax are converted to
+  working days exactly on the sourced Karnataka calendar, starting from the day that step can really begin, and the UI
+  shows both ("30 calendar days (20 working days)").
 
 ## Cypher queries
 
