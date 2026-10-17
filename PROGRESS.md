@@ -15,8 +15,8 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 11. [x] Full test suite, axe and screenshots passing; at least two design review rounds done.
 12. [x] Adversarial review: subagent reviews whole repo against spec in fresh context; gaps affecting correctness, honesty or hackathon requirements fixed.
 13. [x] Docs and submission package (section 11).
-14. [ ] Final `bash scripts/verify.sh` run after the last change, output shown, ends with `VERIFY: ALL CHECKS PASSED`.
-15. [ ] `FINAL_REPORT.md` written and printed.
+14. [x] Final `bash scripts/verify.sh` run after the last change, output shown, ends with `VERIFY: ALL CHECKS PASSED`.
+15. [x] `FINAL_REPORT.md` written and printed.
 
 ## Stretch (only after 1 to 11 green)
 - [x] S1 Live deployment: BLOCKED for a live URL (no FalkorDB Cloud credentials or deploy token in the environment; no accounts created). docs/DEPLOY.md written with exact steps; docker compose stack tested locally.
