@@ -126,6 +126,34 @@
     "text_chars": 15083
   },
   {
+    "id": "cbic-gst-faq-registration",
+    "url": "https://cbic-gst.gov.in/pdf/faq-manual/faqs-registration.pdf",
+    "final_url": "https://cbic-gst.gov.in/pdf/faq-manual/faqs-registration.pdf",
+    "title": "CBIC: FAQs on Registration (GST)",
+    "retrieved_at": "2026-10-17",
+    "sha256": "974042b3e5d80cdb537e1c01ddb63786f4ab1d216b5769d55008c5a3aaa2d855",
+    "file": "raw/cbic-gst-faq-registration.pdf",
+    "text_file": "text/cbic-gst-faq-registration.txt",
+    "content_type": "application/pdf",
+    "size": 571812,
+    "large_not_in_git": false,
+    "text_chars": 56573
+  },
+  {
+    "id": "cgst-rule-9",
+    "url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule9_v1.00.html",
+    "final_url": "https://taxinformation.cbic.gov.in/content/html/tax_repository/gst/rules/cgst_rules/active/chapter3/rule9_v1.00.html",
+    "title": "CBIC: CGST Rules, 2017 - Rule 9. Verification of the application and approval",
+    "retrieved_at": "2026-10-17",
+    "sha256": "91ed96f327acffd2454a18d67a2bc3d386c77f263bcc15eaf0cc7695b13b0ee4",
+    "file": "raw/cgst-rule-9.html",
+    "text_file": "text/cgst-rule-9.txt",
+    "content_type": "text/plain",
+    "size": 24672,
+    "large_not_in_git": false,
+    "text_chars": 8733
+  },
+  {
     "id": "dfs-fi-6-4-2012-vol3",
     "url": "https://financialservices.gov.in/sites/default/files/order-notices/6412012-FI%2528%2520Vol.III%2529.pdf",
     "final_url": "https://financialservices.gov.in/sites/default/files/order-notices/6412012-FI%2528%2520Vol.III%2529.pdf",
@@ -180,6 +208,34 @@
     "size": 142708,
     "large_not_in_git": false,
     "text_chars": 14006
+  },
+  {
+    "id": "mca-spice-plus-faqs-wb",
+    "url": "https://web.archive.org/web/20230605171434id_/https://www.mca.gov.in/Ministry/pdf/SPICe+and_linked_filings_FAQs_V3_13%20Jan_2022_updated.pdf",
+    "final_url": "https://web.archive.org/web/20230605171434id_/https://www.mca.gov.in/Ministry/pdf/SPICe+and_linked_filings_FAQs_V3_13%20Jan_2022_updated.pdf",
+    "title": "MCA: SPICe+ and linked filings FAQs V3 (13 Jan 2022, updated) [Wayback copy of mca.gov.in]",
+    "retrieved_at": "2026-10-17",
+    "sha256": "e88d1102e405e5609c126c30cbd9b77c95d21301bd4620f0559c41aeb7372b55",
+    "file": "raw/mca-spice-plus-faqs-wb.pdf",
+    "text_file": "text/mca-spice-plus-faqs-wb.txt",
+    "content_type": "application/pdf",
+    "size": 382467,
+    "large_not_in_git": false,
+    "text_chars": 64804
+  },
+  {
+    "id": "mca-spice-plus-help-wb",
+    "url": "https://web.archive.org/web/20210306171835id_/http://www.mca.gov.in/Ministry/pdf/SPICe+_help.pdf",
+    "final_url": "https://web.archive.org/web/20210306171835id_/http://www.mca.gov.in/Ministry/pdf/SPICe+_help.pdf",
+    "title": "MCA: SPICe+ help (instruction kit) [Wayback copy of mca.gov.in]",
+    "retrieved_at": "2026-10-17",
+    "sha256": "2a7e524b5328cb98da3154e9a52dc27a48150dd2542b53075a6e4a99565c37fe",
+    "file": "raw/mca-spice-plus-help-wb.pdf",
+    "text_file": "text/mca-spice-plus-help-wb.txt",
+    "content_type": "application/pdf",
+    "size": 1048576,
+    "large_not_in_git": false,
+    "text_chars": 0
   },
   {
     "id": "npci-nach-faq-customers-wb",

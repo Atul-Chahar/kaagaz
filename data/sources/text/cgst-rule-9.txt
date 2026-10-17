@@ -1,0 +1,391 @@
+Rule 9
+
+**Rule 9.
+        Verification of the application and approval.
+
+-
+
+(1)
+      The application shall be forwarded to the proper officer who shall examine
+      the application and the accompanying documents and if the same are found
+      to be in order, approve the grant of registration to the applicant within
+      a period of
+
+1
+[seven]
+      working days from the date of submission of the application:
+
+2
+[Provided
+
+that
+      where
+
+-
+
+(a)
+      a person, other than a person notified under sub-section (6D) of
+
+section
+        25
+, fails to under go authentication of Aadhaar number as specified
+      in sub-rule (4A) of
+
+rule
+        8
+
+or does not opt for authentication of Aadhaar
+      number; or
+
+7
+[(aa)
+      a person, who has undergone authentication of Aadhaar number as specified
+      in sub-rule (4A) of
+
+rule
+        8
+, is identified on the common portal, based on data analysis and
+      risk parameters, for carrying out physical verification of places of
+      business; or]
+
+(b)
+      the proper officer, with the approval of an officer
+
+authorised
+
+by
+      the Commissioner not below the rank of Assistant Commissioner, deems it
+      fit to carry out physical verification of places of business,
+
+the
+      registration shall be granted within thirty days of submission of
+      application, after physical verification of the place of business 
+9
+[****],
+      in the manner provided under
+
+rule
+        25
+
+and verification of such documents as the
+      proper officer may deem
+
+fit;
+
+]
+
+(2)
+      Where the application submitted under
+
+rule
+        8
+
+is found to be deficient, either in terms of any
+      information or any document required to be furnished under the said rule,
+      or where the proper officer requires any clarification with regard to any
+      information provided in the application or documents furnished therewith,
+      he may issue a notice to the applicant electronically in
+
+FORM
+          GST REG-03
+
+within a period of 
+3
+[seven]
+      working days from the date of submission of the application and the
+      applicant shall furnish such clarification, information or documents
+      electronically, in
+
+FORM
+          GST REG-04
+, within a period of seven working days from
+      the date of the receipt of such notice.
+
+4
+[
+Provided
+
+that
+      where
+
+-
+
+(a)
+      a person, other than a person notified under sub-section (6D) of
+
+section
+        25
+, fails to undergo authentication of Aadhaar number as specified
+      in sub-rule (4A) of
+
+rule
+        8
+
+or does not opt for authentication of Aadhaar
+      number; or
+
+8
+[(aa)a
+      person, who has undergone authentication of Aadhaar number as specified in
+      sub-rule (4A) of
+
+rule
+        8
+, is identified on the common portal, based on data analysis and
+      risk parameters, for carrying out physical verification of places of
+      business; or]
+
+(b)
+      the proper officer, with the approval of an officer
+
+authorised
+
+by
+      the Commissioner not below the rank of Assistant Commissioner, deems it
+      fit to carry out physical verification of places of business,
+
+the
+      notice in
+
+FORM
+          GST REG-03
+
+may be issued not later than
+      thirty days from the date of submission of the application.]
+
+Explanation
+.
+
+-
+
+For
+      the purposes of this sub-rule, the expression "clarification" includes
+      modification or correction of particulars declared in the application for
+      registration, other than Permanent Account Number, State, mobile
+
+number
+
+and
+      e-mail address declared in
+
+Part
+        A
+
+of
+
+FORM
+          GST REG-01
+
+.
+
+(3)
+      Where the proper officer is satisfied with the clarification, information
+      or documents furnished by the applicant, he may approve the grant of
+      registration to the applicant within a period of seven working days from
+      the date of the receipt of such clarification or information or documents.
+
+(4)
+      Where no reply is furnished by the applicant in response to the notice
+      issued under sub-rule (2) or where the proper officer is not satisfied
+      with the clarification, information or documents furnished, he
+
+5
+[may],
+      for reasons to be recorded in writing, reject such
+
+application
+
+and
+      inform the applicant electronically in
+
+FORM
+          GST REG-05
+.
+
+6
+[(5)
+      If the proper officer fails to take any action, -
+
+(a)
+      within a period of seven working days from the date of submission of the
+      application in cases where the person is not covered under proviso to
+      sub-rule (1); or
+
+(b)
+      within a period of thirty days from the date of submission of the
+      application in cases where a person is covered under proviso to sub-rule
+      (1); or
+
+(c)
+      within a period of seven working days from the date of the receipt of the
+      clarification, information or documents furnished by the applicant under
+      sub-rule (2), the application for grant of registration shall be deemed to
+      have been approved.]
+
+        **Kindly also refer to 
+Notification
+          No. 14/2021
+
+–
+
+CT
+
+dated
+
+1
+st
+ May,
+          2021(w.e.f. 15.04.2021) and 
+Notification
+          No. 24/2021
+
+–
+
+CT
+
+dated
+
+1
+st
+ Jun,
+          2021(w.e.f. 30.05.2021)
+
+1.
+        Substituted vide
+
+Notification
+          No.94/2020
+
+- CT dated. 22.12.2020 for "three"
+
+2.
+        Substituted vide
+
+Notification
+          No.94/2020
+
+- CT dated. 22.12.2020 for "Provided
+        that where a person, other than a person notified under sub-section (6D)
+        of section 25, fails to under go authentication of Aadhaar number as
+        specified in sub-rule (4A) of rule 8 or does not opt for authentication
+        of Aadhaar number, the registration shall be granted only after physical
+        verification of the place of business in the presence of the said
+        person, in the manner provided under rule 25:
+
+Provided
+        further that the proper officer may, for reasons to be recorded in
+        writing and with the approval of an officer not below the rank of Joint
+        Commissioner, in lieu of the physical verification of the place of
+        business, carry out the verification of such documents as he may deem
+        fit."
+
+3.
+        Substituted vide
+
+Notification
+          No.94/2020 - CT
+
+dated. 22.12.2020 for "three".
+
+4.
+        Substituted vide
+
+Notification
+          No.94/2020
+
+- CT dated. 22.12.2020 for "Provided
+        that where a person, other than a person notified under sub-section (6D)
+        of section 25,fails to undergo authentication of Aadhaar number as
+        specified in sub-rule (4A)of rule 8 or does not opt for authentication
+        of Aadhaar number, the notice in
+
+FORM
+          GST REG-03
+
+may be issued not later than
+        twenty-one days from the date of submission of the application."
+
+Prior
+        to its substitution, the proviso was inserted by (w.e.f. 21.08.2020)
+        vide
+
+Notification
+          No. 62/2020
+
+- CT dated.20.08.2020).
+
+5.
+        Substituted (w.e.f. 21.08.2020) vide
+
+Notification
+          No.62/2020
+
+- CT dated. 20.08.2020 for "shall".
+
+6.
+        Substituted vide
+
+Notification
+          No.94/2020
+
+- CT dated. 22.12.2020 for "(5) If
+        the proper officer fails to take any action, -
+
+(a)
+        within a period of three working days from the date of submission of the
+        application in cases where a person successfully undergoes
+        authentication of Aadhaar number or is notified under subsection (6D) of
+        section 25; or
+
+(b)
+        within the
+
+time
+          period
+
+prescribed under the proviso to
+        sub-rule (2), in cases where a person, other than a person notified
+        under sub-section (6D) of section 25, fails to undergo authentication of
+        Aadhaar number as specified in sub-rule (4A) of rule 8; or
+
+(c)
+        within a period of twenty-one days from the date of submission of the
+        application in cases where a person does not opt for authentication of
+        Aadhaar
+
+number;
+
+or
+
+(d)
+        within a period of seven working days from the date of the receipt of
+        the clarification, information or documents furnished by the applicant
+        under sub-rule (2),
+
+the
+        application for grant of registration shall be deemed to have been
+        approved."
+
+7. Inserted
+        vide
+
+Notification
+          No. 26/2022-CT
+
+dated 26.12.2022.
+
+8.
+        Inserted vide
+
+Notification
+          No. 26/2022-CT
+
+dated 26.12.2022.
+
+9.
+        Omitted by 
+Notification
+          No. 38/2023-CT
+
+dated 04.08.2023 for "in the
+        presence of the said person".
