@@ -133,6 +133,8 @@ class Planner:
         for e in kids:
             f = self.finish(e.dst)
             exact = exact and f.exact
+            if self.satisfied(e.dst):
+                continue  # already held: never part of the critical path
             # strict > keeps the first child on ties; prefer an inexact child on a tie (it may be longer)
             if via is None or f.lb > best or (f.lb == best and not f.exact and self._memo[via].exact):
                 best, via = f.lb, e.dst

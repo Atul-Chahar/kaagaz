@@ -158,3 +158,8 @@ def test_sentence_checker_on_a_real_plan_rejects_wrong_numbers_and_invented_docu
     for bad in ("You are 25 days short.", "You have 28 days spare.", "You are 9 days short.", "You need a domicile certificate.",
                 "You also need a ration card."):
         assert not agent.check_sentence(bad, compact, names)["ok"], bad
+
+
+def test_bad_student_id_is_a_plain_422_not_a_crash():
+    r = client.delete("/api/students/BAD ID!")
+    assert r.status_code == 422 and "student_id" in r.json()["message"]

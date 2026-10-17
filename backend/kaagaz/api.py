@@ -53,6 +53,11 @@ async def falkordb_down(_req: Request, _exc: Exception):
         "message": "FalkorDB isn't reachable. Start it with `docker compose up -d`."})
 
 
+@app.exception_handler(ValueError)
+async def bad_value(_req: Request, exc: ValueError):
+    return JSONResponse(status_code=422, content={"error": "bad_arguments", "message": str(exc)})
+
+
 @app.exception_handler(ToolError)
 async def tool_error(_req: Request, exc: ToolError):
     return JSONResponse(status_code=422, content={"error": "bad_arguments", "message": str(exc)})

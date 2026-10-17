@@ -26,6 +26,13 @@ export function windowLine(s: Scheme): { text: string; cls: string } {
 }
 
 export function verdictSentence(p: Plan): string {
+  const base = verdictBase(p)
+  return p.hidden_more && p.depth < p.max_depth
+    ? `${base} Some steps are still hidden at this depth, so step deeper before you trust this.`
+    : base
+}
+
+function verdictBase(p: Plan): string {
   const v = p.verdict
   const u = p.day_unit
   const dl = p.deadline.date ? fmtDate(p.deadline.date) : ''

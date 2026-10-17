@@ -21,7 +21,7 @@ needs **21 working days** for it (Sakala time limit). PostMatric for OBC Student
 Needs Docker.
 
 ```bash
-git clone <this repo> kaagaz && cd kaagaz
+git clone https://github.com/Atul-Chahar/kaagaz.git && cd kaagaz
 docker compose up -d --build
 ```
 
@@ -66,10 +66,10 @@ One shared rules graph per rule pack, `kaagaz:rules:<pack-id>`:
 
 ```
 (:Pack {id, name, jurisdiction, version, timezone})
-(:Scheme {id, name, authority, portal, window_start, window_end, window_year, window_is_last_published,
+(:Scheme {id, name, authority, portal, window_start, window_end, window_year, window_is_last_published, window_renewals_only,
           window_source_url, window_source_title, window_retrieved_at, window_excerpt, window_confidence})
-(:Document {id, name, days, days_source_url, days_source_title, days_retrieved_at, days_excerpt, days_confidence,
-            service_days, validity, office, note})          // days may be null: no official time limit found
+(:Document {id, name, days, days_unit, days_source_url, days_source_title, days_retrieved_at, days_excerpt,
+            days_confidence, service_days, validity, office, note})   // days may be null: no official time limit found
 (:Office {id, name, level})
 (:AnyOf {id, label})                                         // "any one of these documents"
 (:Scheme)-[:REQUIRES {source_url, source_title, retrieved_at, excerpt, confidence, note, condition}]->(:Document|:AnyOf)
@@ -85,6 +85,7 @@ One graph per student, `kaagaz:student:<student-id>`:
 (:Student)-[:HOLDS]->(:Holding {doc_id, issued_on, added_at})
 (:Student)-[:TARGETS]->(:Target {scheme_id, deadline, deadline_source, added_at})
 (:Student)-[:PLANNED]->(:PlanSnapshot {at, scheme_id, verdict, critical_days, exact, json})
+(:Student)-[:APPLIES]->(:Applies {doc_id, added_at})   // "this conditional requirement applies to me"
 ```
 
 ```
@@ -159,7 +160,8 @@ relationship aliases are always bound; and the default 1 second query timeout is
 
 `algo.SPpaths` is not used for "fastest option": it returns the shortest chain under an option, but an option is
 ready only when all of its own prerequisites are done, so `fastest_option.cypher` takes the longest chain per option
-and then the smallest option.
+and then the smallest option. Every plan runs it for each open "any one of" group as a cross-check of the planner's
+choice (shown under "How this was computed"); the integration tests require them to agree.
 
 ## The agent and its tools
 
@@ -205,18 +207,20 @@ recall, invented documents per answer, verdict accuracy, first-step accuracy. `m
 **Latest LLM run: not run.** No LLM key was available while building, so there are no three-system numbers. The
 Benchmark page says "Benchmark not run yet. Add an LLM key and run `make bench`." until a real run exists.
 
-**Kaagaz planner on its own (no LLM, `make bench-deterministic`), 17 Oct 2026:** document recall 96%, 2.29 invented
-documents per answer, verdict accuracy 92% (12 of 13), first-step accuracy 22% (2 of 9). The results file lists all
-15 disagreements. Most come from rules that apply only to some students (for example "caste certificate for reserved
-category students"), which Kaagaz keeps as required because it does not know the student's category, and from "first
-step" questions where no official time limit decides the order. These numbers are shown as they came out; the
-planner was not tuned to the questions.
+**Kaagaz planner on its own (no LLM, `make bench-deterministic`), 17 Oct 2026:** document recall 93%, 1.43 invented
+documents per answer, verdict accuracy 92% (12 of 13), first-step accuracy 33% (3 of 9). The results file lists all 13
+disagreements with both answers. They come from which income or caste certificate a scheme's source names (a generic
+one or the Karnataka one), from "first step" questions where no official time limit decides the order, and from rules
+that apply only to some students (Kaagaz leaves those out unless the student says they apply, and the benchmark does
+not say). These numbers are shown as they came out; the planner was not tuned to the questions. An earlier run, before
+conditional rules were handled, is kept in `bench/results/` too.
 
 ## Data and integrity rules
 
 - Sources: the National Scholarship Portal, the Karnataka State Scholarship Portal and department pages, the Karnataka
   Sakala compendium of time limits (05-05-2026), the Karnataka 2026 holiday notification, UIDAI, RBI, NPCI and
-  district NIC pages. 51 saved sources, each with a SHA-256 hash, listed on the Sources page and in
+  district NIC pages, plus MCA, CBIC/GST, Labour and professional tax sources for the company pack. 60 saved sources,
+  each with a SHA-256 hash, listed on the Sources page and in
   `data/sources/index.json`. Files over 5 MB stay out of git (hash and extracted text are kept).
 - Every rule (requirement edge, processing time, application window, issuing office, holiday) stores
   `source_url`, `source_title`, `retrieved_at`, an `excerpt` of 25 words or fewer, and `confidence`
@@ -227,8 +231,9 @@ planner was not tuned to the questions.
 - Sakala limits are working days. Kaagaz counts working days to the deadline using the official 2026 holiday list and
   the Sundays plus second and fourth Saturdays rule. The 2027 list is not out, so for January 2027 deadlines the UI
   warns that the count may be slightly high.
-- The Example student is synthetic and labelled "Example student" everywhere. No personal data is stored except what
-  a user ticks, in their own graph, which they can delete (`DELETE /api/students/<id>`).
+- The Example student (and the Example founder in the company pack) is synthetic and labelled everywhere. Each
+  visitor gets a private copy. No personal data is stored except what a user ticks, in their own graph, which they
+  can delete (`DELETE /api/students/<id>`).
 
 How the pack was built: research subagents saved sources with `scripts/fetch_source.py` (robots.txt, 1 request per
 second per site, cache) and wrote fragments in `data/research/`; `scripts/build_pack.py` turns them into
@@ -238,11 +243,20 @@ second per site, cache) and wrote fragments in `data/research/`; `scripts/build_
 
 - Most full-depth verdicts are lower bounds, because many steps (proof of residence, bank account, Aadhaar seeding,
   NSP registration) have no official time limit.
-- Eligibility (category, income limit, marks) is not modelled. Rules that apply only to some students are kept as
-  required and labelled with their condition.
+- Eligibility (category, income limit, marks) is not modelled. Rules that apply only to some students ("only if you
+  live in a hostel", "only for reserved categories") are left out of the chain until the student says "This applies
+  to me"; that choice is saved in their own graph. Conditions true for everyone a pack models (a regular degree
+  student) are listed in the pack as assumptions.
+- One scheme (CSSS) has a 2026-27 window for renewals only. Kaagaz models a fresh application, so it shows "no
+  fresh-application window" for it instead of planning against the renewal date.
+- The "address proof" and "ID proof" steps for Karnataka certificates are categories: the sources do not list which
+  documents count, so Kaagaz cannot give a time for them and says so.
 - Karnataka requirement lists for Nadakacheri certificates come from Tumakuru district NIC pages; the state-wide list
   is a scanned Kannada image the audit cannot read.
-- One source is secondary (an SSP e-attestation FAQ hosted by Mangalore University) and is tagged in the UI.
+- Two sources are secondary and tagged in the UI: an SSP e-attestation FAQ hosted by Mangalore University, and the
+  PRS copy of the Karnataka Tax on Professions Act (the official sites were unreachable).
+- GST registration's 7 working days assume Aadhaar authentication; Rule 9 allows up to thirty days otherwise. The
+  Why panel says so.
 - Legal time limits are maximums; real offices can be faster or slower. Kaagaz plans against the legal limit.
 - No live deployment yet (no cloud credentials were available); `docs/DEPLOY.md` has the steps.
 - The three-system LLM benchmark has not been run (no key).
@@ -269,6 +283,10 @@ e2e/               Playwright + axe tests and screenshot capture
 bench/             questions, runner, results        scripts/  verify.sh seed.sh audit_data.py build_pack.py
 docs/              FEASIBILITY, DEMO_SCRIPT, BLOG_DRAFT, SUBMISSION, DEPLOY, DESIGN_REVIEW, screenshots/
 ```
+
+## Licence
+
+Code: MIT (see `LICENSE`). Saved government sources keep their own terms.
 
 ## AI disclosure
 

@@ -106,7 +106,7 @@ export default function Benchmark() {
                 <RunTable run={b.deterministic_run} />
                 {b.deterministic_run.disagreements && (
                   <p className="note" style={{ marginTop: 12 }} data-testid="det-disagreements">
-                    On {b.deterministic_run.disagreements.length} of {b.deterministic_run.questions} questions the graph's answer differs from the answer written from the sources. Each one is listed in the results file. Most come from rules that apply only to some students (for example "caste certificate for reserved category students"), which Kaagaz keeps as required because it does not know a student's category, and from first steps where no official time limit decides the order.
+                    On {b.deterministic_run.disagreements.length} of {b.deterministic_run.questions} questions the graph's answer differs from the answer written from the sources. Each one is listed in the results file with both answers. They come from three things: which income or caste certificate a scheme's source names (a generic one or the Karnataka one), the order of first steps when no official time limit decides it, and rules that apply only to some students, which Kaagaz leaves out unless the student says they apply.
                   </p>
                 )}
               </>

@@ -170,7 +170,7 @@ export const api = {
   explain: (scheme_id: string, doc_id: string) =>
     req<ToolResponse<{ scheme: { id: string; name: string }; doc: { id: string; name: string }; paths: { nodes: { id: string; name: string; label: string }[]; rules: Cite[]; types: string[] }[]; detail: { doc?: Record<string, unknown>; office_id?: string; office_name?: string; issues?: Cite & { days?: number }; requires?: { id: string; name: string; label: string }[] } }>>(`/api/explain?scheme_id=${encodeURIComponent(scheme_id)}&doc_id=${encodeURIComponent(doc_id)}`),
   alternatives: (sid: string, scheme_id: string) =>
-    req<ToolResponse<{ options: { scheme_id: string; name: string; verdict: Plan['verdict']; deadline: Plan['deadline']; days_left: number | null; shared: string[]; shared_count: number; needed_count: number }[] }>>(`/api/alternatives?student_id=${sid}&scheme_id=${encodeURIComponent(scheme_id)}`),
+    req<ToolResponse<{ options: { scheme_id: string; name: string; verdict: Plan['verdict']; deadline: Plan['deadline']; days_left: number | null; calendar_complete: boolean; shared: string[]; shared_count: number; needed_count: number }[] }>>(`/api/alternatives?student_id=${sid}&scheme_id=${encodeURIComponent(scheme_id)}`),
   ask: (question: string, student_id?: string, scheme_id?: string) =>
     req<AskResponse>('/api/ask', { method: 'POST', body: JSON.stringify({ question, student_id, scheme_id }) }),
   benchmark: () => req<BenchResponse>('/api/benchmark'),

@@ -43,9 +43,9 @@ documents:
     name: Aadhaar number (UIDAI)
     days: null   # not a legal limit; see service_days
     service_days: 180   # UIDAI "normally up to", calendar days, 90% service standard; shown, never summed
-    service_days_cite: {source_id: uidai-faq-enrolling-children-wb, excerpt: "For Adults age 18+, normally up to 180 days from the date of enrolment.", confidence: official}
+    service_days_cite: {source_id: uidai-faq-enrolling-children, excerpt: "For Adults age 18+, normally up to 180 days from the date of enrolment.", confidence: official}
     child_days: 30
-    child_days_cite: {source_id: uidai-faq-enrolling-children-wb, excerpt: "For child age-group (0-18 yrs) Normally up to 30 days from the date of enrolment.", confidence: official}
+    child_days_cite: {source_id: uidai-faq-enrolling-children, excerpt: "For child age-group (0-18 yrs) Normally up to 30 days from the date of enrolment.", confidence: official}
     note: >-
       UIDAI FAQ "How much time does it take to get my Aadhaar generated after the enrolment?": normally up to 180 days
       for adults (18+) and up to 30 days for children (0-18), "with 90% service standards" (a normal service level, not a

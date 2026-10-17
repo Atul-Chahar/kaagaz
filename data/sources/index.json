@@ -784,18 +784,18 @@
     "text_chars": 5334
   },
   {
-    "id": "uidai-faq-enrolling-children-wb",
-    "url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
-    "final_url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com",
-    "title": "UIDAI FAQs: Enrolling Children (uidai.gov.in, Wayback Machine snapshot 2026-01-09)",
+    "id": "uidai-faq-enrolling-children",
+    "url": "https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html",
+    "final_url": "https://web.archive.org/web/20251224102409id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html",
+    "title": "UIDAI FAQ: Enrolling children (Wayback Machine copy of uidai.gov.in)",
     "retrieved_at": "2026-10-17",
-    "sha256": "c14a9a70e721734c40ad0a36a5826dc83f5e00039619f7ffc1d843cec2e9d274",
-    "file": "raw/uidai-faq-enrolling-children-wb.html",
-    "text_file": "text/uidai-faq-enrolling-children-wb.txt",
+    "sha256": "f1f31d7719cc204560ef9b9f3b2351b10a3c62f0656dc86ba1f56337e8ac471e",
+    "file": "raw/uidai-faq-enrolling-children.html",
+    "text_file": "text/uidai-faq-enrolling-children.txt",
     "content_type": "text/html",
-    "size": 121450,
+    "size": 121346,
     "large_not_in_git": false,
-    "text_chars": 17263
+    "text_chars": 17265
   },
   {
     "id": "uidai-supporting-docs-goa",

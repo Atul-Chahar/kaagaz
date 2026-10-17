@@ -44,7 +44,7 @@ Saturdays are holidays are also sourced, so working days left can be counted. Th
 SSP scheme > Aadhaar-seeded bank account > bank account > PAN or Form 60 > PAN card > Aadhaar > one proof of identity >
 Karnataka caste certificate > one of ration card or voter card > ration card.
 
-A shorter one that every SSP scheme shares: scheme > caste and income certificate (21 working days) > proof of residence.
+A shorter one that every SSP scheme shares: scheme > caste and income certificate (21 working days) > an address proof (the source does not list which documents count).
 An NSP one: scheme > One Time Registration > Aadhaar face authentication > Aadhaar.
 
 ## Longest critical path against a real deadline

@@ -183,3 +183,12 @@ def test_calendar_days_in_a_working_day_pack_are_converted_or_marked_unknown():
         return 21
     assert Planner(g, set(), unit="working_days", convert=convert).finish("S") == Finish(26, True)
     assert seen == [("calendar_days", 5, 30)]
+
+
+def test_critical_path_never_runs_through_a_held_document():
+    g = graph([doc("A", 21), doc("H", 5), doc("U", None)],
+              [("S", "A", "REQUIRES"), ("A", "H", "REQUIRES"), ("A", "U", "REQUIRES")])
+    p = Planner(g, {"H"})
+    assert p.critical_path() == ["S", "A", "U"]
+    p = Planner(g, {"H", "U"})
+    assert p.critical_path() == ["S", "A"]

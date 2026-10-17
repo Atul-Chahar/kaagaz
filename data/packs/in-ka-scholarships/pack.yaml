@@ -112,9 +112,9 @@ documents:
     fetcher, so the page was saved from its Wayback Machine snapshot of 2026-01-09.'
   service_days: 180
   service_days_cite:
-    source_id: uidai-faq-enrolling-children-wb
-    source_url: https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html?utm_source=chatgpt.com
-    source_title: 'UIDAI FAQs: Enrolling Children (uidai.gov.in, Wayback Machine snapshot 2026-01-09)'
+    source_id: uidai-faq-enrolling-children
+    source_url: https://web.archive.org/web/20260109213046id_/https://uidai.gov.in/en/contact-support/have-any-question/299-english-uk/faqs/enrolment-update/enrolling-children.html
+    source_title: 'UIDAI FAQ: Enrolling children (Wayback Machine copy of uidai.gov.in)'
     retrieved_at: '2026-10-17'
     excerpt: For Adults age 18+, normally up to 180 days from the date of enrolment.
     confidence: official

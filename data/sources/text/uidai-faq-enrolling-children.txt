@@ -928,7 +928,7 @@ Safari 4.0+
 
  Last reviewed and updated on: 
 
-January 5, 2026
+December 24, 2025
 
 UIDAI website translation is done by Bhashini Machine Translation. This is done on experimental basis and will be improved over a period of time. Kindly ignore the errors if any.
 

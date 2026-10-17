@@ -191,7 +191,8 @@ class Tools:
 
     def _unknown(self, tool: str, what: str, trace: Trace) -> ToolResult:
         return ToolResult(tool, "unknown_name", {"name": what, "_rows": 0}, trace.rows,
-                          f"“{what}” is not a name in this rule pack, so no query was run.")
+                          f"“{what}” is not a name in this rule pack. Kaagaz only looked the name up; "
+                          "no plan or path query was run.")
 
     # -- resolve --
     def _resolve(self, a: ResolveArgs, trace: Trace) -> ToolResult:
@@ -400,8 +401,10 @@ class Tools:
         if days is None:
             return ToolResult("explain", "no_official_time", data, trace.rows,
                               f"{names}. No official time limit found for {doc['name']}.")
+        unit = (d.get("doc") or {}).get("days_unit") or self.pack_unit
+        word = "working days" if unit == "working_days" else "calendar days"
         return ToolResult("explain", "answered_with_path", data, trace.rows,
-                          f"{names}. {doc['name']} takes up to {days} days by law.")
+                          f"{names}. {doc['name']} takes up to {days} {word} by law.")
 
     # -- alternatives --
     def _alternatives(self, a: AlternativesArgs, trace: Trace) -> ToolResult:
@@ -422,6 +425,7 @@ class Tools:
             sh = shared_by.get(sid, {"shared": [], "shared_count": 0})
             options.append({"scheme_id": sid, "name": s["scheme"]["name"], "verdict": sub["verdict"],
                             "deadline": sub["deadline"], "days_left": sub["days_left"],
+                            "calendar_complete": sub["calendar_complete"],
                             "shared": sh["shared"], "shared_count": sh["shared_count"],
                             "needed_count": len(sub["needed"])})
 

@@ -288,6 +288,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                       <div className="sub">
                         {o.deadline.date ? `Deadline ${fmtDate(o.deadline.date)}` : o.deadline.source === 'renewals_only' ? `Renewals only (closes ${fmtDate(o.deadline.renewal_window_end)})` : 'No deadline published'}
                         {o.shared_count > 0 ? ` · reuses ${plural(o.shared_count, 'document', 'documents')} you still need` : ''}
+                        {!o.calendar_complete && o.deadline.date ? ' · next year\'s holiday list is not out, so spare days may be fewer' : ''}
                       </div>
                     </div>
                     <span className={`mini-stamp ${cls}`}>{o.verdict.stamp}</span>

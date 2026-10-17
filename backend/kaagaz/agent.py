@@ -215,7 +215,8 @@ def name_search_route(t: Tools, question: str, student_id: str | None, scheme_id
     for h in hits:  # generic words only break ties
         h["score"] = h["hits"] + 0.1 * sum(1 for w in words if w in GENERIC and w in h["name"].lower())
     schemes = sorted([h for h in hits if h["label"] == "Scheme"], key=lambda h: -h["score"])
-    docs = sorted([h for h in hits if h["label"] == "Document"], key=lambda h: -h["score"])
+    # ties go to the closest (shortest) name: "income certificate" means the income certificate, not caste and income
+    docs = sorted([h for h in hits if h["label"] == "Document"], key=lambda h: (-h["score"], len(h["name"])))
     scheme = None
     if schemes:
         best = schemes[0]["score"]
@@ -228,7 +229,7 @@ def name_search_route(t: Tools, question: str, student_id: str | None, scheme_id
             name = d["name"].lower()
             d["score"] = sum(1 for w in specific if w not in used and (w in name or w in d["id"]))
             d["score"] += 0.1 * sum(1 for w in words if w in GENERIC and (w in name or w in d["id"]))
-        docs = sorted([d for d in docs if d["score"] >= 1], key=lambda h: -h["score"])
+        docs = sorted([d for d in docs if d["score"] >= 1], key=lambda h: (-h["score"], len(h["name"])))
     doc = docs[0] if docs else None
     if doc and (scheme or scheme_id):
         return "explain", {"scheme_id": scheme["id"] if scheme else scheme_id, "doc_id": doc["id"]}, hits
