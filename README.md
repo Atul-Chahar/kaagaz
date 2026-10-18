@@ -638,6 +638,7 @@ second per site, cache) and wrote fragments in `data/research/`; `scripts/build_
 - The shared registry in `kaagaz:agents` links student ids to the schemes they target (no names, no documents), so
   the caseworker can find who a rule change affects.
 - In the Docker image, approved rule changes are written inside the container; mount `data/packs` to keep them.
+- There is no login. Anyone who can open the app can approve a finding or a proposal, so run it on your own machine.
 
 ## Local development
 
