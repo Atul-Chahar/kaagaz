@@ -12,11 +12,13 @@ import yaml
 from falkordb import FalkorDB
 from redis.exceptions import ResponseError
 
+from .changes import apply_changes, load_changes
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 PACKS_DIR = Path(os.environ.get("KAAGAZ_PACKS_DIR", ROOT / "data" / "packs"))
 QUERIES_DIR = Path(__file__).resolve().parent / "queries"
 QUERY_TIMEOUT_MS = int(os.environ.get("KAAGAZ_QUERY_TIMEOUT_MS", "10000"))
-CITE_FIELDS = ("source_url", "source_title", "retrieved_at", "excerpt", "confidence")
+CITE_FIELDS = ("source_url", "source_title", "retrieved_at", "excerpt", "confidence", "stale_since", "changed_from")
 
 
 def rules_graph_name(pack_id: str) -> str:
@@ -92,7 +94,9 @@ def list_packs() -> list[str]:
 
 @cache
 def load_pack(pack_id: str) -> dict:
-    return yaml.safe_load((PACKS_DIR / pack_id / "pack.yaml").read_text())
+    """pack.yaml with the approved rule changes (changes.yaml) applied on top."""
+    pack = yaml.safe_load((PACKS_DIR / pack_id / "pack.yaml").read_text())
+    return apply_changes(pack, load_changes(PACKS_DIR, pack_id))
 
 
 def _cite(c: dict | None, prefix: str = "") -> dict:

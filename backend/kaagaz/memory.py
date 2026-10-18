@@ -84,11 +84,16 @@ def applies(student_id: str, trace=None) -> set[str]:
     return {row["doc_id"] for row in r.rows}
 
 
-def set_target(student_id: str, scheme_id: str, deadline: str | None, deadline_source: str, trace=None) -> dict:
+def set_target(student_id: str, scheme_id: str, deadline: str | None, deadline_source: str, trace=None,
+               pack: str | None = None) -> dict:
     r = graph.run(_g(student_id), "target_set",
                   {"student_id": student_id, "scheme_id": scheme_id, "deadline": deadline,
                    "deadline_source": deadline_source, "now": now_iso()}, read_only=False)
     _t(trace, r)
+    if pack:
+        # the shared registry lets the caseworker find this student when a rule for this scheme changes
+        from . import agents
+        agents.register_target(student_id, pack, scheme_id, trace)
     return r.rows[0]
 
 
@@ -116,6 +121,18 @@ def snapshots(student_id: str, limit: int = 10, trace=None) -> list[dict]:
     return r.rows
 
 
+def last_snapshot(student_id: str, scheme_id: str, trace=None) -> dict | None:
+    if not exists(student_id):
+        return None
+    r = graph.run(_g(student_id), "snapshot_last", {"student_id": student_id, "scheme_id": scheme_id})
+    _t(trace, r)
+    if not r.rows:
+        return None
+    row = dict(r.rows[0])
+    row["json"] = json.loads(row["json"]) if row.get("json") else {}
+    return row
+
+
 def save_snapshot(student_id: str, scheme_id: str, verdict: str, critical_days: int, exact: bool, summary: dict,
                   trace=None) -> str:
     r = graph.run(_g(student_id), "snapshot_add",
@@ -128,6 +145,77 @@ def save_snapshot(student_id: str, scheme_id: str, verdict: str, critical_days: 
 
 def reset(student_id: str) -> None:
     graph.delete_graph(_g(student_id))
+    from . import agents
+    agents.forget_student(student_id)
+
+
+# ---- what the agents leave in a student's own graph ----------------------------------------------------------
+
+def _rows(student_id: str, name: str, params: dict, write: bool = False, trace=None) -> list[dict]:
+    if not write and not exists(student_id):
+        return []
+    r = graph.run(_g(student_id), name, {"student_id": student_id} | params, read_only=not write)
+    _t(trace, r)
+    return r.rows
+
+
+def add_alert(student_id: str, alert: dict, trace=None) -> None:
+    _rows(student_id, "alert_add", {"now": now_iso(), **alert}, write=True, trace=trace)
+
+
+def alerts(student_id: str, limit: int = 20, trace=None) -> list[dict]:
+    return [dict(r["alert"]) for r in _rows(student_id, "recall_alerts", {"limit": limit}, trace=trace)]
+
+
+def alerts_seen(student_id: str, trace=None) -> int:
+    rows = _rows(student_id, "alerts_seen", {}, write=True, trace=trace)
+    return rows[0]["n"] if rows else 0
+
+
+def add_case(student_id: str, case: dict, trace=None) -> None:
+    _rows(student_id, "case_add", {"now": now_iso(), **case}, write=True, trace=trace)
+
+
+def cases(student_id: str, limit: int = 5, trace=None) -> list[dict]:
+    out = []
+    for r in _rows(student_id, "recall_cases", {"limit": limit}, trace=trace):
+        c = dict(r["review"])
+        c["json"] = json.loads(c["json"]) if c.get("json") else {}
+        out.append(c)
+    return out
+
+
+def add_proposals(student_id: str, case_id: str, rows: list[dict], trace=None) -> None:
+    _rows(student_id, "proposals_expire", {"case_id": case_id, "now": now_iso()}, write=True, trace=trace)
+    if rows:
+        _rows(student_id, "proposal_add", {"case_id": case_id, "rows": rows, "now": now_iso()}, write=True,
+              trace=trace)
+
+
+def proposals(student_id: str, limit: int = 30, trace=None) -> list[dict]:
+    return [dict(r["proposal"]) | {"case_id": r["case_id"]}
+            for r in _rows(student_id, "recall_proposals", {"limit": limit}, trace=trace)]
+
+
+def decide_proposal(student_id: str, proposal_id: str, status: str, trace=None) -> dict | None:
+    rows = _rows(student_id, "proposal_decide", {"id": proposal_id, "status": status, "now": now_iso()}, write=True,
+                 trace=trace)
+    return dict(rows[0]["proposal"]) if rows else None
+
+
+def add_task(student_id: str, task: dict, trace=None) -> dict:
+    rows = _rows(student_id, "task_add", {"now": now_iso(), **task}, write=True, trace=trace)
+    return dict(rows[0]["task"])
+
+
+def tasks(student_id: str, trace=None) -> list[dict]:
+    return [dict(r["task"]) for r in _rows(student_id, "recall_tasks", {}, trace=trace)]
+
+
+def task_status(student_id: str, task_id: str, status: str, trace=None) -> dict | None:
+    rows = _rows(student_id, "task_status", {"id": task_id, "status": status, "now": now_iso()}, write=True,
+                 trace=trace)
+    return dict(rows[0]["task"]) if rows else None
 
 
 def _t(trace, run) -> None:

@@ -7,18 +7,19 @@ import json
 import logging
 import os
 import secrets
+import threading
 from contextlib import asynccontextmanager
 from contextvars import ContextVar
 from pathlib import Path
 from urllib.parse import parse_qs
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from redis.exceptions import ConnectionError as RedisConnectionError
 
-from . import agent, graph, memory
+from . import agent, agents, caseworker, graph, memory, watcher
 from .planner import MAX_DEPTH
 from .tools import DEFAULT_PACK, ToolError, Tools, Trace, catalogue
 
@@ -289,7 +290,8 @@ def load_example(pack: str | None = None, replace: str | None = None) -> dict:
     for h in ex.get("holdings", []):
         memory.add_holding(sid, h, None)
     deadline = str(ex["deadline"]) if ex.get("deadline") else None
-    memory.set_target(sid, ex["scheme_id"], deadline, "example_own_date" if deadline else "published_window")
+    memory.set_target(sid, ex["scheme_id"], deadline, "example_own_date" if deadline else "published_window",
+                      pack=pid)
     return {"student_id": sid, "label": label, "scheme_id": ex["scheme_id"],
             "holdings": ex.get("holdings", []), "about": ex.get("about")}
 
@@ -313,7 +315,7 @@ def set_target(student_id: str, body: TargetBody, pack: str | None = None) -> di
     memory.ensure_student(student_id, trace=trace)
     src = "student" if body.deadline else "published_window"
     return memory.set_target(student_id, body.scheme_id, body.deadline.isoformat() if body.deadline else None, src,
-                             trace) | {"trace": trace.rows}
+                             trace, pack=_pack_param(pack)) | {"trace": trace.rows}
 
 
 class HoldingBody(BaseModel):
@@ -391,6 +393,135 @@ class AskBody(BaseModel):
 @app.post("/api/ask")
 def ask(body: AskBody, pack: str | None = None) -> dict:
     return agent.ask(tools(_pack_param(pack)), body.question, body.student_id, body.scheme_id)
+
+
+# ---- agents: the caseworker on one student's case ----------------------------------------------------------
+
+class CaseBody(BaseModel):
+    scheme_id: str | None = None
+
+
+@app.post("/api/students/{student_id}/case")
+def review_case(student_id: str, body: CaseBody | None = None, pack: str | None = None) -> dict:
+    """The caseworker investigates the case (several tool calls), decides, and proposes actions (not yet done)."""
+    memory.check_id(student_id)
+    return caseworker.review(tools(_pack_param(pack)), student_id, (body.scheme_id if body else None),
+                             as_of=AS_OF.get() is not None)
+
+
+@app.get("/api/students/{student_id}/case")
+def case_state(student_id: str) -> dict:
+    """What the agents left in this student's graph: the last review, proposals, tasks and alerts."""
+    memory.check_id(student_id)
+    reviews = memory.cases(student_id, 1)
+    return {"review": reviews[0] if reviews else None, "proposals": memory.proposals(student_id),
+            "tasks": memory.tasks(student_id), "alerts": memory.alerts(student_id)}
+
+
+class DecideBody(BaseModel):
+    approve: bool
+    note: str | None = Field(default=None, max_length=300)
+
+
+@app.post("/api/students/{student_id}/proposals/{proposal_id}")
+def decide_proposal(student_id: str, proposal_id: str, body: DecideBody, pack: str | None = None) -> dict:
+    memory.check_id(student_id)
+    return caseworker.act(tools(_pack_param(pack)), student_id, proposal_id, body.approve,
+                          as_of=AS_OF.get() is not None)
+
+
+class TaskBody(BaseModel):
+    status: str = Field(pattern="^(open|done)$")
+
+
+@app.post("/api/students/{student_id}/tasks/{task_id}")
+def set_task(student_id: str, task_id: str, body: TaskBody) -> dict:
+    memory.check_id(student_id)
+    t = memory.task_status(student_id, task_id, body.status)
+    if t is None:
+        raise HTTPException(404, "no such task")
+    return {"task": t}
+
+
+@app.get("/api/students/{student_id}/tasks.ics")
+def tasks_calendar(student_id: str):
+    """The student's open tasks as an all-day calendar (one event per task, on its due date)."""
+    memory.check_id(student_id)
+    stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Kaagaz//caseworker//EN", "CALSCALE:GREGORIAN"]
+    for t in memory.tasks(student_id):
+        if t.get("status") != "open" or not t.get("due"):
+            continue
+        day = dt.date.fromisoformat(t["due"])
+        text = (t.get("title") or "").replace(",", "\\,").replace(";", "\\;")
+        lines += ["BEGIN:VEVENT", f"UID:{t['id']}@{student_id}.kaagaz", f"DTSTAMP:{stamp}",
+                  f"DTSTART;VALUE=DATE:{day:%Y%m%d}", f"DTEND;VALUE=DATE:{day + dt.timedelta(days=1):%Y%m%d}",
+                  f"SUMMARY:{text}", "END:VEVENT"]
+    lines.append("END:VCALENDAR")
+    return Response("\r\n".join(lines) + "\r\n", media_type="text/calendar",
+                    headers={"Content-Disposition": 'attachment; filename="kaagaz-tasks.ics"'})
+
+
+@app.post("/api/students/{student_id}/alerts/seen")
+def alerts_seen(student_id: str) -> dict:
+    memory.check_id(student_id)
+    return {"marked": memory.alerts_seen(student_id)}
+
+
+# ---- agents: watcher, reviewer, shared memory ------------------------------------------------------------------
+
+_watch_lock = threading.Lock()
+
+
+@app.get("/api/agents")
+def agents_state(pack: str | None = None) -> dict:
+    pid = _pack_param(pack)
+    recent = agents.runs(None, 15)
+    return {"agents": agents.overview(), "runs": recent,
+            "running": any(r.get("status") == "running" and r.get("agent") == "watcher" for r in recent),
+            "findings": agents.findings(pid, None, 100), "graph": agents.AGENTS_GRAPH}
+
+
+@app.get("/api/agents/runs/{run_id}")
+def agent_run(run_id: str) -> dict:
+    d = agents.run_detail(run_id)
+    if d is None:
+        raise HTTPException(404, "no such run")
+    return d
+
+
+class WatchBody(BaseModel):
+    only: list[str] | None = None
+    limit: int | None = Field(default=None, ge=1, le=200)
+
+
+@app.post("/api/agents/watcher/run")
+def start_watch(body: WatchBody | None = None, pack: str | None = None) -> dict:
+    """Start a watcher run in the background (it fetches politely, so a full run takes a few minutes)."""
+    pid = _pack_param(pack)
+    if not _watch_lock.acquire(blocking=False):
+        raise HTTPException(409, "the watcher is already running")
+
+    def go() -> None:
+        try:
+            watcher.run_watch(pid, body.only if body else None, body.limit if body else None, trigger="ui")
+        except Exception:  # recorded on the run as failed
+            log.exception("watcher run failed")
+        finally:
+            _watch_lock.release()
+
+    threading.Thread(target=go, daemon=True).start()
+    return {"started": True}
+
+
+@app.post("/api/agents/findings/{finding_id}")
+def decide_finding(finding_id: str, body: DecideBody) -> dict:
+    """The reviewer (a person) approves or rejects what the watcher found. Approval changes the rules graph and the
+    caseworker re-plans every student the change affects."""
+    try:
+        return watcher.decide(finding_id, body.approve, body.note or "")
+    except KeyError:
+        raise HTTPException(404, "no such finding") from None
 
 
 # ---- benchmark ---------------------------------------------------------------------

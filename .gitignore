@@ -30,3 +30,6 @@ docs/DEMO_SCRIPT.md
 docs/DEMO_VIDEO_PLAN.md
 docs/VOICEOVER_SCRIPT.md
 skills-lock.json
+
+# watcher agent: re-fetched copies (evidence for findings; a copy is promoted into raw/ and text/ only when a person approves)
+data/sources/checks/

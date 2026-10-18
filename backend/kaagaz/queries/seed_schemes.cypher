@@ -6,4 +6,5 @@ CREATE (:Scheme {id: r.id, name: r.name, authority: r.authority, portal: r.porta
   window_renewals_only: r.window_renewals_only,
   source_url: r.window_source_url, window_source_url: r.window_source_url,
   window_source_title: r.window_source_title, window_retrieved_at: r.window_retrieved_at,
-  window_excerpt: r.window_excerpt, window_confidence: r.window_confidence})
+  window_excerpt: r.window_excerpt, window_confidence: r.window_confidence,
+  window_stale_since: r.window_stale_since, window_changed_from: r.window_changed_from})

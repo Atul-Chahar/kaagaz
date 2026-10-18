@@ -90,20 +90,31 @@ PARAMS = {
     "documents": {},
     "source_usage": {},
     "graph_stats": {},
+    "rules_by_source": {},
+    "schemes_above": {"id": "aadhaar"},
 }
+
+# Queries on the shared agents graph and the agents' records in a student graph run in tests/test_agents.py.
+OTHER_GRAPHS = ("seed_", "student_", "holding_", "target_", "snapshot_", "recall_", "applies_", "agents_", "alert_",
+                "alerts_", "case_", "proposal_", "proposals_", "task_")
 
 
 def test_every_rules_query_runs_and_returns_rows():
     s0 = scheme_ids()[0]
     a0 = pack()["any_of"][0]["id"]
     fill = {"scheme_id": s0, "scheme_ids": scheme_ids(), "anyof_id": a0, "q": s0}
-    names = [n for n in graph.query_names() if not n.startswith(("seed_", "student_", "holding_", "target_",
-                                                                     "snapshot_", "recall_", "applies_"))]
+    names = [n for n in graph.query_names() if not n.startswith(OTHER_GRAPHS)]
     assert set(names) == set(PARAMS), "every rules query must be covered by this test"
     for n in names:
         params = {k: (fill[k] if v is None else v) for k, v in PARAMS[n].items()}
         r = graph.run(RULES, n, params)
         assert r.rows, f"{n} returned no rows"
+
+
+def test_every_query_file_is_used_by_the_code():
+    code = "\n".join(p.read_text() for p in (graph.ROOT / "backend" / "kaagaz").glob("*.py"))
+    unused = [n for n in graph.query_names() if f'"{n}"' not in code and not n.startswith("seed_")]
+    assert unused == [], f"query files no code runs: {unused}"
 
 
 def test_prerequisites_depth_is_monotonic_and_capped():

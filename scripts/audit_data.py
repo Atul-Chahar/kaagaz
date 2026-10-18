@@ -6,6 +6,8 @@ Checks, for every pack in data/packs/*/pack.yaml:
 - every source_url is in data/sources/index.json, and title / retrieved_at match the index
 - every excerpt is found in that source's saved text (whitespace and case normalised)
 - every saved source file still has the SHA-256 recorded in the index (unless it is a >5 MB file kept out of git)
+- approved rule changes (data/packs/<pack>/changes.yaml, from the watcher agent) are audited the same way, on the
+  merged pack; a source URL can have several saved versions, told apart by retrieved_at
 - days are null or a positive integer; no requirement cycles; ids are unique; the example student is labelled
 """
 
@@ -18,6 +20,8 @@ import sys
 from pathlib import Path
 
 import yaml
+
+from kaagaz.changes import apply_changes, load_changes, unknown_targets
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from textnorm import norm
@@ -35,7 +39,9 @@ def err(msg: str) -> None:
 
 
 index_rows = json.loads((SRC / "index.json").read_text())
-by_url = {r["url"]: r for r in index_rows}
+by_url: dict[str, list[dict]] = {}
+for _r in index_rows:
+    by_url.setdefault(_r["url"], []).append(_r)
 text_cache: dict[str, str] = {}
 
 
@@ -61,10 +67,11 @@ def check_cite(c: dict | None, where: str) -> None:
     ex = c.get("excerpt") or ""
     if len(ex.split()) > 25:
         err(f"{where}: excerpt has {len(ex.split())} words (max 25)")
-    row = by_url.get(c.get("source_url"))
-    if row is None:
+    versions = by_url.get(c.get("source_url")) or []
+    if not versions:
         err(f"{where}: source_url not in index: {c.get('source_url')}")
         return
+    row = next((r for r in versions if str(r["retrieved_at"]) == str(c.get("retrieved_at"))), versions[-1])
     if row["title"] != c.get("source_title"):
         err(f"{where}: source_title differs from index ({row['title']!r})")
     if str(row["retrieved_at"]) != str(c.get("retrieved_at")):
@@ -95,6 +102,13 @@ def audit_sources() -> None:
 def audit_pack(path: Path) -> None:
     pack = yaml.safe_load(path.read_text())
     pid = pack["pack"]["id"]
+    changes = load_changes(path.parent.parent, pid)
+    for bad in unknown_targets(pack, changes):
+        err(f"{pid}/changes.yaml: change for an unknown rule or of an unknown kind: {bad}")
+    for c in changes:
+        if c.get("kind") == "stale" and c.get("source_url") not in by_url:
+            err(f"{pid}/changes.yaml: stale mark for a source not in the index: {c.get('source_url')}")
+    pack = apply_changes(pack, changes)
     docs = {d["id"]: d for d in pack.get("documents", [])}
     anyof = {a["id"] for a in pack.get("any_of", [])}
     schemes = {s["id"]: s for s in pack.get("schemes", [])}

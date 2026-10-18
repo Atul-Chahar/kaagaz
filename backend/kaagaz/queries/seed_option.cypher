@@ -2,4 +2,4 @@
 UNWIND $rows AS r
 MATCH (a:AnyOf {id: r.src}), (b:Document {id: r.dst})
 CREATE (a)-[:OPTION {source_url: r.source_url, source_title: r.source_title, retrieved_at: r.retrieved_at,
-  excerpt: r.excerpt, confidence: r.confidence, note: r.note}]->(b)
+  excerpt: r.excerpt, confidence: r.confidence, stale_since: r.stale_since, changed_from: r.changed_from, note: r.note}]->(b)
