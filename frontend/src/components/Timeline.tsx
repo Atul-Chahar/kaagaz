@@ -117,7 +117,7 @@ export default function Timeline({ plan, onOpen }: { plan: Plan; onOpen: (id: st
                   onClick={e => onOpen(r.id, e.currentTarget)} aria-label={label} data-testid={`slip-${r.id}`} data-critical={r.on_critical}>
                   {inside && <>
                     <span className="t">{shortName(r.name)}</span>{' '}
-                    <span className="d">{g.known ? legalTime(r.days, r.days_unit, plan.day_unit, r.span) : 'unknown time'}</span>
+                    <span className="d">{r.applied ? (r.applied.left === null ? 'applied, unknown time' : `applied, ${r.span ?? r.applied.left} left`) : g.known ? legalTime(r.days, r.days_unit, plan.day_unit, r.span) : 'unknown time'}</span>
                   </>}
                 </button>
                 {!inside && (

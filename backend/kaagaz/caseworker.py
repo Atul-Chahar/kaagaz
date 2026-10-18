@@ -50,6 +50,7 @@ def _since(t: Tools, prev: dict | None, plan: dict) -> dict | None:
             "stamp_before": prev.get("stamp"), "stamp_now": plan["verdict"]["stamp"],
             "verdict_before": prev.get("verdict"), "verdict_now": plan["verdict"]["kind"],
             "new_holdings": sorted(held_now - held_then), "dropped_holdings": sorted(held_then - held_now),
+            "new_applications": sorted({a["doc_id"] for a in plan.get("applied") or []} - set(before.get("applied") or [])),
             "scheme_changed": prev.get("scheme_id") != plan["scheme"]["id"]}
 
 
@@ -80,7 +81,8 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
     _step(steps, "plan", "Walk every chain under the scheme at full depth and count the legal days",
           f"{v['stamp']}: the longest chain is {'at least ' if not v['exact'] else ''}{v['critical_days']} "
           f"{plan['day_unit']}; {plan['days_left'] if plan['days_left'] is not None else 'no'} left before the "
-          f"deadline", plan_res.outcome)
+          f"deadline" + (f"; {_n(len(plan['applied']), 'application', 'applications')} already in progress"
+                         if plan.get("applied") else ""), plan_res.outcome)
 
     ready = plan["start_today"]
     options = {o for i in plan["items"] if i["label"] == "AnyOf" for o in (i.get("options") or [])}
@@ -196,6 +198,7 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
     if narrate and agent.llm_configured():
         note = _note(t, plan, decision, since)
     body = {"steps": steps, "decision": decision, "since": since, "held": plan["held"], "note": note, "as_of": as_of,
+            "applied": [a["doc_id"] for a in plan.get("applied") or []],
             "alternative": {"scheme_id": alt["scheme_id"], "name": alt["name"], "stamp": alt["verdict"]["stamp"]}
             if alt else None}
     memory.add_case(student_id, {"id": case_id, "scheme_id": scheme_id, "today": plan["today"], "verdict": v["kind"],

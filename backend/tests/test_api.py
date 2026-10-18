@@ -191,3 +191,25 @@ def test_as_of_is_per_request_and_bad_dates_are_422():
     r = client.get("/api/schemes", headers={"X-Kaagaz-As-Of": "18/10/2026"})
     assert r.status_code == 422 and r.json()["error"] == "bad_arguments"
     assert client.get("/api/health").json()["snapshot_date"] == "2026-10-18"
+
+
+def test_an_application_counts_down_in_working_days_and_cypher_agrees(sid):
+    client.put(f"/api/students/{sid}/target", json={"scheme_id": "ka-ssp-pms-obc"})
+    h = {"X-Kaagaz-As-Of": "2026-10-18"}
+    q = f"/api/plan?student_id={sid}&scheme_id=ka-ssp-pms-obc&remember=false"
+    before = client.get(q, headers=h).json()["data"]
+    assert "caste-income-certificate-ka" in before["needed"]
+    # applied on Mon 12 Oct 2026: 13 to 17 Oct are 4 working days (Sat 17 Oct is the third Saturday, a working day)
+    r = client.post(f"/api/students/{sid}/applications", json={"doc_id": "caste-income-certificate-ka",
+                                                                "applied_on": "2026-10-12"}, headers=h)
+    assert r.status_code == 200
+    after = client.get(q, headers=h).json()["data"]
+    cert = next(i for i in after["items"] if i["id"] == "caste-income-certificate-ka")
+    assert cert["applied"]["applied_on"] == "2026-10-12" and cert["applied"]["left"] == 21 - cert["applied"]["passed"]
+    assert "caste-income-certificate-ka" not in [s["id"] for s in after["start_today"]]
+    assert after["chain_check"]["agree"] is True
+    assert after["verdict"]["critical_days"] < before["verdict"]["critical_days"]
+    future = client.post(f"/api/students/{sid}/applications", json={"doc_id": "aadhaar", "applied_on": "2026-10-20"},
+                         headers=h)
+    assert future.status_code == 422
+    assert client.delete(f"/api/students/{sid}/applications/caste-income-certificate-ka").json()["removed"] == 1

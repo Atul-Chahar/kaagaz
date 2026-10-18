@@ -149,8 +149,31 @@ class Tools:
         self.calendar = WorkCalendar.from_pack(self.pack)
         self.pack_unit = "working_days" if self.calendar.working else "calendar_days"
 
-    def planner(self, g: RuleGraph, held: set[str], applies: set[str] | None = None) -> Planner:
-        return Planner(g, held, unit=self.pack_unit, convert=self._convert, applies=applies)
+    def planner(self, g: RuleGraph, held: set[str], applies: set[str] | None = None,
+                progress: dict[str, int] | None = None) -> Planner:
+        return Planner(g, held, unit=self.pack_unit, convert=self._convert, applies=applies, progress=progress)
+
+    def progress(self, g: RuleGraph, applications: list[dict], held: set[str]) -> tuple[dict[str, int], list[dict]]:
+        """Days still left on each document the student has applied for, in the document's own unit: its legal
+        time minus the days since the application (working days when the limit is in working days). An application
+        dated after "today" (possible in the submission-day view) is not counted."""
+        left: dict[str, int] = {}
+        shown: list[dict] = []
+        today = self.today()
+        for a in applications:
+            n = g.nodes.get(a["doc_id"])
+            if n is None or a["doc_id"] in held or not a.get("applied_on"):
+                continue
+            on = dt.date.fromisoformat(str(a["applied_on"])[:10])
+            if on > today:
+                continue
+            unit = n.days_unit or self.pack_unit
+            passed = self.calendar.days_between(on, today) if unit == "working_days" and self.calendar.working \
+                else (today - on).days
+            left[n.id] = max(0, n.days - passed) if n.days is not None else 0
+            shown.append({"doc_id": n.id, "applied_on": on.isoformat(), "passed": passed,
+                          "left": left[n.id] if n.days is not None else None, "unit": unit})
+        return left, shown
 
     def _convert(self, from_unit: str, start: int, days: int) -> int | None:
         if from_unit == "calendar_days" and self.pack_unit == "working_days":
@@ -245,13 +268,19 @@ class Tools:
         return {"date": None, "source": "none"}
 
     def plan_core(self, student_id: str, scheme_id: str, depth: int, trace: Trace, held: set[str] | None = None,
-                  save: bool = True, applies: set[str] | None = None) -> dict:
+                  save: bool = True, applies: set[str] | None = None,
+                  applications: list[dict] | None = None) -> dict:
         g, rows, scheme = self.build_rule_graph(scheme_id, depth, trace)
         holdings = memory.holdings(student_id, trace) if held is None else [{"doc_id": h} for h in held]
         held_ids = {h["doc_id"] for h in holdings}
         if applies is None:
             applies = memory.applies(student_id, trace) if held is None else set()
-        p = self.planner(g, held_ids, applies)
+        if applications is None:
+            applications = memory.applications(student_id, trace) if held is None else []
+        progress, applied = self.progress(g, applications, held_ids)
+        prog_ids = sorted(progress)
+        prog_params = {"progress_ids": prog_ids, "progress_left": [progress[i] for i in prog_ids]}
+        p = self.planner(g, held_ids, applies, progress)
         fin = p.finish(scheme_id)
         dl = self._deadline(student_id, scheme, trace)
         deadline = dt.date.fromisoformat(dl["date"]) if dl["date"] else None
@@ -273,6 +302,8 @@ class Tools:
                     "held": nid in held_ids, "needed": nid in needed, "on_critical": nid in crit_set,
                     "days_source": _days_source(n.props), "note": n.props.get("note"),
                     "hidden_below": nid in g.cut}
+            if nid in progress:
+                item["applied"] = next(a for a in applied if a["doc_id"] == nid)
             item["days_unit"] = n.days_unit or self.pack_unit
             if n.label == "Document" and nid in needed:
                 st = p.start_of(nid)
@@ -293,7 +324,8 @@ class Tools:
                                 "span": p.finish(d).lb - p.start_of(d).lb,
                                 "office_name": first_row[d]["office_name"] if d in first_row else None,
                                 "reduction": reduction_if_held(g, held_ids, d, unit=self.pack_unit,
-                                                               convert=self._convert, applies=applies),
+                                                               convert=self._convert, applies=applies,
+                                                               progress=progress),
                                 "on_critical": d in crit_set,
                                 "path": first_row[d]["path"] if d in first_row else [scheme_id, d]})
         start_today.sort(key=lambda s: (-s["reduction"], not s["on_critical"], -(s["days"] or 0), s["id"]))
@@ -301,23 +333,23 @@ class Tools:
         allof = RuleGraph(scheme_id, {k: v for k, v in g.nodes.items() if v.label != "AnyOf"},
                           [e for e in g.edges if g.nodes[e.dst].label != "AnyOf" and g.nodes[e.src].label != "AnyOf"])
         chain_rows = self._q("chain_days", {"scheme_id": scheme_id, "held": sorted(held_ids), "depth": depth,
-                                            "applies": sorted(applies), "limit": 5}, trace)
+                                            "applies": sorted(applies), "limit": 5, **prog_params}, trace)
         chain_max = chain_rows[0]["days"] if chain_rows else 0
         # chain_days.cypher sums the raw legal numbers, so compare it with the planner on raw numbers (no unit change)
-        planner_allof = Planner(allof, held_ids, applies=applies).finish(scheme_id).lb
+        planner_allof = Planner(allof, held_ids, applies=applies, progress=progress).finish(scheme_id).lb
         max_depth_rows = self._q("prerequisites", {"scheme_id": scheme_id, "depth": MAX_DEPTH}, trace)
         max_depth = max((r["depth"] for r in max_depth_rows), default=0)
         # fastest_option.cypher cross-checks the planner's choice inside every open "any one of" group (full depth
         # only, so both see the same graph; comparable when no other group sits under the options)
         option_checks = []
         if depth >= max_depth:
-            raw = Planner(g, held_ids, applies=applies)
+            raw = Planner(g, held_ids, applies=applies, progress=progress)
             anyofs = {k for k, v in g.nodes.items() if v.label == "AnyOf"}
             for aid in sorted(anyofs):
                 if p.satisfied(aid) or p._choice.get(aid) is None or aid not in {i["id"] for i in items}:
                     continue
                 rows_o = self._q("fastest_option", {"anyof_id": aid, "held": sorted(held_ids),
-                                                    "applies": sorted(applies)}, trace)
+                                                    "applies": sorted(applies), **prog_params}, trace)
                 below, stack = set(), [e.dst for e in g.edges if e.src == aid]
                 while stack:
                     n = stack.pop()
@@ -350,6 +382,7 @@ class Tools:
             "critical_path": crit,
             "needed": needed,
             "held": sorted(held_ids),
+            "applied": applied,
             "unknown": unknown,
             "hidden_more": bool(g.cut),
             "applies": sorted(applies),
@@ -366,7 +399,8 @@ class Tools:
         if save:
             result["saved_at"] = memory.save_snapshot(
                 student_id, scheme_id, v.kind, v.critical_days, v.exact,
-                {"stamp": v.stamp, "depth": depth, "held": sorted(held_ids), "critical_path": crit}, trace)
+                {"stamp": v.stamp, "depth": depth, "held": sorted(held_ids), "critical_path": crit,
+                 "applied": [a["doc_id"] for a in applied]}, trace)
         result["_rows"] = len(rows)
         return result
 
@@ -413,7 +447,9 @@ class Tools:
             return self._unknown("alternatives", a.scheme_id, trace)
         held = {h["doc_id"] for h in memory.holdings(a.student_id, trace)}
         applies = memory.applies(a.student_id, trace)
-        base = self.plan_core(a.student_id, scheme["id"], MAX_DEPTH, trace, held=held, save=False, applies=applies)
+        apps = memory.applications(a.student_id, trace)
+        base = self.plan_core(a.student_id, scheme["id"], MAX_DEPTH, trace, held=held, save=False, applies=applies,
+                              applications=apps)
         shared = self._q("shared_documents", {"scheme_id": scheme["id"], "needed": base["needed"]}, trace)
         shared_by = {r["scheme_id"]: r for r in shared}
         options = []
@@ -421,7 +457,8 @@ class Tools:
             sid = s["scheme"]["id"]
             if sid == scheme["id"]:
                 continue
-            sub = self.plan_core(a.student_id, sid, MAX_DEPTH, Trace(), held=held, save=False, applies=applies)
+            sub = self.plan_core(a.student_id, sid, MAX_DEPTH, Trace(), held=held, save=False, applies=applies,
+                                 applications=apps)
             sh = shared_by.get(sid, {"shared": [], "shared_count": 0})
             options.append({"scheme_id": sid, "name": s["scheme"]["name"], "verdict": sub["verdict"],
                             "deadline": sub["deadline"], "days_left": sub["days_left"],

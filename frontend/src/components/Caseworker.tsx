@@ -18,6 +18,7 @@ function SinceLine({ s, names }: { s: Since; names: Record<string, string> }) {
   if (s.stamp_before && s.stamp_before !== s.stamp_now) parts.push(`the stamp went from ${s.stamp_before} to ${s.stamp_now}`)
   else parts.push(`the stamp is still ${s.stamp_now}`)
   if (s.new_holdings.length) parts.push(`you now hold ${s.new_holdings.map(d => names[d] ?? d).join(', ')}`)
+  if (s.new_applications?.length) parts.push(`you applied for ${s.new_applications.map(d => names[d] ?? d).join(', ')}`)
   if (s.dropped_holdings.length) parts.push(`you removed ${s.dropped_holdings.map(d => names[d] ?? d).join(', ')}`)
   if (s.scheme_changed) parts.push('the target scheme changed')
   return <p className="since" data-testid="case-since">Since my last review on {fmtDate(s.last_review)}: {parts.join('; ')}.</p>

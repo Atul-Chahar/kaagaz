@@ -93,6 +93,20 @@ export default function Chain({ session, setSession }: { session: Session | null
     }
   }
 
+  async function markApplied(docId: string, on: boolean) {
+    if (!sid) return
+    setPending(p => new Set(p).add(`applied:${docId}`))
+    try {
+      if (on) await api.removeApplication(sid, docId)
+      else await api.addApplication(sid, docId)
+      await loadAll(depth ?? undefined)
+    } catch (e) {
+      setError(e as ApiError)
+    } finally {
+      setPending(p => { const n = new Set(p); n.delete(`applied:${docId}`); return n })
+    }
+  }
+
   async function toggleApplies(docId: string, on: boolean) {
     if (!sid) return
     setPending(p => new Set(p).add(`applies:${docId}`))
@@ -231,6 +245,22 @@ export default function Chain({ session, setSession }: { session: Session | null
             <h2 id="today-h">Start today</h2>
             <p>Things you can apply for or gather now, in order. The first ones shorten your critical path the most.</p>
           </div>
+          {plan.applied.length > 0 && (
+            <ul className="applied" data-testid="applied">
+              {plan.applied.map(a => (
+                <li key={a.doc_id} data-testid={`applied-${a.doc_id}`}>
+                  <div>
+                    <span className="tag blue">Applied</span> <b>{shortName(itemsById[a.doc_id]?.name ?? a.doc_id)}</b>
+                    <div className="sub">On {fmtDate(a.applied_on)}. {a.left === null ? 'No legal time limit, so Kaagaz cannot say when it arrives.' : `${fmtDays(a.passed, a.unit === 'calendar_days' ? 'days' : plan.day_unit)} have passed; the law allows ${fmtDays(a.left, a.unit === 'calendar_days' ? 'days' : plan.day_unit)} more.`}</div>
+                  </div>
+                  <div className="pair">
+                    <button type="button" className="btn small" disabled={pending.has(a.doc_id)} onClick={() => toggleHeld(a.doc_id, false)}>I have it now</button>
+                    <button type="button" className="btn ghost small" disabled={pending.has(`applied:${a.doc_id}`)} onClick={() => markApplied(a.doc_id, true)}>Undo</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
           {plan.start_today.length === 0 && <p className="note">Nothing can be started at this depth. Every document left needs another one first, or you hold everything.</p>}
           <ol className="todo" data-testid="start-today">
             {plan.start_today.map(s => {
@@ -262,6 +292,7 @@ export default function Chain({ session, setSession }: { session: Session | null
                     <button type="button" className="toggle" aria-pressed={false} disabled={pending.has(s.id)} onClick={() => toggleHeld(s.id, false)} data-testid={`have-${s.id}`}>
                       <span className="box" aria-hidden="true" /> I have this
                     </button>
+                    <button type="button" className="btn ghost small" disabled={pending.has(`applied:${s.id}`)} onClick={() => markApplied(s.id, false)} data-testid={`applied-btn-${s.id}`}>I applied {getAsOf() ? `on ${fmtDate(getAsOf())}` : 'today'}</button>
                     <button type="button" className="btn ghost small" onClick={e => openWhy(s.id, e.currentTarget)}>Why?</button>
                     {src?.source_url && <a href={src.source_url} target="_blank" rel="noreferrer" className="note">Source: {hostOf(src.source_url)}</a>}
                   </div>

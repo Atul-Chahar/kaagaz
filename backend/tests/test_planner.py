@@ -193,3 +193,22 @@ def test_critical_path_never_runs_through_a_held_document():
     assert p.critical_path() == ["S", "A", "U"]
     p = Planner(g, {"H", "U"})
     assert p.critical_path() == ["S", "A"]
+
+
+def test_an_application_in_progress_counts_down_and_its_prerequisites_are_done():
+    # S needs C (21 days), C needs A (unknown) and P (5 days)
+    g = graph([doc("C", 21), doc("A", None), doc("P", 5)], [("S", "C", "REQUIRES"), ("C", "A", "REQUIRES"),
+                                                             ("C", "P", "REQUIRES")])
+    before = Planner(g, set())
+    assert before.finish("S") == Finish(26, False)
+    p = Planner(g, set(), progress={"C": 13})  # applied 8 working days ago
+    assert p.finish("S") == Finish(13, True)
+    assert p.needed() == ["C"] and p.ready_now() == [] and p.critical_path() == ["S", "C"]
+    assert Planner(g, set(), progress={"C": 0}).finish("S") == Finish(0, True)
+    # holding it wins over having applied for it
+    assert Planner(g, {"C"}, progress={"C": 13}).finish("S") == Finish(0, True)
+
+
+def test_an_application_for_a_step_with_no_legal_time_stays_unknown():
+    g = graph([doc("A", None)], [("S", "A", "REQUIRES")])
+    assert Planner(g, set(), progress={"A": 0}).finish("S") == Finish(0, False)

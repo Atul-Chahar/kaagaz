@@ -421,3 +421,7 @@ pre.cypher { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5;
   .finding .diff { grid-template-columns: minmax(0, 1fr); }
   .case-steps li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
+.applied { list-style: none; padding: 0; margin: 0 0 var(--s2); }
+.applied li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2); padding: 10px 0; border-bottom: 1px solid var(--rule); align-items: center; }
+.applied .sub { font-size: 0.86rem; color: var(--ink-soft); margin-top: 2px; }
+@media (max-width: 760px) { .applied li { grid-template-columns: minmax(0, 1fr); } }

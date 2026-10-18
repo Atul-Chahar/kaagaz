@@ -84,6 +84,28 @@ def applies(student_id: str, trace=None) -> set[str]:
     return {row["doc_id"] for row in r.rows}
 
 
+def add_application(student_id: str, doc_id: str, applied_on: str, trace=None) -> dict:
+    r = graph.run(_g(student_id), "application_add", {"student_id": student_id, "doc_id": doc_id,
+                                                      "applied_on": applied_on, "now": now_iso()}, read_only=False)
+    _t(trace, r)
+    return r.rows[0]
+
+
+def remove_application(student_id: str, doc_id: str, trace=None) -> int:
+    r = graph.run(_g(student_id), "application_remove", {"student_id": student_id, "doc_id": doc_id},
+                  read_only=False)
+    _t(trace, r)
+    return r.rows[0]["removed"] if r.rows else 0
+
+
+def applications(student_id: str, trace=None) -> list[dict]:
+    if not exists(student_id):
+        return []
+    r = graph.run(_g(student_id), "recall_applications", {"student_id": student_id})
+    _t(trace, r)
+    return r.rows
+
+
 def set_target(student_id: str, scheme_id: str, deadline: str | None, deadline_source: str, trace=None,
                pack: str | None = None) -> dict:
     r = graph.run(_g(student_id), "target_set",

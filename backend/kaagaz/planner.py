@@ -4,7 +4,8 @@ Works on the sub-graph that prerequisites.cypher returns for one scheme at one d
 nodes (Scheme, Document, AnyOf) and REQUIRES / OPTION edges. Pure Python, no database access,
 so the maths can be unit tested on its own and checked against chain_days.cypher.
 
-finish(doc)   = 0 if held, else days(doc) + max(finish(child)) over its REQUIRES children
+finish(doc)   = 0 if held; the days still left if the student has applied for it (its prerequisites are done);
+                else days(doc) + max(finish(child)) over its REQUIRES children
 finish(anyof) = 0 if any option is held, else min(finish(option))
 finish(scheme)= max(finish(child))
 
@@ -16,7 +17,7 @@ from __future__ import annotations
 
 import datetime as dt
 from collections.abc import Callable
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Literal
 
 MAX_DEPTH = 8
@@ -73,9 +74,13 @@ Converter = Callable[[str, int, int], int | None]
 
 class Planner:
     def __init__(self, graph: RuleGraph, held: set[str] | frozenset[str], unit: str | None = None,
-                 convert: Converter | None = None, applies: set[str] | frozenset[str] | None = None):
+                 convert: Converter | None = None, applies: set[str] | frozenset[str] | None = None,
+                 progress: dict[str, int] | None = None):
         self.g = graph
         self.held = set(held)
+        # documents the student has applied for: doc id -> legal days still left, in the document's own unit
+        # (its legal time minus the days since the application, never below 0). Their prerequisites are done.
+        self.progress = {k: v for k, v in (progress or {}).items() if k not in self.held}
         # a REQUIRES edge with a condition ("only if the student has a disability") counts only when the student
         # has said it applies to them (its target document id is in `applies`)
         self.applies = set(applies or ())
@@ -105,6 +110,13 @@ class Planner:
         elif node.label == "Document" and nid in self.held:
             self._via[nid] = None
             res = ZERO
+        elif node.label == "Document" and nid in self.progress:
+            self._via[nid] = None
+            if node.days is None:
+                res = Finish(0, False)
+            else:
+                days, exact_days = self._days(replace(node, days=self.progress[nid]), 0)
+                res = Finish(days or 0, exact_days)
         else:
             best = self._max_children(nid, [e for e in kids if e.type == "REQUIRES"])
             if node.label == "Document":
@@ -192,6 +204,8 @@ class Planner:
                 if nid in self.held:
                     return
                 out.append(nid)
+                if nid in self.progress:
+                    return  # applied for: its prerequisites are already done
             if node.label == "AnyOf":
                 ch = self._choice.get(nid)
                 if ch:
@@ -207,6 +221,8 @@ class Planner:
     def start_of(self, nid: str) -> Finish:
         """Earliest day this document's application can start (its prerequisites done)."""
         self.finish(nid)
+        if nid in self.progress:
+            return ZERO
         kids = [e for e in self._kids.get(nid, []) if e.type == "REQUIRES"]
         best, exact = 0, True
         for e in kids:
@@ -219,6 +235,8 @@ class Planner:
         """Needed documents whose prerequisites are all already held."""
         out = []
         for nid in self.needed():
+            if nid in self.progress:
+                continue  # already applied for
             kids = [e for e in self._kids.get(nid, []) if e.type == "REQUIRES"]
             if all(self.satisfied(e.dst) for e in kids):
                 out.append(nid)

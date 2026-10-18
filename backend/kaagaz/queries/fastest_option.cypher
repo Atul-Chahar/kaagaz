@@ -2,18 +2,27 @@
 // prerequisites below it (an option is ready only when ALL its own prerequisites are done).
 // A shortest-path procedure (algo.SPpaths) would pick the SHORTEST chain under an option, which is wrong for
 // all-of prerequisites, so this is a weighted path query that takes the maximum per option.
+// A document the student has applied for counts only its days still left, and nothing below it.
 // The planner runs this for every open group as a cross-check of its own choice (plan -> option_checks).
 MATCH (a:AnyOf {id: $anyof_id})-[opt:OPTION]->(o:Document)
 WHERE NOT o.id IN $held
 OPTIONAL MATCH p = (o)-[hops:REQUIRES*1..8]->(x:Document)
-WHERE none(y IN nodes(p) WHERE y.id IN $held OR NOT y:Document)
+WHERE NOT o.id IN $progress_ids
+  AND none(y IN nodes(p) WHERE y.id IN $held OR NOT y:Document)
+  AND none(i IN range(1, length(p) - 1) WHERE nodes(p)[i].id IN $progress_ids)
   AND all(i IN range(0, length(p) - 1) WHERE relationships(p)[i].condition IS NULL OR nodes(p)[i + 1].id IN $applies)
 WITH o, opt, p,
-     CASE WHEN p IS NULL THEN 0 ELSE reduce(t = 0, y IN tail(nodes(p)) | t + coalesce(y.days, 0)) END AS below,
+     CASE WHEN p IS NULL THEN 0 ELSE reduce(t = 0, y IN tail(nodes(p)) | t + CASE WHEN y.id IN $progress_ids AND y.days IS NOT NULL
+       THEN [i IN range(0, size($progress_ids) - 1) WHERE $progress_ids[i] = y.id | $progress_left[i]][0]
+       ELSE coalesce(y.days, 0) END) END AS below,
      CASE WHEN p IS NULL THEN false ELSE any(y IN tail(nodes(p)) WHERE y.days IS NULL) END AS below_unknown
 WITH o, opt, max(below) AS below, max(CASE WHEN below_unknown THEN 1 ELSE 0 END) AS below_unknown
+WITH o, opt, below, below_unknown,
+     CASE WHEN o.id IN $progress_ids AND o.days IS NOT NULL
+       THEN [i IN range(0, size($progress_ids) - 1) WHERE $progress_ids[i] = o.id | $progress_left[i]][0]
+       ELSE coalesce(o.days, 0) END AS own
 RETURN o.id AS doc_id, o.name AS name, o.days AS days,
-       coalesce(o.days, 0) + below AS total_days,
+       own + below AS total_days,
        (o.days IS NULL OR below_unknown = 1) AS has_unknown,
        properties(opt) AS rule
 ORDER BY total_days, has_unknown, doc_id

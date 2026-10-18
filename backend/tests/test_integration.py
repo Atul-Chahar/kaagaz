@@ -77,11 +77,12 @@ def test_every_rule_edge_carries_its_source():
 
 PARAMS = {
     "prerequisites": {"scheme_id": None, "depth": 3},
-    "chain_days": {"scheme_id": None, "held": [], "depth": 8, "applies": [], "limit": 5},
+    "chain_days": {"scheme_id": None, "held": [], "depth": 8, "applies": [], "limit": 5, "progress_ids": [],
+                   "progress_left": []},
     "shared_documents": {"scheme_id": None, "needed": ["caste-income-certificate-ka", "aadhaar"]},
     "load_bearing": {"scheme_ids": None, "held": [], "limit": 5},
     "load_bearing_pagerank": {"limit": 5},
-    "fastest_option": {"anyof_id": None, "held": [], "applies": []},
+    "fastest_option": {"anyof_id": None, "held": [], "applies": [], "progress_ids": [], "progress_left": []},
     "resolve_name": {"q": None},
     "search_names": {"words": ["income"], "limit": 5},
     "explain": {"scheme_id": None, "doc_id": "aadhaar"},
@@ -96,7 +97,7 @@ PARAMS = {
 
 # Queries on the shared agents graph and the agents' records in a student graph run in tests/test_agents.py.
 OTHER_GRAPHS = ("seed_", "student_", "holding_", "target_", "snapshot_", "recall_", "applies_", "agents_", "alert_",
-                "alerts_", "case_", "proposal_", "proposals_", "task_")
+                "alerts_", "case_", "proposal_", "proposals_", "task_", "application_")
 
 
 def test_every_rules_query_runs_and_returns_rows():
@@ -158,13 +159,18 @@ def test_chain_days_cypher_agrees_with_planner_on_all_of_chains():
             conditional = sorted({e.dst for e in g.edges if e.props.get("condition")})
             for held in held_sets:
                 for applies in ([], conditional):
-                    rows = graph.run(RULES, "chain_days", {"scheme_id": sid, "held": sorted(held), "depth": depth,
-                                                           "applies": applies, "limit": 1}).rows
-                    cypher = rows[0]["days"] if rows else 0
-                    planner = Planner(_all_of(g), held, applies=set(applies)).finish(sid).lb
-                    assert cypher == planner, (sid, depth, sorted(held), applies)
-                    checked += 1
-    assert checked >= 100
+                    # applications in progress: none, the certificate half done, and two at once
+                    for progress in ({}, {"caste-income-certificate-ka": 13},
+                                     {"caste-income-certificate-ka": 0, "bank-account": 2}):
+                        ids = sorted(progress)
+                        rows = graph.run(RULES, "chain_days", {
+                            "scheme_id": sid, "held": sorted(held), "depth": depth, "applies": applies, "limit": 1,
+                            "progress_ids": ids, "progress_left": [progress[i] for i in ids]}).rows
+                        cypher = rows[0]["days"] if rows else 0
+                        planner = Planner(_all_of(g), held, applies=set(applies), progress=progress).finish(sid).lb
+                        assert cypher == planner, (sid, depth, sorted(held), applies, progress)
+                        checked += 1
+    assert checked >= 300
 
 
 def test_fastest_option_matches_planner_choice_when_options_have_no_nested_groups():
@@ -183,7 +189,8 @@ def test_fastest_option_matches_planner_choice_when_options_have_no_nested_group
         opts = kids.get(a["id"], [])
         if any(has_nested(o) for o in opts):
             continue
-        rows = graph.run(RULES, "fastest_option", {"anyof_id": a["id"], "held": [], "applies": []}).rows
+        rows = graph.run(RULES, "fastest_option", {"anyof_id": a["id"], "held": [], "applies": [], "progress_ids": [],
+                                                   "progress_left": []}).rows
         # planner on a graph rooted at this AnyOf
         for sid in scheme_ids():
             g, _r, _s = t.build_rule_graph(sid, MAX_DEPTH, Trace())

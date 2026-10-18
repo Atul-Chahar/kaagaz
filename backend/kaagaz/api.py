@@ -435,12 +435,46 @@ class TaskBody(BaseModel):
 
 
 @app.post("/api/students/{student_id}/tasks/{task_id}")
-def set_task(student_id: str, task_id: str, body: TaskBody) -> dict:
+def set_task(student_id: str, task_id: str, body: TaskBody, pack: str | None = None) -> dict:
+    """Mark a task done or open. Done on an "apply for" task also records the application (dated today), so the
+    plan starts counting that document down; open again removes it."""
     memory.check_id(student_id)
     t = memory.task_status(student_id, task_id, body.status)
     if t is None:
         raise HTTPException(404, "no such task")
-    return {"task": t}
+    out: dict = {"task": t}
+    if t.get("kind") == "apply" and t.get("doc_id"):
+        if body.status == "done":
+            out["application"] = memory.add_application(student_id, t["doc_id"],
+                                                         tools(_pack_param(pack)).today().isoformat())
+        else:
+            out["application_removed"] = memory.remove_application(student_id, t["doc_id"])
+    return out
+
+
+class ApplicationBody(BaseModel):
+    doc_id: str
+    applied_on: dt.date | None = None
+
+
+@app.post("/api/students/{student_id}/applications")
+def add_application(student_id: str, body: ApplicationBody, pack: str | None = None) -> dict:
+    """The student applied for a document on a date (today if not given). The plan counts it down from then."""
+    t = tools(_pack_param(pack))
+    trace = Trace()
+    if t._need(body.doc_id, "Document", trace) is None:
+        raise HTTPException(404, f"unknown document {body.doc_id}")
+    on = body.applied_on or t.today()
+    if on > t.today():
+        raise ValueError("applied_on cannot be after today")
+    memory.ensure_student(student_id, trace=trace)
+    return memory.add_application(student_id, body.doc_id, on.isoformat(), trace) | {"trace": trace.rows}
+
+
+@app.delete("/api/students/{student_id}/applications/{doc_id}")
+def remove_application(student_id: str, doc_id: str) -> dict:
+    memory.check_id(student_id)
+    return {"removed": memory.remove_application(student_id, doc_id)}
 
 
 @app.get("/api/students/{student_id}/tasks.ics")

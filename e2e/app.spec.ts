@@ -231,3 +231,20 @@ test('Agents page: the three agents and the watcher state come from the agents g
   const watch = data.runs.find((r: { agent: string }) => r.agent === 'watcher')
   if (watch) await expect(page.getByTestId('watch-summary')).toBeVisible()
 })
+
+test('"I applied today" moves a step to Applied, the plan counts it down, and Undo takes it back', async ({ page, request }) => {
+  const sid = await loadExample(page)
+  const ex = await (await request.get(`/api/students/${sid}`)).json()
+  const scheme = ex.data.targets[0].scheme_id
+  const before = await apiPlan(request, sid, scheme, 1)
+  const first = before.start_today[0].id
+  await page.getByTestId(`applied-btn-${first}`).click()
+  await expect(page.getByTestId(`applied-${first}`)).toBeVisible()
+  await expect(page.getByTestId(`todo-${first}`)).toHaveCount(0)
+  const after = await apiPlan(request, sid, scheme, 1)
+  const a = after.applied.find((x: { doc_id: string }) => x.doc_id === first)
+  expect(a.passed).toBe(0)
+  expect(after.chain_check.agree).toBe(true)
+  await page.getByTestId(`applied-${first}`).getByRole('button', { name: 'Undo' }).click()
+  await expect(page.getByTestId(`todo-${first}`)).toBeVisible()
+})

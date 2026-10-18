@@ -62,6 +62,7 @@ export interface PlanItem {
   span?: number
   note?: string | null
   hidden_below: boolean
+  applied?: Applied
   start?: number
   end?: number
   exact?: boolean
@@ -69,6 +70,8 @@ export interface PlanItem {
   chosen?: string | null
   options?: string[]
 }
+
+export interface Applied { doc_id: string; applied_on: string; passed: number; left: number | null; unit: string }
 
 export type VerdictKind = 'on_time' | 'late' | 'at_least' | 'late_at_least' | 'closed' | 'no_deadline' | 'cannot_compute'
 
@@ -89,6 +92,7 @@ export interface Plan {
   critical_path: string[]
   needed: string[]
   held: string[]
+  applied: Applied[]
   unknown: string[]
   hidden_more: boolean
   applies: string[]
@@ -172,6 +176,8 @@ export const api = {
   addHolding: (sid: string, doc_id: string) => req<ToolResponse<unknown>>(`/api/students/${sid}/holdings`, { method: 'POST', body: JSON.stringify({ doc_id }) }),
   addApplies: (sid: string, doc_id: string) => req(`/api/students/${sid}/applies`, { method: 'POST', body: JSON.stringify({ doc_id }) }),
   removeApplies: (sid: string, doc_id: string) => req(`/api/students/${sid}/applies/${encodeURIComponent(doc_id)}`, { method: 'DELETE' }),
+  addApplication: (sid: string, doc_id: string) => req(`/api/students/${sid}/applications`, { method: 'POST', body: JSON.stringify({ doc_id }) }),
+  removeApplication: (sid: string, doc_id: string) => req(`/api/students/${sid}/applications/${encodeURIComponent(doc_id)}`, { method: 'DELETE' }),
   removeHolding: (sid: string, doc_id: string) => req(`/api/students/${sid}/holdings/${encodeURIComponent(doc_id)}`, { method: 'DELETE' }),
   plan: (sid: string, scheme_id: string, depth: number, remember: boolean) =>
     req<ToolResponse<Plan>>(`/api/plan?student_id=${sid}&scheme_id=${encodeURIComponent(scheme_id)}&depth=${depth}&remember=${remember}`),
@@ -215,7 +221,7 @@ export interface Alert {
 }
 export interface Since {
   last_review: string; last_today?: string; working_days_passed: number; stamp_before?: string; stamp_now: string
-  verdict_before?: string; verdict_now: string; new_holdings: string[]; dropped_holdings: string[]; scheme_changed: boolean
+  verdict_before?: string; verdict_now: string; new_holdings: string[]; dropped_holdings: string[]; new_applications?: string[]; scheme_changed: boolean
 }
 export interface CaseReview {
   case_id: string; scheme: { id: string; name: string }; today: string; as_of: boolean
