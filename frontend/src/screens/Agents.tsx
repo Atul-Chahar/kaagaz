@@ -29,7 +29,7 @@ function FindingCard({ f, onDecide, busy }: { f: Finding; onDecide: (f: Finding,
       <div className="finding-head">
         <span className={`tag ${k.cls}`}>{k.label}</span>
         <span className="tag">{f.status}</span>
-        <span className="note">{plural(f.rule_count, 'rule', 'rules')} · {plural(f.schemes.length, 'scheme', 'schemes')} · {plural(f.students, 'student targets', 'students target')} them</span>
+        <span className="note">{plural(f.rule_count, 'rule', 'rules')} · {plural(f.schemes.length, 'scheme', 'schemes')} · {plural(f.students, 'student targets', 'students target')} them{f.examples ? ` (plus ${plural(f.examples, 'Example copy', 'Example copies')})` : ''}</span>
       </div>
       <p className="src"><a href={f.source_url} target="_blank" rel="noreferrer">{f.source_title}</a> <span className="note">{hostOf(f.source_url)} · checked {fmtDate(f.checked_on)}{f.seen_count > 1 ? ` · seen in ${f.seen_count} runs` : ''}</span></p>
       <div className="diff">

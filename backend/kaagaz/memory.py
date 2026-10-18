@@ -9,6 +9,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import re
+import secrets
 
 from . import graph
 
@@ -163,6 +164,27 @@ def save_snapshot(student_id: str, scheme_id: str, verdict: str, critical_days: 
                   read_only=False)
     _t(trace, r)
     return r.rows[0]["at"]
+
+
+EXAMPLE_ID = re.compile(r"^example-(\d{12})-[a-f0-9]+$")
+
+
+def new_example_id() -> str:
+    """Each visitor gets a private Example copy; the id carries its creation time (UTC) so old copies can go."""
+    return f"example-{dt.datetime.now(dt.UTC):%Y%m%d%H%M}-{secrets.token_hex(4)}"
+
+
+def prune_examples(max_age_hours: int = 24) -> int:
+    """Delete Example copies older than max_age_hours. Real students' graphs are never touched."""
+    cutoff = dt.datetime.now(dt.UTC) - dt.timedelta(hours=max_age_hours)
+    n = 0
+    for name in graph.db().list_graphs():
+        sid = name.removeprefix("kaagaz:student:")
+        m = EXAMPLE_ID.match(sid) if name.startswith("kaagaz:student:") else None
+        if m and dt.datetime.strptime(m[1], "%Y%m%d%H%M").replace(tzinfo=dt.UTC) < cutoff:
+            reset(sid)
+            n += 1
+    return n
 
 
 def reset(student_id: str) -> None:

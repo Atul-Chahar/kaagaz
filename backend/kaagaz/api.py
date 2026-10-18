@@ -284,7 +284,8 @@ def load_example(pack: str | None = None, replace: str | None = None) -> dict:
         raise HTTPException(404, "this pack has no example student")
     if replace and replace.startswith("example-") and memory.STUDENT_ID.match(replace):
         memory.reset(replace)
-    sid = f"example-{secrets.token_hex(5)}"
+    memory.prune_examples()
+    sid = memory.new_example_id()
     label = ex.get("label") or memory.EXAMPLE_LABEL
     memory.ensure_student(sid, label)
     for h in ex.get("holdings", []):

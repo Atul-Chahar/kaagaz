@@ -78,6 +78,7 @@ def findings(pack: str, status: str | None = None, limit: int = 50) -> list[dict
         f = dict(r["finding"])
         f["schemes"] = r["schemes"]
         f["students"] = r["students"]
+        f["examples"] = r["examples"]
         out.append(f)
     return out
 

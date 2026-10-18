@@ -213,3 +213,12 @@ def test_an_application_counts_down_in_working_days_and_cypher_agrees(sid):
                          headers=h)
     assert future.status_code == 422
     assert client.delete(f"/api/students/{sid}/applications/caste-income-certificate-ka").json()["removed"] == 1
+
+
+def test_old_example_copies_are_pruned_and_real_students_are_not(sid):
+    old = "example-202601010000-abcd1234"
+    memory.ensure_student(old, "Example student")
+    fresh = client.post("/api/students/example").json()["student_id"]
+    assert memory.EXAMPLE_ID.match(fresh)
+    assert not memory.exists(old) and memory.exists(fresh) and memory.exists(sid)
+    memory.reset(fresh)

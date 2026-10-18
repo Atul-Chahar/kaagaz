@@ -54,6 +54,8 @@ removed. Kaagaz stamps **12 DAYS SHORT** and lists schemes with later deadlines 
 Three agents share one FalkorDB graph, `kaagaz:agents`. Each keeps a record of its own work there, and they hand work
 to each other through it.
 
+![Recorded from the running app: the caseworker's review of the Example student, an approved task, then the Agents screen with the watcher's real findings](docs/screenshots/agents-flow.gif)
+
 ```mermaid
 flowchart LR
   W[Watcher<br/>re-fetches sources,<br/>re-checks proof sentences] -->|Finding -AFFECTS-> Scheme| G[(FalkorDB<br/>kaagaz:agents)]
@@ -567,6 +569,15 @@ made-up things are the Example student and the Example founder, and they are lab
 
 **Why do the numbers on my screen differ from this README?** Kaagaz counts from today. The README numbers are from
 18 Oct 2026; press **See it as on 18 Oct 2026** to see them again.
+
+**Is the caseworker an LLM agent?** It is an agent that calls tools in a loop and decides what to call next from
+what the last tool returned, then acts after approval. The decision itself is a written policy in code, so it can be
+tested and explained; a wrong deadline call is worse than a plain one. A model is optional: it picks a tool in the Ask
+box and writes a short case note, and both are checked against the graph.
+
+**Can the watcher change the rules on its own?** No. It only records findings. A person approves each one, the change
+goes through the same audit as every other rule, and the old saved copy of the page stays in the repo next to the new
+one.
 
 **Does it work outside Karnataka?** The engine has no India-specific code. A second rule pack (starting a company)
 runs on the same engine, queries and UI. A new region needs a rule pack built from its own sources.

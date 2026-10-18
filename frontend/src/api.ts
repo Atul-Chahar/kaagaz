@@ -238,7 +238,7 @@ export interface Finding {
   source_title: string; old_excerpt: string; old_value?: string; new_excerpt?: string; new_value?: string
   score?: number; note?: string; checked_on: string; status: 'open' | 'approved' | 'rejected'
   created_at: string; last_seen: string; seen_count: number; decided_at?: string; decided_note?: string
-  tls_verified?: boolean; schemes: string[]; students: number
+  tls_verified?: boolean; schemes: string[]; students: number; examples: number
 }
 export interface AgentRun {
   id: string; agent: string; pack: string; started_at: string; finished_at?: string; status: 'running' | 'done' | 'failed'
