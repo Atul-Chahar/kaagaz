@@ -30,3 +30,20 @@ export function getTheme(): 'light' | 'dark' | null {
 export function setTheme(t: 'light' | 'dark'): void {
   try { localStorage.setItem('kaagaz.theme', t) } catch { /* ignore */ }
 }
+
+// "See it as on the submission day": a per-viewer view setting, not data.
+export function getAsOfStored(): string | null {
+  try {
+    const v = localStorage.getItem('kaagaz.asOf')
+    return v && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null
+  } catch {
+    return null
+  }
+}
+
+export function setAsOfStored(v: string | null): void {
+  try {
+    if (v) localStorage.setItem('kaagaz.asOf', v)
+    else localStorage.removeItem('kaagaz.asOf')
+  } catch { /* ignore */ }
+}

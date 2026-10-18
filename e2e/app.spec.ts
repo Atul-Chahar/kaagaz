@@ -177,3 +177,23 @@ test('"This applies to me" adds a conditional requirement to the chain, and remo
   await expect(page.getByTestId('slip-disability-certificate')).toHaveCount(0)
   await request.delete(`/api/students/${s}`)
 })
+
+test('"As on the submission day" counts from that date, says so, and switches back to today', async ({ page, request }) => {
+  const health = await (await request.get('/api/health')).json()
+  const snapshot: string = health.snapshot_date
+  await page.addInitScript(d => { if (!sessionStorage.getItem('asof-set')) { localStorage.setItem('kaagaz.asOf', d); sessionStorage.setItem('asof-set', '1') } }, snapshot)
+  const sid = await loadExample(page)
+  await expect(page.getByTestId('as-of-bar')).toBeVisible()
+  const ex = await (await request.get(`/api/students/${sid}`)).json()
+  const scheme = ex.data.targets[0].scheme_id
+  const r = await request.get(`/api/plan?student_id=${sid}&scheme_id=${scheme}&depth=1&remember=false`, { headers: { 'X-Kaagaz-As-Of': snapshot } })
+  const asOfPlan = (await r.json()).data
+  expect(asOfPlan.today).toBe(snapshot)
+  await expect(page.getByTestId('stamp')).toContainText(asOfPlan.verdict.stamp)
+  await expectNoSeriousA11y(page, 'chain as on the submission day')
+  await page.getByTestId('as-of-off').click()
+  await expect(page.getByTestId('as-of-bar')).toHaveCount(0)
+  expect(await page.evaluate(() => localStorage.getItem('kaagaz.asOf'))).toBeNull()
+  const today = await apiPlan(request, sid, scheme, 1)
+  await expect(page.getByTestId('stamp')).toContainText(today.verdict.stamp)
+})

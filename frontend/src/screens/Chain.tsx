@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { api, ApiError, type Plan, type PlanItem, type ToolResponse } from '../api'
+import { api, ApiError, getAsOf, type Plan, type PlanItem, type ToolResponse } from '../api'
 import { Loading, StateBox, Stamp, TraceTable } from '../components/common'
 import { fmtDate, fmtDays, hostOf, legalTime, plural, shortName } from '../format'
 import { go, type Session } from '../nav'
@@ -157,7 +157,7 @@ export default function Chain({ session, setSession }: { session: Session | null
           <h2 id="verdict-h" className="sr-only">Verdict</h2>
           <p className="big" aria-live="polite" data-testid="verdict-sentence">{verdictSentence(plan)}</p>
           <div className="facts">
-            <span>Today <b>{fmtDate(plan.today)}</b></span>
+            <span>{getAsOf() ? 'As on' : 'Today'} <b>{fmtDate(plan.today)}</b></span>
             <span>Deadline <b>{plan.deadline.date ? fmtDate(plan.deadline.date) : 'none'}</b> ({deadlineLabel(plan)}{plan.scheme.window_source_url ? <>, <a href={plan.scheme.window_source_url} target="_blank" rel="noreferrer">source</a></> : null})</span>
             {plan.days_left !== null && plan.days_left >= 0 && <span>Left <b>{fmtDays(plan.days_left, plan.day_unit)}</b></span>}
             <span>Critical path <b data-testid="critical-days">{v.kind === 'cannot_compute' || (!v.exact && v.critical_days === 0) ? 'unknown' : `${v.exact ? '' : 'at least '}${fmtDays(v.critical_days, plan.day_unit)}`}</b></span>

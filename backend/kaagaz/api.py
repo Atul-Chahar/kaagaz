@@ -8,7 +8,9 @@ import logging
 import os
 import secrets
 from contextlib import asynccontextmanager
+from contextvars import ContextVar
 from pathlib import Path
+from urllib.parse import parse_qs
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
@@ -27,6 +29,12 @@ FRONTEND_DIST = Path(os.environ.get("KAAGAZ_FRONTEND_DIST", ROOT / "frontend" / 
 BENCH_RESULTS = ROOT / "bench" / "results"
 SOURCES_INDEX = ROOT / "data" / "sources" / "index.json"
 BROWSER_URL = os.environ.get("FALKORDB_BROWSER_URL", "http://localhost:3000")
+# The day this build was submitted. The UI offers "see it as on this day" because most 2026-27 windows close soon
+# after it, so a later visitor would otherwise only see closed windows. Rules and deadlines never change with it.
+SNAPSHOT_DATE = dt.date.fromisoformat(os.environ.get("KAAGAZ_SNAPSHOT_DATE", "2026-10-18"))
+AS_OF_HEADER = "x-kaagaz-as-of"
+# "today" for this request: None means the real date in the pack's timezone
+AS_OF: ContextVar[dt.date | None] = ContextVar("kaagaz_as_of", default=None)
 
 
 
@@ -44,6 +52,42 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="Kaagaz", version="0.1.0", lifespan=lifespan)
+
+
+def parse_as_of(raw: str | None) -> dt.date | None:
+    if not raw:
+        return None
+    try:
+        return dt.date.fromisoformat(raw)
+    except ValueError:
+        raise ValueError(f"as_of must be a date like 2026-10-18, not {raw!r}") from None
+
+
+class AsOfMiddleware:
+    """Reads the X-Kaagaz-As-Of header (or ?as_of=) and sets the date every tool counts from, for this request only."""
+
+    def __init__(self, inner):
+        self.inner = inner
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.inner(scope, receive, send)
+        raw = dict(scope.get("headers") or []).get(AS_OF_HEADER.encode(), b"").decode()
+        if not raw:
+            raw = (parse_qs(scope.get("query_string", b"").decode()).get("as_of") or [""])[0]
+        try:
+            day = parse_as_of(raw)
+        except ValueError as e:
+            res = JSONResponse(status_code=422, content={"error": "bad_arguments", "message": str(e)})
+            return await res(scope, receive, send)
+        token = AS_OF.set(day)
+        try:
+            await self.inner(scope, receive, send)
+        finally:
+            AS_OF.reset(token)
+
+
+app.add_middleware(AsOfMiddleware)
 
 
 @app.exception_handler(RedisConnectionError)
@@ -66,7 +110,7 @@ async def tool_error(_req: Request, exc: ToolError):
 def tools(pack_id: str = DEFAULT_PACK) -> Tools:
     if pack_id not in graph.list_packs():
         raise HTTPException(404, f"unknown pack {pack_id}")
-    return Tools(pack_id)
+    return Tools(pack_id, today=AS_OF.get())
 
 
 def call(pack_id: str, name: str, args: dict) -> dict:
@@ -90,7 +134,8 @@ def health() -> dict:
     seeded = {p: graph.rules_graph_name(p) in graphs for p in packs}
     return {"ok": all(seeded.values()), "falkordb": True, "packs": seeded, "llm": agent.llm_configured(),
             "llm_model": agent.config().get("model") if agent.llm_configured() else None,
-            "browser_url": BROWSER_URL}
+            "browser_url": BROWSER_URL, "snapshot_date": SNAPSHOT_DATE.isoformat(),
+            "as_of": AS_OF.get().isoformat() if AS_OF.get() else None}
 
 
 @app.get("/api/packs")
@@ -133,7 +178,7 @@ def schemes(pack: str | None = None) -> dict:
         s["day_unit"] = "working days" if t.calendar.working else "days"
         s["direct_requirements"] = r["direct_requirements"]
         out.append(s)
-    return {"today": today.isoformat(), "schemes": out, "trace": trace.rows}
+    return {"today": today.isoformat(), "as_of": AS_OF.get() is not None, "schemes": out, "trace": trace.rows}
 
 
 @app.get("/api/documents")
@@ -324,9 +369,11 @@ def forget_student(student_id: str) -> dict:
 @app.get("/api/plan")
 def plan(student_id: str, scheme_id: str, depth: int = MAX_DEPTH, remember: bool = True,
          pack: str | None = None) -> dict:
+    # a plan counted from a chosen date is a view, not a visit: it is not saved to the student's memory
     res = call(_pack_param(pack), "plan", {"student_id": student_id, "scheme_id": scheme_id, "depth": depth,
-                                           "remember": remember})
+                                           "remember": remember and AS_OF.get() is None})
     res["cypher"] = {n: graph.query_text(n) for n in ("prerequisites", "chain_days")}
+    res["as_of"] = AS_OF.get() is not None
     return res
 
 

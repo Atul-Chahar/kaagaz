@@ -163,3 +163,31 @@ def test_sentence_checker_on_a_real_plan_rejects_wrong_numbers_and_invented_docu
 def test_bad_student_id_is_a_plain_422_not_a_crash():
     r = client.delete("/api/students/BAD ID!")
     assert r.status_code == 422 and "student_id" in r.json()["message"]
+
+
+def test_as_of_header_changes_today_but_not_the_rules(sid):
+    """The submission-day view: the same student and the same rules, counted from a chosen date, and labelled."""
+    client.put(f"/api/students/{sid}/target", json={"scheme_id": "ka-ssp-pms-obc"})
+    q = f"/api/plan?student_id={sid}&scheme_id=ka-ssp-pms-obc&remember=false"
+    before = client.get(q, headers={"X-Kaagaz-As-Of": "2026-10-18"}).json()
+    after = client.get(q, headers={"X-Kaagaz-As-Of": "2026-11-05"}).json()
+    assert before["as_of"] is True and before["data"]["today"] == "2026-10-18"
+    assert before["data"]["deadline"]["date"] == after["data"]["deadline"]["date"] == "2026-10-31"
+    # 19 Oct to 31 Oct 2026 in Karnataka: 13 days minus 2 Sundays, the 4th Saturday (24th) and 2 holidays (20th, 26th)
+    assert before["data"]["days_left"] == 9
+    assert before["data"]["verdict"]["kind"] != "closed" and after["data"]["verdict"]["kind"] == "closed"
+    assert [i["id"] for i in before["data"]["items"]] == [i["id"] for i in after["data"]["items"]]
+    # the query-string form works too, and without either the real date is used and not labelled
+    assert client.get(q + "&as_of=2026-11-05").json()["data"]["verdict"]["kind"] == "closed"
+    assert client.get(q).json()["as_of"] is False
+
+
+def test_as_of_is_per_request_and_bad_dates_are_422():
+    s = client.get("/api/schemes", headers={"X-Kaagaz-As-Of": "2026-10-18"}).json()
+    assert s["today"] == "2026-10-18" and s["as_of"] is True
+    obc = next(x for x in s["schemes"] if x["id"] == "ka-ssp-pms-obc")
+    assert obc["days_left"] == 9
+    assert client.get("/api/schemes").json()["as_of"] is False
+    r = client.get("/api/schemes", headers={"X-Kaagaz-As-Of": "18/10/2026"})
+    assert r.status_code == 422 and r.json()["error"] == "bad_arguments"
+    assert client.get("/api/health").json()["snapshot_date"] == "2026-10-18"

@@ -126,6 +126,12 @@ let currentPack: string | null = null
 export function setPack(id: string | null) { currentPack = id }
 export function getPack(): string | null { return currentPack }
 
+// The date every count starts from. null means today. Set by the date bar ("see it as on the submission day");
+// the server only changes "today", never the rules or deadlines.
+let currentAsOf: string | null = null
+export function setAsOf(day: string | null) { currentAsOf = day }
+export function getAsOf(): string | null { return currentAsOf }
+
 function withPack(path: string): string {
   if (!currentPack || path.startsWith('/api/health') || path === '/api/packs') return path
   return `${path}${path.includes('?') ? '&' : '?'}pack=${encodeURIComponent(currentPack)}`
@@ -135,7 +141,9 @@ async function req<T>(rawPath: string, init?: RequestInit): Promise<T> {
   const path = withPack(rawPath)
   let r: Response
   try {
-    r = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...init })
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+    if (currentAsOf) headers['X-Kaagaz-As-Of'] = currentAsOf
+    r = await fetch(path, { headers, ...init })
   } catch {
     throw new ApiError(0, "The Kaagaz server isn't reachable. Start it with `docker compose up`.", 'api_unreachable')
   }
@@ -152,7 +160,7 @@ export interface PackInfo { id: string; name: string; jurisdiction: string; vers
 
 export const api = {
   packs: () => req<PackInfo[]>('/api/packs'),
-  health: () => req<{ ok: boolean; falkordb: boolean; message?: string; llm: boolean; llm_model: string | null; browser_url: string; packs?: Record<string, boolean> }>('/api/health'),
+  health: () => req<{ ok: boolean; falkordb: boolean; message?: string; llm: boolean; llm_model: string | null; browser_url: string; packs?: Record<string, boolean>; snapshot_date?: string }>('/api/health'),
   schemes: () => req<{ today: string; schemes: Scheme[] }>('/api/schemes'),
   documents: () => req<{ documents: { id: string; name: string; days: number | null; days_unit?: string | null; office_name: string | null; group: string }[]; groups: string[] }>('/api/documents'),
   prerequisites: (scheme_id: string, depth = 8) =>

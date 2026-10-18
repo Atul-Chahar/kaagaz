@@ -26,3 +26,4 @@ One line per decision, with the reason.
 - 2026-10-17: The Example label comes from the pack ("Example student", "Example founder"); the audit requires it to start with "Example ".
 - 2026-10-17: MIT licence for the code (common for hackathon repos, lets judges run and reuse it). Saved government sources keep their own terms; the licence covers the code and the generated pack files. The owner can change this before making the repo public.
 - 2026-10-17: Adversarial review findings and fixes are listed in docs/ADVERSARIAL_REVIEW.md; all eleven were fixed (none ignored).
+- 2026-10-18: "See it as on the submission day" (X-Kaagaz-As-Of header, ?as_of=, KAAGAZ_SNAPSHOT_DATE=2026-10-18). Judging happens after most 2026-27 windows close (7 of 11 on 31 Oct), so a later visitor would only see closed windows. Only "today" moves; rules and deadlines are unchanged, the UI labels it on every screen, and plans viewed this way are not saved to memory.

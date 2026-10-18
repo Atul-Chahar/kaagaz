@@ -84,6 +84,11 @@ button { font: inherit; color: inherit; }
 .nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); border-radius: 0; }
 .theme-btn { border: 1px solid var(--rule-strong); background: transparent; border-radius: var(--radius); padding: 5px 10px; cursor: pointer; color: var(--ink-soft); font-size: 0.85rem; white-space: nowrap; }
 .theme-btn:hover { color: var(--ink); }
+.datebar { border-bottom: 1px solid var(--rule); background: var(--paper-deep); }
+.datebar.as-of { background: var(--stamp-blue-wash); border-bottom-color: var(--stamp-blue); }
+.datebar-in { max-width: var(--max); margin: 0 auto; padding: var(--s1) var(--s2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); }
+.datebar-in p { margin: 0; flex: 1 1 32ch; font-size: 0.9rem; }
+.datebar-in .btn { flex: none; }
 main:focus, main:focus-visible { box-shadow: none; outline: none; }
 main { max-width: var(--max); margin: 0 auto; padding: var(--s4) var(--s2) var(--s8); }
 .foot { max-width: var(--max); margin: 0 auto; padding: var(--s3) var(--s2) var(--s5); border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); }

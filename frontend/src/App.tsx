@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { InkFilter, Mark } from './components/common'
-import { getStudent, getTheme, setStudent, setTheme } from './store'
+import { getAsOfStored, getStudent, getTheme, setAsOfStored, setStudent, setTheme } from './store'
 import Start from './screens/Start'
 import Chain from './screens/Chain'
 import Ask from './screens/Ask'
@@ -9,7 +9,8 @@ import Sources from './screens/Sources'
 import About from './screens/About'
 import type { Session } from './nav'
 import { t, type MessageKey } from './i18n'
-import { setPack } from './api'
+import { api, setAsOf, setPack } from './api'
+import DateBar from './components/DateBar'
 
 const ROUTES: { path: string; key: MessageKey }[] = [
   { path: '/', key: 'nav.start' },
@@ -28,6 +29,8 @@ function currentPath(): string {
 export default function App() {
   const [path, setPath] = useState(currentPath())
   const [session, setSessionState] = useState<Session | null>(() => { const s = getStudent(); setPack(s?.pack ?? null); return s })
+  const [asOf, setAsOfState] = useState<string | null>(() => { const d = getAsOfStored(); setAsOf(d); return d })
+  const [snapshot, setSnapshot] = useState<string | null>(null)
   const [theme, setThemeState] = useState<'light' | 'dark' | null>(() => getTheme())
 
   useEffect(() => {
@@ -42,6 +45,10 @@ export default function App() {
     document.title = path === '/' ? 'Kaagaz' : `${label} · Kaagaz`
     document.getElementById('main')?.focus({ preventScroll: true })
   }, [path])
+
+  useEffect(() => { api.health().then(h => setSnapshot(h.snapshot_date ?? null)).catch(() => setSnapshot(null)) }, [])
+
+  const changeAsOf = useCallback((d: string | null) => { setAsOf(d); setAsOfStored(d); setAsOfState(d) }, [])
 
   const setSession = useCallback((s: Session | null) => { setSessionState(s); setStudent(s) }, [])
 
@@ -80,7 +87,8 @@ export default function App() {
           </button>
         </div>
       </header>
-      <main id="main" tabIndex={-1} style={{ outline: 'none' }}>{screen}</main>
+      <DateBar asOf={asOf} snapshot={snapshot} onChange={changeAsOf} />
+      <main id="main" key={asOf ?? 'today'} tabIndex={-1} style={{ outline: 'none' }}>{screen}</main>
       <footer className="foot">
         <span>{t('foot.sources')}</span>
         <span>{t('foot.advice')}</span>
