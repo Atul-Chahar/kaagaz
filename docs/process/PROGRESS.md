@@ -33,4 +33,4 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 - [x] Caseworker agent: multi-step review with a coded policy, proposals that run only after approval, tasks and .ics, alerts to affected students through the shared registry, cursor so each approval is handled once.
 - [x] Memory over time: applications count down in the planner and in Cypher (300+ agreement cases); the caseworker compares each review with its last one.
 - [x] MCP: review_case and watcher_findings.
-- [x] `bash scripts/verify.sh`: VERIFY: ALL CHECKS PASSED (120 backend tests, 20 e2e, 40 screenshots, Docker build).
+- [x] `bash scripts/verify.sh`: VERIFY: ALL CHECKS PASSED (121 backend tests, 20 e2e, 40 screenshots, Docker build).

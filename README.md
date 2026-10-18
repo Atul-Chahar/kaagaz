@@ -7,7 +7,7 @@
 ![FalkorDB](https://img.shields.io/badge/graph-FalkorDB-5B4CDB)
 ![Python](https://img.shields.io/badge/backend-Python%203.12%20%2B%20FastAPI-3776AB)
 ![React](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript-149ECA)
-![Tests](https://img.shields.io/badge/tests-120%20backend%20%2B%2020%20e2e-2E7D32)
+![Tests](https://img.shields.io/badge/tests-121%20backend%20%2B%2020%20e2e-2E7D32)
 ![Sources](https://img.shields.io/badge/rules-143%2C%20each%20with%20a%20government%20source-555)
 ![Licence](https://img.shields.io/badge/licence-MIT-555)
 
@@ -520,7 +520,7 @@ conditional rules were handled, is kept in `bench/results/` too.
 
 | Claim | How to check it |
 |---|---|
-| Everything works | The [CI run](https://github.com/Atul-Chahar/kaagaz/actions/workflows/ci.yml) on every push: data audit, lint, 75 unit and 45 integration tests on a real FalkorDB, frontend typecheck, lint and build, 20 Playwright + axe tests, Docker build. Locally, `bash scripts/verify.sh` runs the same and also takes 40 screenshots; it ends with `VERIFY: ALL CHECKS PASSED` |
+| Everything works | The [CI run](https://github.com/Atul-Chahar/kaagaz/actions/workflows/ci.yml) on every push: data audit, lint, 75 unit and 46 integration tests on a real FalkorDB, frontend typecheck, lint and build, 20 Playwright + axe tests, Docker build. Locally, `bash scripts/verify.sh` runs the same and also takes 40 screenshots; it ends with `VERIFY: ALL CHECKS PASSED` |
 | The agents work end to end | [`tests/test_agents.py`](backend/tests/test_agents.py): a moved deadline is found, approved, audited, applied to the graph, and reaches only the student it affects; a rejected finding changes nothing; a vanished sentence is marked, not deleted; the caseworker acts only after approval |
 | The watcher ran on the real sources | [`docs/watch/latest.md`](docs/watch/latest.md): every source, its result and every finding from the 18 Oct 2026 run |
 | Every rule comes from a real source | `cd backend && uv run python ../scripts/audit_data.py` checks every excerpt is in the saved source text and every hash matches. The Sources page lists all 60 with links |
