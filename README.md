@@ -2,19 +2,99 @@
 
 > Every scheme finder tells a student what they are eligible for. Kaagaz tells them whether they are already too late, and which certificate to apply for today.
 
-**Track: Track 1, Agents That Act on Connected Data** (Graph Hacks, WeMakeDevs x FalkorDB). Cross-session memory, one graph per student, also touches Track 2.
+![FalkorDB](https://img.shields.io/badge/graph-FalkorDB-5B4CDB) ![Python](https://img.shields.io/badge/backend-Python%203.12%20%2B%20FastAPI-3776AB) ![React](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript-149ECA) ![Tests](https://img.shields.io/badge/tests-99%20backend%20%2B%2015%20e2e%20%2B%2032%20screenshots-2E7D32) ![Licence](https://img.shields.io/badge/licence-MIT-555)
 
-![The chain screen: a student short of a 31 Oct 2026 deadline](docs/screenshots/chain-late-1440-light.png)
+**[Demo video](VIDEO_LINK)** · **[Judge it in 60 seconds](#judge-it-in-60-seconds)** · **[Graph data model](#graph-data-model)** · **[Cypher queries](#cypher-queries)** · **[Benchmark](#benchmark)** · **[Proof you can check](#proof-you-can-check)**
 
-A government scholarship needs many documents. Some documents need other documents first, each from a different
-office, each with a legal processing time. Nobody shows the full chain or adds up the waiting time, so students find
-out too late. Kaagaz walks the requirement graph in FalkorDB at every depth, finds the hidden prerequisites, adds up
-the legal working days on the longest chain (the critical path), and stamps a verdict against the real deadline.
+**Track: Agents That Act on Connected Data** (Graph Hacks, WeMakeDevs x FalkorDB). Each student also has their own
+persistent memory graph, which touches Agent Memory and Coordination.
 
-Example from the real data (17 Oct 2026): a Karnataka student who does not yet hold a caste and income certificate
-needs **21 working days** for it (Sakala time limit). PostMatric for OBC Students closes on **31 Oct 2026**, which is
-**9 working days** away once Sundays, the fourth Saturday and two government holidays are removed. Kaagaz stamps
-**AT LEAST 12 DAYS SHORT** and suggests schemes with later deadlines that reuse the same documents.
+![The chain screen: a student 12 working days short of a 31 Oct 2026 deadline](docs/screenshots/chain-late-1440-light.png)
+
+## The problem
+
+A government scholarship needs documents. Some documents need other documents first, each from a different office,
+each with a legal processing time. Nobody shows the full chain or adds up the waiting time, so students find out
+too late, after the application window has closed.
+
+Kaagaz walks the requirement graph in FalkorDB at every depth, finds the hidden prerequisites, adds up the legal
+working days on the longest chain (the critical path), and stamps a verdict against the real deadline. It never
+guesses: a step with no official time stays unknown, and the verdict becomes "at least".
+
+Example from the real data: a Karnataka student who does not yet hold a caste and income certificate needs
+**21 working days** for it (Sakala time limit). PostMatric for OBC Students closes on **31 Oct 2026**,
+which was **9 working days** away on 18 Oct once Sundays, the fourth Saturday and two government holidays are removed. Kaagaz stamps **12 DAYS SHORT** and lists schemes with later deadlines that reuse the same certificate.
+
+## Judge it in 60 seconds
+
+```bash
+git clone https://github.com/Atul-Chahar/kaagaz.git && cd kaagaz && docker compose up -d --build
+```
+
+1. Open http://localhost:8000 and press **Load the Example student** (a made-up student). Green stamp at depth 1.
+2. Press **One step deeper**. A hidden prerequisite appears and the stamp turns blue: **AT LEAST 21 DAYS**.
+3. Click any slip. The Why panel shows the exact sentence from the government source, its link and saved date, and
+   the Cypher query that produced the answer, with **Open in FalkorDB Browser** (http://localhost:3000).
+4. Press **I have this** on a step under **Start today**, then reload. The plan is recomputed from the student's own
+   graph and the change is still there.
+
+No API key is needed. With one (any OpenAI-compatible or Anthropic key), the Ask box also takes free-text questions.
+
+## Hackathon requirements, and where they are met
+
+| Requirement | Where |
+|---|---|
+| FalkorDB is the primary database and central to the product | Every answer is a Cypher query over the rules graph plus a per-student graph; see [How the graph does the work](#how-the-graph-does-the-work) |
+| Public repo | This repo, MIT licence |
+| README with setup and graph data model | [Quick start](#quick-start), [Graph data model](#graph-data-model) |
+| Cypher queries the product depends on | [Cypher queries](#cypher-queries): 35 parameterised files in `backend/kaagaz/queries/`, each linked |
+| Demo video | [Demo video](VIDEO_LINK) |
+| Live deployment or full local setup | Full local setup with one Docker command; deployment steps in [`docs/DEPLOY.md`](docs/DEPLOY.md) |
+| Only public, synthetic or own data | 60 public government sources in `data/sources/index.json` with SHA-256 hashes; the Example student is synthetic |
+| AI tools disclosed | [AI disclosure](#ai-disclosure) |
+| New work during the event | Full commit history in this repo: first commit 17 Oct 2026, inside the 15 to 18 Oct event |
+
+## Architecture
+
+```mermaid
+flowchart LR
+  subgraph Sources
+    S[60 saved government pages<br/>text + SHA-256]
+  end
+  S -->|build_pack.py + audit_data.py<br/>every excerpt checked against saved text| P[Rule pack YAML]
+  P -->|seed| R[(FalkorDB<br/>kaagaz:rules:pack)]
+  U[Student] --> UI[React UI]
+  UI --> API[FastAPI]
+  Q[Ask box] -->|optional LLM picks 1 of 7 tools| T
+  API --> T[Fixed tool catalogue<br/>resolve, prerequisites, plan,<br/>explain, alternatives,<br/>remember_holding, recall]
+  T -->|35 parameterised Cypher files| R
+  T -->|holdings, targets, snapshots| M[(FalkorDB<br/>kaagaz:student:id)]
+  T --> PL[Planner<br/>critical path in working days<br/>on the official holiday calendar]
+  PL --> V[Verdict stamp + Start today + Why panel with sources]
+  MCP[MCP server] --> T
+```
+
+The model never writes Cypher. Names are resolved against the graph before any other query runs, and every tool call
+and query is logged as a trace row shown in the UI.
+
+## Proof you can check
+
+| Claim | How to check it |
+|---|---|
+| Every rule comes from a real source | `cd backend && uv run python ../scripts/audit_data.py` checks every excerpt is in the saved source text and every hash matches. The Sources page lists all 60 with links |
+| The numbers come from the graph | Each Why panel shows the Cypher query; paste it into FalkorDB Browser and get the same rows |
+| Everything works | `bash scripts/verify.sh`: data audit, 66 unit and 33 integration tests on real FalkorDB, typecheck, lint, build, 15 Playwright + axe tests, 32 screenshots, Docker build. Ends with `VERIFY: ALL CHECKS PASSED` |
+| The benchmark is real | Raw answers, model name and date in `bench/results/20261017T171028Z.json`; the Benchmark page reads it |
+| Memory persists | Integration test restarts the API and reads the holding back; another test shows student A's graph cannot see B's |
+
+## Found and fixed
+
+A separate review pass checked the whole repo against the spec in a fresh context. It found 11 problems; all are
+fixed, with tests. The worst three: the static file route could serve files outside the app (path traversal); the
+LLM sentence checker accepted any number found anywhere in the result; rules marked "only if" were treated as always
+required. Full list: [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md). The live LLM trial later found two more
+bugs (empty answers from reasoning models, and no ids given to the model), fixed in
+[`docs/LLM_SETUP.md`](docs/LLM_SETUP.md).
 
 ## Quick start
 
