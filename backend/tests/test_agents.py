@@ -16,7 +16,7 @@ from fastapi.testclient import TestClient
 
 from kaagaz import agents, caseworker, graph, memory, sources, watcher
 from kaagaz.sources import Fetched
-from kaagaz.tools import Tools
+from kaagaz.tools import ToolError, Tools
 
 pytestmark = pytest.mark.integration
 ROOT = Path(__file__).resolve().parents[2]
@@ -206,7 +206,7 @@ def test_caseworker_investigates_decides_proposes_and_acts_only_on_approval(worl
     done = caseworker.act(t, sid, pending[0]["id"], approve=True)
     assert done["done"]["task"]["status"] == "open" and len(memory.tasks(sid)) == 1
     assert done["plan_after"]["scheme_id"] == "ka-ssp-pms-obc"
-    with pytest.raises(Exception):
+    with pytest.raises(ToolError):
         caseworker.act(t, sid, pending[0]["id"], approve=True)  # already decided
     # the second review remembers the first
     memory.add_holding(sid, "sslc-marks-card", None)
