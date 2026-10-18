@@ -218,6 +218,9 @@ test('Caseworker: investigates in steps, proposes, and acts only after approval'
   const after = await (await request.get(`/api/students/${sid}/case`)).json()
   expect(after.tasks.length).toBe(1)
   await expect(page.getByTestId('ics')).toHaveAttribute('href', `/api/students/${sid}/tasks.ics`)
+  // approving re-plans, which replays the stamp's press animation; measure contrast after it settles
+  await page.waitForLoadState('networkidle')
+  await page.waitForTimeout(800)
   await expectNoSeriousA11y(page, 'chain with caseworker')
 })
 

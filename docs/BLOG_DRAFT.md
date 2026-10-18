@@ -67,6 +67,23 @@ Many steps have no official time limit. Opening a bank account, getting an addre
 
 The Sakala limits turned out to be working days, which meant I needed Karnataka's official 2026 holiday list and the rule that second and fourth Saturdays are off before any count made sense. For deadlines in January 2027 the 2027 list isn't published yet, and the screen says the count may be slightly high.
 
+## The rules go stale, so an agent checks them
+
+Saving the sources fixes the rules to the day I saved them. Government pages change: deadlines get extended, portals get redesigned. So Kaagaz has a watcher agent. It fetches every saved page again (robots.txt respected, one request per second per site) and checks that each rule's exact sentence is still on the live page. When a sentence is gone, it finds the closest sentence on the new page with the digits masked, so "Last date to apply: 31.10.2026" and "Last date to apply: 15.11.2026" match, and it reports the new date.
+
+The watcher never changes a rule. Each finding waits on an Agents screen, where a person sees the saved sentence next to what the page says now and approves or rejects it. An approval saves the new copy of the page as a new source version, writes the change to a file that the same audit checks, and rebuilds the rules graph. Then a third agent, the caseworker, follows a registry in the graph to every student who targets an affected scheme, re-plans each one and leaves them an alert.
+
+All three share one FalkorDB graph, `kaagaz:agents`. Runs, source checks, findings and decisions are nodes, and finding the students a change affects is one pattern:
+
+```cypher
+MATCH (f:Finding {id: $id})-[:AFFECTS]->(s:SchemeRef)<-[:TARGETS]-(st:StudentRef)
+RETURN DISTINCT st.id AS student_id, s.id AS scheme_id
+```
+
+Its first real run, on 18 October, checked the 22 pages behind 175 rules. 18 had exactly the same text. Every deadline sentence was still there. One page, the State Scholarship Portal's home page, had lost the application steps that 48 rules quote. They may have moved into a section the page loads with a script, which a text check can't tell apart from a real change. So the findings are open, waiting for me to look.
+
+The same caseworker also works on one student at a time. "Review my case" runs recall, plan, explain and, only when the answer isn't a clear yes, alternatives. Then it decides with a written policy and proposes tasks with due dates or a plan B. Nothing happens until the student presses Approve. Once a student applies for a certificate, the plan counts it down: the legal limit minus the working days since they applied. The Cypher cross-check applies the same countdown, so the planner and the database still have to agree.
+
 ## Letting a model near it, carefully
 
 There's an optional Ask box where a language model can answer free-text questions. The model gets seven tools (`resolve`, `prerequisites`, `plan`, `explain`, `alternatives`, `remember_holding`, `recall`) and picks one. It never writes Cypher. Names are looked up in the graph before any other query runs, so "income certificate" either matches a real node or comes back as "unknown name".
@@ -99,6 +116,8 @@ Most of what I learned came from bugs. Before calling it done, I had a separate 
 
 **The static file route could serve any file on the server.** `/../../README.md` worked. Paths are now resolved and must stay inside the built frontend, with a test for four ways of writing a traversal.
 
+**One change showed up 48 times.** The watcher's first real run raised 48 findings. There were really 8: the portal's sentences back the same requirement for six schemes, and the watcher made one finding per rule. It now raises one finding per sentence, listing every rule that cites it. When most of a page's sentences vanish at once, it also says so, because that usually means the page moved, not that the law changed.
+
 **The demo would have shown closed windows to the judges.** I found this one while preparing the submission. Seven of the 11 scholarships close on 31 October 2026, and judging happens after that. Anyone opening the app in November would see a wall of "window closed". I added a bar that offers "See it as on 18 Oct 2026". It moves only the start date. The rules and deadlines stay real, the bar stays on screen, and plans viewed that way aren't saved to the student's memory.
 
 FalkorDB had a few surprises too. You can't pass the upper bound of a variable-length pattern as a parameter (`*1..$depth`), so I use a fixed bound and filter by depth. Label unions like `(n:Document|AnyOf)` aren't supported. The default query timeout is one second. And `algo.SPpaths` looked perfect for "which option is fastest" until I remembered that an option is ready only when all of its own prerequisites are done. That's the longest chain under each option, not the shortest, so I wrote that query myself.
@@ -110,6 +129,8 @@ FalkorDB had a few surprises too. You can't pass the upper bound of a variable-l
 - Legal limits are maximums. A real office can be faster or slower; Kaagaz plans against the limit.
 - It covers 11 Karnataka and central scholarships, plus a second rule pack for starting a company in Karnataka that runs on the same engine with no code changes. Other states need their own rule packs built from their own sources.
 - There's no live deployment. It runs locally with one Docker command.
+- The watcher compares text, so a page that builds its content with JavaScript can look changed when it isn't. A person decides every finding for that reason.
+- The caseworker's decisions are a fixed policy. It doesn't learn from what happened to earlier students.
 - The benchmark is small: 29 questions, one model, and ground truth from the same sources as the graph.
 
 ## If you're building something like this

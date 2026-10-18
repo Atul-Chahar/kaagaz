@@ -7,16 +7,19 @@
 ![FalkorDB](https://img.shields.io/badge/graph-FalkorDB-5B4CDB)
 ![Python](https://img.shields.io/badge/backend-Python%203.12%20%2B%20FastAPI-3776AB)
 ![React](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript-149ECA)
-![Tests](https://img.shields.io/badge/tests-101%20backend%20%2B%2016%20e2e-2E7D32)
+![Tests](https://img.shields.io/badge/tests-120%20backend%20%2B%2020%20e2e-2E7D32)
 ![Sources](https://img.shields.io/badge/rules-143%2C%20each%20with%20a%20government%20source-555)
 ![Licence](https://img.shields.io/badge/licence-MIT-555)
 
-**[Demo video](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing)** · **[Run it in 60 seconds](#run-it-in-60-seconds)** ·
+**[Demo video](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing)** · **[Run it in 60 seconds](#run-it-in-60-seconds)** · **[The agents](#the-agents)** ·
 **[How FalkorDB is used](#how-falkordb-is-used)** · **[Graph data model](#graph-data-model)** ·
 **[Cypher queries](#the-cypher-the-product-depends-on)** · **[Proof you can check](#proof-you-can-check)** ·
 **[Questions judges ask](#questions-judges-ask)**
 
-**Graph Hacks (WeMakeDevs x FalkorDB). Tracks: Agents That Act on Connected Data, and Agent Memory and Coordination.**
+**Graph Hacks (WeMakeDevs x FalkorDB).** Tracks: **Agents That Act on Connected Data** (a caseworker agent
+investigates a student's case through the graph, decides, and acts after approval; a watcher agent re-checks the rules
+against the live government pages) and **Agent Memory and Coordination** (three agents coordinate through one shared
+FalkorDB graph, and each student's own memory graph changes as their applications move).
 
 ![The chain screen: a student 12 working days short of a 31 Oct 2026 deadline](docs/screenshots/chain-late-1440-light.png)
 
@@ -43,6 +46,62 @@ removed. Kaagaz stamps **12 DAYS SHORT** and lists schemes with later deadlines 
 5. **Remembers each student** in their own graph, so "I have this" survives a reload and the plan updates.
 6. **Never guesses.** A step with no official time stays unknown and the verdict becomes "at least". Every rule
    carries the exact sentence from its government source, shown in the Why panel with a link and the saved date.
+7. **Has agents that act and remember.** A caseworker reviews a case and proposes what to do, a watcher checks
+   whether the government pages still say what the rules quote, and both work through a shared graph.
+
+## The agents
+
+Three agents share one FalkorDB graph, `kaagaz:agents`. Each keeps a record of its own work there, and they hand work
+to each other through it.
+
+```mermaid
+flowchart LR
+  W[Watcher<br/>re-fetches sources,<br/>re-checks proof sentences] -->|Finding -AFFECTS-> Scheme| G[(FalkorDB<br/>kaagaz:agents)]
+  G --> R[Reviewer: a person<br/>approves or rejects]
+  R -->|approved: changes.yaml,<br/>rules graph rebuilt| C[Caseworker]
+  G -->|registry: StudentRef -TARGETS-> SchemeRef| C
+  C -->|re-plan, Alert| S[(kaagaz:student:id<br/>each student's own graph)]
+  U[Student] -->|Review my case| C
+  C -->|proposals, approved tasks| S
+```
+
+| Agent | What it does | What it writes |
+|---|---|---|
+| **Watcher** | Fetches each saved government source again (robots.txt respected, one request per second per site) and looks for every rule's exact proof sentence on the live page. When a sentence is gone, it finds the closest one on the new page with the digits masked and says whether a date changed, a number changed, the wording changed, or the sentence is gone. Sources behind schemes that students target are checked first. | `(:Run)-[:CHECKED]->(:SourceCheck)`, `(:Run)-[:FOUND]->(:Finding)-[:AFFECTS]->(:SchemeRef)` |
+| **Reviewer** (a person) | Approves or rejects each finding on the **Agents** screen. Nothing in the rules changes before that. On approval, the re-fetched copy is saved as a new source version, the change goes into `data/packs/<pack>/changes.yaml` (audited like every other rule), and the rules graph is rebuilt. | `(:Agent {id: 'reviewer'})-[:DECIDED]->(:Finding)` |
+| **Caseworker** | After an approval, follows the registry to every student who targets an affected scheme, re-plans each one, and leaves an alert in that student's own graph. A cursor on its node means each approval is handled once. On request, it reviews one student's case (below). | `(:Agent)-[:NOTIFIED]->(:Finding)`; in the student's graph `(:Alert)`, `(:CaseReview)-[:PROPOSED]->(:Proposal)`, `(:Task)` |
+
+**The caseworker's loop.** "Review my case" calls the same tools the Ask box uses, and each step depends on what the
+last one returned: `recall` (what the student holds, and the caseworker's own last review), then `plan` (critical
+path and verdict), then `explain` for each step that can start now but has no legal time, then `alternatives`, but
+only when the verdict is not a clear yes. Then it decides with a written policy, so the decision can be tested:
+
+- On time: apply for each step that can start now by the latest date that keeps the spare days.
+- Time unknown: start the steps with no legal time first, because they decide whether the plan works.
+- Short: apply today anyway, since offices can be faster than the limit, and keep a plan B that reuses the same
+  documents, with a checkpoint on the deadline.
+- Window closed: switch to the best scheme that can still be made.
+
+It proposes tasks with due dates, a plan-B checkpoint, or a switch of target. **None of them runs until the student
+presses Approve.** After acting it plans again, so the student sees the effect, and an approved task can go into a
+calendar file. If an LLM key is set, the model writes a short case note, which must pass the same sentence checker as
+the Ask box.
+
+**Memory that changes over time.**
+- An application counts down. Press "I applied today", or tick an approved "apply for" task as done, and that step's
+  remaining time becomes its legal limit minus the working days since the application. The planner and both Cypher
+  cross-checks (`chain_days`, `fastest_option`) apply the same countdown, and the integration tests make them agree
+  on more than 300 cases.
+- Each review is compared with the caseworker's previous one: working days passed, how the stamp moved, and what the
+  student got or applied for since.
+- Alerts from an approved rule change wait in the student's graph until they are read.
+
+**First real run, 18 Oct 2026** ([`docs/watch/latest.md`](docs/watch/latest.md)). The watcher checked the 22 saved
+sources behind the 175 rules of the scholarship pack. 18 had the same text and 3 had changed; the 74 MB Sakala
+compendium was skipped as too large (`--include-large` checks it). Every application deadline sentence was still on
+its page. The 8 findings all come from the SSP home page, which no longer shows the application steps that 48 rules
+quote. Because most of that page changed at once, the watcher warns that the steps may have moved to a section loaded
+by script. The findings are left open for a person to decide.
 
 ## Demo video
 
@@ -66,7 +125,11 @@ Then open http://localhost:8000:
    the Cypher query that produced the answer, with **Open in FalkorDB Browser** (http://localhost:3000; the rules
    graph is `kaagaz:rules:in-ka-scholarships`).
 4. Press **I have this** on a step under **Start today**, then reload. The plan is recomputed from the student's own
-   graph and the change is still there.
+   graph and the change is still there. **I applied today** starts that step's countdown instead.
+5. Under **Caseworker**, press **Review my case**. You see each tool it called, its decision and its proposals.
+   Approve one and it becomes a task, with a calendar file.
+6. Open **Agents**: the watcher's last run over the live government pages, and what it found, waiting for a person to
+   approve or reject.
 
 **Opening this after 18 Oct 2026?** Kaagaz counts from today, and 7 of the 11 scholarship windows close on
 31 Oct 2026. A bar under the menu then offers **See it as on 18 Oct 2026**, the submission day. Only the start date
@@ -82,7 +145,9 @@ No API key is needed. With one (any OpenAI-compatible or Anthropic key), the Ask
 | ![Start: pick a scholarship and tick what you hold](docs/screenshots/start-1440-light.png) **Start.** Pick a scholarship, tick what you already hold, or load the Example student. | ![Depth 2: a hidden prerequisite appears on the timeline](docs/screenshots/chain-depth2-1440-light.png) **Show hidden steps.** Each depth is the same traversal with a larger bound. Red tape marks the critical path. |
 | ![Why panel: the path, the source sentence and the Cypher](docs/screenshots/why-1440-light.png) **Why panel.** Every hop with its source sentence, link, date and confidence. | ![About the graph: data model, load-bearing documents, every query](docs/screenshots/graph-1440-light.png) **About the graph.** Data model, live counts, load-bearing documents (PageRank) and every query file. |
 
-All 9 screens in light and dark, at 1440 and 390 px, are in [`docs/screenshots/`](docs/screenshots/).
+| ![Caseworker: each tool it called, its decision, and proposals waiting for approval](docs/screenshots/caseworker-1440-light.png) **Caseworker.** Each tool call it made and why, the decision, and actions that wait for your approval. | ![Agents: the three agents, the watcher's last run and findings to decide](docs/screenshots/agents-1440-light.png) **Agents.** The watcher's run over the live government pages, and each finding with the old and new sentence. |
+
+Every screen in light and dark, at 1440 and 390 px, is in [`docs/screenshots/`](docs/screenshots/).
 
 ## Hackathon requirements, and where they are met
 
@@ -91,10 +156,10 @@ All 9 screens in light and dark, at 1440 and 390 px, are in [`docs/screenshots/`
 | FalkorDB is the primary database and central to the product | Every answer is a Cypher query over the rules graph plus a per-student graph: [How FalkorDB is used](#how-falkordb-is-used) |
 | Public repository | This repository, MIT licence |
 | README with setup instructions and the graph data model | [Run it in 60 seconds](#run-it-in-60-seconds), [Local development](#local-development), [Graph data model](#graph-data-model) |
-| The Cypher queries the product depends on | [The Cypher the product depends on](#the-cypher-the-product-depends-on): 35 parameterised files in [`backend/kaagaz/queries/`](backend/kaagaz/queries/), the three central ones shown in full |
+| The Cypher queries the product depends on | [The Cypher the product depends on](#the-cypher-the-product-depends-on): 71 parameterised files in [`backend/kaagaz/queries/`](backend/kaagaz/queries/), the three central ones shown in full |
 | Demo video | [Demo video](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing) |
 | Live deployment, or complete local setup | No live deployment. One Docker command starts FalkorDB, FalkorDB Browser and the app; [`docs/DEPLOY.md`](docs/DEPLOY.md) has deployment steps |
-| Track | Agents That Act on Connected Data, and Agent Memory and Coordination |
+| Track | Agents That Act on Connected Data, and Agent Memory and Coordination: [The agents](#the-agents) |
 | Only public, synthetic or own data | 60 public government sources in [`data/sources/index.json`](data/sources/index.json), each with a SHA-256 hash; the Example student is synthetic |
 | AI tools disclosed | [How this was built, and AI disclosure](#how-this-was-built-and-ai-disclosure) |
 | New work during the event | Full commit history: first commit 17 Oct 2026, inside the 15 to 18 Oct event |
@@ -111,7 +176,10 @@ the way. Take FalkorDB away and there is no chain to walk, no critical path and 
 | Many graphs in one instance | One shared rules graph per rule pack, and one separate memory graph per student (`kaagaz:student:<id>`). A query runs on one graph, so one student's data can never reach another student's query | [`memory.py`](backend/kaagaz/memory.py), [`student_init.cypher`](backend/kaagaz/queries/student_init.cypher) |
 | `algo.pageRank` | Ranks "load-bearing" documents: the ones most requirements depend on, directly or through other documents | [`load_bearing_pagerank.cypher`](backend/kaagaz/queries/load_bearing_pagerank.cypher) |
 | Properties on edges | Every REQUIRES, OPTION and ISSUES edge stores `source_url`, `source_title`, `retrieved_at`, the exact `excerpt` and `confidence`, so every answer can show its proof | [`seed_requires.cypher`](backend/kaagaz/queries/seed_requires.cypher) |
-| Parameterised queries and read-only queries (`GRAPH.RO_QUERY`) | All 35 queries are fixed files with parameters, run read-only unless they write student memory or seed a pack; the model never writes Cypher | [`graph.py`](backend/kaagaz/graph.py) |
+| One shared graph for agent coordination | Runs, source checks, findings, decisions and a registry of which student targets which scheme live in `kaagaz:agents`. The caseworker finds who a change affects with one pattern, `(f:Finding)-[:AFFECTS]->(:SchemeRef)<-[:TARGETS]-(:StudentRef)` | [`agents_affected_students.cypher`](backend/kaagaz/queries/agents_affected_students.cypher) |
+| `MERGE` and `FOREACH` for idempotent writes | A finding seen again is linked to the new run instead of duplicated, and keeps its decision | [`agents_finding_upsert.cypher`](backend/kaagaz/queries/agents_finding_upsert.cypher) |
+| List comprehensions over parameter lists inside `reduce()` | The countdown for applications in progress, computed in the database for the cross-check | [`chain_days.cypher`](backend/kaagaz/queries/chain_days.cypher) |
+| Parameterised queries and read-only queries (`GRAPH.RO_QUERY`) | All 71 query files are fixed files with parameters, run read-only unless they write memory or seed a pack; the model never writes Cypher | [`graph.py`](backend/kaagaz/graph.py) |
 | Indexes | `id` indexes on Scheme, Document, AnyOf and Office | [`seed_indexes.cypher`](backend/kaagaz/queries/seed_indexes.cypher) |
 | Per-query timeout | Set explicitly on every query (the default is 1 second) | [`graph.py`](backend/kaagaz/graph.py) |
 | FalkorDB Browser (ships in the same image) | Every Why panel shows its Cypher with **Open in FalkorDB Browser**, so a judge can run it and get the same rows | [`WhyPanel.tsx`](frontend/src/components/WhyPanel.tsx) |
@@ -142,11 +210,15 @@ flowchart LR
   UI --> API[FastAPI]
   Q[Ask box] -->|optional LLM picks 1 of 7 tools| T
   API --> T[Fixed tool catalogue<br/>resolve, prerequisites, plan,<br/>explain, alternatives,<br/>remember_holding, recall]
-  T -->|35 parameterised Cypher files| R
+  T -->|71 parameterised Cypher files| R
   T -->|holdings, targets, snapshots| M[(FalkorDB<br/>kaagaz:student:id)]
   T --> PL[Planner<br/>critical path in working days<br/>on the official holiday calendar]
   PL --> V[Verdict stamp + Start today + Why panel with sources]
   MCP[MCP server] --> T
+  W[Watcher agent] -->|re-checks proof sentences| R
+  W --> A[(FalkorDB<br/>kaagaz:agents)]
+  A --> C[Caseworker agent]
+  C --> T
 ```
 
 The model never writes Cypher. Names are resolved against the graph before any other query runs, and every tool call
@@ -178,6 +250,27 @@ One graph per student, `kaagaz:student:<student-id>`:
 (:Student)-[:TARGETS]->(:Target {scheme_id, deadline, deadline_source, added_at})
 (:Student)-[:PLANNED]->(:PlanSnapshot {at, scheme_id, verdict, critical_days, exact, json})
 (:Student)-[:APPLIES]->(:Applies {doc_id, added_at})   // "this conditional requirement applies to me"
+```
+
+Each student graph also holds what the agents leave there:
+
+```
+(:Student)-[:APPLIED]->(:Application {doc_id, applied_on, added_at})           // counts the step down
+(:Student)-[:REVIEWED]->(:CaseReview {id, at, today, scheme_id, verdict, stamp, decision, json})
+(:CaseReview)-[:PROPOSED]->(:Proposal {id, kind, title, reason, doc_id, scheme_id, due, status})
+(:Student)-[:HAS_TASK]->(:Task {id, kind, title, due, status, from_proposal})
+(:Student)-[:ALERTED]->(:Alert {id, at, kind, scheme_id, finding_id, message, before, after, seen})
+```
+
+One shared agents graph, `kaagaz:agents`:
+
+```
+(:Agent {id, name, role, cursor})-[:RAN]->(:Run {id, agent, pack, started_at, finished_at, status, trigger, summary})
+(:Run)-[:CHECKED]->(:SourceCheck {source_id, url, status, rules_checked, rules_missing, new_sha256, warning})
+(:Run)-[:FOUND]->(:Finding {id, kind, rule_keys, source_url, old_excerpt, new_excerpt, new_value, status})
+(:Finding)-[:AFFECTS]->(:SchemeRef {key, pack, id})<-[:TARGETS]-(:StudentRef {id})   // ids only
+(:Agent {id: 'reviewer'})-[:DECIDED {at, status}]->(:Finding)
+(:Agent {id: 'caseworker'})-[:NOTIFIED {at, student_id, before, after}]->(:Finding)
 ```
 
 ```
@@ -256,9 +349,9 @@ RETURN o.id AS scheme_id, o.name AS name, o.window_end AS window_end, o.window_y
 ORDER BY shared_count DESC, scheme_id
 ```
 
-All 35 query files:
+All 71 query files:
 
-**Rules graph (planning and explaining)** (14)
+**Rules graph: planning, explaining and watching** (16)
 
 | Query | What it does |
 |---|---|
@@ -272,27 +365,68 @@ All 35 query files:
 | [`load_bearing_pagerank`](backend/kaagaz/queries/load_bearing_pagerank.cypher) | PageRank over REQUIRES edges on the whole pack: documents that many requirements point to (directly or through other documents) score highest. |
 | [`prerequisites`](backend/kaagaz/queries/prerequisites.cypher) | Every document and "any one of" group a scheme needs, at every depth up to $depth. |
 | [`resolve_name`](backend/kaagaz/queries/resolve_name.cypher) | Exact, then case-insensitive, lookup of a scheme or document by id or name. |
+| [`rules_by_source`](backend/kaagaz/queries/rules_by_source.cypher) | Rules graph: every rule with its proof sentence, for the watcher to re-check against the live page. rule_key names the rule: REQUIRES:<from>><to>, OPTION:<from>><to>, office:<doc>, days:<doc>, window:<scheme>. |
 | [`schemes`](backend/kaagaz/queries/schemes.cypher) | Every scheme in the pack with its application window, for the Start screen. |
+| [`schemes_above`](backend/kaagaz/queries/schemes_above.cypher) | Rules graph: every scheme whose requirement tree (any depth) contains this node, or the scheme itself. |
 | [`search_names`](backend/kaagaz/queries/search_names.cypher) | Name search used by the Ask box when no LLM key is set: schemes and documents whose name contains a word. |
 | [`shared_documents`](backend/kaagaz/queries/shared_documents.cypher) | Other schemes whose requirement trees (any depth) reuse documents this student still needs. |
 | [`source_usage`](backend/kaagaz/queries/source_usage.cypher) | How many rules in the graph cite each source URL (edges, processing times, windows). |
 
-**Student memory graph** (12)
+**Student memory graph (one per student)** (28)
 
 | Query | What it does |
 |---|---|
+| [`alert_add`](backend/kaagaz/queries/alert_add.cypher) | Student graph: an agent leaves an alert for the student (idempotent by id). |
+| [`alerts_seen`](backend/kaagaz/queries/alerts_seen.cypher) | Student graph: the student has seen their alerts. |
+| [`application_add`](backend/kaagaz/queries/application_add.cypher) | Student graph: the student applied for a document on a date (idempotent per document; a later call moves the date). |
+| [`application_remove`](backend/kaagaz/queries/application_remove.cypher) | Student graph: forget an application (for example when it was recorded by mistake). |
 | [`applies_add`](backend/kaagaz/queries/applies_add.cypher) | Student graph: the student says a conditional requirement applies to them (e.g. they live in a hostel). |
 | [`applies_remove`](backend/kaagaz/queries/applies_remove.cypher) | Student graph: a conditional requirement does not apply to the student after all. |
+| [`case_add`](backend/kaagaz/queries/case_add.cypher) | Student graph: the caseworker agent records one review of the student's case. |
 | [`holding_add`](backend/kaagaz/queries/holding_add.cypher) | Student graph: record a document the student holds (idempotent). |
 | [`holding_remove`](backend/kaagaz/queries/holding_remove.cypher) | Student graph: forget a holding. |
+| [`proposal_add`](backend/kaagaz/queries/proposal_add.cypher) | Student graph: actions the caseworker proposes; none runs until the student approves it. |
+| [`proposal_decide`](backend/kaagaz/queries/proposal_decide.cypher) | Student graph: the student approves or rejects one pending proposal. |
+| [`proposals_expire`](backend/kaagaz/queries/proposals_expire.cypher) | Student graph: pending proposals from earlier reviews are replaced by a new review. |
+| [`recall_alerts`](backend/kaagaz/queries/recall_alerts.cypher) | Student graph: alerts, newest first. |
+| [`recall_applications`](backend/kaagaz/queries/recall_applications.cypher) | Student graph: documents the student has applied for, with the date. |
 | [`recall_applies`](backend/kaagaz/queries/recall_applies.cypher) | Student graph: conditional requirements the student said apply to them. |
+| [`recall_cases`](backend/kaagaz/queries/recall_cases.cypher) | Student graph: the caseworker's earlier reviews, newest first (its memory of this case). |
 | [`recall_holdings`](backend/kaagaz/queries/recall_holdings.cypher) | Student graph: every holding with when it was saved. |
+| [`recall_proposals`](backend/kaagaz/queries/recall_proposals.cypher) | Student graph: proposed actions, newest first, with the review that proposed them. |
 | [`recall_snapshots`](backend/kaagaz/queries/recall_snapshots.cypher) | Student graph: the most recent saved plans. |
 | [`recall_targets`](backend/kaagaz/queries/recall_targets.cypher) | Student graph: schemes the student targets. |
+| [`recall_tasks`](backend/kaagaz/queries/recall_tasks.cypher) | Student graph: the student's tasks, by due date. |
 | [`snapshot_add`](backend/kaagaz/queries/snapshot_add.cypher) | Student graph: remember a computed plan, so a later visit can say what changed. |
+| [`snapshot_last`](backend/kaagaz/queries/snapshot_last.cypher) | Student graph: the most recent saved plan for one scheme, with its stamp (used to say what a rule change did). |
 | [`student_get`](backend/kaagaz/queries/student_get.cypher) | Student graph: the student node. |
 | [`student_init`](backend/kaagaz/queries/student_init.cypher) | Student graph: create the student node once (each student has a separate graph `kaagaz:student:<id>`). |
 | [`target_set`](backend/kaagaz/queries/target_set.cypher) | Student graph: the scheme the student is applying for, with the deadline they plan against. |
+| [`task_add`](backend/kaagaz/queries/task_add.cypher) | Student graph: a task the student approved (apply for a document, gather one, or a plan-B checkpoint). |
+| [`task_status`](backend/kaagaz/queries/task_status.cypher) | Student graph: mark a task done or open again. |
+
+**Agents graph (shared by the three agents)** (18)
+
+| Query | What it does |
+|---|---|
+| [`agents_affected_students`](backend/kaagaz/queries/agents_affected_students.cypher) | Agents graph: students whose target scheme a finding affects (only ids; their data stays in their own graph). |
+| [`agents_approved_since`](backend/kaagaz/queries/agents_approved_since.cypher) | Agents graph: approved findings the caseworker has not handled yet (decided after its cursor). |
+| [`agents_check_add`](backend/kaagaz/queries/agents_check_add.cypher) | Agents graph: the watcher records what it saw when it re-fetched one source. |
+| [`agents_cursor_set`](backend/kaagaz/queries/agents_cursor_set.cypher) | Agents graph: move an agent's cursor (what it has already handled). |
+| [`agents_finding_decide`](backend/kaagaz/queries/agents_finding_decide.cypher) | Agents graph: the reviewer (a person) approves or rejects an open finding. |
+| [`agents_finding_get`](backend/kaagaz/queries/agents_finding_get.cypher) | Agents graph: one finding. |
+| [`agents_finding_upsert`](backend/kaagaz/queries/agents_finding_upsert.cypher) | Agents graph: the watcher records a finding (idempotent by id) and links it to the schemes it affects. |
+| [`agents_findings`](backend/kaagaz/queries/agents_findings.cypher) | Agents graph: findings for a pack (optionally one status), newest first, with the schemes they affect and how many students target those schemes. |
+| [`agents_init`](backend/kaagaz/queries/agents_init.cypher) | Agents graph (`kaagaz:agents`, shared by every agent): register an agent once. |
+| [`agents_notified`](backend/kaagaz/queries/agents_notified.cypher) | Agents graph: the caseworker records that it re-planned a student because of a finding. |
+| [`agents_overview`](backend/kaagaz/queries/agents_overview.cypher) | Agents graph: every agent with its run count, last run and cursor. |
+| [`agents_registry_forget`](backend/kaagaz/queries/agents_registry_forget.cypher) | Agents graph: remove a student from the shared registry (when they delete their memory). |
+| [`agents_registry_target`](backend/kaagaz/queries/agents_registry_target.cypher) | Agents graph: the shared registry of which student targets which scheme, so a rule change can find the students it affects. |
+| [`agents_run_finish`](backend/kaagaz/queries/agents_run_finish.cypher) | Agents graph: close a run with its status and a JSON summary. |
+| [`agents_run_get`](backend/kaagaz/queries/agents_run_get.cypher) | Agents graph: one run with every source check and the findings it raised or saw again. |
+| [`agents_run_start`](backend/kaagaz/queries/agents_run_start.cypher) | Agents graph: an agent starts a run (watcher check, caseworker propagation). |
+| [`agents_runs`](backend/kaagaz/queries/agents_runs.cypher) | Agents graph: recent runs, newest first (optionally for one agent). |
+| [`agents_watch_priority`](backend/kaagaz/queries/agents_watch_priority.cypher) | Agents graph: how many students target each scheme, so the watcher checks their sources first. |
 
 **Seeding a rule pack** (9)
 
@@ -330,7 +464,8 @@ model (`openai/gpt-oss-20b`) and how it was chosen: [`docs/LLM_SETUP.md`](docs/L
 
 ### MCP server
 
-The same seven tools over MCP. With FalkorDB running:
+The same seven tools over MCP, plus `review_case` (the caseworker's review) and `watcher_findings`. With FalkorDB
+running:
 
 ```bash
 claude mcp add kaagaz -- uv --directory /path/to/kaagaz/backend run python -m kaagaz.mcp_server
@@ -383,12 +518,26 @@ conditional rules were handled, is kept in `bench/results/` too.
 
 | Claim | How to check it |
 |---|---|
-| Everything works | The [CI run](https://github.com/Atul-Chahar/kaagaz/actions/workflows/ci.yml) on every push: data audit, lint, 66 unit and 35 integration tests on a real FalkorDB, frontend typecheck, lint and build, 16 Playwright + axe tests, Docker build. Locally, `bash scripts/verify.sh` runs the same and also takes 32 screenshots; it ends with `VERIFY: ALL CHECKS PASSED` |
+| Everything works | The [CI run](https://github.com/Atul-Chahar/kaagaz/actions/workflows/ci.yml) on every push: data audit, lint, 75 unit and 45 integration tests on a real FalkorDB, frontend typecheck, lint and build, 20 Playwright + axe tests, Docker build. Locally, `bash scripts/verify.sh` runs the same and also takes 40 screenshots; it ends with `VERIFY: ALL CHECKS PASSED` |
+| The agents work end to end | [`tests/test_agents.py`](backend/tests/test_agents.py): a moved deadline is found, approved, audited, applied to the graph, and reaches only the student it affects; a rejected finding changes nothing; a vanished sentence is marked, not deleted; the caseworker acts only after approval |
+| The watcher ran on the real sources | [`docs/watch/latest.md`](docs/watch/latest.md): every source, its result and every finding from the 18 Oct 2026 run |
 | Every rule comes from a real source | `cd backend && uv run python ../scripts/audit_data.py` checks every excerpt is in the saved source text and every hash matches. The Sources page lists all 60 with links |
 | The numbers come from the graph | Each Why panel shows the Cypher query; paste it into FalkorDB Browser and get the same rows |
 | The planner and Cypher agree | Every plan shows the `chain_days.cypher` and `fastest_option.cypher` cross-checks; integration tests compare them on more than 100 cases |
 | The benchmark is real | Raw answers, model name and date in [`bench/results/20261017T171028Z.json`](bench/results/20261017T171028Z.json); the Benchmark page reads it |
 | Memory persists and is private | An integration test restarts the API and reads the holding back; another shows student A's graph cannot see student B's |
+
+## CI/CD
+
+- **CI** ([`ci.yml`](.github/workflows/ci.yml)), on every push and pull request: the data audit, lint, unit tests,
+  integration tests against a FalkorDB service container, the frontend build, Playwright with axe, and the Docker
+  build.
+- **CD**, on `main` once every check has passed: the app image is published to the GitHub container registry as
+  `ghcr.io/atul-chahar/kaagaz`. [`docker-compose.ghcr.yml`](docker-compose.ghcr.yml) runs it without building.
+- **The watcher, every morning** ([`watch-sources.yml`](.github/workflows/watch-sources.yml), 08:00 IST and on
+  demand): runs the watcher against the live sources, puts the report in the job summary, keeps the re-fetched copies
+  as an artifact, and opens or updates one GitHub issue when it finds something. It never changes the rules; a person
+  decides.
 
 ## Found and fixed
 
@@ -469,6 +618,15 @@ second per site, cache) and wrote fragments in `data/research/`; `scripts/build_
   by id) on the timeline and lists the others as "or any one of".
 - No live deployment: it runs locally with one Docker command. `docs/DEPLOY.md` has the steps to deploy it.
 - The three-system LLM benchmark is small (29 questions, one model) and its ground truth comes from the same sources as the graph.
+- The watcher compares text. A page that loads its content with JavaScript can look changed when it has not; the
+  8 open findings on the SSP home page may be that, which is why a person decides. It checks the rules in the rules
+  graph, not the holiday calendar, and the daily workflow checks the scholarship pack (`--pack in-ka-company` checks
+  the other one). GitHub's runners are outside India, so a government site that refuses them shows as unreachable.
+- The caseworker's decisions are a fixed policy over the plan. It does not learn from what happened to earlier
+  students.
+- The shared registry in `kaagaz:agents` links student ids to the schemes they target (no names, no documents), so
+  the caseworker can find who a rule change affects.
+- In the Docker image, approved rule changes are written inside the container; mount `data/packs` to keep them.
 
 ## Local development
 
@@ -487,9 +645,11 @@ Python 3.12 with uv, Node 22+ with pnpm. All settings are env vars, listed with 
 `bash scripts/verify.sh` runs, in order: FalkorDB start, seed, data audit, lint, unit tests (planner maths, deadline
 edge cases, tool argument validation, sentence checker, benchmark scorer, audit failure cases), integration tests
 against real FalkorDB (every query file, `chain_days.cypher` against the planner on more than 100 cases, student
-graph isolation, memory surviving an API restart, MCP, the submission-day date switch), frontend typecheck, lint and
+graph isolation, memory surviving an API restart, MCP, the submission-day date switch, the three agents end to end,
+applications counting down), frontend typecheck, lint and
 build, Playwright end-to-end tests (depth stepping matches the API at every depth, "I have this" recomputes, Why panel
-source link, Ask without a key, honest Benchmark page, keyboard use, no sideways scroll at 390 px, the date switch),
+source link, Ask without a key, honest Benchmark page, keyboard use, no sideways scroll at 390 px, the date switch,
+the caseworker acting only after approval, the Agents screen, "I applied today"),
 axe accessibility checks on every screen, screenshots at 1440 and 390 px in light and dark (`docs/screenshots/`), and
 the Docker image build. [GitHub Actions](.github/workflows/ci.yml) runs the same checks, except screenshots, on every
 push.
@@ -498,6 +658,7 @@ push.
 
 ```
 backend/kaagaz/    api.py graph.py tools.py planner.py workdays.py memory.py agent.py mcp_server.py queries/*.cypher
+                   agents.py (shared agents graph) watcher.py caseworker.py sources.py changes.py
 backend/tests/     unit + integration tests
 data/packs/        rule packs (pack.yaml is generated; meta.yaml holds the Example student and display groups)
 data/research/     sourced research fragments        data/sources/  index.json, text/, raw/ (saved sources)
@@ -506,7 +667,8 @@ e2e/               Playwright + axe tests and screenshot capture
 bench/             questions, runner, results        scripts/  verify.sh seed.sh audit_data.py build_pack.py
 docs/              FEASIBILITY, DEPLOY, DESIGN_REVIEW, ADVERSARIAL_REVIEW, LLM_SETUP, screenshots/
 docs/process/      the spec, progress checklist, decision log and final report from the build
-.github/workflows/ CI
+docs/watch/        the latest watcher report
+.github/workflows/ CI with image publishing, and the daily watcher
 ```
 
 ## How this was built, and AI disclosure

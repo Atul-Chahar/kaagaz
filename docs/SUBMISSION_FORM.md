@@ -12,6 +12,8 @@ It is for students in India applying for government scholarships, starting with 
 
 Kaagaz shows the chain one depth at a time and stamps a verdict against the real deadline: ON TIME, AT LEAST 21 DAYS or 12 DAYS SHORT. It lists what to apply for today and which other schemes reuse the same certificate. Every rule carries the exact sentence from its government source, and the build fails if that sentence isn't in the saved page. When the law gives no time for a step, Kaagaz leaves it unknown and the verdict becomes "at least". Each student has their own memory graph, so the documents they already hold are remembered between visits.
 
+Three agents work through one shared FalkorDB graph. A caseworker reviews a student's case step by step (recall, plan, explain, alternatives), decides, and proposes tasks with due dates or a plan B; nothing happens until the student approves. A watcher re-fetches the government pages and checks that every rule's exact sentence is still there; on its first real run it checked 175 rules on 22 pages and flagged 8 sentences that had disappeared from one portal page. A person approves or rejects each finding, and on approval the caseworker re-plans every student it affects and leaves them an alert. Applications count down: once a student applies for a certificate, its remaining time is the legal limit minus the working days since.
+
 On a 29-question benchmark with the same model (gpt-oss-20b), Kaagaz found 93% of the required documents. The model alone found 9% and plain RAG 5%.
 
 If you open it after 18 Oct 2026, most of these windows will have closed. A bar under the menu offers "See it as on 18 Oct 2026". It moves only the start date and stays on screen while it is on.
@@ -50,7 +52,11 @@ The rules live in a FalkorDB graph: 11 scholarships, 41 documents, 13 issuing of
 
 5. Ranking documents. algo.pageRank over REQUIRES edges finds the documents most of the pack depends on.
 
-6. A safe agent. All 35 queries are parameterised .cypher files behind seven tools, also served over MCP. The model picks a tool and never writes Cypher, names are resolved in the graph before any other query runs, and every query shows up in the UI trace.
+6. A safe agent. All 71 queries are parameterised .cypher files behind a fixed tool catalogue, also served over MCP. The model picks a tool and never writes Cypher, names are resolved in the graph before any other query runs, and every query shows up in the UI trace.
+
+7. Agents that coordinate through a graph. A shared graph, kaagaz:agents, holds every watcher run, source check, finding, human decision and caseworker notification as nodes and edges. When a person approves a finding, the caseworker finds the affected students with one pattern, (f:Finding)-[:AFFECTS]->(:SchemeRef)<-[:TARGETS]-(:StudentRef), re-plans each one in their own graph, and records the notification. A cursor on its Agent node means each approval is handled once. MERGE and FOREACH keep the watcher's writes idempotent across runs.
+
+8. Memory that changes over time. A student's graph holds applications with dates, the caseworker's earlier reviews, proposals, tasks and alerts. The countdown for an application in progress is computed in Cypher too, so the planner and the database must agree on it; the integration tests check over 300 cases.
 
 What we had to work around: a parameter can't be the upper bound of a variable-length pattern, so the bound is a fixed 16 and $depth filters the paths. Label unions like (n:Document|AnyOf) aren't supported, so queries use WHERE n:Document OR n:AnyOf. We raised the default 1-second query timeout per query. algo.SPpaths returns the shortest chain under an option, but an option is ready only when all of its own prerequisites are done, so fastest_option.cypher takes the longest chain per option and then picks the smallest.
 

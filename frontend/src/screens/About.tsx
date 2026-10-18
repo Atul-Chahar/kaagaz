@@ -82,7 +82,8 @@ export default function About({ session }: { session: Session | null }) {
         <section>
           <h2 style={{ marginBottom: 16 }}>How the hackathon rules are met</h2>
           <ul style={{ paddingLeft: 18, margin: 0, display: 'grid', gap: 10 }}>
-            <li><b>Track 1, Agents That Act on Connected Data.</b> Cross-session memory (one graph per student) also touches Track 2.</li>
+            <li><b>Agents That Act on Connected Data.</b> The caseworker investigates a case through the graph, decides, and acts once the student approves. The watcher re-checks every rule against the live government pages.</li>
+            <li><b>Agent Memory and Coordination.</b> The three agents coordinate through one shared graph (<a href="#/agents">Agents</a>), and each student's own graph changes as applications move.</li>
             <li><b>The graph does real work.</b> Variable-length traversal finds hidden prerequisites; <code>reduce()</code> sums legal days along chains; shared-document and load-bearing queries rank options.</li>
             <li><b>The model never writes Cypher.</b> It may only call one of seven fixed tools, and names are checked against the graph before any other query runs.</li>
             <li><b>Every answer carries its path</b> and the source sentence for each step. When no rule connects two things, Kaagaz says "not in the graph".</li>

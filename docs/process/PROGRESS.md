@@ -24,3 +24,13 @@ Tick only when the check has passed (evidence in transcript). `BLOCKED: <reason>
 - [x] S3 Second rule pack: starting a company in Karnataka (in-ka-company), same sourcing and audit, pack switcher on Start, exact working/calendar day conversion, e2e + integration tests.
 - [x] S4 i18n structure ready for the app shell (frontend/src/i18n.ts), English only: no Hindi strings, because they could not be checked carefully.
 
+
+## After the first submission (18 Oct 2026)
+- [x] Date switch: "See it as on 18 Oct 2026", labelled, plans viewed that way not saved (API and e2e tests).
+- [x] GitHub Actions CI; image published to ghcr.io on main after CI; daily watcher workflow opening an issue.
+- [x] Watcher agent: re-checks every rule's proof sentence on the live pages; one finding per sentence; warning when most of a page changes; first real run in docs/watch/latest.md (22 sources, 175 rules, 8 findings, left open).
+- [x] Reviewer step: approve or reject; approval writes changes.yaml (audited), saves the new source version, rebuilds the rules graph.
+- [x] Caseworker agent: multi-step review with a coded policy, proposals that run only after approval, tasks and .ics, alerts to affected students through the shared registry, cursor so each approval is handled once.
+- [x] Memory over time: applications count down in the planner and in Cypher (300+ agreement cases); the caseworker compares each review with its last one.
+- [x] MCP: review_case and watcher_findings.
+- [x] `bash scripts/verify.sh`: VERIFY: ALL CHECKS PASSED (120 backend tests, 20 e2e, 40 screenshots, Docker build).
