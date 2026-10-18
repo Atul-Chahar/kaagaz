@@ -24,3 +24,9 @@ video/sound_effects vol 1/
 video/sound_effects vol 1.zip
 video/audio/*.wav
 video/frames/
+# private: demo video project, demo and voiceover scripts, skill lock (kept locally, not published)
+video/
+docs/DEMO_SCRIPT.md
+docs/DEMO_VIDEO_PLAN.md
+docs/VOICEOVER_SCRIPT.md
+skills-lock.json

@@ -96,9 +96,9 @@ VERIFY: ALL CHECKS PASSED
    depth 1, press **One step deeper**, blue "AT LEAST 21 DAYS". Numbers change daily (working days left shrink).
 2. Click the slip, check the Why panel's source links open the right government pages, and open one excerpt's source
    to judge it yourself (Sources page lists all 60 with hashes).
-3. Pick **PostMatric for OBC Students** on Start, tick the documents in `docs/DEMO_SCRIPT.md` (1:05), and confirm the
+3. Pick **PostMatric for OBC Students** on Start, tick everything except the caste and income certificate, and confirm the
    red "12 DAYS SHORT" and the hatched overrun. Then try the **Rule pack** switcher and the Example founder.
 4. Read `docs/FEASIBILITY.md` and the README's "Limitations" so you can answer judges' questions about unknown times,
    conditional rules and the CSSS renewal-only window.
 5. Make the repo public, then
-   record the video from `docs/DEMO_SCRIPT.md` and submit (checklist in `docs/SUBMISSION.md`).
+   record the demo video and submit (checklist in `docs/SUBMISSION.md`).

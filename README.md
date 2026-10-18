@@ -300,7 +300,7 @@ data/research/     sourced research fragments        data/sources/  index.json, 
 frontend/          Vite + React + TypeScript, hand-written CSS with design tokens
 e2e/               Playwright + axe tests and screenshot capture
 bench/             questions, runner, results        scripts/  verify.sh seed.sh audit_data.py build_pack.py
-docs/              FEASIBILITY, DEMO_SCRIPT, BLOG_DRAFT, SUBMISSION, DEPLOY, DESIGN_REVIEW, screenshots/
+docs/              FEASIBILITY, BLOG_DRAFT, SUBMISSION, DEPLOY, DESIGN_REVIEW, screenshots/
 ```
 
 ## Licence
