@@ -1,0 +1,71 @@
+# The watcher agent, every morning: re-fetch the government sources (politely), re-check every rule's proof
+# sentence, and open or update one issue when something changed. Nothing in the rules changes here: a person
+# decides each finding in the app (Agents screen) or by editing the rule pack.
+name: Watch sources
+
+on:
+  schedule:
+    - cron: "30 2 * * *"   # 08:00 IST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: watch-sources
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      falkordb:
+        image: falkordb/falkordb:latest
+        ports: ["6380:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      FALKORDB_HOST: localhost
+      FALKORDB_PORT: "6380"
+      LLM_PROVIDER: ""
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - name: Install pdftotext and dependencies
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q poppler-utils
+          cd backend && uv python install 3.12 && uv sync --frozen
+      - name: Seed the rule packs
+        run: bash scripts/seed.sh
+      - name: Run the watcher
+        run: |
+          cd backend
+          uv run python -m kaagaz.watcher --trigger "github-actions ${{ github.event_name }}" \
+            --report "$RUNNER_TEMP/watch.md" --json "$RUNNER_TEMP/watch.json"
+          cat "$RUNNER_TEMP/watch.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the report and the re-fetched copies
+        uses: actions/upload-artifact@v4
+        with:
+          name: watch-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/watch.md
+            ${{ runner.temp }}/watch.json
+            data/sources/checks/
+          retention-days: 30
+      - name: Open or update the watcher issue when there are findings
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(python3 -c "import json;print(len(json.load(open('$RUNNER_TEMP/watch.json'))['findings']))")
+          echo "findings: $n"
+          [ "$n" -gt 0 ] || exit 0
+          gh label create watcher --color 24467A --description "Found by the watcher agent" --force
+          body="$RUNNER_TEMP/body.md"
+          { echo "The watcher found $n change(s) on the government sources in [run ${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            echo "Nothing in the rules has changed. Decide each finding in the app (Agents screen) after running the watcher locally, or update the rule pack by hand."
+            echo; cat "$RUNNER_TEMP/watch.md"; } > "$body"
+          open=$(gh issue list --label watcher --state open --json number --jq '.[0].number')
+          if [ -n "$open" ]; then gh issue comment "$open" --body-file "$body"
+          else gh issue create --title "Watcher: changes on the government sources" --label watcher --body-file "$body"; fi

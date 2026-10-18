@@ -1,4 +1,5 @@
 # The same checks as scripts/verify.sh, on every push and pull request, against a real FalkorDB (no mocks).
+# On main, once every check passes, the app image is published to the GitHub container registry.
 name: CI
 
 on:
@@ -105,3 +106,26 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: docker build -t kaagaz-app:ci .
+
+  publish:
+    name: Publish the app image (main only, after every check passed)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [backend, frontend, e2e, docker]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push ghcr.io/<owner>/kaagaz
+        run: |
+          img="ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/kaagaz"
+          docker build -t "$img:latest" -t "$img:${{ github.sha }}" .
+          docker push "$img:${{ github.sha }}"
+          docker push "$img:latest"
+          echo "Published $img:latest and $img:${{ github.sha }}" >> "$GITHUB_STEP_SUMMARY"

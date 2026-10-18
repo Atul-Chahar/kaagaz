@@ -1,0 +1,30 @@
+# Run the published image instead of building it: docker compose -f docker-compose.ghcr.yml up -d
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    ports:
+      - "${FALKORDB_HOST_PORT:-6380}:6379"
+      - "${FALKORDB_BROWSER_PORT:-3000}:3000"
+    volumes:
+      - falkordb-data:/var/lib/falkordb/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  app:
+    image: ghcr.io/atul-chahar/kaagaz:latest
+    depends_on:
+      falkordb:
+        condition: service_healthy
+    environment:
+      FALKORDB_HOST: falkordb
+      FALKORDB_PORT: "6379"
+      KAAGAZ_SEED_ON_START: "1"
+      FALKORDB_BROWSER_URL: "http://localhost:${FALKORDB_BROWSER_PORT:-3000}"
+    ports:
+      - "${KAAGAZ_PORT:-8000}:8000"
+
+volumes:
+  falkordb-data:
