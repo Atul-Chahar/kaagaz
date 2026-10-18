@@ -145,8 +145,8 @@ def classify(rule: dict, new_norm: str, new_text: str, tokens: list[str] | None 
 
 # ---- the run ---------------------------------------------------------------------------------------------------
 
-def _fid(pack: str, rule_key: str, kind: str, new_excerpt: str | None) -> str:
-    return "f-" + hashlib.sha1(f"{pack}|{rule_key}|{kind}|{new_excerpt or ''}".encode()).hexdigest()[:12]
+def _fid(pack: str, source_id: str, kind: str, evidence: str) -> str:
+    return "f-" + hashlib.sha1(f"{pack}|{source_id}|{kind}|{evidence}".encode()).hexdigest()[:12]
 
 
 def _rules(pack: str) -> list[dict]:
@@ -223,26 +223,42 @@ def run_watch(pack: str = DEFAULT_PACK, only: list[str] | None = None, limit: in
                     check["same_file"] = got.sha256 == row["sha256"]
                     check["new_text_file"] = str(got.text_path.relative_to(SRC)) if got.text_path else None
                     tokens = _soft(got.text or "")
+                    # one finding per proof sentence: several rules (often one per scheme) can cite the same sentence
+                    groups: dict[tuple[str, str], dict] = {}
                     for rule in rules:
                         res = classify(rule, new_norm, got.text or "", tokens)
                         if res is None:
                             continue
                         check["rules_missing"] += 1
-                        fid = _fid(pack, rule["rule_key"], res["kind"], res.get("new_excerpt"))
-                        props = {"pack": pack, "kind": res["kind"], "rule_key": rule["rule_key"],
-                                 "rule_kind": rule["kind"], "from_id": rule["from_id"], "to_id": rule["to_id"],
+                        g = groups.setdefault((res["kind"], norm(rule["excerpt"])), {"res": res, "rules": []})
+                        g["rules"].append(rule)
+                    broad = check["rules_checked"] >= 4 and check["rules_missing"] > check["rules_checked"] / 2
+                    if broad:
+                        check["warning"] = "most_rules_missing"
+                    for (kind, _), g in groups.items():
+                        res, rs = g["res"], g["rules"]
+                        fid = _fid(pack, sid, kind, norm(rs[0]["excerpt"]) + "|" + (res.get("new_excerpt") or ""))
+                        note = res.get("note")
+                        if broad:
+                            note = ("Most of the proof sentences on this page are gone at once ("
+                                    f"{check['rules_missing']} of {check['rules_checked']}). The page may have moved "
+                                    "or may show a different section now. Look at the page before approving.")
+                        schemes = sorted({x for r in rs for x in r["schemes"]})
+                        props = {"pack": pack, "kind": kind, "rule_keys": [r["rule_key"] for r in rs],
+                                 "rule_count": len(rs), "rule_kind": rs[0]["kind"],
+                                 "from_ids": sorted({r["from_id"] for r in rs}), "to_id": rs[0]["to_id"],
                                  "source_id": sid, "source_url": row["url"], "source_title": row["title"],
-                                 "old_excerpt": rule["excerpt"], "old_value": rule.get("value"),
+                                 "old_excerpt": rs[0]["excerpt"], "old_value": rs[0].get("value"),
                                  "new_excerpt": res.get("new_excerpt"), "new_value": res.get("new_value"),
-                                 "score": res.get("score"), "note": res.get("note"), "checked_on": today,
+                                 "score": res.get("score"), "note": note, "checked_on": today,
                                  "check_run": run_id, "new_text_file": check["new_text_file"],
                                  "new_raw_file": str(got.raw_path.relative_to(SRC)) if got.raw_path else None,
                                  "new_sha256": got.sha256, "tls_verified": got.tls_verified}
                         agents.q("agents_finding_upsert", {"run_id": run_id, "id": fid, "props": props,
                                                            "now": agents.now_iso(), "pack": pack,
-                                                           "scheme_ids": rule["schemes"]}, write=True)
+                                                           "scheme_ids": schemes}, write=True)
                         raised.append(fid)
-                        counts[f"finding_{res['kind']}"] += 1
+                        counts[f"finding_{kind}"] += 1
             counts[check["status"]] += 1
             agents.q("agents_check_add", {"run_id": run_id, "props": {k: v for k, v in check.items() if v is not None}},
                      write=True)
@@ -304,27 +320,33 @@ def decide(fid: str, approve: bool, note: str = "") -> dict:
     pack = f["pack"]
     applied = None
     if approve:
+        keys = f.get("rule_keys") or []
         if f["kind"] in ("date_changed", "wording_changed"):
             ex = f.get("new_excerpt") or ""
             text_file = SRC / (f.get("new_text_file") or "")
             if len(ex.split()) > MAX_WORDS or not text_file.exists() or norm(ex) not in norm(text_file.read_text()):
                 raise ValueError("the new sentence is not in the re-fetched copy any more; run the watcher again")
             row = _promote(f)
-            cite = {"source_url": row["url"], "source_title": row["title"], "retrieved_at": row["retrieved_at"],
-                    "excerpt": ex, "confidence": _old_confidence(graph.load_pack(pack), f["rule_key"])}
-            change = {"kind": "window_end" if f["kind"] == "date_changed" else "excerpt", "rule_key": f["rule_key"],
-                      "cite": cite}
-            if f["kind"] == "date_changed":
-                change["value"] = f["new_value"]
+            pk = graph.load_pack(pack)
+            changes = []
+            for key in keys:
+                cite = {"source_url": row["url"], "source_title": row["title"], "retrieved_at": row["retrieved_at"],
+                        "excerpt": ex, "confidence": _old_confidence(pk, key)}
+                change = {"kind": "window_end" if f["kind"] == "date_changed" else "excerpt", "rule_key": key,
+                          "cite": cite}
+                if f["kind"] == "date_changed":
+                    change["value"] = f["new_value"]
+                changes.append(change)
         else:
             # the proof is gone (or a number changed): keep the rule, flag it for a person to rework the pack
-            change = {"kind": "stale", "rule_key": f["rule_key"], "checked_at": str(f["checked_on"]),
-                      "source_url": f["source_url"], "found": f.get("new_excerpt")}
-        change |= {"finding_id": fid, "approved_at": agents.now_iso(), "note": note or None}
-        append_change(graph.PACKS_DIR, pack, change)
+            changes = [{"kind": "stale", "rule_key": key, "checked_at": str(f["checked_on"]),
+                        "source_url": f["source_url"], "found": f.get("new_excerpt")} for key in keys]
+        stamp = {"finding_id": fid, "approved_at": agents.now_iso(), "note": note or None}
+        for change in changes:
+            append_change(graph.PACKS_DIR, pack, change | stamp)
         graph.load_pack.cache_clear()
         graph.seed_pack(pack)
-        applied = change
+        applied = changes
     agents.ensure()
     decided = agents.q("agents_finding_decide", {"id": fid, "status": "approved" if approve else "rejected",
                                                  "now": agents.now_iso(), "note": note or None}, write=True)
@@ -375,7 +397,8 @@ def report(res: dict, found: list[dict | None]) -> str:
     if any(found):
         lines += ["", "## Findings (each needs a person to approve or reject it)", ""]
         for f in filter(None, found):
-            lines += [f"### {f['kind']}: `{f['rule_key']}` ({f['status']})", "",
+            lines += [f"### {f['kind']}: {f['rule_count']} rule(s) citing one sentence ({f['status']})", "",
+                      "- Rules: " + ", ".join(f"`{k}`" for k in f["rule_keys"]),
                       f"- Source: {f['source_title']} ({f['source_url']})",
                       f"- Saved sentence: \"{f['old_excerpt']}\"",
                       (f"- On the page now: \"{f.get('new_excerpt') or 'no close match'}\" (similarity "

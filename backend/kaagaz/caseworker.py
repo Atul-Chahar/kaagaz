@@ -29,6 +29,10 @@ UNSURE = ("at_least", "cannot_compute", "no_deadline")
 BAD = ("late", "late_at_least", "closed")
 
 
+def _n(n: int, one: str, many: str) -> str:
+    return f"{n} {one if n == 1 else many}"
+
+
 def _step(steps: list, tool: str, why: str, found: str, outcome: str | None = None) -> None:
     steps.append({"n": len(steps) + 1, "tool": tool, "why": why, "found": found, "outcome": outcome})
 
@@ -62,7 +66,7 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
                 None)
     scheme_id = scheme_id or (targets[0]["scheme_id"] if targets else None)
     _step(steps, "recall", "Start from what the student told Kaagaz and what I found last time",
-          f"{len(rec.data.get('holdings') or [])} documents held, {len(targets)} target(s)"
+          f"{_n(len(rec.data.get('holdings') or []), 'document', 'documents')} held, {_n(len(targets), 'target', 'targets')}"
           + (f"; my last review was on {prev['at'][:10]}" if prev else "; no earlier review"), rec.outcome)
     if not scheme_id:
         raise ToolError("the student has no target scheme yet; pick one on the Start screen first")
@@ -97,8 +101,8 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
         good.sort(key=lambda o: (-o["shared_count"], -(o["verdict"]["margin"] or 0), o["scheme_id"]))
         alt = good[0] if good else None
         _step(steps, "alternatives", "The verdict is not a clear yes, so look for schemes that can still be made",
-              f"{len(good)} other scheme(s) can be made; " + (
-                  f"best fit: {alt['name']} ({alt['verdict']['stamp']}, shares {alt['shared_count']} document(s))"
+              f"{_n(len(good), 'other scheme', 'other schemes')} can be made; " + (
+                  f"best fit: {alt['name']} ({alt['verdict']['stamp']}, shares {_n(alt['shared_count'], 'document', 'documents')})"
                   if alt else "none can be made with the documents needed"), al.outcome)
 
     today = dt.date.fromisoformat(plan["today"])
@@ -152,7 +156,7 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
                  "No legal time limit, so start now; Kaagaz cannot tell how long it takes")
     elif v["kind"] in UNSURE:
         decision = {"kind": "start_unknowns", "text": (
-            f"Kaagaz can't promise this one: {len(plan['unknown'])} step(s) have no legal time limit. Start every "
+            f"Kaagaz can't promise this one: {_n(len(plan['unknown']), 'step has', 'steps have')} no legal time limit. Start every "
             "step that can begin now today, the unknown ones first."
             + (f" Keep {alt['name']} in mind ({alt['verdict']['stamp'].lower()})." if alt else ""))}
         for s in sorted(ready, key=lambda s: s["days"] is not None):
@@ -168,7 +172,7 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
             f"{plan['day_unit']}, and {plan['days_left']} are left, so this is {short} short if every office uses "
             "its full time. Apply today anyway, since offices can be faster than the limit"
             + (f", and keep {alt['name']} as plan B: {alt['verdict']['stamp'].lower()}, reusing "
-               f"{alt['shared_count']} document(s)." if alt else ". No other scheme in this pack can be made."))}
+               f"{_n(alt['shared_count'], 'document', 'documents')}." if alt else ". No other scheme in this pack can be made."))}
         for s in ready:
             task("apply" if s["days"] is not None else "gather", s, f"{s['verb']} {s['name']} today", today,
                  "Every working day counts: the plan is already short")
@@ -200,7 +204,7 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
                                  "json": json.dumps(body)}, trace)
     memory.add_proposals(student_id, case_id, proposals, trace)
     _step(steps, "propose", "Write the proposed actions to the student's graph; none runs until approved",
-          f"{len(proposals)} proposal(s) waiting for the student")
+          f"{_n(len(proposals), 'proposal', 'proposals')} waiting for the student")
     return {"case_id": case_id, "scheme": {"id": scheme_id, "name": plan["scheme"]["name"]}, "today": plan["today"],
             "as_of": as_of,
             "verdict": v, "decision": decision, "since": since, "steps": steps,
@@ -210,11 +214,13 @@ def review(t: Tools, student_id: str, scheme_id: str | None = None, narrate: boo
 
 def _note(t: Tools, plan: dict, decision: dict, since: dict | None) -> dict | None:
     facts = {"scheme": plan["scheme"]["name"], "verdict": plan["verdict"], "days_left": plan["days_left"],
+             "day_unit": plan["day_unit"],
              "deadline": plan["deadline"].get("date"), "decision": decision["text"], "since": since}
     try:
         text = agent.complete(
             "You write one or two plain sentences to a student about their scholarship paperwork. Use only the "
-            "facts given. No advice beyond the decision. No greetings.", json.dumps(facts), max_tokens=400).strip()
+            "facts given. Day counts are in the unit given as day_unit; always name that unit. No advice beyond "
+            "the decision. No greetings.", json.dumps(facts), max_tokens=400).strip()
     except agent.LLMError as e:  # the note is optional; the decision stands without it
         return {"text": None, "ok": False, "problems": [f"model call failed: {type(e).__name__}"]}
     known = [i["name"] for i in plan["items"]] + [plan["scheme"]["name"]]

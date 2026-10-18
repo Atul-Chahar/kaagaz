@@ -185,8 +185,64 @@ export const api = {
   sources: () => req<{ sources: { id: string; title: string; url: string; retrieved_at: string; sha256: string; content_type: string; size: number; rules_citing: number; confidence: string | null }[] }>('/api/sources'),
   queries: () => req<{ name: string; file: string; about: string; cypher: string }[]>('/api/queries'),
   graphStats: () => req<{ graph: string; rows: { kind: string; name: string; n: number }[]; ms: number }>('/api/graph-stats'),
+  reviewCase: (sid: string, scheme_id?: string) => req<CaseReview>(`/api/students/${sid}/case`, { method: 'POST', body: JSON.stringify({ scheme_id: scheme_id ?? null }) }),
+  caseState: (sid: string) => req<{ review: StoredReview | null; proposals: Proposal[]; tasks: Task[]; alerts: Alert[] }>(`/api/students/${sid}/case`),
+  decideProposal: (sid: string, pid: string, approve: boolean) =>
+    req<{ proposal: Proposal; done: unknown; plan_after?: { scheme_id: string; stamp: string; kind: VerdictKind } }>(`/api/students/${sid}/proposals/${encodeURIComponent(pid)}`, { method: 'POST', body: JSON.stringify({ approve }) }),
+  setTask: (sid: string, tid: string, status: 'open' | 'done') => req<{ task: Task }>(`/api/students/${sid}/tasks/${encodeURIComponent(tid)}`, { method: 'POST', body: JSON.stringify({ status }) }),
+  alertsSeen: (sid: string) => req<{ marked: number }>(`/api/students/${sid}/alerts/seen`, { method: 'POST' }),
+  agents: () => req<{ agents: AgentInfo[]; runs: AgentRun[]; running: boolean; findings: Finding[]; graph: string }>('/api/agents'),
+  agentRun: (id: string) => req<{ run: AgentRun; checks: SourceCheck[]; findings: string[] }>(`/api/agents/runs/${encodeURIComponent(id)}`),
+  startWatch: (limit?: number) => req<{ started: boolean }>('/api/agents/watcher/run', { method: 'POST', body: JSON.stringify(limit ? { limit } : {}) }),
+  decideFinding: (id: string, approve: boolean, note?: string) =>
+    req<{ finding: Finding; applied: unknown; propagation?: { notified: { student_id: string; before?: string; after: string }[] } }>(`/api/agents/findings/${encodeURIComponent(id)}`, { method: 'POST', body: JSON.stringify({ approve, note: note || null }) }),
   loadBearing: (sid?: string) => req<{ scheme_ids: string[]; by_scheme_count: { doc_id: string; name: string; days: number | null; scheme_count: number }[]; pagerank: { doc_id: string; name: string; score: number }[] }>(`/api/load-bearing${sid ? `?student_id=${sid}` : ''}`),
 }
+
+export interface CaseStep { n: number; tool: string; why: string; found: string; outcome?: Outcome | null }
+export interface Proposal {
+  id: string; kind: 'apply' | 'gather' | 'checkpoint' | 'switch_target'; title: string; reason: string
+  doc_id?: string | null; scheme_id: string; due?: string | null
+  status: 'pending' | 'approved' | 'rejected' | 'replaced'; case_id: string; created_at: string; decided_at?: string
+}
+export interface Task {
+  id: string; kind: string; title: string; reason?: string; doc_id?: string | null; scheme_id: string; due?: string | null
+  status: 'open' | 'done'; created_at: string
+}
+export interface Alert {
+  id: string; at: string; kind: string; scheme_id: string; finding_id: string; message: string
+  before?: string; after?: string; seen: boolean
+}
+export interface Since {
+  last_review: string; last_today?: string; working_days_passed: number; stamp_before?: string; stamp_now: string
+  verdict_before?: string; verdict_now: string; new_holdings: string[]; dropped_holdings: string[]; scheme_changed: boolean
+}
+export interface CaseReview {
+  case_id: string; scheme: { id: string; name: string }; today: string; as_of: boolean
+  verdict: Plan['verdict']; decision: { kind: string; text: string }; since: Since | null; steps: CaseStep[]
+  proposals: Proposal[]; note: { text: string | null; ok: boolean; problems: string[] } | null; trace: TraceRow[]
+}
+export interface StoredReview {
+  id: string; at: string; scheme_id: string; today: string; verdict: VerdictKind; stamp: string; decision: string
+  json: { steps: CaseStep[]; decision: { kind: string; text: string }; since: Since | null; as_of?: boolean; note?: CaseReview['note'] }
+}
+export interface Finding {
+  id: string; pack: string; kind: 'date_changed' | 'wording_changed' | 'value_changed' | 'excerpt_missing'
+  rule_keys: string[]; rule_count: number; rule_kind: string; from_ids: string[]; to_id: string; source_id: string; source_url: string
+  source_title: string; old_excerpt: string; old_value?: string; new_excerpt?: string; new_value?: string
+  score?: number; note?: string; checked_on: string; status: 'open' | 'approved' | 'rejected'
+  created_at: string; last_seen: string; seen_count: number; decided_at?: string; decided_note?: string
+  tls_verified?: boolean; schemes: string[]; students: number
+}
+export interface AgentRun {
+  id: string; agent: string; pack: string; started_at: string; finished_at?: string; status: 'running' | 'done' | 'failed'
+  trigger: string; summary: Record<string, number | string> | null
+}
+export interface SourceCheck {
+  source_id: string; url: string; title: string; at: string; status: string; rules_checked: number; rules_missing: number
+  http?: number; tls_verified?: boolean; same_file?: boolean; error?: string; warning?: string
+}
+export interface AgentInfo { id: string; name: string; role: string; cursor?: string | null; runs: number; last_run?: string | null; decisions: number }
 
 export interface AskResponse {
   mode: 'llm' | 'name_search'

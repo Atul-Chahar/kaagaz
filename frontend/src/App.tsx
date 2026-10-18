@@ -7,6 +7,7 @@ import Ask from './screens/Ask'
 import Benchmark from './screens/Benchmark'
 import Sources from './screens/Sources'
 import About from './screens/About'
+import Agents from './screens/Agents'
 import type { Session } from './nav'
 import { t, type MessageKey } from './i18n'
 import { api, setAsOf, setPack } from './api'
@@ -16,6 +17,7 @@ const ROUTES: { path: string; key: MessageKey }[] = [
   { path: '/', key: 'nav.start' },
   { path: '/chain', key: 'nav.chain' },
   { path: '/ask', key: 'nav.ask' },
+  { path: '/agents', key: 'nav.agents' },
   { path: '/benchmark', key: 'nav.benchmark' },
   { path: '/sources', key: 'nav.sources' },
   { path: '/graph', key: 'nav.graph' },
@@ -64,6 +66,7 @@ export default function App() {
   switch (path) {
     case '/chain': screen = <Chain session={session} setSession={setSession} />; break
     case '/ask': screen = <Ask session={session} />; break
+    case '/agents': screen = <Agents />; break
     case '/benchmark': screen = <Benchmark />; break
     case '/sources': screen = <Sources />; break
     case '/graph': screen = <About session={session} />; break

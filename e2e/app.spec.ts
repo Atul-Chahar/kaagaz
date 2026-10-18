@@ -91,6 +91,7 @@ test('Benchmark page shows only real results or the honest empty state', async (
 
 const SCREENS: [string, string][] = [
   ['start', '/#/'], ['ask', '/#/ask'], ['benchmark', '/#/benchmark'], ['sources', '/#/sources'], ['graph', '/#/graph'],
+  ['agents', '/#/agents'],
 ]
 
 for (const [name, url] of SCREENS) {
@@ -128,7 +129,7 @@ test('keyboard: depth stepper and slips are reachable and work', async ({ page }
 
 test('390 px wide: no screen scrolls sideways (the timeline scrolls inside its own frame)', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  for (const url of ['/#/', '/#/ask', '/#/benchmark', '/#/sources', '/#/graph']) {
+  for (const url of ['/#/', '/#/ask', '/#/agents', '/#/benchmark', '/#/sources', '/#/graph']) {
     await page.goto(url)
     await page.waitForLoadState('networkidle')
     expect(await page.evaluate(() => document.documentElement.scrollWidth), url).toBeLessThanOrEqual(390)
@@ -196,4 +197,37 @@ test('"As on the submission day" counts from that date, says so, and switches ba
   expect(await page.evaluate(() => localStorage.getItem('kaagaz.asOf'))).toBeNull()
   const today = await apiPlan(request, sid, scheme, 1)
   await expect(page.getByTestId('stamp')).toContainText(today.verdict.stamp)
+})
+
+test('Caseworker: investigates in steps, proposes, and acts only after approval', async ({ page, request }) => {
+  const sid = await loadExample(page)
+  await page.getByTestId('case-review').click()
+  await expect(page.getByTestId('case-decision')).toBeVisible({ timeout: 30_000 })
+  const steps = page.getByTestId('case-steps').locator('li')
+  await expect(steps.first()).toContainText('recall')
+  await expect(page.getByTestId('case-steps')).toContainText('plan')
+  // what the panel shows is what the student's graph holds
+  const state = await (await request.get(`/api/students/${sid}/case`)).json()
+  expect(state.review.decision.length).toBeGreaterThan(0)
+  expect(state.tasks).toEqual([])
+  const pending = state.proposals.filter((p: { status: string }) => p.status === 'pending')
+  expect(pending.length).toBeGreaterThan(0)
+  await page.getByTestId('proposal-approve').first().click()
+  await expect(page.getByTestId('proposal-result')).toContainText('Done')
+  await expect(page.getByTestId('tasks').locator('li')).toHaveCount(1)
+  const after = await (await request.get(`/api/students/${sid}/case`)).json()
+  expect(after.tasks.length).toBe(1)
+  await expect(page.getByTestId('ics')).toHaveAttribute('href', `/api/students/${sid}/tasks.ics`)
+  await expectNoSeriousA11y(page, 'chain with caseworker')
+})
+
+test('Agents page: the three agents and the watcher state come from the agents graph', async ({ page, request }) => {
+  const data = await (await request.get('/api/agents')).json()
+  await page.goto('/#/agents')
+  await expect(page.getByTestId('agent-flow').locator('li')).toHaveCount(3)
+  const open = data.findings.filter((f: { status: string }) => f.status === 'open')
+  if (open.length) await expect(page.getByTestId('finding')).toHaveCount(data.findings.length)
+  else await expect(page.getByTestId('no-findings')).toBeVisible()
+  const watch = data.runs.find((r: { agent: string }) => r.agent === 'watcher')
+  if (watch) await expect(page.getByTestId('watch-summary')).toBeVisible()
 })

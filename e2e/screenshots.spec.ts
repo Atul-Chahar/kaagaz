@@ -87,7 +87,15 @@ for (const v of VARIANTS) {
       await page.screenshot({ path: `${OUT}/ask-${tag}.png`, fullPage: true, animations: 'disabled' })
     })
 
-    for (const [name, url] of [['benchmark', '/#/benchmark'], ['sources', '/#/sources'], ['graph', '/#/graph']] as const) {
+    test(`caseworker ${tag}`, async ({ page }) => {
+      await prep(page, v.theme)
+      await example(page)
+      await page.getByTestId('case-review').click()
+      await expect(page.getByTestId('case-decision')).toBeVisible({ timeout: 30_000 })
+      await page.getByTestId('caseworker').screenshot({ path: `${OUT}/caseworker-${tag}.png`, animations: 'disabled' })
+    })
+
+    for (const [name, url] of [['agents', '/#/agents'], ['benchmark', '/#/benchmark'], ['sources', '/#/sources'], ['graph', '/#/graph']] as const) {
       test(`${name} ${tag}`, async ({ page }) => {
         await prep(page, v.theme)
         await page.goto(url)

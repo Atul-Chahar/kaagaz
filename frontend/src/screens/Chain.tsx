@@ -7,6 +7,7 @@ import { verdictSentence } from '../labels'
 import { usePackUi } from '../packui'
 import WhyPanel from '../components/WhyPanel'
 import Timeline from '../components/Timeline'
+import Caseworker, { AgentAlerts } from '../components/Caseworker'
 
 type Cache = Record<number, ToolResponse<Plan>>
 
@@ -175,6 +176,8 @@ export default function Chain({ session, setSession }: { session: Session | null
         </div>
       </section>
 
+      {sid && <AgentAlerts sid={sid} />}
+
       <div className="depth" role="group" aria-labelledby="depth-label">
         <span id="depth-label" className="label">Show hidden steps</span>
         <div className="depth-steps">
@@ -300,6 +303,10 @@ export default function Chain({ session, setSession }: { session: Session | null
           )}
         </section>
       </div>
+
+      <hr className="hair" />
+      {sid && <Caseworker key={`${sid}:${plan.scheme.id}`} sid={sid} schemeId={plan.scheme.id}
+        names={Object.fromEntries(plan.items.map(i => [i.id, i.name]))} onChanged={() => loadAll(depth ?? undefined)} />}
 
       <hr className="hair" />
       <details>

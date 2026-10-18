@@ -125,11 +125,12 @@ def test_a_moved_deadline_is_found_approved_applied_audited_and_reaches_the_affe
     fake = FakeFetcher({BCWD: ("31.10.2026", "15.11.2026")})
     res = watcher.run_watch(PACK, only=[BCWD], fetcher=fake)
     found = [agents.finding(f) for f in res["findings"]]
-    dates = [f for f in found if f["kind"] == "date_changed"]
-    assert {f["rule_key"] for f in dates} == {"window:ka-ssp-fee-concession-bcwd", "window:ka-ssp-vidyasiri-bcwd"}
-    f = next(f for f in dates if f["rule_key"] == "window:ka-ssp-fee-concession-bcwd")
+    # one sentence backs both schemes' last date, so the watcher raises one finding covering both rules
+    assert [f["kind"] for f in found] == ["date_changed"]
+    f = found[0]
+    assert set(f["rule_keys"]) == {"window:ka-ssp-fee-concession-bcwd", "window:ka-ssp-vidyasiri-bcwd"}
     assert f["new_value"] == "2026-11-15" and f["old_value"] == "2026-10-31" and f["status"] == "open"
-    assert f["schemes"] == ["ka-ssp-fee-concession-bcwd"]
+    assert f["schemes"] == ["ka-ssp-fee-concession-bcwd", "ka-ssp-vidyasiri-bcwd"]
     listed = next(x for x in agents.findings(PACK) if x["id"] == f["id"])
     assert listed["students"] == 1  # through the shared registry
 
@@ -137,9 +138,11 @@ def test_a_moved_deadline_is_found_approved_applied_audited_and_reaches_the_affe
     assert scheme("ka-ssp-fee-concession-bcwd")["window_end"] == "2026-10-31"
 
     out = watcher.decide(f["id"], approve=True, note="checked the page")
-    assert out["applied"]["kind"] == "window_end" and out["applied"]["value"] == "2026-11-15"
-    props = scheme("ka-ssp-fee-concession-bcwd")
-    assert props["window_end"] == "2026-11-15" and props["window_changed_from"] == "2026-10-31"
+    assert [c["kind"] for c in out["applied"]] == ["window_end", "window_end"]
+    assert {c["value"] for c in out["applied"]} == {"2026-11-15"}
+    for sch in ("ka-ssp-fee-concession-bcwd", "ka-ssp-vidyasiri-bcwd"):
+        props = scheme(sch)
+        assert props["window_end"] == "2026-11-15" and props["window_changed_from"] == "2026-10-31"
     changes = yaml.safe_load((world["repo"] / "data/packs" / PACK / "changes.yaml").read_text())["changes"]
     assert changes[0]["cite"]["excerpt"] == "Last date to apply: 15.11.2026"
     r = audit(world["repo"])
@@ -175,7 +178,7 @@ def test_a_vanished_proof_sentence_is_marked_stale_not_deleted(world):
     res = watcher.run_watch(PACK, only=[BCWD], fetcher=fake)
     f = next(agents.finding(x) for x in res["findings"] if agents.finding(x)["kind"] == "excerpt_missing")
     watcher.decide(f["id"], approve=True)
-    props = scheme(f["from_id"])
+    props = scheme(f["from_ids"][0])
     assert props["window_end"] == "2026-10-31" and props["window_stale_since"]
     assert audit(world["repo"]).returncode == 0
 
@@ -234,3 +237,24 @@ def test_agents_and_case_api(world):
     assert c.post("/api/agents/findings/f-nothing", json={"approve": True}).status_code == 404
     as_of = c.post(f"/api/students/{sid}/case", json={}, headers={"X-Kaagaz-As-Of": "2026-10-18"}).json()
     assert as_of["as_of"] is True and as_of["today"] == "2026-10-18"
+
+
+def test_a_page_that_loses_most_of_its_sentences_at_once_is_flagged_for_a_careful_look(world):
+    row = next(r for r in sources.load_index() if r["id"] == "ssp-ka-home")
+    text = sources.saved_text(row)
+    fake = FakeFetcher({"ssp-ka-home": (text.split()[0], text.split()[0])})
+    fake.fetch = lambda url, dest, name, _f=fake.fetch: _replace_page(_f(url, dest, name), "Last Dates Section")
+    res = watcher.run_watch(PACK, only=["ssp-ka-home"], fetcher=fake)
+    check = res["checks"][0]
+    assert check["warning"] == "most_rules_missing" and check["rules_missing"] == check["rules_checked"]
+    found = [agents.finding(x) for x in res["findings"]]
+    # findings are per sentence, far fewer than the rules they cover
+    assert len(found) < check["rules_missing"] and sum(f["rule_count"] for f in found) == check["rules_missing"]
+    assert all("Look at the page before approving" in f["note"] for f in found)
+
+
+def _replace_page(got: Fetched, text: str) -> Fetched:
+    got.text_path.write_text(text)
+    got.raw_path.write_text(text)
+    got.text = text
+    return got

@@ -6,6 +6,7 @@ const en = {
   'nav.start': 'Start',
   'nav.chain': 'Your chain',
   'nav.ask': 'Ask',
+  'nav.agents': 'Agents',
   'nav.benchmark': 'Benchmark',
   'nav.sources': 'Sources',
   'nav.graph': 'About the graph',

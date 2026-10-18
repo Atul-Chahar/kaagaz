@@ -370,3 +370,54 @@ pre.cypher { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5;
   .scheme-opt { grid-template-columns: 18px minmax(0, 1fr); }
   .scheme-opt .when { grid-column: 2; text-align: left; white-space: normal; }
 }
+
+/* ---- agents: caseworker, alerts, watcher and findings ---- */
+.late-text { color: var(--red-tape); }
+.mono { font-family: var(--font-mono); font-size: 0.8rem; overflow-wrap: anywhere; }
+.pair { display: flex; gap: 6px; flex-wrap: wrap; }
+.block { margin-top: var(--s5); }
+.case .btn { margin-top: 4px; }
+.case-body { margin-top: var(--s3); display: grid; gap: var(--s2); }
+.since { font-size: 0.92rem; color: var(--ink-soft); border-left: 3px solid var(--stamp-blue); padding-left: var(--s2); }
+.decision { background: var(--paper-slip); border: 1px solid var(--rule-strong); padding: var(--s2) var(--s3); border-radius: var(--radius); }
+.decision p { margin: 6px 0 0; font-family: var(--font-head); font-size: 1.12rem; line-height: 1.45; }
+.decision p.note { font-family: var(--font-body); font-size: 0.88rem; }
+.case-steps summary { cursor: pointer; color: var(--ink-soft); }
+.case-steps ol { list-style: none; padding: 0; margin: var(--s1) 0 0; }
+.case-steps li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: var(--s2); padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.case-steps .tool { font-family: var(--font-mono); font-size: 0.8rem; color: var(--stamp-blue); padding-top: 2px; }
+.case-sub { font-size: 1.05rem; margin: var(--s3) 0 var(--s1); }
+.tasks { list-style: none; padding: 0; margin: 0; }
+.tasks li { display: flex; justify-content: space-between; gap: var(--s2); padding: 8px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.tasks label { display: flex; gap: 10px; align-items: baseline; }
+.tasks li.done span { text-decoration: line-through; color: var(--ink-soft); }
+.tasks .due { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-soft); white-space: nowrap; }
+.alerts { margin-top: var(--s3); border: 1px solid var(--stamp-blue); background: var(--stamp-blue-wash); padding: var(--s2) var(--s3); border-radius: var(--radius); }
+.alerts h2 { font-size: 1rem; margin: 0 0 6px; }
+.alerts ul { margin: 0 0 var(--s1); padding-left: 18px; }
+.alerts li { margin: 4px 0; }
+.agent-flow { list-style: none; padding: 0; margin: var(--s4) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; counter-reset: flow; }
+.agent-flow li { position: relative; display: flex; flex-direction: column; gap: 4px; padding: var(--s2) var(--s3) var(--s2) var(--s2); border: 1px solid var(--rule-strong); background: var(--paper-slip); }
+.agent-flow li + li { border-left: 0; }
+.agent-flow li:not(:last-child)::after { content: ''; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; border-top: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); background: var(--paper-slip); transform: translateY(-50%) rotate(45deg); z-index: 1; }
+.run-summary { margin-top: var(--s2); }
+.run-summary p { margin: 4px 0; }
+.findings { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s2); }
+.finding { border: 1px solid var(--rule-strong); background: var(--paper-slip); padding: var(--s2) var(--s3); border-radius: var(--radius); }
+.finding.rejected, .finding.approved { background: transparent; }
+.finding-head { display: flex; flex-wrap: wrap; gap: 6px var(--s1); align-items: baseline; }
+.finding .src { margin: 8px 0; }
+.finding .diff { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s2); }
+.finding blockquote { margin: 4px 0; padding: 6px 10px; border-left: 3px solid var(--rule-strong); background: var(--paper); font-size: 0.92rem; overflow-wrap: anywhere; }
+.finding blockquote.none { color: var(--ink-soft); font-style: italic; }
+.finding .warn { border-left: 3px solid var(--stamp-blue); padding-left: 8px; }
+.finding .decide { margin-top: var(--s1); display: grid; gap: 6px; }
+.finding .decide input { max-width: 520px; }
+.finding details summary { cursor: pointer; color: var(--ink-soft); font-size: 0.88rem; }
+@media (max-width: 760px) {
+  .agent-flow { grid-template-columns: minmax(0, 1fr); }
+  .agent-flow li + li { border-left: 1px solid var(--rule-strong); border-top: 0; }
+  .agent-flow li:not(:last-child)::after { right: 50%; top: auto; bottom: -7px; transform: translateX(50%) rotate(135deg); }
+  .finding .diff { grid-template-columns: minmax(0, 1fr); }
+  .case-steps li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
