@@ -16,11 +16,13 @@ Each student has their own memory graph, so documents they already hold persist 
 
 The same engine runs a second rule pack (starting a company in Karnataka) with no code changes.
 
+If you open it after 18 Oct 2026, most 2026-27 windows will have closed. A bar under the menu offers "See it as on 18 Oct 2026", the submission day: only the start date moves, the rules and deadlines stay real, and the screen says so.
+
 ## Track
 
-Agents That Act on Connected Data
-
-(Optional: also tick Agent Memory and Coordination, because each student has a persistent per-student memory graph. Only tick it if the organisers confirmed that one submission can be judged in more than one track.)
+Tick both:
+- Agents That Act on Connected Data
+- Agent Memory and Coordination (each student has a persistent memory graph of their own; the rules allow entering more than one track)
 
 ## Repository
 
@@ -32,7 +34,7 @@ https://github.com/Atul-Chahar/kaagaz
 
 ## Live demo or deployment
 
-Leave empty. The README has a one-command local setup (`docker compose up -d --build`) that starts FalkorDB, FalkorDB Browser and the app.
+Leave empty. The README has a one-command local setup (`docker compose up -d --build`) that starts FalkorDB, FalkorDB Browser and the app. Every push is also checked by GitHub Actions against a real FalkorDB: https://github.com/Atul-Chahar/kaagaz/actions/workflows/ci.yml
 
 ## How did you use FalkorDB in your project?
 

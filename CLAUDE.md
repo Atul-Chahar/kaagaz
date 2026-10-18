@@ -1,12 +1,12 @@
 # Kaagaz: rules for every session
 
-Read PROGRESS.md and DECISIONS.md before doing anything. The full spec is KAAGAZ_SPEC.md.
+Read docs/process/PROGRESS.md and docs/process/DECISIONS.md before doing anything. The full spec is docs/process/KAAGAZ_SPEC.md.
 
 ## Non-negotiable (spec sections 0, 4, 7)
-- Never ask the user anything. Pick the option that serves the judging criteria, log one line in DECISIONS.md.
+- Never ask the user anything. Pick the option that serves the judging criteria, log one line in docs/process/DECISIONS.md.
 - Prove, do not claim: every "done" needs printed evidence (test output, exit code, screenshot looked at).
 - No fake anything: no invented data, hard-coded results, mocked graph, placeholder or simulated numbers.
-  If it can't be done for real: `BLOCKED: <reason>` in PROGRESS.md + honest empty state in UI.
+  If it can't be done for real: `BLOCKED: <reason>` in docs/process/PROGRESS.md + honest empty state in UI.
 - Every rule stores source_url, source_title, retrieved_at, excerpt (<=25 words, found in saved text), confidence (official|secondary).
 - Unknown processing time = null. Never guess. Verdicts depending on unknowns are lower bounds.
 - Sources saved in data/sources/raw + data/sources/index.json with SHA-256. >5 MB files stay out of git.

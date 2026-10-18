@@ -1,6 +1,6 @@
 # Adversarial review (17 Oct 2026)
 
-A subagent with a fresh context reviewed the whole repo against KAAGAZ_SPEC.md, looking only for problems with
+A subagent with a fresh context reviewed the whole repo against [the spec](process/KAAGAZ_SPEC.md), looking only for problems with
 correctness, honesty or the hackathon requirements. Every finding and what was done:
 
 | # | Finding | Severity | Done |
