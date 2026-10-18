@@ -10,7 +10,11 @@ from __future__ import annotations
 
 from mcp.server.mcpserver import MCPServer
 
-from .tools import TOOL_DESCRIPTIONS, ToolError, Tools
+from . import agents, caseworker
+from .tools import DEFAULT_PACK, TOOL_DESCRIPTIONS, ToolError, Tools
+
+# Agent tools on top of the catalogue. They read and write only through the same tools and named queries.
+AGENT_TOOLS = ("review_case", "watcher_findings")
 
 server = MCPServer(
     name="kaagaz",
@@ -75,6 +79,25 @@ def remember_holding(student_id: str, doc_id: str, issued_on: str | None = None)
 @server.tool(description=TOOL_DESCRIPTIONS["recall"])
 def recall(student_id: str) -> dict:
     return _call("recall", {"student_id": student_id})
+
+
+@server.tool(description=("The caseworker agent reviews a student's case: it calls recall, plan, explain and "
+                          "alternatives as needed, decides, and saves proposed actions in the student's graph. "
+                          "Proposals are not carried out until the student approves them in the app."))
+def review_case(student_id: str, scheme_id: str | None = None) -> dict:
+    try:
+        r = caseworker.review(_t(), student_id, scheme_id, narrate=False)
+    except ToolError as e:
+        return {"outcome": "not_in_graph", "error": str(e)}
+    return {k: r[k] for k in ("case_id", "scheme", "today", "verdict", "decision", "since", "steps")} | {
+        "proposals": [p for p in r["proposals"] if p["status"] == "pending"]}
+
+
+@server.tool(description=("What the watcher agent found when it last re-checked the government sources: rules whose "
+                          "proof sentence is no longer on the live page, with old and new text. Status open means a "
+                          "person has not decided it yet; nothing in the rules changes before that."))
+def watcher_findings(status: str | None = "open") -> dict:
+    return {"findings": agents.findings(DEFAULT_PACK, status, 50), "runs": agents.runs("watcher", 3)}
 
 
 if __name__ == "__main__":
