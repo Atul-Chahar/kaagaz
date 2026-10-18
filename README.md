@@ -11,7 +11,7 @@
 ![Sources](https://img.shields.io/badge/rules-143%2C%20each%20with%20a%20government%20source-555)
 ![Licence](https://img.shields.io/badge/licence-MIT-555)
 
-**[Demo video](VIDEO_LINK)** · **[Run it in 60 seconds](#run-it-in-60-seconds)** ·
+**[Demo video](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing)** · **[Run it in 60 seconds](#run-it-in-60-seconds)** ·
 **[How FalkorDB is used](#how-falkordb-is-used)** · **[Graph data model](#graph-data-model)** ·
 **[Cypher queries](#the-cypher-the-product-depends-on)** · **[Proof you can check](#proof-you-can-check)** ·
 **[Questions judges ask](#questions-judges-ask)**
@@ -46,7 +46,7 @@ removed. Kaagaz stamps **12 DAYS SHORT** and lists schemes with later deadlines 
 
 ## Demo video
 
-**[Watch the demo](VIDEO_LINK)**: the Example student, the hidden steps appearing depth by depth, the Why panel
+**[Watch the demo](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing)**: the Example student, the hidden steps appearing depth by depth, the Why panel
 with its source sentence and Cypher, the student's memory surviving a reload, and the same query run in FalkorDB
 Browser.
 
@@ -92,7 +92,7 @@ All 9 screens in light and dark, at 1440 and 390 px, are in [`docs/screenshots/`
 | Public repository | This repository, MIT licence |
 | README with setup instructions and the graph data model | [Run it in 60 seconds](#run-it-in-60-seconds), [Local development](#local-development), [Graph data model](#graph-data-model) |
 | The Cypher queries the product depends on | [The Cypher the product depends on](#the-cypher-the-product-depends-on): 35 parameterised files in [`backend/kaagaz/queries/`](backend/kaagaz/queries/), the three central ones shown in full |
-| Demo video | [Demo video](VIDEO_LINK) |
+| Demo video | [Demo video](https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing) |
 | Live deployment, or complete local setup | No live deployment. One Docker command starts FalkorDB, FalkorDB Browser and the app; [`docs/DEPLOY.md`](docs/DEPLOY.md) has deployment steps |
 | Track | Agents That Act on Connected Data, and Agent Memory and Coordination |
 | Only public, synthetic or own data | 60 public government sources in [`data/sources/index.json`](data/sources/index.json), each with a SHA-256 hash; the Example student is synthetic |

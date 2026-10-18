@@ -30,7 +30,9 @@ https://github.com/Atul-Chahar/kaagaz
 
 ## Demo video
 
-(your YouTube link, public or unlisted)
+https://drive.google.com/file/d/1O2tQ376d4i9ojpo3L3ipvYGz6F57Pmp9/view?usp=sharing
+
+(The form asks for a YouTube link, public or unlisted. If it rejects a Drive link, upload the same file to YouTube as unlisted and use that link here and in the README.)
 
 ## Live demo or deployment
 
