@@ -1,0 +1,107 @@
+# The same checks as scripts/verify.sh, on every push and pull request, against a real FalkorDB (no mocks).
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FALKORDB_HOST: localhost
+  FALKORDB_PORT: "6380"
+  # checks run with no LLM key, so the no-key paths are what is tested
+  LLM_PROVIDER: ""
+  LLM_API_KEY: ""
+
+jobs:
+  backend:
+    name: Data audit, lint, unit and integration tests (real FalkorDB)
+    runs-on: ubuntu-latest
+    services:
+      falkordb:
+        image: falkordb/falkordb:latest
+        ports: ["6380:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 2s --health-timeout 3s --health-retries 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - name: Install Python 3.12 and dependencies
+        run: cd backend && uv python install 3.12 && uv sync --frozen
+      - name: Seed both rule packs into FalkorDB
+        run: bash scripts/seed.sh
+      - name: Data audit (every excerpt found in its saved source, every hash matches)
+        run: cd backend && uv run python ../scripts/audit_data.py
+      - name: Lint
+        run: cd backend && uv run ruff check kaagaz tests ../scripts ../bench/run_bench.py
+      - name: Unit tests
+        run: cd backend && uv run pytest -q -m 'not integration'
+      - name: Integration tests against FalkorDB
+        run: cd backend && uv run pytest -q -m integration
+
+  frontend:
+    name: Frontend typecheck, lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: cd frontend && pnpm install --frozen-lockfile
+      - run: cd frontend && pnpm typecheck
+      - run: cd frontend && pnpm lint
+      - run: cd frontend && pnpm build
+
+  e2e:
+    name: End-to-end and accessibility (Playwright, axe)
+    runs-on: ubuntu-latest
+    services:
+      falkordb:
+        image: falkordb/falkordb:latest
+        ports: ["6380:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 2s --health-timeout 3s --health-retries 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Install
+        run: |
+          cd backend && uv python install 3.12 && uv sync --frozen && cd ..
+          cd frontend && pnpm install --frozen-lockfile && pnpm build && cd ..
+          cd e2e && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium
+      - name: Seed
+        run: bash scripts/seed.sh
+      - name: Playwright + axe
+        run: cd e2e && pnpm exec playwright test app.spec.ts
+      - name: Keep traces of failed tests
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: e2e/test-results/
+          retention-days: 14
+
+  docker:
+    name: Docker image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t kaagaz-app:ci .
